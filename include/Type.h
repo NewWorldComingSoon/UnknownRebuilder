@@ -77,7 +77,7 @@ public:
     bool isPointerTy() const;
 
 public:
-    // static
+    // Static
     static Type *getVoidTy(Context &C);
     static Type *getFloatTy(Context &C);
     static Type *getDoubleTy(Context &C);
