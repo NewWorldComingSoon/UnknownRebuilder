@@ -123,7 +123,7 @@ Type::isPointerTy() const
 }
 
 ////////////////////////////////////////////////////////////
-// static
+// Static
 Type *
 Type::getVoidTy(Context &C)
 {
@@ -190,6 +190,45 @@ Type::getInt128Ty(Context &C)
     return &C.mImpl->mInt128Ty;
 }
 
+PointerType *
+Type::getInt1PtrTy(Context &C, uint32_t ElementTypeSizeInBits)
+{
+    return getInt1Ty(C)->getPointerTo(ElementTypeSizeInBits);
+}
+
+PointerType *
+Type::getInt8PtrTy(Context &C, uint32_t ElementTypeSizeInBits)
+{
+    return getInt8Ty(C)->getPointerTo(ElementTypeSizeInBits);
+}
+
+PointerType *
+Type::getInt16PtrTy(Context &C, uint32_t ElementTypeSizeInBits)
+{
+    return getInt16Ty(C)->getPointerTo(ElementTypeSizeInBits);
+}
+
+PointerType *
+Type::getInt32PtrTy(Context &C, uint32_t ElementTypeSizeInBits)
+{
+    return getInt32Ty(C)->getPointerTo(ElementTypeSizeInBits);
+}
+
+PointerType *
+Type::getInt64PtrTy(Context &C, uint32_t ElementTypeSizeInBits)
+{
+    return getInt64Ty(C)->getPointerTo(ElementTypeSizeInBits);
+}
+
+////////////////////////////////////////////////////////////
+// Pointer
+// Return a pointer to the current type.  This is equivalent
+PointerType *
+Type::getPointerTo(uint32_t ElementTypeSizeInBits)
+{
+    return PointerType::get(mContext, this, ElementTypeSizeInBits);
+}
+
 ////////////////////////////////////////////////////////////
 //     IntegerType
 //
@@ -217,6 +256,14 @@ Type *
 PointerType::getElementType() const
 {
     return mElementType;
+}
+
+////////////////////////////////////////////////////////////
+// Static
+PointerType *
+PointerType::get(Context &C, Type *ElementType, uint32_t ElementTypeSizeInBits)
+{
+    return C.mImpl->getPointerType(ElementType, ElementTypeSizeInBits);
 }
 
 } // namespace uir
