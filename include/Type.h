@@ -33,16 +33,16 @@ public:
 
 public:
     // Get/Set the name of the type
-    std::string getTypeName() const { return mTypeName; }
-    void setTypeName(const std::string TypeName) { mTypeName = TypeName; }
+    std::string getTypeName() const;
+    void setTypeName(const std::string TypeName);
 
     // Get/Set the id of the type
-    TypeID getTypeID() const { return mTypeID; }
-    void setTypeID(TypeID TypeID) { mTypeID = TypeID; }
+    TypeID getTypeID() const;
+    void setTypeID(TypeID TypeID);
 
     // Get/Set the bits of the type
-    uint32_t getTypeBits() const { return mTypeSizeInBits; }
-    void setTypeBits(uint32_t TypeSizeInBits) { mTypeSizeInBits = TypeSizeInBits; }
+    uint32_t getTypeBits() const;
+    void setTypeBits(uint32_t TypeSizeInBits);
 };
 
 } // namespace uir
