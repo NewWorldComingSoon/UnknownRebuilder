@@ -130,4 +130,22 @@ IntegerType::IntegerType(Context &C, const std::string TypeName, uint32_t TypeSi
 
 IntegerType::~IntegerType() {}
 
+////////////////////////////////////////////////////////////
+//     PointerType
+//
+
+PointerType::PointerType(Context &C, Type *ContainedType, const std::string TypeName, uint32_t TypeSizeInBits) :
+    Type(C, TypeName, Type::PointerTyID, TypeSizeInBits)
+{
+    mContainedType = ContainedType;
+}
+
+PointerType::~PointerType() {}
+
+Type *
+PointerType::getElementType() const
+{
+    return mContainedType;
+}
+
 } // namespace uir

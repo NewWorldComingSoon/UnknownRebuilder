@@ -6,6 +6,7 @@ namespace uir {
 
 class Context;
 class IntegerType;
+class PointerType;
 
 class Type
 {
@@ -81,6 +82,19 @@ class IntegerType : public Type
 public:
     explicit IntegerType(Context &C, const std::string TypeName, uint32_t TypeSizeInBits);
     virtual ~IntegerType();
+};
+
+class PointerType : public Type
+{
+private:
+    Type *mContainedType;
+
+public:
+    explicit PointerType(Context &C, Type *ContainedType, const std::string TypeName, uint32_t TypeSizeInBits);
+    virtual ~PointerType();
+
+public:
+    Type *getElementType() const;
 };
 
 } // namespace uir
