@@ -5,6 +5,7 @@
 namespace uir {
 
 class Context;
+class IntegerType;
 
 class Type
 {
@@ -73,6 +74,13 @@ public:
 
     // Return true if this is 'pointer'
     bool isPointerTy() const;
+};
+
+class IntegerType : public Type
+{
+public:
+    explicit IntegerType(Context &C, const std::string TypeName, uint32_t NumBits);
+    virtual ~IntegerType();
 };
 
 } // namespace uir

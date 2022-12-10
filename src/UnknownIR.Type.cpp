@@ -119,4 +119,15 @@ Type::isPointerTy() const
     return getTypeID() == PointerTyID;
 }
 
+////////////////////////////////////////////////////////////
+//     IntegerType
+//
+
+IntegerType::IntegerType(Context &C, const std::string TypeName, uint32_t NumBits) :
+    Type(C, TypeName, Type::IntegerTyID, NumBits)
+{
+}
+
+IntegerType::~IntegerType() {}
+
 } // namespace uir
