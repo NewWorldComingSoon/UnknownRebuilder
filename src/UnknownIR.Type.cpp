@@ -258,6 +258,12 @@ PointerType::getElementType() const
     return mElementType;
 }
 
+uint32_t
+PointerType::getElementTypeBits() const
+{
+    return mElementType->getTypeBits();
+}
+
 ////////////////////////////////////////////////////////////
 // Static
 PointerType *

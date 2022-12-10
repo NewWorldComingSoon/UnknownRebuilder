@@ -119,6 +119,7 @@ public:
 
 public:
     Type *getElementType() const;
+    uint32_t getElementTypeBits() const;
 
 public:
     // Static
