@@ -123,8 +123,8 @@ Type::isPointerTy() const
 //     IntegerType
 //
 
-IntegerType::IntegerType(Context &C, const std::string TypeName, uint32_t NumBits) :
-    Type(C, TypeName, Type::IntegerTyID, NumBits)
+IntegerType::IntegerType(Context &C, const std::string TypeName, uint32_t TypeSizeInBits) :
+    Type(C, TypeName, Type::IntegerTyID, TypeSizeInBits)
 {
 }
 

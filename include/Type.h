@@ -79,7 +79,7 @@ public:
 class IntegerType : public Type
 {
 public:
-    explicit IntegerType(Context &C, const std::string TypeName, uint32_t NumBits);
+    explicit IntegerType(Context &C, const std::string TypeName, uint32_t TypeSizeInBits);
     virtual ~IntegerType();
 };
 
