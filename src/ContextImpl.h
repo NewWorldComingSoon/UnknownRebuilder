@@ -18,13 +18,13 @@ public:
         uint32_t ElmtBits;
         bool operator<(const PointerTypeKey &other) const
         {
-            uintptr_t u11 = reinterpret_cast<uintptr_t>(ElmtTy);
-            uintptr_t u12 = reinterpret_cast<uintptr_t>(other.ElmtTy);
-            if (u11 < u12)
+            uintptr_t u1 = reinterpret_cast<uintptr_t>(ElmtTy);
+            uintptr_t u2 = reinterpret_cast<uintptr_t>(other.ElmtTy);
+            if (u1 < u2)
             {
                 return true;
             }
-            else if (u11 > u12)
+            else if (u1 > u2)
             {
                 return false;
             }
