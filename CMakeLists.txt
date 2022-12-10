@@ -55,7 +55,7 @@ endif()
 # Target: UnknownIR
 set(UnknownIR_SOURCES
 	"src/ContextImpl/UnknownIR.ContextImpl.cpp"
-	"src/InternalErrors/InternalErrors.cpp"
+	"src/InternalErrors/UnknownIR.InternalErrors.cpp"
 	"src/UnknownIR.Context.cpp"
 	"src/UnknownIR.Type.cpp"
 	"src/UnknownIR.cpp"
