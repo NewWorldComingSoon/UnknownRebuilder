@@ -54,7 +54,7 @@ public:
     IntegerType mInt64Ty;
     IntegerType mInt128Ty;
 
-    // PointerType instances
+    // PointerType map
     std::map<PointerTypeKey, PointerType *> mPointerTypes;
 
 public:
