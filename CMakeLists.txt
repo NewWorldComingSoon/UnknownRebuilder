@@ -54,11 +54,13 @@ if(ENABLE_TEST) # test_mode
 endif()
 # Target: UnknownIR
 set(UnknownIR_SOURCES
+	"src/ContextImpl/UnknownIR.ContextImpl.cpp"
+	"src/InternalErrors/InternalErrors.cpp"
 	"src/UnknownIR.Context.cpp"
-	"src/UnknownIR.ContextImpl.cpp"
 	"src/UnknownIR.Type.cpp"
 	"src/UnknownIR.cpp"
-	"src/ContextImpl.h"
+	"src/ContextImpl/ContextImpl.h"
+	"src/InternalErrors/InternalErrors.h"
 	"include/Config.h"
 	"include/Context.h"
 	"include/Type.h"
