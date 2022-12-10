@@ -1,4 +1,7 @@
 #include <Type.h>
+#include <Context.h>
+
+#include "ContextImpl.h"
 
 namespace uir {
 ////////////////////////////////////////////////////////////
@@ -117,6 +120,74 @@ bool
 Type::isPointerTy() const
 {
     return getTypeID() == PointerTyID;
+}
+
+////////////////////////////////////////////////////////////
+// static
+Type *
+Type::getVoidTy(Context &C)
+{
+    return &C.mImpl->mVoidTy;
+}
+
+Type *
+Type::getFloatTy(Context &C)
+{
+    return &C.mImpl->mFloatTy;
+}
+
+Type *
+Type::getDoubleTy(Context &C)
+{
+    return &C.mImpl->mDoubleTy;
+}
+
+Type *
+Type::getLabelTy(Context &C)
+{
+    return &C.mImpl->mLabelTy;
+}
+
+Type *
+Type::getFunctionTy(Context &C)
+{
+    return &C.mImpl->mFunctionTy;
+}
+
+IntegerType *
+Type::getInt1Ty(Context &C)
+{
+    return &C.mImpl->mInt1Ty;
+}
+
+IntegerType *
+Type::getInt8Ty(Context &C)
+{
+    return &C.mImpl->mInt8Ty;
+}
+
+IntegerType *
+Type::getInt16Ty(Context &C)
+{
+    return &C.mImpl->mInt16Ty;
+}
+
+IntegerType *
+Type::getInt32Ty(Context &C)
+{
+    return &C.mImpl->mInt32Ty;
+}
+
+IntegerType *
+Type::getInt64Ty(Context &C)
+{
+    return &C.mImpl->mInt64Ty;
+}
+
+IntegerType *
+Type::getInt128Ty(Context &C)
+{
+    return &C.mImpl->mInt128Ty;
 }
 
 ////////////////////////////////////////////////////////////

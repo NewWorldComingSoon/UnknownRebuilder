@@ -75,6 +75,20 @@ public:
 
     // Return true if this is 'pointer'
     bool isPointerTy() const;
+
+public:
+    // static
+    static Type *getVoidTy(Context &C);
+    static Type *getFloatTy(Context &C);
+    static Type *getDoubleTy(Context &C);
+    static Type *getLabelTy(Context &C);
+    static Type *getFunctionTy(Context &C);
+    static IntegerType *getInt1Ty(Context &C);
+    static IntegerType *getInt8Ty(Context &C);
+    static IntegerType *getInt16Ty(Context &C);
+    static IntegerType *getInt32Ty(Context &C);
+    static IntegerType *getInt64Ty(Context &C);
+    static IntegerType *getInt128Ty(Context &C);
 };
 
 class IntegerType : public Type
