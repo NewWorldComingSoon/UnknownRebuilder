@@ -89,16 +89,16 @@ public:
     static IntegerType *getInt32Ty(Context &C);
     static IntegerType *getInt64Ty(Context &C);
     static IntegerType *getInt128Ty(Context &C);
-    static PointerType *getInt1PtrTy(Context &C, uint32_t ElementTypeSizeInBits);
-    static PointerType *getInt8PtrTy(Context &C, uint32_t ElementTypeSizeInBits);
-    static PointerType *getInt16PtrTy(Context &C, uint32_t ElementTypeSizeInBits);
-    static PointerType *getInt32PtrTy(Context &C, uint32_t ElementTypeSizeInBits);
-    static PointerType *getInt64PtrTy(Context &C, uint32_t ElementTypeSizeInBits);
+    static PointerType *getInt1PtrTy(Context &C);
+    static PointerType *getInt8PtrTy(Context &C);
+    static PointerType *getInt16PtrTy(Context &C);
+    static PointerType *getInt32PtrTy(Context &C);
+    static PointerType *getInt64PtrTy(Context &C);
 
 public:
     // Pointer
     // Return a pointer to the current type.  This is equivalent
-    PointerType *getPointerTo(uint32_t ElementTypeSizeInBits);
+    PointerType *getPointerTo();
 };
 
 class IntegerType : public Type
@@ -114,7 +114,7 @@ private:
     Type *mElementType;
 
 public:
-    explicit PointerType(Context &C, Type *ElementType, const std::string TypeName, uint32_t ElementTypeSizeInBits);
+    explicit PointerType(Context &C, Type *ElementType, const std::string TypeName);
     virtual ~PointerType();
 
 public:
@@ -122,7 +122,7 @@ public:
 
 public:
     // Static
-    static PointerType *get(Context &C, Type *ElementType, uint32_t ElementTypeSizeInBits);
+    static PointerType *get(Context &C, Type *ElementType);
 };
 
 } // namespace uir

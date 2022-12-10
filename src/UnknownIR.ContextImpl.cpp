@@ -32,22 +32,24 @@ ContextImpl ::~ContextImpl()
 }
 
 PointerType *
-ContextImpl::getPointerType(Type *ElmtTy, uint32_t ElmtBits)
+ContextImpl::getPointerType(Type *ElmtTy)
 {
-    PointerTypeKey PtrTyKey;
-    PtrTyKey.ElmtTy = ElmtTy;
-    PtrTyKey.ElmtBits = ElmtBits;
-
-    auto It = mPointerTypes.find(PtrTyKey);
+    auto It = mPointerTypes.find(ElmtTy);
     if (It != mPointerTypes.end())
     {
         return It->second;
     }
 
-    // ptri8/ptri16/ptri32/ptri64/ptri128
+    if (ElmtTy->getTypeBits() == 1 || ElmtTy->getTypeBits() == 128)
+    {
+        // No ptri1 and ptri128
+        return nullptr;
+    }
+
+    // ptri8/ptri16/ptri32/ptri64
     std::string PtrTyName = UIR_PTR_TYPE_NAME_PREFIX + ElmtTy->getTypeName();
-    PointerType *PtrTy = new PointerType(mContext, ElmtTy, PtrTyName, ElmtBits);
-    mPointerTypes[PtrTyKey] = PtrTy;
+    PointerType *PtrTy = new PointerType(mContext, ElmtTy, PtrTyName);
+    mPointerTypes[ElmtTy] = PtrTy;
     return PtrTy;
 }
 

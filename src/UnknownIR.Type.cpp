@@ -191,42 +191,42 @@ Type::getInt128Ty(Context &C)
 }
 
 PointerType *
-Type::getInt1PtrTy(Context &C, uint32_t ElementTypeSizeInBits)
+Type::getInt1PtrTy(Context &C)
 {
-    return getInt1Ty(C)->getPointerTo(ElementTypeSizeInBits);
+    return getInt1Ty(C)->getPointerTo();
 }
 
 PointerType *
-Type::getInt8PtrTy(Context &C, uint32_t ElementTypeSizeInBits)
+Type::getInt8PtrTy(Context &C)
 {
-    return getInt8Ty(C)->getPointerTo(ElementTypeSizeInBits);
+    return getInt8Ty(C)->getPointerTo();
 }
 
 PointerType *
-Type::getInt16PtrTy(Context &C, uint32_t ElementTypeSizeInBits)
+Type::getInt16PtrTy(Context &C)
 {
-    return getInt16Ty(C)->getPointerTo(ElementTypeSizeInBits);
+    return getInt16Ty(C)->getPointerTo();
 }
 
 PointerType *
-Type::getInt32PtrTy(Context &C, uint32_t ElementTypeSizeInBits)
+Type::getInt32PtrTy(Context &C)
 {
-    return getInt32Ty(C)->getPointerTo(ElementTypeSizeInBits);
+    return getInt32Ty(C)->getPointerTo();
 }
 
 PointerType *
-Type::getInt64PtrTy(Context &C, uint32_t ElementTypeSizeInBits)
+Type::getInt64PtrTy(Context &C)
 {
-    return getInt64Ty(C)->getPointerTo(ElementTypeSizeInBits);
+    return getInt64Ty(C)->getPointerTo();
 }
 
 ////////////////////////////////////////////////////////////
 // Pointer
 // Return a pointer to the current type.  This is equivalent
 PointerType *
-Type::getPointerTo(uint32_t ElementTypeSizeInBits)
+Type::getPointerTo()
 {
-    return PointerType::get(mContext, this, ElementTypeSizeInBits);
+    return PointerType::get(mContext, this);
 }
 
 ////////////////////////////////////////////////////////////
@@ -244,8 +244,8 @@ IntegerType::~IntegerType() {}
 //     PointerType
 //
 
-PointerType::PointerType(Context &C, Type *ElementType, const std::string TypeName, uint32_t ElementTypeSizeInBits) :
-    Type(C, TypeName, Type::PointerTyID, ElementTypeSizeInBits)
+PointerType::PointerType(Context &C, Type *ElementType, const std::string TypeName) :
+    Type(C, TypeName, Type::PointerTyID, ElementType->getTypeBits())
 {
     mElementType = ElementType;
 }
@@ -261,9 +261,9 @@ PointerType::getElementType() const
 ////////////////////////////////////////////////////////////
 // Static
 PointerType *
-PointerType::get(Context &C, Type *ElementType, uint32_t ElementTypeSizeInBits)
+PointerType::get(Context &C, Type *ElementType)
 {
-    return C.mImpl->getPointerType(ElementType, ElementTypeSizeInBits);
+    return C.mImpl->getPointerType(ElementType);
 }
 
 } // namespace uir

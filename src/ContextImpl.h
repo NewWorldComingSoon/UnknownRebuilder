@@ -1,7 +1,7 @@
 #pragma once
 #include <stdint.h>
 #include <string>
-#include <map>
+#include <unordered_map>
 
 #include <Type.h>
 
@@ -11,30 +11,6 @@ class Context;
 
 class ContextImpl
 {
-public:
-    struct PointerTypeKey
-    {
-        Type *ElmtTy;
-        uint32_t ElmtBits;
-        bool operator<(const PointerTypeKey &other) const
-        {
-            uintptr_t u1 = reinterpret_cast<uintptr_t>(ElmtTy);
-            uintptr_t u2 = reinterpret_cast<uintptr_t>(other.ElmtTy);
-            if (u1 < u2)
-            {
-                return true;
-            }
-            else if (u1 > u2)
-            {
-                return false;
-            }
-            else
-            {
-                return ElmtBits < other.ElmtBits;
-            }
-        }
-    };
-
 private:
     Context &mContext;
 
@@ -55,14 +31,14 @@ public:
     IntegerType mInt128Ty;
 
     // PointerType map
-    std::map<PointerTypeKey, PointerType *> mPointerTypes;
+    std::unordered_map<Type *, PointerType *> mPointerTypes;
 
 public:
     explicit ContextImpl(Context &C);
     ~ContextImpl();
 
 public:
-    PointerType *getPointerType(Type *ElmtTy, uint32_t ElmtBits);
+    PointerType *getPointerType(Type *ElmtTy);
 };
 
 } // namespace uir
