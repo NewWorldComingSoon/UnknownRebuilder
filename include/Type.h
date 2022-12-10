@@ -4,6 +4,8 @@
 
 namespace uir {
 
+class Context;
+
 class Type
 {
 public:
@@ -20,16 +22,21 @@ public:
     };
 
 private:
+    Context &mContext;
     std::string mTypeName;
     TypeID mTypeID;
     uint32_t mTypeSizeInBits;
 
 public:
-    explicit Type(const std::string TypeName, TypeID TypeID, uint32_t TypeSizeInBits) :
-        mTypeName(TypeName), mTypeID(TypeID), mTypeSizeInBits(TypeSizeInBits)
+    explicit Type(Context &C, const std::string TypeName, TypeID TypeID, uint32_t TypeSizeInBits) :
+        mContext(C), mTypeName(TypeName), mTypeID(TypeID), mTypeSizeInBits(TypeSizeInBits)
     {
     }
     virtual ~Type() {}
+
+public:
+    // Context
+    Context &getContext() const { return mContext; }
 
 public:
     // Get/Set the name of the type

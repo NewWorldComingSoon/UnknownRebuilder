@@ -54,8 +54,12 @@ if(ENABLE_TEST) # test_mode
 endif()
 # Target: UnknownIR
 set(UnknownIR_SOURCES
+	"src/UnknownIR.Context.cpp"
+	"src/UnknownIR.ContextImpl.cpp"
 	"src/UnknownIR.Type.cpp"
 	"src/UnknownIR.cpp"
+	"src/ContextImpl.h"
+	"include/Context.h"
 	"include/Type.h"
 	"include/UnknownIR.h"
 	cmake.toml
