@@ -59,6 +59,7 @@ set(UnknownIR_SOURCES
 	"src/UnknownIR.Type.cpp"
 	"src/UnknownIR.cpp"
 	"src/ContextImpl.h"
+	"include/Config.h"
 	"include/Context.h"
 	"include/Type.h"
 	"include/UnknownIR.h"

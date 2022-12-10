@@ -205,10 +205,10 @@ IntegerType::~IntegerType() {}
 //     PointerType
 //
 
-PointerType::PointerType(Context &C, Type *ContainedType, const std::string TypeName, uint32_t TypeSizeInBits) :
-    Type(C, TypeName, Type::PointerTyID, TypeSizeInBits)
+PointerType::PointerType(Context &C, Type *ElementType, const std::string TypeName, uint32_t ElementTypeSizeInBits) :
+    Type(C, TypeName, Type::PointerTyID, ElementTypeSizeInBits)
 {
-    mContainedType = ContainedType;
+    mElementType = ElementType;
 }
 
 PointerType::~PointerType() {}
@@ -216,7 +216,7 @@ PointerType::~PointerType() {}
 Type *
 PointerType::getElementType() const
 {
-    return mContainedType;
+    return mElementType;
 }
 
 } // namespace uir

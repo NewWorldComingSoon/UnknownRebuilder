@@ -101,10 +101,10 @@ public:
 class PointerType : public Type
 {
 private:
-    Type *mContainedType;
+    Type *mElementType;
 
 public:
-    explicit PointerType(Context &C, Type *ContainedType, const std::string TypeName, uint32_t TypeSizeInBits);
+    explicit PointerType(Context &C, Type *ElementType, const std::string TypeName, uint32_t ElementTypeSizeInBits);
     virtual ~PointerType();
 
 public:
