@@ -28,11 +28,8 @@ private:
     uint32_t mTypeSizeInBits;
 
 public:
-    explicit Type(Context &C, const std::string TypeName, TypeID TypeID, uint32_t TypeSizeInBits) :
-        mContext(C), mTypeName(TypeName), mTypeID(TypeID), mTypeSizeInBits(TypeSizeInBits)
-    {
-    }
-    virtual ~Type() {}
+    explicit Type(Context &C, const std::string TypeName, TypeID TypeID, uint32_t TypeSizeInBits);
+    virtual ~Type();
 
 public:
     // Context

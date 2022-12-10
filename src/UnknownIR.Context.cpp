@@ -4,7 +4,7 @@
 
 namespace uir {
 /////////////////////////////////////////////////////////
-// ctor/dtor
+// Ctor/Dtor
 Context::Context() : mImpl(new ContextImpl(*this)), mArch(ArchX86), mMode(Mode32) {}
 
 Context::Context(Arch arch, Mode mode) : Context()

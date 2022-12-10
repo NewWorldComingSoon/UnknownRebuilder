@@ -4,6 +4,16 @@ namespace uir {
 ////////////////////////////////////////////////////////////
 //     Type
 //
+
+////////////////////////////////////////////////////////////
+// Ctor/Dtor
+Type::Type(Context &C, const std::string TypeName, TypeID TypeID, uint32_t TypeSizeInBits) :
+    mContext(C), mTypeName(TypeName), mTypeID(TypeID), mTypeSizeInBits(TypeSizeInBits)
+{
+}
+
+Type::~Type() {}
+
 ////////////////////////////////////////////////////////////
 // Get/Set
 // Get/Set the name of the type

@@ -12,6 +12,7 @@ ContextImpl::ContextImpl(Context &C) :
     mFunctionTy(C, "function", Type::FunctionTyID, 0)
 {
 }
+
 ContextImpl ::~ContextImpl() {}
 
 } // namespace uir
