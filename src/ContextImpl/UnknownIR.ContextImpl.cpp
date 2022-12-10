@@ -3,6 +3,8 @@
 #include <Context.h>
 #include <Type.h>
 
+#include <InternalErrors/InternalErrors.h>
+
 namespace uir {
 
 ContextImpl::ContextImpl(Context &C) :
@@ -43,6 +45,7 @@ ContextImpl::getPointerType(Type *ElmtTy)
     if (ElmtTy->getTypeBits() == 1 || ElmtTy->getTypeBits() == 128)
     {
         // No ptri1 and ptri128
+        uir_unreachable("ElmtTy->getTypeBits() == 1 || ElmtTy->getTypeBits() == 128");
         return nullptr;
     }
 
