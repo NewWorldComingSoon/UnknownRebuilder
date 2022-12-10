@@ -1,0 +1,25 @@
+# Reference: https://build-cpp.github.io/cmkr/cmake-toml
+
+[conditions]
+test_mode = "ENABLE_TEST"
+
+[project]
+name = "UnknownIR"
+msvc-runtime = "static"
+languages = ["CXX"]
+cmake-after = """
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/Output)
+"""
+test_mode.cmake-after = "add_definitions(-DENABLE_TEST)"
+
+[subdir.test]
+condition = "test_mode"
+
+
+[target.UnknownIR]
+type = "library"
+include-directories = ["include"]
+headers = ["include/**.h"]
+sources = ["src/**.cpp", "src/**.hpp", "src/**.h"]
+compile-features = ["cxx_std_20"]
+

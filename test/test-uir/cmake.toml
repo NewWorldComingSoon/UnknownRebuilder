@@ -1,0 +1,17 @@
+# Reference: https://build-cpp.github.io/cmkr/cmake-toml
+
+[target.test-uir]
+type = "executable"
+msvc-runtime = "static"
+headers = ["**.h"]
+sources = ["**.cpp", "**.h"]
+include-directories = [
+"../../include",
+"../googletest/googletest/include"
+]
+
+link-libraries = [
+"UnknownIR",
+"gtest"
+]
+compile-features = ["cxx_std_20"]
