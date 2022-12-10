@@ -25,7 +25,7 @@ private:
     uint32_t mTypeSizeInBits;
 
 public:
-    explicit Type(const std::string TypeName, TypeID TypeID, uint64_t TypeSizeInBits) :
+    explicit Type(const std::string TypeName, TypeID TypeID, uint32_t TypeSizeInBits) :
         mTypeName(TypeName), mTypeID(TypeID), mTypeSizeInBits(TypeSizeInBits)
     {
     }
