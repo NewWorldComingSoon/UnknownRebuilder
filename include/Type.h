@@ -43,6 +43,31 @@ public:
     // Get/Set the bits of the type
     uint32_t getTypeBits() const;
     void setTypeBits(uint32_t TypeSizeInBits);
+
+public:
+    // Return true if this is 'void'
+    bool isVoidTy() const;
+
+    // Return true if this is 'float'
+    bool isFloatTy() const;
+
+    // Return true if this is 'double'
+    bool isDoubleTy() const;
+
+    // Return true if this is 'label'
+    bool isLabelTy() const;
+
+    // Return true if this is 'integer'
+    bool isIntegerTy() const;
+
+    // Return true if this is 'function'
+    bool isFunctionTy() const;
+
+    // Return true if this is 'array'
+    bool isArrayTy() const;
+
+    // Return true if this is 'pointer'
+    bool isPointerTy() const;
 };
 
 } // namespace uir
