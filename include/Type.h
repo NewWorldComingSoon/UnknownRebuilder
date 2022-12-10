@@ -42,6 +42,7 @@ public:
 
     // Get/Set the bits of the type
     uint32_t getTypeBits() const;
+    uint32_t getTypeSize() const;
     void setTypeBits(uint32_t TypeSizeInBits);
 
 public:

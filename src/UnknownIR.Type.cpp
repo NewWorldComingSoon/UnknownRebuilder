@@ -37,6 +37,12 @@ Type::getTypeBits() const
     return mTypeSizeInBits;
 }
 
+uint32_t
+Type::getTypeSize() const
+{
+    return mTypeSizeInBits / 8;
+}
+
 void
 Type::setTypeBits(uint32_t TypeSizeInBits)
 {
