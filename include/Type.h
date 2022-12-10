@@ -95,7 +95,7 @@ public:
     static PointerType *getInt32PtrTy(Context &C, uint32_t ElementTypeSizeInBits);
     static PointerType *getInt64PtrTy(Context &C, uint32_t ElementTypeSizeInBits);
 
-protected:
+public:
     // Pointer
     // Return a pointer to the current type.  This is equivalent
     PointerType *getPointerTo(uint32_t ElementTypeSizeInBits);
