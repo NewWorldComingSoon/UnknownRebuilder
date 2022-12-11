@@ -58,7 +58,9 @@ set(UnknownIR_SOURCES
 	"src/InternalErrors/UnknownIR.InternalErrors.cpp"
 	"src/UnknownIR.Context.cpp"
 	"src/UnknownIR.Type.cpp"
+	"src/UnknownIR.Use.cpp"
 	"src/UnknownIR.User.cpp"
+	"src/UnknownIR.Value.cpp"
 	"src/UnknownIR.cpp"
 	"src/ContextImpl/ContextImpl.h"
 	"src/InternalErrors/InternalErrors.h"
@@ -66,7 +68,9 @@ set(UnknownIR_SOURCES
 	"include/Context.h"
 	"include/Type.h"
 	"include/UnknownIR.h"
+	"include/Use.h"
 	"include/User.h"
+	"include/Value.h"
 	cmake.toml
 )
 

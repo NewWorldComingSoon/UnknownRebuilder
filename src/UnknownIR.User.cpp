@@ -3,6 +3,7 @@
 namespace uir {
 
 User::User() {}
+
 User::~User() {}
 
 } // namespace uir

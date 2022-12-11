@@ -8,8 +8,7 @@ uir_unreachable_internal(const char *msg /*= nullptr*/, const char *file /*= nul
 {
     if (msg)
     {
-        std::cerr << "[UIR]: ";
-        std::cerr << msg << "\n";
+        std::cerr << "[UIR]: " << msg << "\n";
         std::cerr << "UNREACHABLE executed";
         if (file)
         {
