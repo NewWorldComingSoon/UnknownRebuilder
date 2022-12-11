@@ -53,10 +53,10 @@ TEST(test_uir, test_uir_type_2)
     printf("Ptr32Ty TypeBits = %d\n", Ptr32Ty->getTypeBits());
     printf("Ptr32Ty PointerBits = %d\n", Ptr32Ty->getPointerBits());
 
-    auto Ptr64Ty = Type::getInt64PtrTy(CTX);
-    printf("Ptr64Ty ElementTypeBits = %d\n", Ptr64Ty->getElementTypeBits());
-    printf("Ptr64Ty TypeBits = %d\n", Ptr64Ty->getTypeBits());
-    printf("Ptr64Ty PointerBits = %d\n", Ptr64Ty->getPointerBits());
+    // auto Ptr64Ty = Type::getInt64PtrTy(CTX);
+    // printf("Ptr64Ty ElementTypeBits = %d\n", Ptr64Ty->getElementTypeBits());
+    // printf("Ptr64Ty TypeBits = %d\n", Ptr64Ty->getTypeBits());
+    // printf("Ptr64Ty PointerBits = %d\n", Ptr64Ty->getPointerBits());
 }
 
 TEST(test_uir, test_uir_type_3)
