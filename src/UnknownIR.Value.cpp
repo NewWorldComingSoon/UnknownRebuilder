@@ -71,6 +71,32 @@ Value::getValueSize() const
 }
 
 ////////////////////////////////////////////////////////////
+// Iterator
+Value::user_iterator
+Value::user_begin()
+{
+    return mUsers.begin();
+}
+
+Value::const_user_iterator
+Value::user_begin() const
+{
+    return mUsers.cbegin();
+}
+
+Value::user_iterator
+Value::user_end()
+{
+    return mUsers.end();
+}
+
+Value::const_user_iterator
+Value::user_end() const
+{
+    return mUsers.cend();
+}
+
+////////////////////////////////////////////////////////////
 // Replace
 // Replaces all references to the "From" definition with references to the
 void

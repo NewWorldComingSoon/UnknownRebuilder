@@ -43,6 +43,15 @@ public:
     uint32_t getValueSize() const;
 
 public:
+    // Iterator
+    using user_iterator = std::unordered_set<User *>::iterator;
+    using const_user_iterator = std::unordered_set<User *>::const_iterator;
+    user_iterator user_begin();
+    const_user_iterator user_begin() const;
+    user_iterator user_end();
+    const_user_iterator user_end() const;
+
+public:
     // Replace
     // Replaces all references to the "From" definition with references to the
     virtual void replaceUsesOfWith(Value *From, Value *To) override;
