@@ -38,6 +38,10 @@ public:
     Type *getType() const;
     void setType(Type *Ty);
 
+    // Get the bits/size of the value
+    uint32_t getValueBits() const;
+    uint32_t getValueSize() const;
+
 public:
     // Replace
     // Replaces all references to the "From" definition with references to the

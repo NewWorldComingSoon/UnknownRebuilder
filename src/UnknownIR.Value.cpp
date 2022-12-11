@@ -57,6 +57,19 @@ Value::setType(Type *Ty)
     mType = Ty;
 }
 
+// Get the bits/size of the value
+uint32_t
+Value::getValueBits() const
+{
+    return mType->getTypeBits();
+}
+
+uint32_t
+Value::getValueSize() const
+{
+    return mType->getTypeBits() / 8;
+}
+
 ////////////////////////////////////////////////////////////
 // Replace
 // Replaces all references to the "From" definition with references to the
