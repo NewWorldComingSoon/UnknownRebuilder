@@ -11,7 +11,7 @@ class PointerType;
 class Type
 {
 public:
-    enum TypeID
+    enum TypeID : uint32_t
     {
         VoidTyID,
         FloatTyID,

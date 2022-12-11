@@ -8,12 +8,12 @@ class ContextImpl;
 class Context
 {
 public:
-    enum Mode
+    enum Mode : uint32_t
     {
         Mode32,
         Mode64
     };
-    enum Arch
+    enum Arch : uint32_t
     {
         ArchX86,
     };
@@ -21,7 +21,7 @@ public:
 private:
     Mode mMode;
     Arch mArch;
-	
+
 public:
     ContextImpl *const mImpl;
 
