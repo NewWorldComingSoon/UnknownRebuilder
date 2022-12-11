@@ -25,6 +25,8 @@ public:
 
 protected:
     Context &mContext;
+
+protected:
     std::string mTypeName;
     TypeID mTypeID;
     uint32_t mTypeSizeInBits;

@@ -12,6 +12,8 @@ class Value : public Object
 private:
     Type *mType;
     std::string mValueName;
+
+private:
     std::unordered_set<Value *> mUsers;
 
 public:
