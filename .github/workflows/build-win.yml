@@ -19,8 +19,12 @@ jobs:
       with:
           submodules: 'recursive'
     
-    - name: Setup reviewdog
-      uses: reviewdog/action-setup@v1.0.3
+    - name: Review
+      uses: reviewdog/action-cpplint@master
+      with:
+        github_token: ${{ secrets.github_token }}
+        reporter: github-pr-review
+        flags: --linelength=50 # Optional
 
     - name: Build-Win64
       run: |
