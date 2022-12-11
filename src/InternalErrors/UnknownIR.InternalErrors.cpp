@@ -4,11 +4,12 @@
 namespace uir {
 
 void
-uir_unreachable_internal(const char *msg /*= nullptr*/, const char *file /*= nullptr*/, unsigned line /*= 0*/)
+uir_unreachable_internal(const char *msg = nullptr, const char *file = nullptr, unsigned line = 0)
 {
+    std::cerr << "[UIR]: ";
     if (msg)
     {
-        std::cerr << "[UIR]:" << msg << "\n";
+        std::cerr << msg << "\n";
     }
 
     std::cerr << "UNREACHABLE executed";
@@ -18,7 +19,7 @@ uir_unreachable_internal(const char *msg /*= nullptr*/, const char *file /*= nul
     }
 
     std::cerr << "!\n";
-    abort();
+    std::abort();
 }
 
 } // namespace uir
