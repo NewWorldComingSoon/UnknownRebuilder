@@ -1,8 +1,9 @@
 #pragma once
+#include <Object.h>
 
 namespace uir {
 
-class Value
+class Value : public Object
 {
 public:
     Value();
