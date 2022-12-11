@@ -9,6 +9,7 @@ endif()
 # Target: test-uir
 set(test-uir_SOURCES
 	test-uir.cpp
+	test-uir.type.cpp
 	cmake.toml
 )
 

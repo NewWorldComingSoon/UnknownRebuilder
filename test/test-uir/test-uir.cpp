@@ -1,14 +1,4 @@
-
-#include <UnknownIR.h>
 #include <gtest/gtest.h>
-#include <stdio.h>
-#include <stdlib.h>
-
-TEST(test_uir, test_uir_1)
-{
-    printf("-----------begin----------\n");
-    printf("-----------end------------\n");
-}
 
 int
 main(int argc, char *argv[])

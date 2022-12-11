@@ -259,6 +259,12 @@ PointerType::getElementType() const
 }
 
 uint32_t
+PointerType::getPointerBits() const
+{
+    return mContext.getModeBits();
+}
+
+uint32_t
 PointerType::getElementTypeBits() const
 {
     return mElementType->getTypeBits();

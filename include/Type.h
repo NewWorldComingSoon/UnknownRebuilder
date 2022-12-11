@@ -23,7 +23,7 @@ public:
         PointerTyID,
     };
 
-private:
+protected:
     Context &mContext;
     std::string mTypeName;
     TypeID mTypeID;
@@ -119,6 +119,7 @@ public:
 
 public:
     Type *getElementType() const;
+    uint32_t getPointerBits() const;
     uint32_t getElementTypeBits() const;
 
 public:
