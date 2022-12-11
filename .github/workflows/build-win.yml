@@ -18,7 +18,10 @@ jobs:
       uses: actions/checkout@v3
       with:
           submodules: 'recursive'
-    
+          
+    - name: Run style checks
+      uses: coleaeason/actions-uncrustify@v1
+      
     - name: Build64
       run: |
         cmake -B build64 -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
