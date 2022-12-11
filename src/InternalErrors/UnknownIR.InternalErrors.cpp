@@ -4,7 +4,7 @@
 namespace uir {
 
 void
-uir_unreachable_internal(const char *msg = nullptr, const char *file = nullptr, unsigned line = 0)
+uir_unreachable_internal(const char *msg /*= nullptr*/, const char *file /*= nullptr*/, unsigned line /*= 0*/)
 {
     std::cerr << "[UIR]: ";
     if (msg)

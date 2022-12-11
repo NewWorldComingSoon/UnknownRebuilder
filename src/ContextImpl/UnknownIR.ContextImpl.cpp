@@ -25,11 +25,10 @@ ContextImpl::ContextImpl(Context &C) :
 
 ContextImpl ::~ContextImpl()
 {
-    for (auto &PtrTy : mPointerTypes)
+    for (auto &ptr_ty : mPointerTypes)
     {
-        auto TempPtr = PtrTy.second;
-        PtrTy.second = nullptr;
-        delete TempPtr;
+        delete ptr_ty.second;
+        ptr_ty.second = nullptr;
     }
 }
 
