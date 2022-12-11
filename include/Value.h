@@ -50,6 +50,13 @@ public:
     const_user_iterator user_begin() const;
     user_iterator user_end();
     const_user_iterator user_end() const;
+    bool user_empty() const;
+    bool user_contains(User *U) const;
+    size_t user_size() const;
+    size_t user_count(User *U) const;
+    void user_insert(User *U);
+    void user_erase(User *U);
+    void user_clear();
 
 public:
     // Replace

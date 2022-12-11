@@ -96,6 +96,52 @@ Value::user_end() const
     return mUsers.cend();
 }
 
+bool
+Value::user_empty() const
+{
+    return mUsers.empty();
+}
+
+bool
+Value::user_contains(User *U) const
+{
+    return mUsers.contains(U);
+}
+
+size_t
+Value::user_size() const
+{
+    return mUsers.size();
+}
+
+size_t
+Value::user_count(User *U) const
+{
+    return mUsers.count(U);
+}
+
+void
+Value::user_insert(User *U)
+{
+    mUsers.insert(U);
+}
+
+void
+Value::user_erase(User *U)
+{
+    auto It = mUsers.find(U);
+    if (It != mUsers.end())
+    {
+        mUsers.erase(It);
+    }
+}
+
+void
+Value::user_clear()
+{
+    mUsers.clear();
+}
+
 ////////////////////////////////////////////////////////////
 // Replace
 // Replaces all references to the "From" definition with references to the
