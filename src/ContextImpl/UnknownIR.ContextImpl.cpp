@@ -1,8 +1,8 @@
 #include "ContextImpl.h"
-#include <Config.h>
 #include <Context.h>
 #include <Type.h>
 
+#include <InternalConfig/InternalConfig.h>
 #include <InternalErrors/InternalErrors.h>
 
 namespace uir {
