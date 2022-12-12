@@ -2,8 +2,8 @@
 #include <Context.h>
 #include <Type.h>
 
-#include <InternalConfig/InternalConfig.h>
-#include <InternalErrors/InternalErrors.h>
+#include <Internal/InternalConfig/InternalConfig.h>
+#include <Internal/InternalErrors/InternalErrors.h>
 
 namespace uir {
 

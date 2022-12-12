@@ -2,7 +2,7 @@
 #include <Context.h>
 
 #include "ContextImpl/ContextImpl.h"
-#include "InternalErrors/InternalErrors.h"
+#include "Internal/InternalErrors/InternalErrors.h"
 
 namespace uir {
 ////////////////////////////////////////////////////////////
