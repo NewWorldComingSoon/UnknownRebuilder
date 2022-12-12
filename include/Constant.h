@@ -53,7 +53,6 @@ public:
 
 public:
     // Static
-
     // Using BitWidth to convert a value to a new value
     static uint64_t convertValue(uint64_t Val, uint32_t BitWidth);
 
