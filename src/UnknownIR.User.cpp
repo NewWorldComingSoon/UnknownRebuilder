@@ -10,7 +10,7 @@ User::~User() {}
 
 ////////////////////////////////////////////////////////////
 // Replace
-// Replaces all references to the "From" definition with references to the
+// Replaces all references to the "From" definition with references to the "To"
 void
 User::replaceUsesOfWith(Value *From, Value *To)
 {

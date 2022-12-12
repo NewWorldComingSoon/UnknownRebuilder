@@ -158,7 +158,7 @@ Value::user_clear()
 
 ////////////////////////////////////////////////////////////
 // Replace
-// Replaces all references to the "From" definition with references to the
+// Replaces all references to the "From" definition with references to the "To"
 void
 Value::replaceUsesOfWith(Value *From, Value *To)
 {
