@@ -5,7 +5,10 @@ namespace uir {
 
 ////////////////////////////////////////////////////////////
 // Ctor/Dtor
-User::User() {}
+User::User()
+{
+    mOperandList.clear();
+}
 
 User::~User() {}
 
@@ -22,6 +25,81 @@ const std::vector<Value *> &
 User::getOperandList() const
 {
     return mOperandList;
+}
+
+////////////////////////////////////////////////////////////
+// Iterator
+User::op_iterator
+User::op_begin()
+{
+    return mOperandList.begin();
+}
+
+User::const_op_iterator
+User::op_begin() const
+{
+    return mOperandList.cbegin();
+}
+
+User::op_iterator
+User::op_end()
+{
+    return mOperandList.end();
+}
+
+User::const_op_iterator
+User::op_end() const
+{
+    return mOperandList.cend();
+}
+
+Value *
+User::op_back()
+{
+    return mOperandList.back();
+}
+
+Value *
+User::op_front()
+{
+    return mOperandList.front();
+}
+
+void
+User::op_push(Value *V)
+{
+    mOperandList.push_back(V);
+}
+
+void
+User::op_pop()
+{
+    mOperandList.pop_back();
+}
+
+size_t
+User::op_count() const
+{
+    return mOperandList.size();
+}
+
+void
+User::op_erase(Value *V)
+{
+    for (auto It = mOperandList.begin(); It != mOperandList.end(); ++It)
+    {
+        if (*It == V)
+        {
+            mOperandList.erase(It);
+            break;
+        }
+    }
+}
+
+bool
+User::op_empty() const
+{
+    return mOperandList.empty();
 }
 
 ////////////////////////////////////////////////////////////
