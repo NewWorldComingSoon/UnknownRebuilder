@@ -44,7 +44,7 @@ public:
     uint64_t getZExtValue() const;
     int64_t getSExtValue() const;
     void setValue(uint64_t Val);
-    uint64_t setValue(uint64_t Val, bool RetNewVal);
+    uint64_t setValue(Type *Ty, uint64_t Val, bool RetNewVal);
 
     // Return the bitwidth of this constant.
     uint32_t getBitWidth() const;

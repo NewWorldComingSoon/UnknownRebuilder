@@ -53,7 +53,7 @@ Constant::replaceAllUsesWith(Value *V)
 ////////////////////////////////////////////////////////////
 //     ConstantInt
 //
-ConstantInt::ConstantInt(Type *Ty, uint64_t Val) : Constant(Ty, std::to_string(setValue(Val, true)))
+ConstantInt::ConstantInt(Type *Ty, uint64_t Val) : Constant(Ty, std::to_string(setValue(Ty, Val, true)))
 {
     //
     //
@@ -119,15 +119,24 @@ ConstantInt::getSExtValue() const
 void
 ConstantInt::setValue(uint64_t Val)
 {
-    setValue(Val, false);
+    setValue(nullptr, Val, false);
 }
 
 uint64_t
-ConstantInt::setValue(uint64_t Val, bool RetNewVal)
+ConstantInt::setValue(Type *Ty, uint64_t Val, bool RetNewVal)
 {
     uint64_t OldVal = mVal;
 
-    uint32_t BitWidth = getBitWidth();
+    uint32_t BitWidth = 32;
+    if (Ty)
+    {
+        BitWidth = Ty->getTypeBits();
+    }
+    else
+    {
+        BitWidth = getBitWidth();
+    }
+
     if (BitWidth == 1)
     {
         if (Val)

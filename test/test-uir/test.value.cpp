@@ -10,5 +10,19 @@ TEST(test_uir, test_uir_value_1)
     Context CTX;
     CTX.setArch(Context::ArchX86);
     CTX.setMode(Context::Mode64);
-	
+
+    Value *Val0 = new Value(Type::getInt32Ty(CTX), "var_1");
+    printf("Val0 ReadableName = %s\n", Val0->getReadableName().c_str());
+
+    Value *Val1 = new Constant(Type::getInt32Ty(CTX), "const_1");
+    printf("Val1 ReadableName = %s\n", Val1->getReadableName().c_str());
+
+    Value *Val2 = new ConstantInt(Type::getInt32Ty(CTX), 123);
+    printf("Val2 ReadableName = %s\n", Val2->getReadableName().c_str());
+
+    Value *Val3 = new GlobalVariable(Type::getInt32Ty(CTX), "global_1");
+    printf("Val3 ReadableName = %s\n", Val3->getReadableName().c_str());
+
+    Value *Val4 = new LocalVariable(Type::getInt32Ty(CTX), "local_1");
+    printf("Val4 ReadableName = %s\n", Val4->getReadableName().c_str());
 }
