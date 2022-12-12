@@ -37,10 +37,10 @@ ContextImpl ::~ContextImpl()
         PtrTy.second = nullptr;
     }
 
-    for (auto &CstInt : mIntConstants)
+    for (auto &CstIntTy : mIntConstants)
     {
-        delete CstInt.second;
-        CstInt.second = nullptr;
+        delete CstIntTy.second;
+        CstIntTy.second = nullptr;
     }
 }
 
