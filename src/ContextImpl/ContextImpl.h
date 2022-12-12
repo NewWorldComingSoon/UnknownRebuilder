@@ -16,6 +16,9 @@ private:
     Context &mContext;
 
 public:
+    //Ordered index
+    uint64_t mOrderedValueNameIndex;
+
     // Basic type instances
     Type mVoidTy;
     Type mFloatTy;

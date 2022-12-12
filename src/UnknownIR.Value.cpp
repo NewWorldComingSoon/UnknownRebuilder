@@ -1,4 +1,6 @@
 #include <Value.h>
+#include <Context.h>
+#include <ContextImpl/ContextImpl.h>
 
 #include <Internal/InternalConfig/InternalConfig.h>
 
@@ -178,6 +180,16 @@ void
 Value::replaceAllUsesWith(Value *V)
 {
     // nothing
+}
+
+////////////////////////////////////////////////////////////
+// Static
+// Generate a new value name by order
+std::string
+Value::generateOrderedValueName(Context &C)
+{
+    auto CurIdx = C.mImpl->mOrderedValueNameIndex++;
+    return std::to_string(CurIdx);
 }
 
 } // namespace uir

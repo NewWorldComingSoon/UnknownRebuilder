@@ -9,6 +9,7 @@ namespace uir {
 
 ContextImpl::ContextImpl(Context &C) :
     mContext(C),
+    mOrderedValueNameIndex(0),
     mVoidTy(C, "void", Type::VoidTyID, 0),
     mFloatTy(C, "float", Type::FloatTyID, 32),
     mDoubleTy(C, "double", Type::DoubleTyID, 64),
@@ -25,6 +26,8 @@ ContextImpl::ContextImpl(Context &C) :
 
 ContextImpl ::~ContextImpl()
 {
+    mOrderedValueNameIndex = 0;
+
     for (auto &IntTy : mIntegerTypes)
     {
         delete IntTy.second;
