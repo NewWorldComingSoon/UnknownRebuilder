@@ -39,6 +39,9 @@ public:
     // Get/Set the value of ConstantInt
     uint64_t getValue() const;
     void setValue(uint64_t Val);
+
+    // Return the bitwidth of this constant.
+    uint32_t getBitWidth() const;
 };
 
 } // namespace uir

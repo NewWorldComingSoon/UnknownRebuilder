@@ -4,6 +4,8 @@
 #include <sstream>
 #include <string>
 
+#include <Internal/InternalErrors/InternalErrors.h>
+
 namespace uir {
 ////////////////////////////////////////////////////////////
 //     Constant
@@ -51,7 +53,7 @@ Constant::replaceAllUsesWith(Value *V)
 //
 ConstantInt::ConstantInt(Type *Ty, uint64_t Val) : Constant(Ty, std::to_string(Val))
 {
-    mVal = Val;
+    setValue(Val);
 }
 
 ConstantInt::~ConstantInt()
@@ -88,7 +90,45 @@ ConstantInt::getValue() const
 void
 ConstantInt::setValue(uint64_t Val)
 {
-    mVal = Val;
+    uint32_t BitWidth = getBitWidth();
+    if (BitWidth == 1)
+    {
+        if (Val)
+        {
+            mVal = 1;
+        }
+        else
+        {
+            mVal = 0;
+        }
+    }
+    else if (BitWidth == 8)
+    {
+        mVal = (uint64_t)((uint8_t)Val);
+    }
+    else if (BitWidth == 16)
+    {
+        mVal = (uint64_t)((uint16_t)Val);
+    }
+    else if (BitWidth == 32)
+    {
+        mVal = (uint64_t)((uint32_t)Val);
+    }
+    else if (BitWidth == 64)
+    {
+        mVal = (uint64_t)((uint64_t)Val);
+    }
+    else
+    {
+        uir_unreachable("Unknown BitWidth in ConstantInt::setValue");
+    }
+}
+
+// Return the bitwidth of this constant.
+uint32_t
+ConstantInt::getBitWidth() const
+{
+    return getValueBits();
 }
 
 } // namespace uir
