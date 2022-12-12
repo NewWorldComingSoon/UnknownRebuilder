@@ -88,7 +88,7 @@ std::string
 ConstantInt::getReadableName() const
 {
     // 1234 i32
-    std::string ReadableName = mValueName;
+    std::string ReadableName = getName();
     ReadableName += " ";
     ReadableName += mType->getTypeName();
 

@@ -43,13 +43,13 @@ ContextImpl::getPointerType(Type *ElmtTy)
 
     if (ElmtTy->getTypeBits() == 1 || ElmtTy->getTypeBits() == 128)
     {
-        // No ptri1 and ptri128
+        // Not support i1* and i128* currently
         uir_unreachable("ElmtTy->getTypeBits() == 1 || ElmtTy->getTypeBits() == 128");
         return nullptr;
     }
 
-    // ptri8/ptri16/ptri32/ptri64
-    std::string PtrTyName = UIR_PTR_TYPE_NAME_PREFIX + ElmtTy->getTypeName();
+    // i8*/i16*/i32*/i64*
+    std::string PtrTyName = ElmtTy->getTypeName() + UIR_PTR_TYPE_NAME_SUFFIX;
     PointerType *PtrTy = new PointerType(mContext, ElmtTy, PtrTyName);
     mPointerTypes[ElmtTy] = PtrTy;
     return PtrTy;
