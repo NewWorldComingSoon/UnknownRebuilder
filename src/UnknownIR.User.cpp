@@ -10,6 +10,21 @@ User::User() {}
 User::~User() {}
 
 ////////////////////////////////////////////////////////////
+// OperandList
+// Returns the list of operands for this instruction.
+std::vector<Value *> &
+User::getOperandList()
+{
+    return mOperandList;
+}
+
+const std::vector<Value *> &
+User::getOperandList() const
+{
+    return mOperandList;
+}
+
+////////////////////////////////////////////////////////////
 // Replace
 // Replaces all references to the "From" definition with references to the "To"
 void
