@@ -5,15 +5,9 @@
 namespace uir {
 ////////////////////////////////////////////////////////////
 // Ctor/Dtor
-Value::Value() : mType(nullptr), mValueName("")
-{
-    mUsers.clear();
-}
+Value::Value() : mType(nullptr), mValueName("") {}
 
-Value::Value(Type *Ty, const std::string ValueName) : mType(Ty), mValueName(ValueName)
-{
-    mUsers.clear();
-}
+Value::Value(Type *Ty, const std::string ValueName) : mType(Ty), mValueName(ValueName) {}
 
 Value::~Value() {}
 

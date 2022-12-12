@@ -5,10 +5,7 @@ namespace uir {
 
 ////////////////////////////////////////////////////////////
 // Ctor/Dtor
-User::User() : Value()
-{
-    mOperandList.clear();
-}
+User::User() : Value() {}
 
 User::User(Type *Ty, const std::string UserName) : Value(Ty, UserName) {}
 
