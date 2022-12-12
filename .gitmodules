@@ -1,6 +1,3 @@
 [submodule "test/googletest"]
 	path = test/googletest
 	url = https://github.com/google/googletest
-[submodule "c4core"]
-	path = c4core
-	url = https://github.com/biojppm/c4core
