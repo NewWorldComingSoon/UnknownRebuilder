@@ -53,7 +53,8 @@ Constant::replaceAllUsesWith(Value *V)
 ////////////////////////////////////////////////////////////
 //     ConstantInt
 //
-ConstantInt::ConstantInt(Type *Ty, uint64_t Val) : Constant(Ty, std::to_string(setValue(Val, Ty->getTypeBits(), true)))
+ConstantInt::ConstantInt(Type *Ty, uint64_t Val) :
+    Constant(Ty, toHexString(setValue(Val, Ty->getTypeBits(), true), Ty->getTypeBits()))
 {
     //
     //
@@ -105,14 +106,14 @@ ConstantInt::getValue() const
 uint64_t
 ConstantInt::getZExtValue() const
 {
-    assert(getBitWidth() > 64 && "Too many bits for uint64_t");
+    assert(getBitWidth() <= 64 && "Too many bits for uint64_t");
     return mVal;
 }
 
 int64_t
 ConstantInt::getSExtValue() const
 {
-    assert(getBitWidth() > 64 && "Too many bits for int64_t");
+    assert(getBitWidth() <= 64 && "Too many bits for int64_t");
     return (int64_t)mVal;
 }
 
@@ -191,13 +192,20 @@ ConstantInt::convertValue(uint64_t Val, uint32_t BitWidth)
 std::string
 ConstantInt::toHexString(uint64_t Val, uint32_t BitWidth)
 {
-    return "";
+    uint64_t NewVal = convertValue(Val, BitWidth);
+    std::stringstream SS;
+    SS << "0x";
+    SS << std::hex << NewVal;
+    return SS.str();
 }
 
 std::string
 ConstantInt::toDecimalString(uint64_t Val, uint32_t BitWidth)
 {
-    return "";
+    uint64_t NewVal = convertValue(Val, BitWidth);
+    std::stringstream SS;
+    SS << NewVal;
+    return SS.str();
 }
 
 } // namespace uir

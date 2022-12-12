@@ -17,8 +17,8 @@ TEST(test_uir, test_uir_value_1)
     Value *Val1 = new Constant(Type::getInt32Ty(CTX), "const_1");
     printf("Val1 ReadableName = %s\n", Val1->getReadableName().c_str());
 
-    Value *Val2 = new ConstantInt(Type::getInt32Ty(CTX), 123);
-    printf("Val2 ReadableName = %s\n", Val2->getReadableName().c_str());
+    ConstantInt *Val2 = new ConstantInt(Type::getInt32Ty(CTX), 0x7b);
+    printf("Val2 ReadableName = %s, ZExtValue = %llx\n", Val2->getReadableName().c_str(), Val2->getZExtValue());
 
     Value *Val3 = new GlobalVariable(Type::getInt32Ty(CTX), "global_1");
     printf("Val3 ReadableName = %s\n", Val3->getReadableName().c_str());
