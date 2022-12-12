@@ -10,6 +10,7 @@ endif()
 set(test-uir_SOURCES
 	main.cpp
 	test.type.cpp
+	test.value.cpp
 	cmake.toml
 )
 

@@ -21,7 +21,7 @@ protected:
 
 public:
     Value();
-    Value(Type *Ty, const std::string ValueName);
+    explicit Value(Type *Ty, const std::string ValueName);
     virtual ~Value();
 
 public:

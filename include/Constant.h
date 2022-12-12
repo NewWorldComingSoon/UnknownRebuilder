@@ -6,7 +6,7 @@ namespace uir {
 class Constant : public Value
 {
 public:
-    Constant(Type *Ty, const std::string ConstantName);
+    explicit Constant(Type *Ty, const std::string ConstantName);
     virtual ~Constant();
 
 public:
@@ -24,7 +24,7 @@ private:
     uint64_t mVal;
 
 public:
-    ConstantInt(Type *Ty, uint64_t Val);
+    explicit ConstantInt(Type *Ty, uint64_t Val);
     virtual ~ConstantInt();
 
 public:
