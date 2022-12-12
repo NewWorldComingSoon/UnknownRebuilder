@@ -31,6 +31,12 @@ Value::getUsers() const
     return mUsers;
 }
 
+std::unordered_set<User *> &
+Value::getUsers()
+{
+    return mUsers;
+}
+
 ////////////////////////////////////////////////////////////
 // Get/Set
 // Get/Set the name of the value

@@ -31,6 +31,7 @@ public:
 public:
     // User
     const std::unordered_set<User *> &getUsers() const;
+    std::unordered_set<User *> &getUsers();
 
 public:
     // Get/Set the name of the value
