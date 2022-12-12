@@ -149,7 +149,6 @@ ConstantInt::getBitWidth() const
 
 ////////////////////////////////////////////////////////////
 // Static
-
 uint64_t
 ConstantInt::convertValue(uint64_t Val, uint32_t BitWidth)
 {
