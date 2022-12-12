@@ -92,14 +92,14 @@ ConstantInt::getValue() const
 uint64_t
 ConstantInt::getZExtValue() const
 {
-    assert(getBitWidth() <= 64 && "Too many bits for uint64_t");
+    assert(getBitWidth() > 64 && "Too many bits for uint64_t");
     return mVal;
 }
 
 int64_t
 ConstantInt::getSExtValue() const
 {
-    assert(getBitWidth() <= 64 && "Too many bits for int64_t");
+    assert(getBitWidth() > 64 && "Too many bits for int64_t");
     return (int64_t)mVal;
 }
 
