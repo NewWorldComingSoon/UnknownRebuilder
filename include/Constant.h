@@ -12,4 +12,13 @@ public:
 private:
 };
 
+class ConstantInt : public Constant
+{
+public:
+    ConstantInt();
+    virtual ~ConstantInt();
+
+private:
+};
+
 } // namespace uir
