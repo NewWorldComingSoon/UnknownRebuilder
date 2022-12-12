@@ -16,7 +16,7 @@ private:
     Type *mType;
     std::string mValueName;
 
-private:
+protected:
     std::unordered_set<User *> mUsers;
 
 public:
@@ -27,6 +27,10 @@ public:
 public:
     // Context
     Context &getContext() const;
+
+public:
+    // User
+    const std::unordered_set<User *> &getUsers() const;
 
 public:
     // Get/Set the name of the value
@@ -65,10 +69,6 @@ public:
 
     // Change all uses of this to point to a new Value.
     virtual void replaceAllUsesWith(Value *V) override;
-
-public:
-    // Friend
-    friend class User;
 };
 
 } // namespace uir

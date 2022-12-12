@@ -24,6 +24,14 @@ Value::getContext() const
 }
 
 ////////////////////////////////////////////////////////////
+// User
+const std::unordered_set<User *> &
+Value::getUsers() const
+{
+    return mUsers;
+}
+
+////////////////////////////////////////////////////////////
 // Get/Set
 // Get/Set the name of the value
 std::string
