@@ -53,7 +53,7 @@ Constant::replaceAllUsesWith(Value *V)
 ////////////////////////////////////////////////////////////
 //     ConstantInt
 //
-ConstantInt::ConstantInt(Type *Ty, uint64_t Val) : Constant(Ty, std::to_string(setValue(Ty, Val, true)))
+ConstantInt::ConstantInt(Type *Ty, uint64_t Val) : Constant(Ty, std::to_string(setValue(Val, Ty->getTypeBits(), true)))
 {
     //
     //
@@ -119,55 +119,15 @@ ConstantInt::getSExtValue() const
 void
 ConstantInt::setValue(uint64_t Val)
 {
-    setValue(nullptr, Val, false);
+    setValue(Val, mType->getTypeBits(), false);
 }
 
 uint64_t
-ConstantInt::setValue(Type *Ty, uint64_t Val, bool RetNewVal)
+ConstantInt::setValue(uint64_t Val, uint32_t BitWidth, bool RetNewVal)
 {
     uint64_t OldVal = mVal;
 
-    uint32_t BitWidth = 32;
-    if (Ty)
-    {
-        BitWidth = Ty->getTypeBits();
-    }
-    else
-    {
-        BitWidth = getBitWidth();
-    }
-
-    if (BitWidth == 1)
-    {
-        if (Val)
-        {
-            mVal = 1;
-        }
-        else
-        {
-            mVal = 0;
-        }
-    }
-    else if (BitWidth == 8)
-    {
-        mVal = (uint64_t)((uint8_t)Val);
-    }
-    else if (BitWidth == 16)
-    {
-        mVal = (uint64_t)((uint16_t)Val);
-    }
-    else if (BitWidth == 32)
-    {
-        mVal = (uint64_t)((uint32_t)Val);
-    }
-    else if (BitWidth == 64)
-    {
-        mVal = (uint64_t)((uint64_t)Val);
-    }
-    else
-    {
-        uir_unreachable("Unknown BitWidth in ConstantInt::setValue");
-    }
+    mVal = convertValue(Val, BitWidth);
 
     if (RetNewVal)
     {
@@ -184,6 +144,60 @@ uint32_t
 ConstantInt::getBitWidth() const
 {
     return getValueBits();
+}
+
+////////////////////////////////////////////////////////////
+// Static
+
+uint64_t
+ConstantInt::convertValue(uint64_t Val, uint32_t BitWidth)
+{
+    uint64_t NewVal = 0;
+    if (BitWidth == 1)
+    {
+        if (Val)
+        {
+            NewVal = 1;
+        }
+        else
+        {
+            NewVal = 0;
+        }
+    }
+    else if (BitWidth == 8)
+    {
+        NewVal = (uint64_t)((uint8_t)Val);
+    }
+    else if (BitWidth == 16)
+    {
+        NewVal = (uint64_t)((uint16_t)Val);
+    }
+    else if (BitWidth == 32)
+    {
+        NewVal = (uint64_t)((uint32_t)Val);
+    }
+    else if (BitWidth == 64)
+    {
+        NewVal = (uint64_t)((uint64_t)Val);
+    }
+    else
+    {
+        uir_unreachable("Unknown BitWidth in ConstantInt::convertValue");
+    }
+
+    return NewVal;
+}
+
+std::string
+ConstantInt::toHexString(uint64_t Val, uint32_t BitWidth)
+{
+    return "";
+}
+
+std::string
+ConstantInt::toDecimalString(uint64_t Val, uint32_t BitWidth)
+{
+    return "";
 }
 
 } // namespace uir
