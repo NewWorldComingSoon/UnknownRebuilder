@@ -108,6 +108,11 @@ class IntegerType : public Type
 public:
     explicit IntegerType(Context &C, const std::string TypeName, uint32_t TypeSizeInBits);
     virtual ~IntegerType();
+
+public:
+    // Static
+    // Get or create an IntegerType instance.
+    static IntegerType *get(Context &C, uint32_t NumBits);
 };
 
 class PointerType : public Type

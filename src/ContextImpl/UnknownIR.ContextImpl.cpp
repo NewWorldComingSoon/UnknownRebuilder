@@ -25,10 +25,22 @@ ContextImpl::ContextImpl(Context &C) :
 
 ContextImpl ::~ContextImpl()
 {
+    for (auto &IntTy : mIntegerTypes)
+    {
+        delete IntTy.second;
+        IntTy.second = nullptr;
+    }
+
     for (auto &PtrTy : mPointerTypes)
     {
         delete PtrTy.second;
         PtrTy.second = nullptr;
+    }
+
+    for (auto &CstInt : mIntConstants)
+    {
+        delete CstInt.second;
+        CstInt.second = nullptr;
     }
 }
 

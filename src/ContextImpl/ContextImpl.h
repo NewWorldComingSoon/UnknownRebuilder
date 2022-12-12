@@ -8,6 +8,7 @@
 namespace uir {
 
 class Context;
+class ConstantInt;
 
 class ContextImpl
 {
@@ -30,8 +31,15 @@ public:
     IntegerType mInt64Ty;
     IntegerType mInt128Ty;
 
+    // IntegerTypes map
+    std::unordered_map<uint32_t, IntegerType *> mIntegerTypes;
+
     // PointerType map
     std::unordered_map<Type *, PointerType *> mPointerTypes;
+
+    // IntConstants map
+    using ConstantIntMapTy = std::unordered_map<uint64_t, ConstantInt *>;
+    ConstantIntMapTy mIntConstants;
 
 public:
     explicit ContextImpl(Context &C);

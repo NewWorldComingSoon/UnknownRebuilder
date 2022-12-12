@@ -1,6 +1,8 @@
 #include <Type.h>
 #include <Context.h>
 
+#include <cassert>
+
 #include "ContextImpl/ContextImpl.h"
 #include "Internal/InternalErrors/InternalErrors.h"
 
@@ -246,6 +248,68 @@ IntegerType::IntegerType(Context &C, const std::string TypeName, uint32_t TypeSi
 }
 
 IntegerType::~IntegerType() {}
+
+////////////////////////////////////////////////////////////
+// Static
+// Get or create an IntegerType instance.
+IntegerType *
+IntegerType::get(Context &C, uint32_t NumBits)
+{
+    // Check for the built-in integer types
+    if (NumBits == 1)
+    {
+        if (auto IntTy = dynamic_cast<IntegerType *>(Type::getInt1Ty(C)))
+        {
+            return IntTy;
+        }
+    }
+    else if (NumBits == 1)
+    {
+        if (auto IntTy = dynamic_cast<IntegerType *>(Type::getInt8Ty(C)))
+        {
+            return IntTy;
+        }
+    }
+    else if (NumBits == 16)
+    {
+        if (auto IntTy = dynamic_cast<IntegerType *>(Type::getInt16Ty(C)))
+        {
+            return IntTy;
+        }
+    }
+    else if (NumBits == 32)
+    {
+        if (auto IntTy = dynamic_cast<IntegerType *>(Type::getInt32Ty(C)))
+        {
+            return IntTy;
+        }
+    }
+    else if (NumBits == 64)
+    {
+        if (auto IntTy = dynamic_cast<IntegerType *>(Type::getInt64Ty(C)))
+        {
+            return IntTy;
+        }
+    }
+    else if (NumBits == 128)
+    {
+        if (auto IntTy = dynamic_cast<IntegerType *>(Type::getInt128Ty(C)))
+        {
+            return IntTy;
+        }
+    }
+
+    IntegerType *Entry = C.mImpl->mIntegerTypes[NumBits];
+    if (!Entry)
+    {
+        // i256/i512
+        std::string NewTypeName = "i";
+        NewTypeName += std::to_string(NumBits);
+
+        Entry = new IntegerType(C, NewTypeName, NumBits);
+    }
+    return Entry;
+}
 
 ////////////////////////////////////////////////////////////
 //     PointerType

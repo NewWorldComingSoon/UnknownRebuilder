@@ -2,6 +2,7 @@
 #include "Value.h"
 
 namespace uir {
+class Context;
 
 class Constant : public Value
 {
@@ -52,9 +53,18 @@ public:
 
 public:
     // Static
+
+    // Using BitWidth to convert a value to a new value
     static uint64_t convertValue(uint64_t Val, uint32_t BitWidth);
+
+    // Using BitWidth to convert a value to a new hex string
     static std::string toHexString(uint64_t Val, uint32_t BitWidth);
+
+    // Using BitWidth to convert a value to a new decimal string
     static std::string toDecimalString(uint64_t Val, uint32_t BitWidth);
+
+    // Get a ConstantInt from a value
+    static ConstantInt *get(Context &Context, uint64_t Val, uint32_t BitWidth);
 };
 
 } // namespace uir

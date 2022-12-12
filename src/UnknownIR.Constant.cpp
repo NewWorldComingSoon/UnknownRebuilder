@@ -1,5 +1,7 @@
 #include <Constant.h>
 #include <User.h>
+#include <Context.h>
+#include <ContextImpl/ContextImpl.h>
 
 #include <sstream>
 #include <string>
@@ -149,6 +151,7 @@ ConstantInt::getBitWidth() const
 
 ////////////////////////////////////////////////////////////
 // Static
+// Using BitWidth to convert a value to a new value
 uint64_t
 ConstantInt::convertValue(uint64_t Val, uint32_t BitWidth)
 {
@@ -188,6 +191,7 @@ ConstantInt::convertValue(uint64_t Val, uint32_t BitWidth)
     return NewVal;
 }
 
+// Using BitWidth to convert a value to a new hex string
 std::string
 ConstantInt::toHexString(uint64_t Val, uint32_t BitWidth)
 {
@@ -198,6 +202,7 @@ ConstantInt::toHexString(uint64_t Val, uint32_t BitWidth)
     return SS.str();
 }
 
+// Using BitWidth to convert a value to a new decimal string
 std::string
 ConstantInt::toDecimalString(uint64_t Val, uint32_t BitWidth)
 {
@@ -205,6 +210,23 @@ ConstantInt::toDecimalString(uint64_t Val, uint32_t BitWidth)
     std::stringstream SS;
     SS << NewVal;
     return SS.str();
+}
+
+// Get a ConstantInt from a value
+ConstantInt *
+ConstantInt::get(Context &Context, uint64_t Val, uint32_t BitWidth)
+{
+    uint64_t NewVal = convertValue(Val, BitWidth);
+    ContextImpl *Impl = Context.mImpl;
+    ConstantInt *Slot = Impl->mIntConstants[NewVal];
+    if (Slot == nullptr)
+    {
+        // Get the corresponding integer type for the bit width of the value.
+        IntegerType *IntTy = IntegerType::get(Context, BitWidth);
+        Slot = new ConstantInt(IntTy, NewVal);
+    }
+    assert(Slot->getType() == IntegerType::get(Context, BitWidth));
+    return Slot;
 }
 
 } // namespace uir
