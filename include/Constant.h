@@ -39,6 +39,7 @@ public:
     // Get/Set the value of ConstantInt
     uint64_t getValue() const;
     void setValue(uint64_t Val);
+    uint64_t setValue(uint64_t Val, bool RetNewVal);
 
     // Return the bitwidth of this constant.
     uint32_t getBitWidth() const;

@@ -51,9 +51,10 @@ Constant::replaceAllUsesWith(Value *V)
 ////////////////////////////////////////////////////////////
 //     ConstantInt
 //
-ConstantInt::ConstantInt(Type *Ty, uint64_t Val) : Constant(Ty, std::to_string(Val))
+ConstantInt::ConstantInt(Type *Ty, uint64_t Val) : Constant(Ty, std::to_string(setValue(Val, true)))
 {
-    setValue(Val);
+    //
+    //
 }
 
 ConstantInt::~ConstantInt()
@@ -90,6 +91,14 @@ ConstantInt::getValue() const
 void
 ConstantInt::setValue(uint64_t Val)
 {
+    setValue(Val, false);
+}
+
+uint64_t
+ConstantInt::setValue(uint64_t Val, bool RetNewVal)
+{
+    uint64_t OldVal = mVal;
+
     uint32_t BitWidth = getBitWidth();
     if (BitWidth == 1)
     {
@@ -121,6 +130,15 @@ ConstantInt::setValue(uint64_t Val)
     else
     {
         uir_unreachable("Unknown BitWidth in ConstantInt::setValue");
+    }
+
+    if (RetNewVal)
+    {
+        return mVal;
+    }
+    else
+    {
+        return OldVal;
     }
 }
 
