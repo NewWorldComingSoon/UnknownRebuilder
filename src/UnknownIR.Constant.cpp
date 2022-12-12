@@ -88,7 +88,7 @@ ConstantInt::replaceAllUsesWith(Value *V)
 std::string
 ConstantInt::getReadableName() const
 {
-    // 1234 i32
+    // 0x7b i32
     std::string ReadableName = getName();
     ReadableName += " ";
     ReadableName += mType->getTypeName();
