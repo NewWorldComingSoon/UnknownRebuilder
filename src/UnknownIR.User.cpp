@@ -1,4 +1,5 @@
 #include <User.h>
+#include <assert.h>
 
 namespace uir {
 
@@ -32,6 +33,23 @@ User::replaceAllUsesWith(Value *V)
     {
         User->replaceUsesOfWith(this, V);
     }
+}
+
+////////////////////////////////////////////////////////////
+// Get/Set
+// Get/Set the operand at the specified index.
+Value *
+User::getOperand(uint32_t Index) const
+{
+    assert(Index < mOperandList.size() && "getOperand() out of range!");
+    return mOperandList[Index];
+}
+
+void
+User::setOperand(uint32_t Index, Value *Val)
+{
+    assert(Index < mOperandList.size() && "setOperand() out of range!");
+    mOperandList[Index] = Val;
 }
 
 } // namespace uir

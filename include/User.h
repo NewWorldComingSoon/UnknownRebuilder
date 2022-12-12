@@ -1,10 +1,16 @@
 #pragma once
 #include "Value.h"
 
+#include <vector>
+#include <stdint.h>
+
 namespace uir {
 
 class User : public Value
 {
+private:
+    std::vector<Value *> mOperandList;
+
 public:
     User();
     virtual ~User();
@@ -16,6 +22,12 @@ public:
 
     // Change all uses of this to point to a new Value.
     virtual void replaceAllUsesWith(Value *V) override;
+
+public:
+    // Get/Set
+    // Get/Set the operand at the specified index.
+    Value *getOperand(uint32_t Index) const;
+    void setOperand(uint32_t Index, Value *Val);
 };
 
 } // namespace uir
