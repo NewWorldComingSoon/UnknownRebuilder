@@ -1,9 +1,9 @@
 #pragma once
-#include "Value.h"
+#include "Constant.h"
 
 namespace uir {
 
-class LocalVariable : public Value
+class LocalVariable : public Constant
 {
 public:
     explicit LocalVariable(Type *Ty, const std::string LocalVariableName);

@@ -167,22 +167,6 @@ Value::user_clear()
 }
 
 ////////////////////////////////////////////////////////////
-// Replace
-// Replaces all references to the "From" definition with references to the "To"
-void
-Value::replaceUsesOfWith(Value *From, Value *To)
-{
-    // nothing
-}
-
-// Change all uses of this to point to a new Value.
-void
-Value::replaceAllUsesWith(Value *V)
-{
-    // nothing
-}
-
-////////////////////////////////////////////////////////////
 // Static
 // Generate a new value name by order
 std::string

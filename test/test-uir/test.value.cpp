@@ -11,9 +11,6 @@ TEST(test_uir, test_uir_value_1)
     CTX.setArch(Context::ArchX86);
     CTX.setMode(Context::Mode64);
 
-    Value *Val0 = new Value(Type::getInt32Ty(CTX), "var_1");
-    printf("Val0 ReadableName = %s\n", Val0->getReadableName().c_str());
-
     Value *Val1 = new Constant(Type::getInt32Ty(CTX), "const_1");
     printf("Val1 ReadableName = %s\n", Val1->getReadableName().c_str());
 
@@ -32,9 +29,6 @@ TEST(test_uir, test_uir_value_2)
     Context CTX;
     CTX.setArch(Context::ArchX86);
     CTX.setMode(Context::Mode64);
-
-    Value *Ptr0 = new Value(Type::getInt32PtrTy(CTX), "var_ptr_1");
-    printf("Ptr0 ReadableName = %s\n", Ptr0->getReadableName().c_str());
 
     Value *Ptr1 = new Constant(Type::getInt32PtrTy(CTX), "const_ptr_1");
     printf("Ptr1 ReadableName = %s\n", Ptr1->getReadableName().c_str());

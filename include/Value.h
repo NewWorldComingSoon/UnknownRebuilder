@@ -67,10 +67,10 @@ public:
 public:
     // Replace
     // Replaces all references to the "From" definition with references to the "To"
-    virtual void replaceUsesOfWith(Value *From, Value *To) override;
+    virtual void replaceUsesOfWith(Value *From, Value *To) = 0;
 
     // Change all uses of this to point to a new Value.
-    virtual void replaceAllUsesWith(Value *V) override;
+    virtual void replaceAllUsesWith(Value *V) = 0;
 
 public:
     // Static
