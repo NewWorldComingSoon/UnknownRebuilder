@@ -38,6 +38,8 @@ public:
 public:
     // Get/Set the value of ConstantInt
     uint64_t getValue() const;
+    uint64_t getZExtValue() const;
+    int64_t getSExtValue() const;
     void setValue(uint64_t Val);
     uint64_t setValue(uint64_t Val, bool RetNewVal);
 

@@ -3,6 +3,7 @@
 
 #include <sstream>
 #include <string>
+#include <cassert>
 
 #include <Internal/InternalErrors/InternalErrors.h>
 
@@ -86,6 +87,20 @@ uint64_t
 ConstantInt::getValue() const
 {
     return mVal;
+}
+
+uint64_t
+ConstantInt::getZExtValue() const
+{
+    assert(getBitWidth() <= 64 && "Too many bits for uint64_t");
+    return mVal;
+}
+
+int64_t
+ConstantInt::getSExtValue() const
+{
+    assert(getBitWidth() <= 64 && "Too many bits for int64_t");
+    return (int64_t)mVal;
 }
 
 void
