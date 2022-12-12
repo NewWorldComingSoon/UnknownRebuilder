@@ -19,7 +19,7 @@ condition = "test_mode"
 
 [target.UnknownIR]
 type = "library"
-include-directories = ["./src", "include"]
+include-directories = ["src", "include", "c4core/src"]
 headers = ["include/**.h"]
 sources = ["src/**.cpp", "src/**.hpp", "src/**.h"]
 compile-features = ["cxx_std_20"]
