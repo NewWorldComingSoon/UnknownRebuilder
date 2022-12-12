@@ -12,7 +12,7 @@ class User;
 
 class Value : public Object
 {
-private:
+protected:
     Type *mType;
     std::string mValueName;
 
@@ -35,7 +35,8 @@ public:
 
 public:
     // Get/Set the name of the value
-    std::string getName() const;
+    virtual std::string getName() const override;
+    virtual std::string getReadableName() const override;
     bool hasName() const;
     void setName(const std::string ValueName);
 

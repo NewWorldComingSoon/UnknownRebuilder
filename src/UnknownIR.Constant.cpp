@@ -6,6 +6,7 @@
 #include <cassert>
 
 #include <Internal/InternalErrors/InternalErrors.h>
+#include <Internal/InternalConfig/InternalConfig.h>
 
 namespace uir {
 ////////////////////////////////////////////////////////////
@@ -82,6 +83,18 @@ ConstantInt::replaceAllUsesWith(Value *V)
 
 ////////////////////////////////////////////////////////////
 // Get/Set
+// Get the readable name of this object
+std::string
+ConstantInt::getReadableName() const
+{
+    // 1234 i32
+    std::string ReadableName = mValueName;
+    ReadableName += " ";
+    ReadableName += mType->getTypeName();
+
+    return ReadableName;
+}
+
 // Get/Set the value of ConstantInt
 uint64_t
 ConstantInt::getValue() const

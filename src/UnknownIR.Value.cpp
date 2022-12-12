@@ -1,5 +1,7 @@
 #include <Value.h>
 
+#include <Internal/InternalConfig/InternalConfig.h>
+
 namespace uir {
 ////////////////////////////////////////////////////////////
 // Ctor/Dtor
@@ -44,6 +46,18 @@ std::string
 Value::getName() const
 {
     return mValueName;
+}
+
+std::string
+Value::getReadableName() const
+{
+    // %var i32
+    std::string ReadableName = UIR_LOCAL_VARIABLE_NAME_PREFIX;
+    ReadableName += mValueName;
+    ReadableName += " ";
+    ReadableName += mType->getTypeName();
+
+    return ReadableName;
 }
 
 bool

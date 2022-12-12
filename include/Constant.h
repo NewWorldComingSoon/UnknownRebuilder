@@ -36,6 +36,9 @@ public:
     virtual void replaceAllUsesWith(Value *V) override;
 
 public:
+    // Get the readable name of this object
+    virtual std::string getReadableName() const override;
+
     // Get/Set the value of ConstantInt
     uint64_t getValue() const;
     uint64_t getZExtValue() const;
