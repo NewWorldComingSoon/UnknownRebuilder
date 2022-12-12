@@ -13,6 +13,7 @@ private:
 
 public:
     User();
+    explicit User(Type *Ty, const std::string UserName);
     virtual ~User();
 
 public:

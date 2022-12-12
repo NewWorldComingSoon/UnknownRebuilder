@@ -1,22 +1,14 @@
 #pragma once
-#include "Value.h"
+#include "User.h"
 
 namespace uir {
 class Context;
 
-class Constant : public Value
+class Constant : public User
 {
 public:
     explicit Constant(Type *Ty, const std::string ConstantName);
     virtual ~Constant();
-
-public:
-    // Replace
-    // Replaces all references to the "From" definition with references to the "To"
-    virtual void replaceUsesOfWith(Value *From, Value *To) override;
-
-    // Change all uses of this to point to a new Value.
-    virtual void replaceAllUsesWith(Value *V) override;
 };
 
 class ConstantInt : public Constant
@@ -27,14 +19,6 @@ private:
 public:
     explicit ConstantInt(Type *Ty, uint64_t Val);
     virtual ~ConstantInt();
-
-public:
-    // Replace
-    // Replaces all references to the "From" definition with references to the "To"
-    virtual void replaceUsesOfWith(Value *From, Value *To) override;
-
-    // Change all uses of this to point to a new Value.
-    virtual void replaceAllUsesWith(Value *V) override;
 
 public:
     // Get the readable name of this object
