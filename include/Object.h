@@ -3,8 +3,6 @@
 
 namespace uir {
 
-class Value;
-
 // This is base class
 class Object
 {
