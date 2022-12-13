@@ -94,6 +94,5 @@ target_compile_features(UnknownIR PUBLIC
 target_include_directories(UnknownIR PUBLIC
 	src
 	include
-	"c4core/src"
 )
 
