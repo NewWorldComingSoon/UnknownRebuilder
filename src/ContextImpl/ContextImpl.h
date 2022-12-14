@@ -17,8 +17,9 @@ private:
 
 public:
     //Ordered index
-    uint64_t mOrderedValueNameIndex;
-
+    uint64_t mOrderedLocalVarNameIndex;
+    uint64_t mOrderedGlobalVarNameIndex;
+	
     // Basic type instances
     Type mVoidTy;
     Type mFloatTy;

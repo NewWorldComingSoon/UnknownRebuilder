@@ -42,3 +42,22 @@ TEST(test_uir, test_uir_value_2)
     Value *Ptr4 = new LocalVariable(Type::getInt32PtrTy(CTX), "local_ptr_1");
     printf("Ptr4 ReadableName = %s\n", Ptr4->getReadableName().c_str());
 }
+
+TEST(test_uir, test_uir_value_3)
+{
+    Context CTX;
+    CTX.setArch(Context::ArchX86);
+    CTX.setMode(Context::Mode64);
+
+    Value *Val11 = new GlobalVariable(Type::getInt32Ty(CTX), GlobalVariable::generateOrderedGlobalVarName(CTX));
+    printf("Val11 ReadableName = %s\n", Val11->getReadableName().c_str());
+
+    Value *Val12 = new GlobalVariable(Type::getInt32Ty(CTX), GlobalVariable::generateOrderedGlobalVarName(CTX));
+    printf("Val12 ReadableName = %s\n", Val12->getReadableName().c_str());
+
+    Value *Val21 = new LocalVariable(Type::getInt32Ty(CTX), LocalVariable::generateOrderedLocalVarName(CTX));
+    printf("Val21 ReadableName = %s\n", Val21->getReadableName().c_str());
+
+    Value *Val22 = new LocalVariable(Type::getInt32Ty(CTX), LocalVariable::generateOrderedLocalVarName(CTX));
+    printf("Val22 ReadableName = %s\n", Val22->getReadableName().c_str());
+}

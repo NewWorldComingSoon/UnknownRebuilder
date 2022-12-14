@@ -1,5 +1,8 @@
 #include <GlobalVariable.h>
 
+#include <Context.h>
+#include <ContextImpl/ContextImpl.h>
+
 #include <Internal/InternalConfig/InternalConfig.h>
 
 namespace uir {
@@ -32,6 +35,16 @@ GlobalVariable::getReadableName() const
     ReadableName += mType->getTypeName();
 
     return ReadableName;
+}
+
+////////////////////////////////////////////////////////////
+// Static
+// Generate a new value name by order
+std::string
+GlobalVariable::generateOrderedGlobalVarName(Context &C)
+{
+    auto CurIdx = C.mImpl->mOrderedGlobalVarNameIndex++;
+    return std::to_string(CurIdx);
 }
 
 } // namespace uir

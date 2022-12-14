@@ -71,11 +71,6 @@ public:
 
     // Change all uses of this to point to a new Value.
     virtual void replaceAllUsesWith(Value *V) = 0;
-
-public:
-    // Static
-    // Generate a new value name by order
-    static std::string generateOrderedValueName(Context &C);
 };
 
 } // namespace uir

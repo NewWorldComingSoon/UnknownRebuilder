@@ -166,14 +166,4 @@ Value::user_clear()
     mUsers.clear();
 }
 
-////////////////////////////////////////////////////////////
-// Static
-// Generate a new value name by order
-std::string
-Value::generateOrderedValueName(Context &C)
-{
-    auto CurIdx = C.mImpl->mOrderedValueNameIndex++;
-    return std::to_string(CurIdx);
-}
-
 } // namespace uir
