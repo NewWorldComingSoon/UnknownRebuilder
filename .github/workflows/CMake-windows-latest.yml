@@ -27,7 +27,7 @@ jobs:
     - name: Upload artifacts-Win64
       uses: actions/upload-artifact@main
       with:
-        name: UnknownIR-Win64
+        name: UnknownRebuilder-Win64
         path: |
           include/*
           build64/Release/*      
