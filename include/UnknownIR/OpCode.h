@@ -29,11 +29,15 @@ struct OpCodeComponent
 
 const OpCodeComponent GlobalOpCodeComponents[] = {
     // Binary Operators
+    // op3 = op1 + op2
     {OpCodeID::Add, "Add", 3, true},
+    // op3 = op1 - op2
     {OpCodeID::Sub, "Sub", 3, true},
 
     // Terminator
+    // ret
     {OpCodeID::Ret, "Ret", 0, false},
+    // ret imm
     {OpCodeID::RetIMM, "RetIMM", 1, false},
 
     // Unknown
