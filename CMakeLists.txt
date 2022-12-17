@@ -52,6 +52,16 @@ if(ENABLE_TEST) # test_mode
 	set(CMAKE_FOLDER ${CMKR_CMAKE_FOLDER})
 
 endif()
+# Subdirectory: 3rdparty
+set(CMKR_CMAKE_FOLDER ${CMAKE_FOLDER})
+if(CMAKE_FOLDER)
+	set(CMAKE_FOLDER "${CMAKE_FOLDER}/3rdparty")
+else()
+	set(CMAKE_FOLDER 3rdparty)
+endif()
+add_subdirectory(3rdparty)
+set(CMAKE_FOLDER ${CMKR_CMAKE_FOLDER})
+
 # Subdirectory: tools
 set(CMKR_CMAKE_FOLDER ${CMAKE_FOLDER})
 if(CMAKE_FOLDER)

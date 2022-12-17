@@ -16,6 +16,7 @@ test_mode.cmake-after = "add_definitions(-DENABLE_TEST)"
 [subdir.test]
 condition = "test_mode"
 
+[subdir.3rdparty]
 [subdir.tools]
 
 
