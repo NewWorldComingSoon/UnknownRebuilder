@@ -6,5 +6,6 @@ Yet another Intermediate Representation(IR) called UnknownIR(UIR).
 
 ## Credit
 - LLVM
+- RetDec
 
 This is currently an unfinished project.
