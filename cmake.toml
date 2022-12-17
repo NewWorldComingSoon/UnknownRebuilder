@@ -1,7 +1,7 @@
 # Reference: https://build-cpp.github.io/cmkr/cmake-toml
 
 [conditions]
-test_mode = "ENABLE_TEST"
+test_mode = "ENABLE_TEST_UIR"
 
 [project]
 name = "UnknownIR"

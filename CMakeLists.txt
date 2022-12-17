@@ -36,11 +36,11 @@ project(UnknownIR
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/Output)
 add_definitions(-DUNKNOWNIR_SRC_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
 
-if(ENABLE_TEST) # test_mode
+if(ENABLE_TEST_UIR) # test_mode
 	add_definitions(-DENABLE_TEST)
 endif()
 
-if(ENABLE_TEST) # test_mode
+if(ENABLE_TEST_UIR) # test_mode
 	# Subdirectory: test
 	set(CMKR_CMAKE_FOLDER ${CMAKE_FOLDER})
 	if(CMAKE_FOLDER)
