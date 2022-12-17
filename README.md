@@ -15,6 +15,7 @@ Yet another Intermediate Representation(IR) called UnknownIR(UIR).
 - Keystone
 
 ## Build
+Only tested on Windows, other systems have not been tested
 ```
 cmake -Bbuild -DCAPSTONE_BUILD_TESTS=OFF -DCAPSTONE_BUILD_SHARED=OFF -DCAPSTONE_BUILD_STATIC_RUNTIME=ON -DLLVM_TARGETS_TO_BUILD=X86
 ```
