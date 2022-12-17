@@ -1,7 +1,7 @@
 #  UnknownRebuilder
 [![CMake-windows-latest](https://github.com/NewWorldComingSoon/UnknownRebuilder/actions/workflows/CMake-windows-latest.yml/badge.svg)](https://github.com/NewWorldComingSoon/UnknownRebuilder/actions/workflows/CMake-windows-latest.yml)
 
-X86 native code rebuilder using UnknownIR(UIR)
+X86 native code rebuilder using UnknownIR(UIR).
 
 ## What's UIR?
 Yet another Intermediate Representation(IR) called UnknownIR(UIR).
@@ -15,7 +15,7 @@ Yet another Intermediate Representation(IR) called UnknownIR(UIR).
 - Keystone
 
 ## Build
-Only tested on Windows, other systems have not been tested
+Only tested on Windows, other systems have not been tested.
 ```
 cmake -Bbuild -DCAPSTONE_BUILD_TESTS=OFF -DCAPSTONE_BUILD_SHARED=OFF -DCAPSTONE_BUILD_STATIC_RUNTIME=ON -DLLVM_TARGETS_TO_BUILD=X86
 ```
