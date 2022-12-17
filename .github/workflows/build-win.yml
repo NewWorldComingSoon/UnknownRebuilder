@@ -1,4 +1,4 @@
-name: CMake-windows-2019
+name: CMake-windows-latest
 
 on: [push, pull_request]
 
@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        os: [windows-2019]
+        os: [windows-latest]
     env:
       BUILD_TYPE: Release
     steps:
