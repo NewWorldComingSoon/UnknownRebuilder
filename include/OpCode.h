@@ -5,7 +5,7 @@
 namespace uir {
 #define GET_OPCODE_NAME(Name) (#Name)
 
-enum OpCode : uint8_t
+enum OpCodeID : uint8_t
 {
     // Binary Operators
     Add,
@@ -21,8 +21,8 @@ enum OpCode : uint8_t
 
 struct OpCodeComponent
 {
-    std::string mName;
-    OpCode mOpCode;
+    std::string mOpCodeName;
+    OpCodeID mOpCodeID;
     uint32_t mNumberOfOperands;
     bool mHasEFlags;
 };
