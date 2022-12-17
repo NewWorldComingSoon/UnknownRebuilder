@@ -9,7 +9,6 @@ Yet another Intermediate Representation(IR) called UnknownIR(UIR).
 ## Build
 ```
 cmake -Bbuild -DCAPSTONE_BUILD_TESTS=OFF -DCAPSTONE_BUILD_SHARED=OFF -DCAPSTONE_BUILD_STATIC_RUNTIME=ON -DLLVM_TARGETS_TO_BUILD=X86
-cmake --build build --config Release -- -m
 ```
 
 ## Credit
