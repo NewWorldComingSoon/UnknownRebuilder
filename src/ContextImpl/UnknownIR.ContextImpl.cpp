@@ -11,6 +11,7 @@ ContextImpl::ContextImpl(Context &C) :
     mContext(C),
     mOrderedLocalVarNameIndex(0),
     mOrderedGlobalVarNameIndex(0),
+    mOrderedFunctionNameIndex(0),
     mVoidTy(C, "void", Type::VoidTyID, 0),
     mFloatTy(C, "float", Type::FloatTyID, 32),
     mDoubleTy(C, "double", Type::DoubleTyID, 64),
@@ -29,6 +30,7 @@ ContextImpl ::~ContextImpl()
 {
     mOrderedLocalVarNameIndex = 0;
     mOrderedGlobalVarNameIndex = 0;
+    mOrderedFunctionNameIndex = 0;
 
     for (auto &IntTy : mIntegerTypes)
     {

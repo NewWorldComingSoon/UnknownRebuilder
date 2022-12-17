@@ -19,7 +19,8 @@ public:
     //Ordered index
     uint64_t mOrderedLocalVarNameIndex;
     uint64_t mOrderedGlobalVarNameIndex;
-	
+    uint64_t mOrderedFunctionNameIndex;
+
     // Basic type instances
     Type mVoidTy;
     Type mFloatTy;
