@@ -187,4 +187,11 @@ ConstantInt::get(Context &Context, uint64_t Val, uint32_t BitWidth)
     return Slot;
 }
 
+// Get a ConstantInt from a value
+ConstantInt *
+ConstantInt::get(IntegerType *Ty, uint64_t Val, uint32_t BitWidth)
+{
+    return get(Ty->getContext(), Val, BitWidth);
+}
+
 } // namespace uir

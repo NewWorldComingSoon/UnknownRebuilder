@@ -61,3 +61,14 @@ TEST(test_uir, test_uir_value_3)
     Value *Val22 = new LocalVariable(Type::getInt32Ty(CTX), LocalVariable::generateOrderedLocalVarName(CTX));
     printf("Val22 ReadableName = %s\n", Val22->getReadableName().c_str());
 }
+
+TEST(test_uir, test_uir_value_4)
+{
+    Context CTX;
+    CTX.setArch(Context::ArchX86);
+    CTX.setMode(Context::Mode64);
+
+    auto CSTInt = ConstantInt::get(CTX, 25474, 32);
+    printf("CSTInt getZExtValue = %lld\n", CSTInt->getZExtValue());
+    printf("CSTInt ReadableName = %s\n", CSTInt->getReadableName().c_str());
+}

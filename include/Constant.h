@@ -48,6 +48,9 @@ public:
 
     // Get a ConstantInt from a value
     static ConstantInt *get(Context &Context, uint64_t Val, uint32_t BitWidth);
+
+    // Get a ConstantInt from a value
+    static ConstantInt *get(IntegerType *Ty, uint64_t Val, uint32_t BitWidth);
 };
 
 } // namespace uir
