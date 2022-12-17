@@ -6,30 +6,6 @@ if(CMKR_ROOT_PROJECT)
 	configure_file(cmake.toml cmake.toml COPYONLY)
 endif()
 
-# Target: UnknownBackend-cli
-set(UnknownBackend-cli_SOURCES
-	"UnknownBackend-cli/main.cpp"
-	cmake.toml
-)
-
-add_executable(UnknownBackend-cli)
-
-target_sources(UnknownBackend-cli PRIVATE ${UnknownBackend-cli_SOURCES})
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${UnknownBackend-cli_SOURCES})
-
-target_compile_features(UnknownBackend-cli PRIVATE
-	cxx_std_20
-)
-
-target_include_directories(UnknownBackend-cli PRIVATE
-	"../include"
-)
-
-get_directory_property(CMKR_VS_STARTUP_PROJECT DIRECTORY ${PROJECT_SOURCE_DIR} DEFINITION VS_STARTUP_PROJECT)
-if(NOT CMKR_VS_STARTUP_PROJECT)
-	set_property(DIRECTORY ${PROJECT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT UnknownBackend-cli)
-endif()
-
 # Target: UnknownFrontend-cli
 set(UnknownFrontend-cli_SOURCES
 	"UnknownFrontend-cli/main.cpp"
@@ -52,5 +28,29 @@ target_include_directories(UnknownFrontend-cli PRIVATE
 get_directory_property(CMKR_VS_STARTUP_PROJECT DIRECTORY ${PROJECT_SOURCE_DIR} DEFINITION VS_STARTUP_PROJECT)
 if(NOT CMKR_VS_STARTUP_PROJECT)
 	set_property(DIRECTORY ${PROJECT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT UnknownFrontend-cli)
+endif()
+
+# Target: UnknownBackend-cli
+set(UnknownBackend-cli_SOURCES
+	"UnknownBackend-cli/main.cpp"
+	cmake.toml
+)
+
+add_executable(UnknownBackend-cli)
+
+target_sources(UnknownBackend-cli PRIVATE ${UnknownBackend-cli_SOURCES})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${UnknownBackend-cli_SOURCES})
+
+target_compile_features(UnknownBackend-cli PRIVATE
+	cxx_std_20
+)
+
+target_include_directories(UnknownBackend-cli PRIVATE
+	"../include"
+)
+
+get_directory_property(CMKR_VS_STARTUP_PROJECT DIRECTORY ${PROJECT_SOURCE_DIR} DEFINITION VS_STARTUP_PROJECT)
+if(NOT CMKR_VS_STARTUP_PROJECT)
+	set_property(DIRECTORY ${PROJECT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT UnknownBackend-cli)
 endif()
 
