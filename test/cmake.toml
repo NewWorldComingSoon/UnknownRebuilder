@@ -1,6 +1,24 @@
 
+
 [subdir.googletest]
-[subdir.test-uir]
+
+
+[target.test-uir]
+type = "executable"
+msvc-runtime = "static"
+headers = ["test-uir/**.h"]
+sources = ["test-uir/**.cpp", "test-uir/**.h"]
+include-directories = [
+"../include",
+"googletest/googletest/include"
+]
+
+link-libraries = [
+"UnknownIR",
+"gtest"
+]
+compile-features = ["cxx_std_20"]
+
 
 
 

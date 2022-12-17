@@ -16,13 +16,40 @@ endif()
 add_subdirectory(googletest)
 set(CMAKE_FOLDER ${CMKR_CMAKE_FOLDER})
 
-# Subdirectory: test-uir
-set(CMKR_CMAKE_FOLDER ${CMAKE_FOLDER})
-if(CMAKE_FOLDER)
-	set(CMAKE_FOLDER "${CMAKE_FOLDER}/test-uir")
-else()
-	set(CMAKE_FOLDER test-uir)
+# Target: test-uir
+set(test-uir_SOURCES
+	"test-uir/main.cpp"
+	"test-uir/test.type.cpp"
+	"test-uir/test.value.cpp"
+	cmake.toml
+)
+
+add_executable(test-uir)
+
+target_sources(test-uir PRIVATE ${test-uir_SOURCES})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${test-uir_SOURCES})
+
+target_compile_features(test-uir PRIVATE
+	cxx_std_20
+)
+
+target_include_directories(test-uir PRIVATE
+	"../include"
+	"googletest/googletest/include"
+)
+
+target_link_libraries(test-uir PRIVATE
+	UnknownIR
+	gtest
+)
+
+set_target_properties(test-uir PROPERTIES
+	MSVC_RUNTIME_LIBRARY
+		"MultiThreaded$<$<CONFIG:Debug>:Debug>"
+)
+
+get_directory_property(CMKR_VS_STARTUP_PROJECT DIRECTORY ${PROJECT_SOURCE_DIR} DEFINITION VS_STARTUP_PROJECT)
+if(NOT CMKR_VS_STARTUP_PROJECT)
+	set_property(DIRECTORY ${PROJECT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT test-uir)
 endif()
-add_subdirectory(test-uir)
-set(CMAKE_FOLDER ${CMKR_CMAKE_FOLDER})
 
