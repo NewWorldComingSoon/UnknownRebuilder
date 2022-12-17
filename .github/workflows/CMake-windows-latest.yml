@@ -21,7 +21,7 @@ jobs:
 
     - name: Build-Win64
       run: |
-        cmake -B build64 -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
+        cmake -B build64 -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCAPSTONE_BUILD_TESTS=OFF -DCAPSTONE_BUILD_SHARED=OFF -DCAPSTONE_BUILD_STATIC_RUNTIME=ON -DLLVM_TARGETS_TO_BUILD=X86
         cmake --build build64 --config ${{ env.BUILD_TYPE }} --parallel
     
     - name: Upload artifacts-Win64
