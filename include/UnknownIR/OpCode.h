@@ -7,11 +7,17 @@ namespace uir {
 
 enum class OpCodeID : uint8_t
 {
-    // Binary Operators
+    // Binary operators instructions
     Add,
     Sub,
 
-    // Terminator
+    // Bitwise instructions
+    Xor,
+    Or,
+    And,
+    Not,
+
+    // Terminator instructions
     Ret,
     RetIMM,
 
@@ -27,21 +33,33 @@ struct OpCodeComponent
     bool mHasEFlags;
 };
 
+// clang-format off
 const OpCodeComponent GlobalOpCodeComponents[] = {
-    // Binary Operators
-    // op3 = op1 + op2
-    {OpCodeID::Add, "Add", 3, true},
-    // op3 = op1 - op2
-    {OpCodeID::Sub, "Sub", 3, true},
+    // Binary operators instructions
+        // op3 = op1 + op2
+    {   OpCodeID::Add,         "Add",      3,      true    },
+        // op3 = op1 - op2
+    {   OpCodeID::Sub,         "Sub",      3,      true    },
 
-    // Terminator
-    // ret
-    {OpCodeID::Ret, "Ret", 0, false},
-    // ret imm
-    {OpCodeID::RetIMM, "RetIMM", 1, false},
+    // Bitwise instructions
+        // op3 = op1 ^ op2
+    {   OpCodeID::Xor,         "Xor",      3,      true    },
+        // op3 = op1 | op2
+    {   OpCodeID::Or,          "Or",       3,      true    },
+        // op3 = op1 & op2
+    {   OpCodeID::And,         "And",      3,      true    },
+        // op2 = ~op1
+    {   OpCodeID::Not,         "Not",      2,      false   },
+	
+    // Terminator instructions
+        // ret
+    {   OpCodeID::Ret,         "Ret",      0,      false   },
+        // ret imm
+    {   OpCodeID::RetIMM,      "RetIMM",   1,      false   },
 
-    // Unknown
-    {OpCodeID::Unknown, "Unknown", 0, false},
+        // Unknown
+    {   OpCodeID::Unknown,     "Unknown",  0,      false   },
 };
+// clang-format on
 
 } // namespace uir
