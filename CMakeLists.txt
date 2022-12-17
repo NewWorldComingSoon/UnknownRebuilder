@@ -124,3 +124,47 @@ target_include_directories(UnknownIR PUBLIC
 	"include/UnknownIR"
 )
 
+# Target: UnknownFrontend
+set(UnknownFrontend_SOURCES
+	"src/UnknownFrontend/UnknownFrontend.cpp"
+	"include/UnknownFrontend/UnknownFrontend.h"
+	cmake.toml
+)
+
+add_library(UnknownFrontend)
+
+target_sources(UnknownFrontend PRIVATE ${UnknownFrontend_SOURCES})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${UnknownFrontend_SOURCES})
+
+target_compile_features(UnknownFrontend PUBLIC
+	cxx_std_20
+)
+
+target_include_directories(UnknownFrontend PUBLIC
+	"src/UnknownFrontend"
+	include
+	"include/UnknownFrontend"
+)
+
+# Target: UnknownBackend
+set(UnknownBackend_SOURCES
+	"src/UnknownBackend/UnknownBacktend.cpp"
+	"include/UnknownBackend/UnknownBacktend.h"
+	cmake.toml
+)
+
+add_library(UnknownBackend)
+
+target_sources(UnknownBackend PRIVATE ${UnknownBackend_SOURCES})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${UnknownBackend_SOURCES})
+
+target_compile_features(UnknownBackend PUBLIC
+	cxx_std_20
+)
+
+target_include_directories(UnknownBackend PUBLIC
+	"src/UnknownBackend"
+	include
+	"include/UnknownBackend"
+)
+

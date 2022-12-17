@@ -28,3 +28,18 @@ sources = ["src/UnknownIR/**.cpp", "src/UnknownIR/**.hpp", "src/UnknownIR/**.h"]
 compile-features = ["cxx_std_20"]
 
 
+[target.UnknownFrontend]
+type = "library"
+include-directories = ["src/UnknownFrontend", "include", "include/UnknownFrontend"]
+headers = ["include/UnknownFrontend/**.h"]
+sources = ["src/UnknownFrontend/**.cpp", "src/UnknownFrontend/**.hpp", "src/UnknownFrontend/**.h"]
+compile-features = ["cxx_std_20"]
+
+
+[target.UnknownBackend]
+type = "library"
+include-directories = ["src/UnknownBackend", "include", "include/UnknownBackend"]
+headers = ["include/UnknownBackend/**.h"]
+sources = ["src/UnknownBackend/**.cpp", "src/UnknownBackend/**.hpp", "src/UnknownBackend/**.h"]
+compile-features = ["cxx_std_20"]
+
