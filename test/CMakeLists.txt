@@ -6,16 +6,19 @@ if(CMKR_ROOT_PROJECT)
 	configure_file(cmake.toml cmake.toml COPYONLY)
 endif()
 
-# Subdirectory: googletest
-set(CMKR_CMAKE_FOLDER ${CMAKE_FOLDER})
-if(CMAKE_FOLDER)
-	set(CMAKE_FOLDER "${CMAKE_FOLDER}/googletest")
-else()
-	set(CMAKE_FOLDER googletest)
-endif()
-add_subdirectory(googletest)
-set(CMAKE_FOLDER ${CMKR_CMAKE_FOLDER})
+include(FetchContent)
 
+if(ENABLE_TEST) # test_mode
+	message(STATUS "Fetching googletest (release-1.12.1)...")
+	FetchContent_Declare(googletest
+		GIT_REPOSITORY
+			"https://github.com/google/googletest"
+		GIT_TAG
+			release-1.12.1
+	)
+	FetchContent_MakeAvailable(googletest)
+
+endif()
 # Target: test-uir
 set(test-uir_SOURCES
 	"test-uir/main.cpp"

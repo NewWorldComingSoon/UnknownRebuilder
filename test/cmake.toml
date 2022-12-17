@@ -1,6 +1,9 @@
 
 
-[subdir.googletest]
+[fetch-content.googletest]
+condition = "test_mode"
+git = "https://github.com/google/googletest"
+tag = "release-1.12.1"
 
 
 [target.test-uir]

@@ -6,23 +6,23 @@ if(CMKR_ROOT_PROJECT)
 	configure_file(cmake.toml cmake.toml COPYONLY)
 endif()
 
-# Subdirectory: capstone-retdec
-set(CMKR_CMAKE_FOLDER ${CMAKE_FOLDER})
-if(CMAKE_FOLDER)
-	set(CMAKE_FOLDER "${CMAKE_FOLDER}/capstone-retdec")
-else()
-	set(CMAKE_FOLDER capstone-retdec)
-endif()
-add_subdirectory(capstone-retdec)
-set(CMAKE_FOLDER ${CMKR_CMAKE_FOLDER})
+include(FetchContent)
 
-# Subdirectory: keystone-retdec
-set(CMKR_CMAKE_FOLDER ${CMAKE_FOLDER})
-if(CMAKE_FOLDER)
-	set(CMAKE_FOLDER "${CMAKE_FOLDER}/keystone-retdec")
-else()
-	set(CMAKE_FOLDER keystone-retdec)
-endif()
-add_subdirectory(keystone-retdec)
-set(CMAKE_FOLDER ${CMKR_CMAKE_FOLDER})
+message(STATUS "Fetching capstone-retdec (main)...")
+FetchContent_Declare(capstone-retdec
+	GIT_REPOSITORY
+		"https://github.com/NewWorldComingSoon/capstone-retdec"
+	GIT_TAG
+		main
+)
+FetchContent_MakeAvailable(capstone-retdec)
+
+message(STATUS "Fetching keystone-retdec (main)...")
+FetchContent_Declare(keystone-retdec
+	GIT_REPOSITORY
+		"https://github.com/NewWorldComingSoon/keystone-retdec"
+	GIT_TAG
+		main
+)
+FetchContent_MakeAvailable(keystone-retdec)
 
