@@ -10,8 +10,15 @@ namespace uir {
 ////////////////////////////////////////////////////////////
 //     Function
 //
-Function::Function(Context &C, const std::string FunctionName, uint64_t FunctionAddress) :
-    Constant(Type::getFunctionTy(C), FunctionName), mFunctionName(FunctionName), mFunctionAddress(FunctionAddress)
+Function::Function(
+    Context &C,
+    const std::string FunctionName,
+    uint64_t FunctionAddressBegin,
+    uint64_t FunctionAddressEnd) :
+    Constant(Type::getFunctionTy(C), FunctionName),
+    mFunctionName(FunctionName),
+    mFunctionAddressBegin(FunctionAddressBegin),
+    mFunctionAddressEnd(FunctionAddressEnd)
 {
     //
     //

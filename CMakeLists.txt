@@ -56,6 +56,7 @@ endif()
 set(UnknownIR_SOURCES
 	"src/ContextImpl/UnknownIR.ContextImpl.cpp"
 	"src/Internal/InternalErrors/UnknownIR.InternalErrors.cpp"
+	"src/UnknownIR.BasicBlock.cpp"
 	"src/UnknownIR.Constant.cpp"
 	"src/UnknownIR.Context.cpp"
 	"src/UnknownIR.Function.cpp"
@@ -71,6 +72,7 @@ set(UnknownIR_SOURCES
 	"src/ContextImpl/ContextImpl.h"
 	"src/Internal/InternalConfig/InternalConfig.h"
 	"src/Internal/InternalErrors/InternalErrors.h"
+	"include/BasicBlock.h"
 	"include/Constant.h"
 	"include/Context.h"
 	"include/Function.h"

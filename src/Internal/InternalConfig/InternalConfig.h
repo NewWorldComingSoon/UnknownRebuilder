@@ -12,3 +12,5 @@
 // Prefix name of function
 #define UIR_FUNCTION_VARIABLE_NAME_PREFIX "$"
 
+// Suffix name of block
+#define UIR_BLOCK_VARIABLE_NAME_PREFIX ":"

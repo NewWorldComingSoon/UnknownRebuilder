@@ -7,10 +7,15 @@ class Function : public Constant
 {
 private:
     std::string mFunctionName;
-    uint64_t mFunctionAddress;
+    uint64_t mFunctionAddressBegin;
+    uint64_t mFunctionAddressEnd;
 
 public:
-    explicit Function(Context &C, const std::string FunctionName, uint64_t FunctionAddress);
+    explicit Function(
+        Context &C,
+        const std::string FunctionName,
+        uint64_t FunctionAddressBegin,
+        uint64_t FunctionAddressEnd);
     virtual ~Function();
 
 public:
