@@ -1,2 +1,18 @@
-[subdir.UnknownBackend-cli]
-[subdir.UnknownFrontend-cli]
+
+[target.UnknownBackend-cli]
+type = "executable"
+include-directories = ["../include"]
+headers = ["UnknownBackend-cli/**.h"]
+sources = ["UnknownBackend-cli/**.cpp", "UnknownBackend-cli/**.hpp", "UnknownBackend-cli/**.h"]
+compile-features = ["cxx_std_20"]
+
+
+[target.UnknownFrontend-cli]
+type = "executable"
+include-directories = ["../include"]
+headers = ["UnknownFrontend-cli/**.h"]
+sources = ["UnknownFrontend-cli/**.cpp", "UnknownFrontend-cli/**.hpp", "UnknownFrontend-cli/**.h"]
+compile-features = ["cxx_std_20"]
+
+
+

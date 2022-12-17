@@ -1,6 +1,0 @@
-[target.UnknownBackend-cli]
-type = "executable"
-include-directories = ["../../include"]
-headers = ["**.h"]
-sources = ["**.cpp", "**.hpp", "**.h"]
-compile-features = ["cxx_std_20"]

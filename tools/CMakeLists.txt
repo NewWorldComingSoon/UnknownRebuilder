@@ -6,23 +6,51 @@ if(CMKR_ROOT_PROJECT)
 	configure_file(cmake.toml cmake.toml COPYONLY)
 endif()
 
-# Subdirectory: UnknownBackend-cli
-set(CMKR_CMAKE_FOLDER ${CMAKE_FOLDER})
-if(CMAKE_FOLDER)
-	set(CMAKE_FOLDER "${CMAKE_FOLDER}/UnknownBackend-cli")
-else()
-	set(CMAKE_FOLDER UnknownBackend-cli)
-endif()
-add_subdirectory(UnknownBackend-cli)
-set(CMAKE_FOLDER ${CMKR_CMAKE_FOLDER})
+# Target: UnknownBackend-cli
+set(UnknownBackend-cli_SOURCES
+	"UnknownBackend-cli/main.cpp"
+	cmake.toml
+)
 
-# Subdirectory: UnknownFrontend-cli
-set(CMKR_CMAKE_FOLDER ${CMAKE_FOLDER})
-if(CMAKE_FOLDER)
-	set(CMAKE_FOLDER "${CMAKE_FOLDER}/UnknownFrontend-cli")
-else()
-	set(CMAKE_FOLDER UnknownFrontend-cli)
+add_executable(UnknownBackend-cli)
+
+target_sources(UnknownBackend-cli PRIVATE ${UnknownBackend-cli_SOURCES})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${UnknownBackend-cli_SOURCES})
+
+target_compile_features(UnknownBackend-cli PRIVATE
+	cxx_std_20
+)
+
+target_include_directories(UnknownBackend-cli PRIVATE
+	"../include"
+)
+
+get_directory_property(CMKR_VS_STARTUP_PROJECT DIRECTORY ${PROJECT_SOURCE_DIR} DEFINITION VS_STARTUP_PROJECT)
+if(NOT CMKR_VS_STARTUP_PROJECT)
+	set_property(DIRECTORY ${PROJECT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT UnknownBackend-cli)
 endif()
-add_subdirectory(UnknownFrontend-cli)
-set(CMAKE_FOLDER ${CMKR_CMAKE_FOLDER})
+
+# Target: UnknownFrontend-cli
+set(UnknownFrontend-cli_SOURCES
+	"UnknownFrontend-cli/main.cpp"
+	cmake.toml
+)
+
+add_executable(UnknownFrontend-cli)
+
+target_sources(UnknownFrontend-cli PRIVATE ${UnknownFrontend-cli_SOURCES})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${UnknownFrontend-cli_SOURCES})
+
+target_compile_features(UnknownFrontend-cli PRIVATE
+	cxx_std_20
+)
+
+target_include_directories(UnknownFrontend-cli PRIVATE
+	"../include"
+)
+
+get_directory_property(CMKR_VS_STARTUP_PROJECT DIRECTORY ${PROJECT_SOURCE_DIR} DEFINITION VS_STARTUP_PROJECT)
+if(NOT CMKR_VS_STARTUP_PROJECT)
+	set_property(DIRECTORY ${PROJECT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT UnknownFrontend-cli)
+endif()
 
