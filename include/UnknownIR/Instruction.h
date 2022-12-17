@@ -1,6 +1,6 @@
 #pragma once
-#include "OpCode.h"
-#include "User.h"
+#include <UnknownIR/OpCode.h>
+#include <UnknownIR/User.h>
 
 namespace uir {
 

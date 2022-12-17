@@ -1,6 +1,6 @@
 #pragma once
-#include "Object.h"
-#include "Type.h"
+#include <UnknownIR/Object.h>
+#include <UnknownIR/Type.h>
 
 #include <cstdint>
 #include <unordered_set>

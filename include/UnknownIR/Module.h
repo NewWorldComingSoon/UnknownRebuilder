@@ -1,5 +1,5 @@
 #pragma once
-#include "Function.h"
+#include <UnknownIR/Function.h>
 
 namespace uir {
 

@@ -4,23 +4,26 @@
 test_mode = "ENABLE_TEST"
 
 [project]
-name = "UnknownIR"
+name = "UnknownRebuilder"
 msvc-runtime = "static"
 languages = ["CXX"]
 cmake-after = """
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/Output)
-add_definitions(-DUNKNOWNIR_SRC_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
+add_definitions(-DUNKNOWN_REBUILDER_SRC_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
 """
 test_mode.cmake-after = "add_definitions(-DENABLE_TEST)"
 
 [subdir.test]
 condition = "test_mode"
 
+[subdir.tools]
+
 
 [target.UnknownIR]
 type = "library"
-include-directories = ["src", "include"]
-headers = ["include/**.h"]
-sources = ["src/**.cpp", "src/**.hpp", "src/**.h"]
+include-directories = ["src/UnknownIR", "include", "include/UnknownIR"]
+headers = ["include/UnknownIR/**.h"]
+sources = ["src/UnknownIR/**.cpp", "src/UnknownIR/**.hpp", "src/UnknownIR/**.h"]
 compile-features = ["cxx_std_20"]
+
 

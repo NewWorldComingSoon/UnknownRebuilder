@@ -1,5 +1,5 @@
 #pragma once
-#include "Constant.h"
+#include <UnknownIR/Constant.h>
 
 namespace uir {
 

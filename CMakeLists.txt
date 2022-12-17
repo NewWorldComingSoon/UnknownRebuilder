@@ -28,13 +28,13 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 	configure_file(cmake.toml cmake.toml COPYONLY)
 endif()
 
-project(UnknownIR
+project(UnknownRebuilder
 	LANGUAGES
 		CXX
 )
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/Output)
-add_definitions(-DUNKNOWNIR_SRC_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
+add_definitions(-DUNKNOWN_REBUILDER_SRC_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
 
 if(ENABLE_TEST) # test_mode
 	add_definitions(-DENABLE_TEST)
@@ -52,40 +52,50 @@ if(ENABLE_TEST) # test_mode
 	set(CMAKE_FOLDER ${CMKR_CMAKE_FOLDER})
 
 endif()
+# Subdirectory: tools
+set(CMKR_CMAKE_FOLDER ${CMAKE_FOLDER})
+if(CMAKE_FOLDER)
+	set(CMAKE_FOLDER "${CMAKE_FOLDER}/tools")
+else()
+	set(CMAKE_FOLDER tools)
+endif()
+add_subdirectory(tools)
+set(CMAKE_FOLDER ${CMKR_CMAKE_FOLDER})
+
 # Target: UnknownIR
 set(UnknownIR_SOURCES
-	"src/ContextImpl/UnknownIR.ContextImpl.cpp"
-	"src/Internal/InternalErrors/UnknownIR.InternalErrors.cpp"
-	"src/UnknownIR.BasicBlock.cpp"
-	"src/UnknownIR.Constant.cpp"
-	"src/UnknownIR.Context.cpp"
-	"src/UnknownIR.Function.cpp"
-	"src/UnknownIR.GlobalVariable.cpp"
-	"src/UnknownIR.Instruction.cpp"
-	"src/UnknownIR.LocalVariable.cpp"
-	"src/UnknownIR.Module.cpp"
-	"src/UnknownIR.Object.cpp"
-	"src/UnknownIR.Type.cpp"
-	"src/UnknownIR.User.cpp"
-	"src/UnknownIR.Value.cpp"
-	"src/UnknownIR.cpp"
-	"src/ContextImpl/ContextImpl.h"
-	"src/Internal/InternalConfig/InternalConfig.h"
-	"src/Internal/InternalErrors/InternalErrors.h"
-	"include/BasicBlock.h"
-	"include/Constant.h"
-	"include/Context.h"
-	"include/Function.h"
-	"include/GlobalVariable.h"
-	"include/Instruction.h"
-	"include/LocalVariable.h"
-	"include/Module.h"
-	"include/Object.h"
-	"include/OpCode.h"
-	"include/Type.h"
-	"include/UnknownIR.h"
-	"include/User.h"
-	"include/Value.h"
+	"src/UnknownIR/ContextImpl/UnknownIR.ContextImpl.cpp"
+	"src/UnknownIR/Internal/InternalErrors/UnknownIR.InternalErrors.cpp"
+	"src/UnknownIR/UnknownIR.BasicBlock.cpp"
+	"src/UnknownIR/UnknownIR.Constant.cpp"
+	"src/UnknownIR/UnknownIR.Context.cpp"
+	"src/UnknownIR/UnknownIR.Function.cpp"
+	"src/UnknownIR/UnknownIR.GlobalVariable.cpp"
+	"src/UnknownIR/UnknownIR.Instruction.cpp"
+	"src/UnknownIR/UnknownIR.LocalVariable.cpp"
+	"src/UnknownIR/UnknownIR.Module.cpp"
+	"src/UnknownIR/UnknownIR.Object.cpp"
+	"src/UnknownIR/UnknownIR.Type.cpp"
+	"src/UnknownIR/UnknownIR.User.cpp"
+	"src/UnknownIR/UnknownIR.Value.cpp"
+	"src/UnknownIR/UnknownIR.cpp"
+	"src/UnknownIR/ContextImpl/ContextImpl.h"
+	"src/UnknownIR/Internal/InternalConfig/InternalConfig.h"
+	"src/UnknownIR/Internal/InternalErrors/InternalErrors.h"
+	"include/UnknownIR/BasicBlock.h"
+	"include/UnknownIR/Constant.h"
+	"include/UnknownIR/Context.h"
+	"include/UnknownIR/Function.h"
+	"include/UnknownIR/GlobalVariable.h"
+	"include/UnknownIR/Instruction.h"
+	"include/UnknownIR/LocalVariable.h"
+	"include/UnknownIR/Module.h"
+	"include/UnknownIR/Object.h"
+	"include/UnknownIR/OpCode.h"
+	"include/UnknownIR/Type.h"
+	"include/UnknownIR/UnknownIR.h"
+	"include/UnknownIR/User.h"
+	"include/UnknownIR/Value.h"
 	cmake.toml
 )
 
@@ -99,7 +109,8 @@ target_compile_features(UnknownIR PUBLIC
 )
 
 target_include_directories(UnknownIR PUBLIC
-	src
+	"src/UnknownIR"
 	include
+	"include/UnknownIR"
 )
 
