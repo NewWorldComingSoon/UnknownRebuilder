@@ -1,5 +1,5 @@
 #  UnknownRebuilder
-[![CMake-win](https://github.com/NewWorldComingSoon/UnknownRebuilder/actions/workflows/build-win.yml/badge.svg)](https://github.com/NewWorldComingSoon/UnknownRebuilder/actions/workflows/build-win.yml)
+[![CMake-windows-2019](https://github.com/NewWorldComingSoon/UnknownRebuilder/actions/workflows/build-win.yml/badge.svg)](https://github.com/NewWorldComingSoon/UnknownRebuilder/actions/workflows/build-win.yml)
 
 X86 native code rebuilder using UnknownIR(UIR)
 
