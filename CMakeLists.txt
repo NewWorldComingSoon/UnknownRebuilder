@@ -81,6 +81,7 @@ set(UnknownIR_SOURCES
 	"include/LocalVariable.h"
 	"include/Module.h"
 	"include/Object.h"
+	"include/OpCode.h"
 	"include/Type.h"
 	"include/UnknownIR.h"
 	"include/User.h"

@@ -2,7 +2,7 @@
 #include "Object.h"
 #include "Type.h"
 
-#include <stdint.h>
+#include <cstdint>
 #include <unordered_set>
 
 namespace uir {

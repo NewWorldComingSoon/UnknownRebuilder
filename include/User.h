@@ -2,7 +2,7 @@
 #include "Value.h"
 
 #include <vector>
-#include <stdint.h>
+#include <cstdint>
 
 namespace uir {
 

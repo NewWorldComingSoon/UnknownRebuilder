@@ -1,4 +1,5 @@
 #pragma once
+#include "OpCode.h"
 #include "User.h"
 
 namespace uir {
