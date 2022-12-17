@@ -8,11 +8,11 @@ Yet another Intermediate Representation(IR) called UnknownIR(UIR).
 
 ## Credit
 - [cmkr](https://github.com/build-cpp/cmkr)
-- LLVM
+- [LLVM](https://github.com/llvm/llvm-project)
 - [RetDec](https://github.com/avast/retdec)
 - [VTIL](https://github.com/vtil-project)
-- Capstone 
-- Keystone
+- [Capstone](https://github.com/NewWorldComingSoon/capstone-retdec) 
+- [Keystone](https://github.com/NewWorldComingSoon/keystone-retdec)
 
 ## Build
 Only tested on Windows, other systems have not been tested.
