@@ -7,6 +7,7 @@ X86 native code rebuilder using UnknownIR(UIR)
 Yet another Intermediate Representation(IR) called UnknownIR(UIR).
 
 ## Credit
+- cmkr
 - LLVM
 - RetDec
 - Capstone 
