@@ -127,7 +127,9 @@ target_include_directories(UnknownIR PUBLIC
 # Target: UnknownFrontend
 set(UnknownFrontend_SOURCES
 	"src/UnknownFrontend/UnknownFrontend.cpp"
+	"src/UnknownFrontend/x86/UnknownFrontend.x86.cpp"
 	"include/UnknownFrontend/UnknownFrontend.h"
+	"include/UnknownFrontend/x86/UnknownFrontend.x86.h"
 	cmake.toml
 )
 
