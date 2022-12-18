@@ -2,4 +2,16 @@
 
 namespace ufrontend {
 
+UnknownFrontendTranslator::UnknownFrontendTranslator()
+{
+    //
+    //
 }
+
+UnknownFrontendTranslator::~UnknownFrontendTranslator()
+{
+    //
+    //
+}
+
+} // namespace ufrontend
