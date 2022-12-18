@@ -32,7 +32,7 @@ protected:
     uint32_t mTypeSizeInBits;
 
 public:
-    explicit Type(Context &C, const std::string TypeName, TypeID TypeID, uint32_t TypeSizeInBits);
+    explicit Type(Context &C, const char *TypeName, TypeID TypeID, uint32_t TypeSizeInBits);
     virtual ~Type();
 
 public:
@@ -42,7 +42,7 @@ public:
 public:
     // Get/Set the name of the type
     std::string getTypeName() const;
-    void setTypeName(const std::string TypeName);
+    void setTypeName(const char *TypeName);
 
     // Get/Set the id of the type
     TypeID getTypeID() const;
@@ -106,7 +106,7 @@ public:
 class IntegerType : public Type
 {
 public:
-    explicit IntegerType(Context &C, const std::string TypeName, uint32_t TypeSizeInBits);
+    explicit IntegerType(Context &C, const char *TypeName, uint32_t TypeSizeInBits);
     virtual ~IntegerType();
 
 public:
@@ -121,7 +121,7 @@ private:
     Type *mElementType;
 
 public:
-    explicit PointerType(Context &C, Type *ElementType, const std::string TypeName);
+    explicit PointerType(Context &C, Type *ElementType, const char *TypeName);
     virtual ~PointerType();
 
 public:

@@ -13,7 +13,7 @@ namespace uir {
 
 ////////////////////////////////////////////////////////////
 // Ctor/Dtor
-Type::Type(Context &C, const std::string TypeName, TypeID TypeID, uint32_t TypeSizeInBits) :
+Type::Type(Context &C, const char *TypeName, TypeID TypeID, uint32_t TypeSizeInBits) :
     mContext(C), mTypeName(TypeName), mTypeID(TypeID), mTypeSizeInBits(TypeSizeInBits)
 {
 }
@@ -30,7 +30,7 @@ Type::getTypeName() const
 }
 
 void
-Type::setTypeName(const std::string TypeName)
+Type::setTypeName(const char *TypeName)
 {
     mTypeName = TypeName;
 }
@@ -242,7 +242,7 @@ Type::getPointerTo()
 //     IntegerType
 //
 
-IntegerType::IntegerType(Context &C, const std::string TypeName, uint32_t TypeSizeInBits) :
+IntegerType::IntegerType(Context &C, const char *TypeName, uint32_t TypeSizeInBits) :
     Type(C, TypeName, Type::IntegerTyID, TypeSizeInBits)
 {
 }
@@ -306,7 +306,7 @@ IntegerType::get(Context &C, uint32_t NumBits)
         std::string NewTypeName = "i";
         NewTypeName += std::to_string(NumBits);
 
-        Entry = new IntegerType(C, NewTypeName, NumBits);
+        Entry = new IntegerType(C, NewTypeName.c_str(), NumBits);
     }
     return Entry;
 }
@@ -315,7 +315,7 @@ IntegerType::get(Context &C, uint32_t NumBits)
 //     PointerType
 //
 
-PointerType::PointerType(Context &C, Type *ElementType, const std::string TypeName) :
+PointerType::PointerType(Context &C, Type *ElementType, const char *TypeName) :
     Type(C, TypeName, Type::PointerTyID, ElementType->getTypeBits())
 {
     mElementType = ElementType;

@@ -14,7 +14,7 @@ namespace uir {
 ////////////////////////////////////////////////////////////
 //     Constant
 //
-Constant::Constant(Type *Ty, const std::string ConstantName) : User(Ty, ConstantName)
+Constant::Constant(Type *Ty, const char *ConstantName) : User(Ty, ConstantName)
 {
     //
     //
@@ -30,7 +30,7 @@ Constant::~Constant()
 //     ConstantInt
 //
 ConstantInt::ConstantInt(Type *Ty, uint64_t Val) :
-    Constant(Ty, toHexString(setValue(Val, Ty->getTypeBits(), true), Ty->getTypeBits()))
+    Constant(Ty, toHexString(setValue(Val, Ty->getTypeBits(), true), Ty->getTypeBits()).c_str())
 {
     //
     //

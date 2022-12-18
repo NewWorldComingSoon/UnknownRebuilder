@@ -21,7 +21,7 @@ protected:
 
 public:
     Value();
-    explicit Value(Type *Ty, const std::string ValueName);
+    explicit Value(Type *Ty, const char *ValueName);
     virtual ~Value();
 
 public:
@@ -38,7 +38,7 @@ public:
     virtual std::string getName() const override;
     virtual std::string getReadableName() const override;
     bool hasName() const;
-    void setName(const std::string ValueName);
+    void setName(const char *ValueName);
 
     // Get/Set the type of the value
     Type *getType() const;

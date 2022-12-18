@@ -12,7 +12,7 @@ namespace uir {
 //
 BasicBlock::BasicBlock(
     Context &C,
-    const std::string BasicBlockName,
+    const char *BasicBlockName,
     uint64_t BasicBlockAddressBegin,
     uint64_t BasicBlockAddressEnd,
     Function *Parent /*= nullptr*/) :

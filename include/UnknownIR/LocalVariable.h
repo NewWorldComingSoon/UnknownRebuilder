@@ -8,7 +8,7 @@ class Context;
 class LocalVariable : public Constant
 {
 public:
-    explicit LocalVariable(Type *Ty, const std::string LocalVariableName);
+    explicit LocalVariable(Type *Ty, const char *LocalVariableName);
     virtual ~LocalVariable();
 
 public:

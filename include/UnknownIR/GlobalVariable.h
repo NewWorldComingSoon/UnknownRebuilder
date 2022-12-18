@@ -6,7 +6,7 @@ namespace uir {
 class GlobalVariable : public Constant
 {
 public:
-    explicit GlobalVariable(Type *Ty, const std::string GlobalVariableName);
+    explicit GlobalVariable(Type *Ty, const char *GlobalVariableName);
     virtual ~GlobalVariable();
 
 public:

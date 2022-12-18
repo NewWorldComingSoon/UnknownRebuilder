@@ -9,7 +9,7 @@ namespace uir {
 // Ctor/Dtor
 Value::Value() : mType(nullptr), mValueName("") {}
 
-Value::Value(Type *Ty, const std::string ValueName) : mType(Ty), mValueName(ValueName) {}
+Value::Value(Type *Ty, const char *ValueName) : mType(Ty), mValueName(ValueName) {}
 
 Value::~Value() {}
 
@@ -63,7 +63,7 @@ Value::hasName() const
 }
 
 void
-Value::setName(const std::string ValueName)
+Value::setName(const char *ValueName)
 {
     mValueName = ValueName;
 }

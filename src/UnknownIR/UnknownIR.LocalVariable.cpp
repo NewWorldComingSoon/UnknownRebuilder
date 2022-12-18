@@ -10,7 +10,7 @@ namespace uir {
 ////////////////////////////////////////////////////////////
 //     LocalVariable
 //
-LocalVariable::LocalVariable(Type *Ty, const std::string LocalVariableName) : Constant(Ty, LocalVariableName)
+LocalVariable::LocalVariable(Type *Ty, const char *LocalVariableName) : Constant(Ty, LocalVariableName)
 {
     //
     //
