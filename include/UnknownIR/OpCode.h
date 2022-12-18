@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdint>
 #include <string>
-#include <array>
+#include <vector>
 
 namespace uir {
 
@@ -34,31 +34,31 @@ struct OpCodeComponent
 };
 
 // clang-format off
-const OpCodeComponent GlobalOpCodeComponents[] = {
+const std::vector<OpCodeComponent> GlobalOpCodeComponents = {
     // Binary operators instructions
         // op3 = op1 + op2
-    {   OpCodeID::Add,         "Add",      3,      true    },
+    {   OpCodeID::Add,         "uir.add",      3,      true    },
         // op3 = op1 - op2
-    {   OpCodeID::Sub,         "Sub",      3,      true    },
+    {   OpCodeID::Sub,         "uir.sub",      3,      true    },
 
     // Bitwise instructions
         // op3 = op1 ^ op2
-    {   OpCodeID::Xor,         "Xor",      3,      true    },
+    {   OpCodeID::Xor,         "uir.xor",      3,      true    },
         // op3 = op1 | op2
-    {   OpCodeID::Or,          "Or",       3,      true    },
+    {   OpCodeID::Or,          "uir.or",       3,      true    },
         // op3 = op1 & op2
-    {   OpCodeID::And,         "And",      3,      true    },
+    {   OpCodeID::And,         "uir.and",      3,      true    },
         // op2 = ~op1
-    {   OpCodeID::Not,         "Not",      2,      false   },
+    {   OpCodeID::Not,         "uir.not",      2,      false   },
 	
     // Terminator instructions
         // ret
-    {   OpCodeID::Ret,         "Ret",      0,      false   },
+    {   OpCodeID::Ret,         "uir.ret",      0,      false   },
         // ret imm
-    {   OpCodeID::RetIMM,      "RetIMM",   1,      false   },
+    {   OpCodeID::RetIMM,      "uir.retimm",   1,      false   },
 
         // Unknown
-    {   OpCodeID::Unknown,     "Unknown",  0,      false   },
+    {   OpCodeID::Unknown,     "uir.unknown",  0,      false   },
 };
 // clang-format on
 
