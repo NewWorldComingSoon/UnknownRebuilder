@@ -30,7 +30,12 @@ compile-features = ["cxx_std_20"]
 
 [target.UnknownFrontend]
 type = "library"
-include-directories = ["src/UnknownFrontend", "include", "include/UnknownFrontend"]
+include-directories = [
+"3rdparty/capstone-retdec/include",
+"src/UnknownFrontend", 
+"include", 
+"include/UnknownFrontend"
+]
 headers = ["include/UnknownFrontend/**.h"]
 sources = ["src/UnknownFrontend/**.cpp", "src/UnknownFrontend/**.hpp", "src/UnknownFrontend/**.h"]
 compile-features = ["cxx_std_20"]
@@ -42,7 +47,11 @@ link-libraries = [
 
 [target.UnknownBackend]
 type = "library"
-include-directories = ["src/UnknownBackend", "include", "include/UnknownBackend"]
+include-directories = [
+"src/UnknownBackend", 
+"include", 
+"include/UnknownBackend"
+]
 headers = ["include/UnknownBackend/**.h"]
 sources = ["src/UnknownBackend/**.cpp", "src/UnknownBackend/**.hpp", "src/UnknownBackend/**.h"]
 compile-features = ["cxx_std_20"]

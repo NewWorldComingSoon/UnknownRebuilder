@@ -143,6 +143,7 @@ target_compile_features(UnknownFrontend PUBLIC
 )
 
 target_include_directories(UnknownFrontend PUBLIC
+	"3rdparty/capstone-retdec/include"
 	"src/UnknownFrontend"
 	include
 	"include/UnknownFrontend"

@@ -1,10 +1,3 @@
 
-[fetch-content.capstone-retdec]
-git = "https://github.com/NewWorldComingSoon/capstone-retdec"
-tag = "main"
-
-[fetch-content.keystone-retdec]
-git = "https://github.com/NewWorldComingSoon/keystone-retdec"
-tag = "main"
-
-
+[subdir.capstone-retdec]
+[subdir.keystone-retdec]

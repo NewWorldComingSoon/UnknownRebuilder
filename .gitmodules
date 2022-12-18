@@ -1,0 +1,6 @@
+[submodule "3rdparty/capstone-retdec"]
+	path = 3rdparty/capstone-retdec
+	url = https://github.com/NewWorldComingSoon/capstone-retdec
+[submodule "3rdparty/keystone-retdec"]
+	path = 3rdparty/keystone-retdec
+	url = https://github.com/NewWorldComingSoon/keystone-retdec
