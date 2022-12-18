@@ -49,4 +49,19 @@ Module::setModuleName(const char *ModuleName)
     mModuleName = ModuleName;
 }
 
+// Get the specified function in the module
+Function *
+Module::getFunction(const char *FunctionName) const
+{
+    for (Function *Func : mFunctionList)
+    {
+        if (Func->getName().compare(FunctionName) == 0)
+        {
+            return Func;
+        }
+    }
+
+    return nullptr;
+}
+
 } // namespace uir
