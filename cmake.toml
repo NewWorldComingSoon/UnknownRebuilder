@@ -34,6 +34,10 @@ include-directories = ["src/UnknownFrontend", "include", "include/UnknownFronten
 headers = ["include/UnknownFrontend/**.h"]
 sources = ["src/UnknownFrontend/**.cpp", "src/UnknownFrontend/**.hpp", "src/UnknownFrontend/**.h"]
 compile-features = ["cxx_std_20"]
+link-libraries = [
+"capstone-static",
+"UnknownIR"
+]
 
 
 [target.UnknownBackend]
@@ -42,4 +46,9 @@ include-directories = ["src/UnknownBackend", "include", "include/UnknownBackend"
 headers = ["include/UnknownBackend/**.h"]
 sources = ["src/UnknownBackend/**.cpp", "src/UnknownBackend/**.hpp", "src/UnknownBackend/**.h"]
 compile-features = ["cxx_std_20"]
+link-libraries = [
+"UnknownIR"
+]
+
+
 

@@ -148,6 +148,11 @@ target_include_directories(UnknownFrontend PUBLIC
 	"include/UnknownFrontend"
 )
 
+target_link_libraries(UnknownFrontend PUBLIC
+	capstone-static
+	UnknownIR
+)
+
 # Target: UnknownBackend
 set(UnknownBackend_SOURCES
 	"src/UnknownBackend/UnknownBacktend.cpp"
@@ -168,5 +173,9 @@ target_include_directories(UnknownBackend PUBLIC
 	"src/UnknownBackend"
 	include
 	"include/UnknownBackend"
+)
+
+target_link_libraries(UnknownBackend PUBLIC
+	UnknownIR
 )
 
