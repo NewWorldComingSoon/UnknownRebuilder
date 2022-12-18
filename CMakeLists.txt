@@ -88,7 +88,6 @@ set(UnknownIR_SOURCES
 	"src/UnknownIR/UnknownIR.Type.cpp"
 	"src/UnknownIR/UnknownIR.User.cpp"
 	"src/UnknownIR/UnknownIR.Value.cpp"
-	"src/UnknownIR/UnknownIR.cpp"
 	"src/UnknownIR/ContextImpl/ContextImpl.h"
 	"src/UnknownIR/Internal/InternalConfig/InternalConfig.h"
 	"src/UnknownIR/Internal/InternalErrors/InternalErrors.h"
