@@ -20,6 +20,22 @@ jobs:
       with:
           submodules: 'recursive'
     
+    - uses: actions/checkout@v2
+    - uses: DoozyX/clang-format-lint-action@v0.14
+      with:
+        source: '.'
+        exclude: './3rdparty'
+        extensions: 'h,hpp,cpp,c'
+        clangFormatVersion: 14
+        style: InheritParentConfig
+        
+    - uses: EndBug/add-and-commit@v4
+      with:
+        author_name: Clang Robot
+        author_email: robot@example.com
+        message: 'Committing clang-format changes'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
     - name: Build-Win64
       run: |
