@@ -62,4 +62,14 @@ const std::vector<OpCodeComponent> GlobalOpCodeComponents = {
 };
 // clang-format on
 
+////////////////////////////////////////////////////////////////////
+// Function
+// Get OpCode component by ID
+const OpCodeComponent &
+getOpCodeComponent(OpCodeID ID);
+
+// Get OpCode component by name
+const OpCodeComponent &
+getOpCodeComponent(const char *Name);
+
 } // namespace uir

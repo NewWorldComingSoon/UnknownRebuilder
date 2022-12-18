@@ -85,6 +85,7 @@ set(UnknownIR_SOURCES
 	"src/UnknownIR/UnknownIR.LocalVariable.cpp"
 	"src/UnknownIR/UnknownIR.Module.cpp"
 	"src/UnknownIR/UnknownIR.Object.cpp"
+	"src/UnknownIR/UnknownIR.OpCode.cpp"
 	"src/UnknownIR/UnknownIR.Type.cpp"
 	"src/UnknownIR/UnknownIR.User.cpp"
 	"src/UnknownIR/UnknownIR.Value.cpp"
