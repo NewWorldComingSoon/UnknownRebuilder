@@ -26,6 +26,21 @@ Module::~Module()
 }
 
 ////////////////////////////////////////////////////////////
+// FunctionList
+// Get function list
+const std::unordered_set<Function *> &
+Module::getFunctionList() const
+{
+    return mFunctionList;
+}
+
+std::unordered_set<Function *> &
+Module::getFunctionList()
+{
+    return mFunctionList;
+}
+
+////////////////////////////////////////////////////////////
 // Context
 // Get context
 Context &

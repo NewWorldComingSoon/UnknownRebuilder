@@ -17,6 +17,11 @@ public:
     virtual ~Module();
 
 public:
+    // FunctionList
+    const std::unordered_set<Function *> &getFunctionList() const;
+    std::unordered_set<Function *> &getFunctionList();
+
+public:
     // Context
     Context &getContext() const;
 
