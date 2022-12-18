@@ -24,10 +24,18 @@ jobs:
         cmake -B build64 -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCAPSTONE_BUILD_TESTS=OFF -DCAPSTONE_BUILD_SHARED=OFF -DCAPSTONE_BUILD_STATIC_RUNTIME=ON -DLLVM_TARGETS_TO_BUILD=X86
         cmake --build build64 --config ${{ env.BUILD_TYPE }} --parallel
     
+    - name: Copy SDK
+      run: |
+        mkdir lib
+        copy build64\Release\*.* lib
+        mkdir bin
+        copy Output\Release\*.* bin
+        
     - name: Upload artifacts-Win64
       uses: actions/upload-artifact@main
       with:
         name: UnknownRebuilder-Win64
         path: |
           include/*
-          build64/Release/*      
+          lib/*  
+          bin/*   
