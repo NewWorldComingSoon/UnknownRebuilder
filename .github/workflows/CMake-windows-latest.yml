@@ -14,11 +14,12 @@ jobs:
     env:
       BUILD_TYPE: Release
     steps:
+    
     - name: Checkout Repo
       uses: actions/checkout@v3
       with:
           submodules: 'recursive'
-
+        
     - name: Build-Win64
       run: |
         cmake -B build64 -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCAPSTONE_BUILD_TESTS=OFF -DCAPSTONE_BUILD_SHARED=OFF -DCAPSTONE_BUILD_STATIC_RUNTIME=ON -DLLVM_TARGETS_TO_BUILD=X86
