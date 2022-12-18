@@ -3,6 +3,9 @@
 
 X86 native code rebuilder using UnknownIR(UIR).
 
+## Motivation
+Just for learning. Maybe it can help others too
+
 ## What's UIR?
 Yet another Intermediate Representation(IR) called UnknownIR(UIR).
 
