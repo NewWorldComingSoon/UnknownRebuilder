@@ -79,4 +79,15 @@ Module::getFunction(const char *FunctionName) const
     return nullptr;
 }
 
+// Insert a function into the module
+void
+Module::insertFunction(Function *Function)
+{
+    auto It = mFunctionList.find(Function);
+    if (It != mFunctionList.end())
+    {
+        mFunctionList.insert(Function);
+    }
+}
+
 } // namespace uir

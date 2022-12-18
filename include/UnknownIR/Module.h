@@ -33,6 +33,9 @@ public:
 
     // Get the specified function by name in the module
     Function *getFunction(const char *FunctionName) const;
+
+    // Insert a function into the module
+    void insertFunction(Function *Function);
 };
 
 } // namespace uir
