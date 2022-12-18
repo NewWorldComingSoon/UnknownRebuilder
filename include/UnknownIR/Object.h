@@ -8,7 +8,7 @@ class Object
 {
 public:
     Object();
-    virtual ~Object();
+    virtual ~Object() = default;
 
 public:
     // Name

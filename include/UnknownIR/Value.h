@@ -1,9 +1,10 @@
 #pragma once
-#include <UnknownIR/Object.h>
-#include <UnknownIR/Type.h>
 
 #include <cstdint>
 #include <unordered_set>
+
+#include <UnknownIR/Object.h>
+#include <UnknownIR/Type.h>
 
 namespace uir {
 
