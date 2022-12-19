@@ -13,7 +13,7 @@
 |*                                                                            *|
 \*===----------------------------------------------------------------------===*/
 
-#ifndef LLVM_C_INITIALIZATION_H
+#pragma once
 #define LLVM_C_INITIALIZATION_H
 
 #include "unknown/Types.h"
@@ -31,19 +31,32 @@ extern "C" {
  * @{
  */
 
-void LLVMInitializeCore(LLVMPassRegistryRef R);
-void LLVMInitializeTransformUtils(LLVMPassRegistryRef R);
-void LLVMInitializeScalarOpts(LLVMPassRegistryRef R);
-void LLVMInitializeObjCARCOpts(LLVMPassRegistryRef R);
-void LLVMInitializeVectorization(LLVMPassRegistryRef R);
-void LLVMInitializeInstCombine(LLVMPassRegistryRef R);
-void LLVMInitializeAggressiveInstCombiner(LLVMPassRegistryRef R);
-void LLVMInitializeIPO(LLVMPassRegistryRef R);
-void LLVMInitializeInstrumentation(LLVMPassRegistryRef R);
-void LLVMInitializeAnalysis(LLVMPassRegistryRef R);
-void LLVMInitializeIPA(LLVMPassRegistryRef R);
-void LLVMInitializeCodeGen(LLVMPassRegistryRef R);
-void LLVMInitializeTarget(LLVMPassRegistryRef R);
+void
+LLVMInitializeCore(LLVMPassRegistryRef R);
+void
+LLVMInitializeTransformUtils(LLVMPassRegistryRef R);
+void
+LLVMInitializeScalarOpts(LLVMPassRegistryRef R);
+void
+LLVMInitializeObjCARCOpts(LLVMPassRegistryRef R);
+void
+LLVMInitializeVectorization(LLVMPassRegistryRef R);
+void
+LLVMInitializeInstCombine(LLVMPassRegistryRef R);
+void
+LLVMInitializeAggressiveInstCombiner(LLVMPassRegistryRef R);
+void
+LLVMInitializeIPO(LLVMPassRegistryRef R);
+void
+LLVMInitializeInstrumentation(LLVMPassRegistryRef R);
+void
+LLVMInitializeAnalysis(LLVMPassRegistryRef R);
+void
+LLVMInitializeIPA(LLVMPassRegistryRef R);
+void
+LLVMInitializeCodeGen(LLVMPassRegistryRef R);
+void
+LLVMInitializeTarget(LLVMPassRegistryRef R);
 
 /**
  * @}

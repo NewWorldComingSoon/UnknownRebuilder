@@ -9,8 +9,7 @@
 /// \file This file provides rule coverage tracking for tablegen-erated CodeGen.
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_SUPPORT_CODEGENCOVERAGE_H
-#define LLVM_SUPPORT_CODEGENCOVERAGE_H
+#pragma once
 
 #include "unknown/ADT/BitVector.h"
 
@@ -18,23 +17,24 @@ namespace unknown {
 class LLVMContext;
 class MemoryBuffer;
 
-class CodeGenCoverage {
+class CodeGenCoverage
+{
 protected:
-  BitVector RuleCoverage;
+    BitVector RuleCoverage;
 
 public:
-  using const_covered_iterator = BitVector::const_set_bits_iterator;
+    using const_covered_iterator = BitVector::const_set_bits_iterator;
 
-  CodeGenCoverage();
+    CodeGenCoverage();
 
-  void setCovered(uint64_t RuleID);
-  bool isCovered(uint64_t RuleID) const;
-  iterator_range<const_covered_iterator> covered() const;
+    void setCovered(uint64_t RuleID);
+    bool isCovered(uint64_t RuleID) const;
+    iterator_range<const_covered_iterator> covered() const;
 
-  bool parse(MemoryBuffer &Buffer, StringRef BackendName);
-  bool emit(StringRef FilePrefix, StringRef BackendName) const;
-  void reset();
+    bool parse(MemoryBuffer &Buffer, StringRef BackendName);
+    bool emit(StringRef FilePrefix, StringRef BackendName) const;
+    void reset();
 };
-} // namespace llvm
+} // namespace unknown
 
 #endif // ifndef LLVM_SUPPORT_CODEGENCOVERAGE_H

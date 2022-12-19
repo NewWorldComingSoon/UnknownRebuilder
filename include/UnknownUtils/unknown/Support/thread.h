@@ -14,14 +14,13 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_SUPPORT_THREAD_H
-#define LLVM_SUPPORT_THREAD_H
+#pragma once
 
 #include "unknown/Config/llvm-config.h"
 
 #if LLVM_ENABLE_THREADS
 
-#include <thread>
+#    include <thread>
 
 namespace unknown {
 typedef std::thread thread;
@@ -29,24 +28,26 @@ typedef std::thread thread;
 
 #else // !LLVM_ENABLE_THREADS
 
-#include <utility>
+#    include <utility>
 
 namespace unknown {
 
-struct thread {
-  thread() {}
-  thread(thread &&other) {}
-  template <class Function, class... Args>
-  explicit thread(Function &&f, Args &&... args) {
-    f(std::forward<Args>(args)...);
-  }
-  thread(const thread &) = delete;
+struct thread
+{
+    thread() {}
+    thread(thread &&other) {}
+    template <class Function, class... Args>
+    explicit thread(Function &&f, Args &&...args)
+    {
+        f(std::forward<Args>(args)...);
+    }
+    thread(const thread &) = delete;
 
-  void join() {}
-  static unsigned hardware_concurrency() { return 1; };
+    void join() {}
+    static unsigned hardware_concurrency() { return 1; };
 };
 
-}
+} // namespace unknown
 
 #endif // LLVM_ENABLE_THREADS
 

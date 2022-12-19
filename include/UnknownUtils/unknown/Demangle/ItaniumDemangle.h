@@ -184,30 +184,15 @@ public:
         return hasFunctionSlow(S);
     }
 
-    Kind getKind() const
-    {
-        return K;
-    }
+    Kind getKind() const { return K; }
 
-    virtual bool hasRHSComponentSlow(OutputStream &) const
-    {
-        return false;
-    }
-    virtual bool hasArraySlow(OutputStream &) const
-    {
-        return false;
-    }
-    virtual bool hasFunctionSlow(OutputStream &) const
-    {
-        return false;
-    }
+    virtual bool hasRHSComponentSlow(OutputStream &) const { return false; }
+    virtual bool hasArraySlow(OutputStream &) const { return false; }
+    virtual bool hasFunctionSlow(OutputStream &) const { return false; }
 
     // Dig through "glue" nodes like ParameterPack and ForwardTemplateReference to
     // get at a node that actually represents some concrete syntax.
-    virtual const Node *getSyntaxNode(OutputStream &) const
-    {
-        return this;
-    }
+    virtual const Node *getSyntaxNode(OutputStream &) const { return this; }
 
     void print(OutputStream &S) const
     {
@@ -225,10 +210,7 @@ public:
     // implementation.
     virtual void printRight(OutputStream &) const {}
 
-    virtual StringView getBaseName() const
-    {
-        return StringView();
-    }
+    virtual StringView getBaseName() const { return StringView(); }
 
     // Silence compiler warnings, this dtor will never be called.
     virtual ~Node() = default;

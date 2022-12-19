@@ -7,8 +7,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_SUPPORT_CHRONO_H
-#define LLVM_SUPPORT_CHRONO_H
+#pragma once
 
 #include "unknown/Support/Compiler.h"
 #include "unknown/Support/FormatProviders.h"
@@ -205,5 +204,3 @@ public:
 };
 
 } // namespace unknown
-
-#endif // LLVM_SUPPORT_CHRONO_H

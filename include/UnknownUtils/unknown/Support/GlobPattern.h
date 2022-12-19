@@ -12,8 +12,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_SUPPORT_GLOB_PATTERN_H
-#define LLVM_SUPPORT_GLOB_PATTERN_H
+#pragma once
 
 #include "unknown/ADT/BitVector.h"
 #include "unknown/ADT/Optional.h"
@@ -25,24 +24,24 @@
 // are "*", "?", "[<chars>]" and "[^<chars>]".
 namespace unknown {
 class BitVector;
-template <typename T> class ArrayRef;
+template <typename T>
+class ArrayRef;
 
-class GlobPattern {
+class GlobPattern
+{
 public:
-  static Expected<GlobPattern> create(StringRef Pat);
-  bool match(StringRef S) const;
+    static Expected<GlobPattern> create(StringRef Pat);
+    bool match(StringRef S) const;
 
 private:
-  bool matchOne(ArrayRef<BitVector> Pat, StringRef S) const;
+    bool matchOne(ArrayRef<BitVector> Pat, StringRef S) const;
 
-  // Parsed glob pattern.
-  std::vector<BitVector> Tokens;
+    // Parsed glob pattern.
+    std::vector<BitVector> Tokens;
 
-  // The following members are for optimization.
-  Optional<StringRef> Exact;
-  Optional<StringRef> Prefix;
-  Optional<StringRef> Suffix;
+    // The following members are for optimization.
+    Optional<StringRef> Exact;
+    Optional<StringRef> Prefix;
+    Optional<StringRef> Suffix;
 };
-}
-
-#endif // LLVM_SUPPORT_GLOB_PATTERN_H
+} // namespace unknown

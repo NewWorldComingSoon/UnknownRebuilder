@@ -7,8 +7,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_ADT_STRINGREF_H
-#define LLVM_ADT_STRINGREF_H
+#pragma once
 
 #include "unknown/ADT/STLExtras.h"
 #include "unknown/ADT/iterator_range.h"
@@ -942,5 +941,3 @@ struct isPodLike<StringRef>
 };
 
 } // namespace unknown
-
-#endif // LLVM_ADT_STRINGREF_H

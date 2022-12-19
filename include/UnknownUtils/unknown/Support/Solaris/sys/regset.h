@@ -12,7 +12,7 @@
  *
  *===----------------------------------------------------------------------===*/
 
-#ifndef LLVM_SUPPORT_SOLARIS_SYS_REGSET_H
+#pragma once
 
 #include_next <sys/regset.h>
 
@@ -35,5 +35,3 @@
 #undef EFL
 #undef ERR
 #undef TRAPNO
-
-#endif

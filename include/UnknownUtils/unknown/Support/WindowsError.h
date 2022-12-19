@@ -7,13 +7,11 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_SUPPORT_WINDOWSERROR_H
-#define LLVM_SUPPORT_WINDOWSERROR_H
+#pragma once
 
 #include <system_error>
 
 namespace unknown {
-std::error_code mapWindowsError(unsigned EV);
+std::error_code
+mapWindowsError(unsigned EV);
 }
-
-#endif

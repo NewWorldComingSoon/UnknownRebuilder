@@ -12,8 +12,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_SUPPORT_UNICODE_H
-#define LLVM_SUPPORT_UNICODE_H
+#pragma once
 
 namespace unknown {
 class StringRef;
@@ -21,9 +20,10 @@ class StringRef;
 namespace sys {
 namespace unicode {
 
-enum ColumnWidthErrors {
-  ErrorInvalidUTF8 = -2,
-  ErrorNonPrintableCharacter = -1
+enum ColumnWidthErrors
+{
+    ErrorInvalidUTF8 = -2,
+    ErrorNonPrintableCharacter = -1
 };
 
 /// Determines if a character is likely to be displayed correctly on the
@@ -42,7 +42,8 @@ enum ColumnWidthErrors {
 ///   * surrogates (category = Cs);
 ///   * unassigned characters (category = Cn).
 /// \return true if the character is considered printable.
-bool isPrintable(int UCS);
+bool
+isPrintable(int UCS);
 
 /// Gets the number of positions the UTF8-encoded \p Text is likely to occupy
 /// when output on a terminal ("character width"). This depends on the
@@ -58,14 +59,16 @@ bool isPrintable(int UCS);
 ///   * 0 for each non-spacing and enclosing combining mark;
 ///   * 2 for each CJK character excluding halfwidth forms;
 ///   * 1 for each of the remaining characters.
-int columnWidthUTF8(StringRef Text);
+int
+columnWidthUTF8(StringRef Text);
 
 /// Fold input unicode character according the Simple unicode case folding
 /// rules.
-int foldCharSimple(int C);
+int
+foldCharSimple(int C);
 
 } // namespace unicode
 } // namespace sys
-} // namespace llvm
+} // namespace unknown
 
 #endif

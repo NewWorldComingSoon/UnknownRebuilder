@@ -12,8 +12,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_ADT_SCOPE_EXIT_H
-#define LLVM_ADT_SCOPE_EXIT_H
+#pragma once
 
 #include "unknown/Support/Compiler.h"
 
@@ -23,28 +22,30 @@
 namespace unknown {
 namespace detail {
 
-template <typename Callable> class scope_exit {
-  Callable ExitFunction;
-  bool Engaged = true; // False once moved-from or release()d.
+template <typename Callable>
+class scope_exit
+{
+    Callable ExitFunction;
+    bool Engaged = true; // False once moved-from or release()d.
 
 public:
-  template <typename Fp>
-  explicit scope_exit(Fp &&F) : ExitFunction(std::forward<Fp>(F)) {}
+    template <typename Fp>
+    explicit scope_exit(Fp &&F) : ExitFunction(std::forward<Fp>(F))
+    {
+    }
 
-  scope_exit(scope_exit &&Rhs)
-      : ExitFunction(std::move(Rhs.ExitFunction)), Engaged(Rhs.Engaged) {
-    Rhs.release();
-  }
-  scope_exit(const scope_exit &) = delete;
-  scope_exit &operator=(scope_exit &&) = delete;
-  scope_exit &operator=(const scope_exit &) = delete;
+    scope_exit(scope_exit &&Rhs) : ExitFunction(std::move(Rhs.ExitFunction)), Engaged(Rhs.Engaged) { Rhs.release(); }
+    scope_exit(const scope_exit &) = delete;
+    scope_exit &operator=(scope_exit &&) = delete;
+    scope_exit &operator=(const scope_exit &) = delete;
 
-  void release() { Engaged = false; }
+    void release() { Engaged = false; }
 
-  ~scope_exit() {
-    if (Engaged)
-      ExitFunction();
-  }
+    ~scope_exit()
+    {
+        if (Engaged)
+            ExitFunction();
+    }
 };
 
 } // end namespace detail
@@ -56,11 +57,11 @@ public:
 // Interface is specified by p0052r2.
 template <typename Callable>
 LLVM_NODISCARD detail::scope_exit<typename std::decay<Callable>::type>
-make_scope_exit(Callable &&F) {
-  return detail::scope_exit<typename std::decay<Callable>::type>(
-      std::forward<Callable>(F));
+make_scope_exit(Callable &&F)
+{
+    return detail::scope_exit<typename std::decay<Callable>::type>(std::forward<Callable>(F));
 }
 
-} // end namespace llvm
+} // namespace unknown
 
 #endif

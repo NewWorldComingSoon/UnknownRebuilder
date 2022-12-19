@@ -7,8 +7,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_SUPPORT_TAR_WRITER_H
-#define LLVM_SUPPORT_TAR_WRITER_H
+#pragma once
 
 #include "unknown/ADT/StringRef.h"
 #include "unknown/ADT/StringSet.h"
@@ -16,19 +15,19 @@
 #include "unknown/Support/raw_ostream.h"
 
 namespace unknown {
-class TarWriter {
+class TarWriter
+{
 public:
-  static Expected<std::unique_ptr<TarWriter>> create(StringRef OutputPath,
-                                                     StringRef BaseDir);
+    static Expected<std::unique_ptr<TarWriter>> create(StringRef OutputPath, StringRef BaseDir);
 
-  void append(StringRef Path, StringRef Data);
+    void append(StringRef Path, StringRef Data);
 
 private:
-  TarWriter(int FD, StringRef BaseDir);
-  raw_fd_ostream OS;
-  std::string BaseDir;
-  StringSet<> Files;
+    TarWriter(int FD, StringRef BaseDir);
+    raw_fd_ostream OS;
+    std::string BaseDir;
+    StringSet<> Files;
 };
-}
+} // namespace unknown
 
 #endif

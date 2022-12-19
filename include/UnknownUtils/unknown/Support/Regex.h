@@ -14,43 +14,46 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_SUPPORT_REGEX_H
-#define LLVM_SUPPORT_REGEX_H
+#pragma once
 
 #include <string>
 
 struct llvm_regex;
 
 namespace unknown {
-  class StringRef;
-  template<typename T> class SmallVectorImpl;
+class StringRef;
+template <typename T>
+class SmallVectorImpl;
 
-  class Regex {
-  public:
-    enum {
-      NoFlags=0,
-      /// Compile for matching that ignores upper/lower case distinctions.
-      IgnoreCase=1,
-      /// Compile for newline-sensitive matching. With this flag '[^' bracket
-      /// expressions and '.' never match newline. A ^ anchor matches the
-      /// null string after any newline in the string in addition to its normal
-      /// function, and the $ anchor matches the null string before any
-      /// newline in the string in addition to its normal function.
-      Newline=2,
-      /// By default, the POSIX extended regular expression (ERE) syntax is
-      /// assumed. Pass this flag to turn on basic regular expressions (BRE)
-      /// instead.
-      BasicRegex=4
+class Regex
+{
+public:
+    enum
+    {
+        NoFlags = 0,
+        /// Compile for matching that ignores upper/lower case distinctions.
+        IgnoreCase = 1,
+        /// Compile for newline-sensitive matching. With this flag '[^' bracket
+        /// expressions and '.' never match newline. A ^ anchor matches the
+        /// null string after any newline in the string in addition to its normal
+        /// function, and the $ anchor matches the null string before any
+        /// newline in the string in addition to its normal function.
+        Newline = 2,
+        /// By default, the POSIX extended regular expression (ERE) syntax is
+        /// assumed. Pass this flag to turn on basic regular expressions (BRE)
+        /// instead.
+        BasicRegex = 4
     };
 
     Regex();
     /// Compiles the given regular expression \p Regex.
     Regex(StringRef Regex, unsigned Flags = NoFlags);
     Regex(const Regex &) = delete;
-    Regex &operator=(Regex regex) {
-      std::swap(preg, regex.preg);
-      std::swap(error, regex.error);
-      return *this;
+    Regex &operator=(Regex regex)
+    {
+        std::swap(preg, regex.preg);
+        std::swap(error, regex.error);
+        return *this;
     }
     Regex(Regex &&regex);
     ~Regex();
@@ -83,8 +86,7 @@ namespace unknown {
     /// \param Error If non-null, any errors in the substitution (invalid
     /// backreferences, trailing backslashes) will be recorded as a non-empty
     /// string.
-    std::string sub(StringRef Repl, StringRef String,
-                    std::string *Error = nullptr);
+    std::string sub(StringRef Repl, StringRef String, std::string *Error = nullptr);
 
     /// If this function returns true, ^Str$ is an extended regular
     /// expression that matches Str and only Str.
@@ -93,10 +95,8 @@ namespace unknown {
     /// Turn String into a regex by escaping its special characters.
     static std::string escape(StringRef String);
 
-  private:
+private:
     struct llvm_regex *preg;
     int error;
-  };
-}
-
-#endif // LLVM_SUPPORT_REGEX_H
+};
+} // namespace unknown

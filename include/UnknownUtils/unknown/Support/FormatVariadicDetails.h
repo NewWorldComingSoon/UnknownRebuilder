@@ -7,8 +7,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_SUPPORT_FORMATVARIADIC_DETAILS_H
-#define LLVM_SUPPORT_FORMATVARIADIC_DETAILS_H
+#pragma once
 
 #include "unknown/ADT/StringRef.h"
 #include "unknown/Support/raw_ostream.h"
@@ -16,105 +15,119 @@
 #include <type_traits>
 
 namespace unknown {
-template <typename T, typename Enable = void> struct format_provider {};
+template <typename T, typename Enable = void>
+struct format_provider
+{
+};
 class Error;
 
 namespace detail {
-class format_adapter {
-  virtual void anchor();
+class format_adapter
+{
+    virtual void anchor();
 
 protected:
-  virtual ~format_adapter() {}
+    virtual ~format_adapter() {}
 
 public:
-  virtual void format(raw_ostream &S, StringRef Options) = 0;
-};
-
-template <typename T> class provider_format_adapter : public format_adapter {
-  T Item;
-
-public:
-  explicit provider_format_adapter(T &&Item) : Item(std::forward<T>(Item)) {}
-
-  void format(unknown::raw_ostream &S, StringRef Options) override {
-    format_provider<typename std::decay<T>::type>::format(Item, S, Options);
-  }
+    virtual void format(raw_ostream &S, StringRef Options) = 0;
 };
 
 template <typename T>
-class stream_operator_format_adapter : public format_adapter {
-  T Item;
+class provider_format_adapter : public format_adapter
+{
+    T Item;
 
 public:
-  explicit stream_operator_format_adapter(T &&Item)
-      : Item(std::forward<T>(Item)) {}
+    explicit provider_format_adapter(T &&Item) : Item(std::forward<T>(Item)) {}
 
-  void format(unknown::raw_ostream &S, StringRef Options) override { S << Item; }
+    void format(unknown::raw_ostream &S, StringRef Options) override
+    {
+        format_provider<typename std::decay<T>::type>::format(Item, S, Options);
+    }
 };
 
-template <typename T> class missing_format_adapter;
+template <typename T>
+class stream_operator_format_adapter : public format_adapter
+{
+    T Item;
+
+public:
+    explicit stream_operator_format_adapter(T &&Item) : Item(std::forward<T>(Item)) {}
+
+    void format(unknown::raw_ostream &S, StringRef Options) override { S << Item; }
+};
+
+template <typename T>
+class missing_format_adapter;
 
 // Test if format_provider<T> is defined on T and contains a member function
 // with the signature:
 //   static void format(const T&, raw_stream &, StringRef);
 //
-template <class T> class has_FormatProvider {
+template <class T>
+class has_FormatProvider
+{
 public:
-  using Decayed = typename std::decay<T>::type;
-  typedef void (*Signature_format)(const Decayed &, unknown::raw_ostream &,
-                                   StringRef);
+    using Decayed = typename std::decay<T>::type;
+    typedef void (*Signature_format)(const Decayed &, unknown::raw_ostream &, StringRef);
 
-  template <typename U>
-  static char test(SameType<Signature_format, &U::format> *);
+    template <typename U>
+    static char test(SameType<Signature_format, &U::format> *);
 
-  template <typename U> static double test(...);
+    template <typename U>
+    static double test(...);
 
-  static bool const value =
-      (sizeof(test<unknown::format_provider<Decayed>>(nullptr)) == 1);
+    static bool const value = (sizeof(test<unknown::format_provider<Decayed>>(nullptr)) == 1);
 };
 
 // Test if raw_ostream& << T -> raw_ostream& is findable via ADL.
-template <class T> class has_StreamOperator {
+template <class T>
+class has_StreamOperator
+{
 public:
-  using ConstRefT = const typename std::decay<T>::type &;
+    using ConstRefT = const typename std::decay<T>::type &;
 
-  template <typename U>
-  static char test(typename std::enable_if<
-                   std::is_same<decltype(std::declval<unknown::raw_ostream &>()
-                                         << std::declval<U>()),
-                                unknown::raw_ostream &>::value,
-                   int *>::type);
+    template <typename U>
+    static char test(typename std::enable_if<
+                     std::is_same<
+                         decltype(std::declval<unknown::raw_ostream &>() << std::declval<U>()),
+                         unknown::raw_ostream &>::value,
+                     int *>::type);
 
-  template <typename U> static double test(...);
+    template <typename U>
+    static double test(...);
 
-  static bool const value = (sizeof(test<ConstRefT>(nullptr)) == 1);
+    static bool const value = (sizeof(test<ConstRefT>(nullptr)) == 1);
 };
 
 // Simple template that decides whether a type T should use the member-function
 // based format() invocation.
 template <typename T>
 struct uses_format_member
-    : public std::integral_constant<
-          bool,
-          std::is_base_of<format_adapter,
-                          typename std::remove_reference<T>::type>::value> {};
+    : public std::
+          integral_constant<bool, std::is_base_of<format_adapter, typename std::remove_reference<T>::type>::value>
+{
+};
 
 // Simple template that decides whether a type T should use the format_provider
 // based format() invocation.  The member function takes priority, so this test
 // will only be true if there is not ALSO a format member.
 template <typename T>
 struct uses_format_provider
-    : public std::integral_constant<
-          bool, !uses_format_member<T>::value && has_FormatProvider<T>::value> {
+    : public std::integral_constant<bool, !uses_format_member<T>::value && has_FormatProvider<T>::value>
+{
 };
 
 // Simple template that decides whether a type T should use the operator<<
 // based format() invocation.  This takes last priority.
 template <typename T>
 struct uses_stream_operator
-    : public std::integral_constant<bool, !uses_format_member<T>::value &&
-                                              !uses_format_provider<T>::value &&
-                                              has_StreamOperator<T>::value> {};
+    : public std::integral_constant<
+          bool,
+          !uses_format_member<T>::value && !uses_format_provider<T>::value && has_StreamOperator<T>::value>
+{
+};
 
 // Simple template that decides whether a type T has neither a member-function
 // nor format_provider based implementation that it can use.  Mostly used so
@@ -122,44 +135,44 @@ struct uses_stream_operator
 // implementation can be located.
 template <typename T>
 struct uses_missing_provider
-    : public std::integral_constant<bool, !uses_format_member<T>::value &&
-                                              !uses_format_provider<T>::value &&
-                                              !uses_stream_operator<T>::value> {
+    : public std::integral_constant<
+          bool,
+          !uses_format_member<T>::value && !uses_format_provider<T>::value && !uses_stream_operator<T>::value>
+{
 };
 
 template <typename T>
 typename std::enable_if<uses_format_member<T>::value, T>::type
-build_format_adapter(T &&Item) {
-  return std::forward<T>(Item);
+build_format_adapter(T &&Item)
+{
+    return std::forward<T>(Item);
 }
 
 template <typename T>
-typename std::enable_if<uses_format_provider<T>::value,
-                        provider_format_adapter<T>>::type
-build_format_adapter(T &&Item) {
-  return provider_format_adapter<T>(std::forward<T>(Item));
+typename std::enable_if<uses_format_provider<T>::value, provider_format_adapter<T>>::type
+build_format_adapter(T &&Item)
+{
+    return provider_format_adapter<T>(std::forward<T>(Item));
 }
 
 template <typename T>
-typename std::enable_if<uses_stream_operator<T>::value,
-                        stream_operator_format_adapter<T>>::type
-build_format_adapter(T &&Item) {
-  // If the caller passed an Error by value, then stream_operator_format_adapter
-  // would be responsible for consuming it.
-  // Make the caller opt into this by calling fmt_consume().
-  static_assert(
-      !std::is_same<unknown::Error, typename std::remove_cv<T>::type>::value,
-      "unknown::Error-by-value must be wrapped in fmt_consume() for formatv");
-  return stream_operator_format_adapter<T>(std::forward<T>(Item));
+typename std::enable_if<uses_stream_operator<T>::value, stream_operator_format_adapter<T>>::type
+build_format_adapter(T &&Item)
+{
+    // If the caller passed an Error by value, then stream_operator_format_adapter
+    // would be responsible for consuming it.
+    // Make the caller opt into this by calling fmt_consume().
+    static_assert(
+        !std::is_same<unknown::Error, typename std::remove_cv<T>::type>::value,
+        "unknown::Error-by-value must be wrapped in fmt_consume() for formatv");
+    return stream_operator_format_adapter<T>(std::forward<T>(Item));
 }
 
 template <typename T>
-typename std::enable_if<uses_missing_provider<T>::value,
-                        missing_format_adapter<T>>::type
-build_format_adapter(T &&Item) {
-  return missing_format_adapter<T>();
+typename std::enable_if<uses_missing_provider<T>::value, missing_format_adapter<T>>::type
+build_format_adapter(T &&Item)
+{
+    return missing_format_adapter<T>();
 }
-}
-}
-
-#endif
+} // namespace detail
+} // namespace unknown

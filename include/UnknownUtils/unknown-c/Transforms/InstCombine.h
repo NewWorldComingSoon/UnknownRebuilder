@@ -12,7 +12,7 @@
 |*                                                                            *|
 \*===----------------------------------------------------------------------===*/
 
-#ifndef LLVM_C_TRANSFORMS_INSTCOMBINE_H
+#pragma once
 #define LLVM_C_TRANSFORMS_INSTCOMBINE_H
 
 #include "unknown/Types.h"
@@ -29,7 +29,8 @@ extern "C" {
  */
 
 /** See llvm::createInstructionCombiningPass function. */
-void LLVMAddInstructionCombiningPass(LLVMPassManagerRef PM);
+void
+LLVMAddInstructionCombiningPass(LLVMPassManagerRef PM);
 
 /**
  * @}
@@ -40,4 +41,3 @@ void LLVMAddInstructionCombiningPass(LLVMPassManagerRef PM);
 #endif /* defined(__cplusplus) */
 
 #endif
-

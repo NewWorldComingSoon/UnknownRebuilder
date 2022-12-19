@@ -12,7 +12,7 @@
 |*                                                                            *|
 \*===----------------------------------------------------------------------===*/
 
-#ifndef LLVM_C_DISASSEMBLER_H
+#pragma once
 #define LLVM_C_DISASSEMBLER_H
 
 #include "unknown/DisassemblerTypes.h"
@@ -36,9 +36,13 @@ extern "C" {
  * returns NULL. This function is equivalent to calling
  * LLVMCreateDisasmCPUFeatures() with an empty CPU name and feature set.
  */
-LLVMDisasmContextRef LLVMCreateDisasm(const char *TripleName, void *DisInfo,
-                                      int TagType, LLVMOpInfoCallback GetOpInfo,
-                                      LLVMSymbolLookupCallback SymbolLookUp);
+LLVMDisasmContextRef
+LLVMCreateDisasm(
+    const char *TripleName,
+    void *DisInfo,
+    int TagType,
+    LLVMOpInfoCallback GetOpInfo,
+    LLVMSymbolLookupCallback SymbolLookUp);
 
 /**
  * Create a disassembler for the TripleName and a specific CPU.  Symbolic
@@ -48,10 +52,14 @@ LLVMDisasmContextRef LLVMCreateDisasm(const char *TripleName, void *DisInfo,
  * disassembler context.  If not, it returns NULL. This function is equivalent
  * to calling LLVMCreateDisasmCPUFeatures() with an empty feature set.
  */
-LLVMDisasmContextRef LLVMCreateDisasmCPU(const char *Triple, const char *CPU,
-                                         void *DisInfo, int TagType,
-                                         LLVMOpInfoCallback GetOpInfo,
-                                         LLVMSymbolLookupCallback SymbolLookUp);
+LLVMDisasmContextRef
+LLVMCreateDisasmCPU(
+    const char *Triple,
+    const char *CPU,
+    void *DisInfo,
+    int TagType,
+    LLVMOpInfoCallback GetOpInfo,
+    LLVMSymbolLookupCallback SymbolLookUp);
 
 /**
  * Create a disassembler for the TripleName, a specific CPU and specific feature
@@ -61,16 +69,21 @@ LLVMDisasmContextRef LLVMCreateDisasmCPU(const char *Triple, const char *CPU,
  * returns a disassembler context.  If not, it returns NULL.
  */
 LLVMDisasmContextRef
-LLVMCreateDisasmCPUFeatures(const char *Triple, const char *CPU,
-                            const char *Features, void *DisInfo, int TagType,
-                            LLVMOpInfoCallback GetOpInfo,
-                            LLVMSymbolLookupCallback SymbolLookUp);
+LLVMCreateDisasmCPUFeatures(
+    const char *Triple,
+    const char *CPU,
+    const char *Features,
+    void *DisInfo,
+    int TagType,
+    LLVMOpInfoCallback GetOpInfo,
+    LLVMSymbolLookupCallback SymbolLookUp);
 
 /**
  * Set the disassembler's options.  Returns 1 if it can set the Options and 0
  * otherwise.
  */
-int LLVMSetDisasmOptions(LLVMDisasmContextRef DC, uint64_t Options);
+int
+LLVMSetDisasmOptions(LLVMDisasmContextRef DC, uint64_t Options);
 
 /* The option to produce marked up assembly. */
 #define LLVMDisassembler_Option_UseMarkup 1
@@ -80,13 +93,14 @@ int LLVMSetDisasmOptions(LLVMDisasmContextRef DC, uint64_t Options);
 #define LLVMDisassembler_Option_AsmPrinterVariant 4
 /* The option to set comment on instructions */
 #define LLVMDisassembler_Option_SetInstrComments 8
-  /* The option to print latency information alongside instructions */
+/* The option to print latency information alongside instructions */
 #define LLVMDisassembler_Option_PrintLatency 16
 
 /**
  * Dispose of a disassembler context.
  */
-void LLVMDisasmDispose(LLVMDisasmContextRef DC);
+void
+LLVMDisasmDispose(LLVMDisasmContextRef DC);
 
 /**
  * Disassemble a single instruction using the disassembler context specified in
@@ -98,9 +112,14 @@ void LLVMDisasmDispose(LLVMDisasmContextRef DC);
  * function returns the number of bytes in the instruction or zero if there was
  * no valid instruction.
  */
-size_t LLVMDisasmInstruction(LLVMDisasmContextRef DC, uint8_t *Bytes,
-                             uint64_t BytesSize, uint64_t PC,
-                             char *OutString, size_t OutStringSize);
+size_t
+LLVMDisasmInstruction(
+    LLVMDisasmContextRef DC,
+    uint8_t *Bytes,
+    uint64_t BytesSize,
+    uint64_t PC,
+    char *OutString,
+    size_t OutStringSize);
 
 /**
  * @}

@@ -20,7 +20,7 @@
 |*                                                                            *|
 \*===----------------------------------------------------------------------===*/
 
-#ifndef LLVM_ASM_PARSER
+#pragma once
 #  error Please define the macro LLVM_ASM_PARSER(TargetName)
 #endif
 

@@ -35,15 +35,16 @@
 /* based on revision d2df04efcbef7d7f6886d345861e5dfda4edacc1 Removed
  * everything but a simple interface for computing XXh64. */
 
-#ifndef LLVM_SUPPORT_XXHASH_H
-#define LLVM_SUPPORT_XXHASH_H
+#pragma once
 
 #include "unknown/ADT/ArrayRef.h"
 #include "unknown/ADT/StringRef.h"
 
 namespace unknown {
-uint64_t xxHash64(unknown::StringRef Data);
-uint64_t xxHash64(unknown::ArrayRef<uint8_t> Data);
-}
+uint64_t
+xxHash64(unknown::StringRef Data);
+uint64_t
+xxHash64(unknown::ArrayRef<uint8_t> Data);
+} // namespace unknown
 
 #endif

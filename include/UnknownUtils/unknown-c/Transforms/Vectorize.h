@@ -17,8 +17,7 @@
 |*                                                                            *|
 \*===----------------------------------------------------------------------===*/
 
-#ifndef LLVM_C_TRANSFORMS_VECTORIZE_H
-#define LLVM_C_TRANSFORMS_VECTORIZE_H
+#pragma once
 
 #include "unknown/Types.h"
 
@@ -34,10 +33,12 @@ extern "C" {
  */
 
 /** See llvm::createLoopVectorizePass function. */
-void LLVMAddLoopVectorizePass(LLVMPassManagerRef PM);
+void
+LLVMAddLoopVectorizePass(LLVMPassManagerRef PM);
 
 /** See llvm::createSLPVectorizerPass function. */
-void LLVMAddSLPVectorizePass(LLVMPassManagerRef PM);
+void
+LLVMAddSLPVectorizePass(LLVMPassManagerRef PM);
 
 /**
  * @}
@@ -46,5 +47,3 @@ void LLVMAddSLPVectorizePass(LLVMPassManagerRef PM);
 #ifdef __cplusplus
 }
 #endif /* defined(__cplusplus) */
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef LLVM_SUPPORT_LOCALE_H
-#define LLVM_SUPPORT_LOCALE_H
+#pragma once
 
 namespace unknown {
 class StringRef;
@@ -7,11 +6,11 @@ class StringRef;
 namespace sys {
 namespace locale {
 
-int columnWidth(StringRef s);
-bool isPrint(int c);
+int
+columnWidth(StringRef s);
+bool
+isPrint(int c);
 
-}
-}
-}
-
-#endif // LLVM_SUPPORT_LOCALE_H
+} // namespace locale
+} // namespace sys
+} // namespace unknown

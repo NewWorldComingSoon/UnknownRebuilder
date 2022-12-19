@@ -24,26 +24,27 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_SUPPORT_JAMCRC_H
-#define LLVM_SUPPORT_JAMCRC_H
+#pragma once
 
 #include "unknown/Support/DataTypes.h"
 
 namespace unknown {
-template <typename T> class ArrayRef;
+template <typename T>
+class ArrayRef;
 
-class JamCRC {
+class JamCRC
+{
 public:
-  JamCRC(uint32_t Init = 0xFFFFFFFFU) : CRC(Init) {}
+    JamCRC(uint32_t Init = 0xFFFFFFFFU) : CRC(Init) {}
 
-  // Update the CRC calculation with Data.
-  void update(ArrayRef<char> Data);
+    // Update the CRC calculation with Data.
+    void update(ArrayRef<char> Data);
 
-  uint32_t getCRC() const { return CRC; }
+    uint32_t getCRC() const { return CRC; }
 
 private:
-  uint32_t CRC;
+    uint32_t CRC;
 };
-} // End of namespace llvm
+} // namespace unknown
 
 #endif

@@ -12,25 +12,28 @@
 ///
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_SUPPORT_COM_H
-#define LLVM_SUPPORT_COM_H
+#pragma once
 
 namespace unknown {
 namespace sys {
 
-enum class COMThreadingMode { SingleThreaded, MultiThreaded };
+enum class COMThreadingMode
+{
+    SingleThreaded,
+    MultiThreaded
+};
 
-class InitializeCOMRAII {
+class InitializeCOMRAII
+{
 public:
-  explicit InitializeCOMRAII(COMThreadingMode Threading,
-                             bool SpeedOverMemory = false);
-  ~InitializeCOMRAII();
+    explicit InitializeCOMRAII(COMThreadingMode Threading, bool SpeedOverMemory = false);
+    ~InitializeCOMRAII();
 
 private:
-  InitializeCOMRAII(const InitializeCOMRAII &) = delete;
-  void operator=(const InitializeCOMRAII &) = delete;
+    InitializeCOMRAII(const InitializeCOMRAII &) = delete;
+    void operator=(const InitializeCOMRAII &) = delete;
 };
-}
-}
+} // namespace sys
+} // namespace unknown
 
 #endif

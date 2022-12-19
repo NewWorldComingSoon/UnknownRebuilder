@@ -11,8 +11,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_SUPPORT_PRINTABLE_H
-#define LLVM_SUPPORT_PRINTABLE_H
+#pragma once
 
 #include <functional>
 
@@ -35,18 +34,20 @@ class raw_ostream;
 /// leads to operator << being ambiguous as function has matching constructors
 /// in some STL versions. I have seen the problem on gcc 4.6 libstdc++ and
 /// microsoft STL.
-class Printable {
+class Printable
+{
 public:
-  std::function<void(raw_ostream &OS)> Print;
-  Printable(std::function<void(raw_ostream &OS)> Print)
-      : Print(std::move(Print)) {}
+    std::function<void(raw_ostream &OS)> Print;
+    Printable(std::function<void(raw_ostream &OS)> Print) : Print(std::move(Print)) {}
 };
 
-inline raw_ostream &operator<<(raw_ostream &OS, const Printable &P) {
-  P.Print(OS);
-  return OS;
+inline raw_ostream &
+operator<<(raw_ostream &OS, const Printable &P)
+{
+    P.Print(OS);
+    return OS;
 }
 
-}
+} // namespace unknown
 
 #endif

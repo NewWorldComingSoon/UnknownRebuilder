@@ -11,8 +11,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_SUPPORT_REGISTRY_H
-#define LLVM_SUPPORT_REGISTRY_H
+#pragma once
 
 #include "unknown/ADT/STLExtras.h"
 #include "unknown/ADT/StringRef.h"
@@ -22,52 +21,54 @@
 #include <memory>
 
 namespace unknown {
-  /// A simple registry entry which provides only a name, description, and
-  /// no-argument constructor.
-  template <typename T>
-  class SimpleRegistryEntry {
+/// A simple registry entry which provides only a name, description, and
+/// no-argument constructor.
+template <typename T>
+class SimpleRegistryEntry
+{
     StringRef Name, Desc;
     std::unique_ptr<T> (*Ctor)();
 
-  public:
-    SimpleRegistryEntry(StringRef N, StringRef D, std::unique_ptr<T> (*C)())
-        : Name(N), Desc(D), Ctor(C) {}
+public:
+    SimpleRegistryEntry(StringRef N, StringRef D, std::unique_ptr<T> (*C)()) : Name(N), Desc(D), Ctor(C) {}
 
     StringRef getName() const { return Name; }
     StringRef getDesc() const { return Desc; }
     std::unique_ptr<T> instantiate() const { return Ctor(); }
-  };
+};
 
-  /// A global registry used in conjunction with static constructors to make
-  /// pluggable components (like targets or garbage collectors) "just work" when
-  /// linked with an executable.
-  template <typename T>
-  class Registry {
-  public:
+/// A global registry used in conjunction with static constructors to make
+/// pluggable components (like targets or garbage collectors) "just work" when
+/// linked with an executable.
+template <typename T>
+class Registry
+{
+public:
     typedef T type;
     typedef SimpleRegistryEntry<T> entry;
 
     class node;
     class iterator;
 
-  private:
+private:
     Registry() = delete;
 
     friend class node;
     static node *Head, *Tail;
 
-  public:
+public:
     /// Node in linked list of entries.
     ///
-    class node {
-      friend class iterator;
-      friend Registry<T>;
+    class node
+    {
+        friend class iterator;
+        friend Registry<T>;
 
-      node *Next;
-      const entry& Val;
+        node *Next;
+        const entry &Val;
 
     public:
-      node(const entry &V) : Next(nullptr), Val(V) {}
+        node(const entry &V) : Next(nullptr), Val(V) {}
     };
 
     /// Add a node to the Registry: this is the interface between the plugin and
@@ -81,27 +82,30 @@ namespace unknown {
 
     /// Iterators for registry entries.
     ///
-    class iterator {
-      const node *Cur;
+    class iterator
+    {
+        const node *Cur;
 
     public:
-      explicit iterator(const node *N) : Cur(N) {}
+        explicit iterator(const node *N) : Cur(N) {}
 
-      bool operator==(const iterator &That) const { return Cur == That.Cur; }
-      bool operator!=(const iterator &That) const { return Cur != That.Cur; }
-      iterator &operator++() { Cur = Cur->Next; return *this; }
-      const entry &operator*() const { return Cur->Val; }
-      const entry *operator->() const { return &Cur->Val; }
+        bool operator==(const iterator &That) const { return Cur == That.Cur; }
+        bool operator!=(const iterator &That) const { return Cur != That.Cur; }
+        iterator &operator++()
+        {
+            Cur = Cur->Next;
+            return *this;
+        }
+        const entry &operator*() const { return Cur->Val; }
+        const entry *operator->() const { return &Cur->Val; }
     };
 
     // begin is not defined here in order to avoid usage of an undefined static
     // data member, instead it's instantiated by LLVM_INSTANTIATE_REGISTRY.
     static iterator begin();
-    static iterator end()   { return iterator(nullptr); }
+    static iterator end() { return iterator(nullptr); }
 
-    static iterator_range<iterator> entries() {
-      return make_range(begin(), end());
-    }
+    static iterator_range<iterator> entries() { return make_range(begin(), end()); }
 
     /// A static registration template. Use like such:
     ///
@@ -112,20 +116,18 @@ namespace unknown {
     ///
     ///  1. The registered subclass has a default constructor.
     template <typename V>
-    class Add {
-      entry Entry;
-      node Node;
+    class Add
+    {
+        entry Entry;
+        node Node;
 
-      static std::unique_ptr<T> CtorFn() { return make_unique<V>(); }
+        static std::unique_ptr<T> CtorFn() { return make_unique<V>(); }
 
     public:
-      Add(StringRef Name, StringRef Desc)
-          : Entry(Name, Desc, CtorFn), Node(Entry) {
-        add_node(&Node);
-      }
+        Add(StringRef Name, StringRef Desc) : Entry(Name, Desc, CtorFn), Node(Entry) { add_node(&Node); }
     };
-  };
-} // end namespace llvm
+};
+} // namespace unknown
 
 /// Instantiate a registry class.
 ///
@@ -136,25 +138,27 @@ namespace unknown {
 /// have explicit specialization declarations in all translation units where the
 /// specialization is used) so we don't.
 #define LLVM_INSTANTIATE_REGISTRY(REGISTRY_CLASS) \
-  namespace unknown { \
-  template<typename T> typename Registry<T>::node *Registry<T>::Head = nullptr;\
-  template<typename T> typename Registry<T>::node *Registry<T>::Tail = nullptr;\
-  template<typename T> \
-  void Registry<T>::add_node(typename Registry<T>::node *N) { \
-    if (Tail) \
-      Tail->Next = N; \
-    else \
-      Head = N; \
-    Tail = N; \
-  } \
-  template<typename T> typename Registry<T>::iterator Registry<T>::begin() { \
-    return iterator(Head); \
-  } \
-  template REGISTRY_CLASS::node *Registry<REGISTRY_CLASS::type>::Head; \
-  template REGISTRY_CLASS::node *Registry<REGISTRY_CLASS::type>::Tail; \
-  template \
-  void Registry<REGISTRY_CLASS::type>::add_node(REGISTRY_CLASS::node*); \
-  template REGISTRY_CLASS::iterator Registry<REGISTRY_CLASS::type>::begin(); \
-  }
-
-#endif // LLVM_SUPPORT_REGISTRY_H
+    namespace unknown { \
+    template <typename T> \
+    typename Registry<T>::node *Registry<T>::Head = nullptr; \
+    template <typename T> \
+    typename Registry<T>::node *Registry<T>::Tail = nullptr; \
+    template <typename T> \
+    void Registry<T>::add_node(typename Registry<T>::node *N) \
+    { \
+        if (Tail) \
+            Tail->Next = N; \
+        else \
+            Head = N; \
+        Tail = N; \
+    } \
+    template <typename T> \
+    typename Registry<T>::iterator Registry<T>::begin() \
+    { \
+        return iterator(Head); \
+    } \
+    template REGISTRY_CLASS::node *Registry<REGISTRY_CLASS::type>::Head; \
+    template REGISTRY_CLASS::node *Registry<REGISTRY_CLASS::type>::Tail; \
+    template void Registry<REGISTRY_CLASS::type>::add_node(REGISTRY_CLASS::node *); \
+    template REGISTRY_CLASS::iterator Registry<REGISTRY_CLASS::type>::begin(); \
+    }

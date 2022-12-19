@@ -19,25 +19,27 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_SUPPORT_ARMEHABI_H
-#define LLVM_SUPPORT_ARMEHABI_H
+#pragma once
 
 namespace unknown {
 namespace ARM {
 namespace EHABI {
-  /// ARM exception handling table entry kinds
-  enum EHTEntryKind {
+/// ARM exception handling table entry kinds
+enum EHTEntryKind
+{
     EHT_GENERIC = 0x00,
     EHT_COMPACT = 0x80
-  };
+};
 
-  enum {
+enum
+{
     /// Special entry for the function never unwind
     EXIDX_CANTUNWIND = 0x1
-  };
+};
 
-  /// ARM-defined frame unwinding opcodes
-  enum UnwindOpcodes {
+/// ARM-defined frame unwinding opcodes
+enum UnwindOpcodes
+{
     // Format: 00xxxxxx
     // Purpose: vsp = vsp + ((x << 2) + 4)
     UNWIND_OPCODE_INC_VSP = 0x00,
@@ -113,10 +115,11 @@ namespace EHABI {
     // Format: 11010xxx
     // Purpose: pop d[(8+x):8]
     UNWIND_OPCODE_POP_VFP_REG_RANGE_FSTMFDD_D8 = 0xd0
-  };
+};
 
-  /// ARM-defined Personality Routine Index
-  enum PersonalityRoutineIndex {
+/// ARM-defined Personality Routine Index
+enum PersonalityRoutineIndex
+{
     // To make the exception handling table become more compact, ARM defined
     // several personality routines in EHABI.  There are 3 different
     // personality routines in ARM EHABI currently.  It is possible to have 16
@@ -126,9 +129,9 @@ namespace EHABI {
     AEABI_UNWIND_CPP_PR2 = 2,
 
     NUM_PERSONALITY_INDEX
-  };
-}
-}
-}
+};
+} // namespace EHABI
+} // namespace ARM
+} // namespace unknown
 
 #endif

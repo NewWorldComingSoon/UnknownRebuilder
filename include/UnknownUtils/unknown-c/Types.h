@@ -11,8 +11,7 @@
 |*                                                                            *|
 \*===----------------------------------------------------------------------===*/
 
-#ifndef LLVM_C_TYPES_H
-#define LLVM_C_TYPES_H
+#pragma once
 
 #include "unknown-c/DataTypes.h"
 
@@ -169,6 +168,4 @@ typedef struct LLVMOpaqueJITEventListener *LLVMJITEventListenerRef;
 
 #ifdef __cplusplus
 }
-#endif
-
 #endif

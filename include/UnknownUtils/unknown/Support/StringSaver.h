@@ -7,8 +7,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_SUPPORT_STRINGSAVER_H
-#define LLVM_SUPPORT_STRINGSAVER_H
+#pragma once
 
 #include "unknown/ADT/DenseSet.h"
 #include "unknown/ADT/StringRef.h"
@@ -19,17 +18,18 @@ namespace unknown {
 
 /// Saves strings in the provided stable storage and returns a
 /// StringRef with a stable character pointer.
-class StringSaver final {
-  BumpPtrAllocator &Alloc;
+class StringSaver final
+{
+    BumpPtrAllocator &Alloc;
 
 public:
-  StringSaver(BumpPtrAllocator &Alloc) : Alloc(Alloc) {}
+    StringSaver(BumpPtrAllocator &Alloc) : Alloc(Alloc) {}
 
-  // All returned strings are null-terminated: *save(S).end() == 0.
-  StringRef save(const char *S) { return save(StringRef(S)); }
-  StringRef save(StringRef S);
-  StringRef save(const Twine &S) { return save(StringRef(S.str())); }
-  StringRef save(const std::string &S) { return save(StringRef(S)); }
+    // All returned strings are null-terminated: *save(S).end() == 0.
+    StringRef save(const char *S) { return save(StringRef(S)); }
+    StringRef save(StringRef S);
+    StringRef save(const Twine &S) { return save(StringRef(S.str())); }
+    StringRef save(const std::string &S) { return save(StringRef(S)); }
 };
 
 /// Saves strings in the provided stable storage and returns a StringRef with a
@@ -40,19 +40,20 @@ public:
 ///
 /// Compared to StringPool, it performs fewer allocations but doesn't support
 /// refcounting/deletion.
-class UniqueStringSaver final {
-  StringSaver Strings;
-  unknown::DenseSet<unknown::StringRef> Unique;
+class UniqueStringSaver final
+{
+    StringSaver Strings;
+    unknown::DenseSet<unknown::StringRef> Unique;
 
 public:
-  UniqueStringSaver(BumpPtrAllocator &Alloc) : Strings(Alloc) {}
+    UniqueStringSaver(BumpPtrAllocator &Alloc) : Strings(Alloc) {}
 
-  // All returned strings are null-terminated: *save(S).end() == 0.
-  StringRef save(const char *S) { return save(StringRef(S)); }
-  StringRef save(StringRef S);
-  StringRef save(const Twine &S) { return save(StringRef(S.str())); }
-  StringRef save(const std::string &S) { return save(StringRef(S)); }
+    // All returned strings are null-terminated: *save(S).end() == 0.
+    StringRef save(const char *S) { return save(StringRef(S)); }
+    StringRef save(StringRef S);
+    StringRef save(const Twine &S) { return save(StringRef(S.str())); }
+    StringRef save(const std::string &S) { return save(StringRef(S)); }
 };
 
-}
+} // namespace unknown
 #endif

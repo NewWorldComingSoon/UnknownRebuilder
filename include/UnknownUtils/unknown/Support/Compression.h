@@ -11,13 +11,13 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_SUPPORT_COMPRESSION_H
-#define LLVM_SUPPORT_COMPRESSION_H
+#pragma once
 
 #include "unknown/Support/DataTypes.h"
 
 namespace unknown {
-template <typename T> class SmallVectorImpl;
+template <typename T>
+class SmallVectorImpl;
 class Error;
 class StringRef;
 
@@ -28,22 +28,23 @@ static constexpr int BestSpeedCompression = 1;
 static constexpr int DefaultCompression = 6;
 static constexpr int BestSizeCompression = 9;
 
-bool isAvailable();
+bool
+isAvailable();
 
-Error compress(StringRef InputBuffer, SmallVectorImpl<char> &CompressedBuffer,
-               int Level = DefaultCompression);
+Error
+compress(StringRef InputBuffer, SmallVectorImpl<char> &CompressedBuffer, int Level = DefaultCompression);
 
-Error uncompress(StringRef InputBuffer, char *UncompressedBuffer,
-                 size_t &UncompressedSize);
+Error
+uncompress(StringRef InputBuffer, char *UncompressedBuffer, size_t &UncompressedSize);
 
-Error uncompress(StringRef InputBuffer,
-                 SmallVectorImpl<char> &UncompressedBuffer,
-                 size_t UncompressedSize);
+Error
+uncompress(StringRef InputBuffer, SmallVectorImpl<char> &UncompressedBuffer, size_t UncompressedSize);
 
-uint32_t crc32(StringRef Buffer);
+uint32_t
+crc32(StringRef Buffer);
 
-}  // End of namespace zlib
+} // End of namespace zlib
 
-} // End of namespace llvm
+} // namespace unknown
 
 #endif

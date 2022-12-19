@@ -19,7 +19,7 @@
 |*                                                                            *|
 \*===----------------------------------------------------------------------===*/
 
-#ifndef LLVM_TARGET
+#pragma once
 #  error Please define the macro LLVM_TARGET(TargetName)
 #endif
 

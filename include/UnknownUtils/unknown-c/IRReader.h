@@ -11,7 +11,7 @@
 |*                                                                            *|
 \*===----------------------------------------------------------------------===*/
 
-#ifndef LLVM_C_IRREADER_H
+#pragma once
 #define LLVM_C_IRREADER_H
 
 #include "unknown/Types.h"
@@ -29,9 +29,8 @@ extern "C" {
  *
  * @see llvm::ParseIR()
  */
-LLVMBool LLVMParseIRInContext(LLVMContextRef ContextRef,
-                              LLVMMemoryBufferRef MemBuf, LLVMModuleRef *OutM,
-                              char **OutMessage);
+LLVMBool
+LLVMParseIRInContext(LLVMContextRef ContextRef, LLVMMemoryBufferRef MemBuf, LLVMModuleRef *OutM, char **OutMessage);
 
 #ifdef __cplusplus
 }

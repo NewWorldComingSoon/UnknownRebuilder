@@ -7,14 +7,14 @@
 |*                                                                            *|
 |*===----------------------------------------------------------------------===*/
 
-#ifndef LLVM_DISASSEMBLER_TYPES_H
+#pragma once
 #define LLVM_DISASSEMBLER_TYPES_H
 
 #include "unknown-c/DataTypes.h"
 #ifdef __cplusplus
-#include <cstddef>
+#    include <cstddef>
 #else
-#include <stddef.h>
+#    include <stddef.h>
 #endif
 
 /**
@@ -39,9 +39,8 @@ typedef void *LLVMDisasmContextRef;
  * TagType for that Triple.  If symbolic information is returned the function
  * returns 1, otherwise it returns 0.
  */
-typedef int (*LLVMOpInfoCallback)(void *DisInfo, uint64_t PC,
-                                  uint64_t Offset, uint64_t Size,
-                                  int TagType, void *TagBuf);
+typedef int (
+    *LLVMOpInfoCallback)(void *DisInfo, uint64_t PC, uint64_t Offset, uint64_t Size, int TagType, void *TagBuf);
 
 /**
  * The initial support in LLVM MC for the most general form of a relocatable
@@ -63,17 +62,19 @@ typedef int (*LLVMOpInfoCallback)(void *DisInfo, uint64_t PC,
  * type is one of the Target specific #defines below and is used to print
  * operands like "_foo@GOT", ":lower16:_foo", etc.
  */
-struct LLVMOpInfoSymbol1 {
-  uint64_t Present;  /* 1 if this symbol is present */
-  const char *Name;  /* symbol name if not NULL */
-  uint64_t Value;    /* symbol value if name is NULL */
+struct LLVMOpInfoSymbol1
+{
+    uint64_t Present; /* 1 if this symbol is present */
+    const char *Name; /* symbol name if not NULL */
+    uint64_t Value;   /* symbol value if name is NULL */
 };
 
-struct LLVMOpInfo1 {
-  struct LLVMOpInfoSymbol1 AddSymbol;
-  struct LLVMOpInfoSymbol1 SubtractSymbol;
-  uint64_t Value;
-  uint64_t VariantKind;
+struct LLVMOpInfo1
+{
+    struct LLVMOpInfoSymbol1 AddSymbol;
+    struct LLVMOpInfoSymbol1 SubtractSymbol;
+    uint64_t Value;
+    uint64_t VariantKind;
 };
 
 /**
@@ -90,12 +91,12 @@ struct LLVMOpInfo1 {
 /**
  * The ARM64 target VariantKinds.
  */
-#define LLVMDisassembler_VariantKind_ARM64_PAGE       1 /* @page */
-#define LLVMDisassembler_VariantKind_ARM64_PAGEOFF    2 /* @pageoff */
-#define LLVMDisassembler_VariantKind_ARM64_GOTPAGE    3 /* @gotpage */
+#define LLVMDisassembler_VariantKind_ARM64_PAGE 1       /* @page */
+#define LLVMDisassembler_VariantKind_ARM64_PAGEOFF 2    /* @pageoff */
+#define LLVMDisassembler_VariantKind_ARM64_GOTPAGE 3    /* @gotpage */
 #define LLVMDisassembler_VariantKind_ARM64_GOTPAGEOFF 4 /* @gotpageoff */
-#define LLVMDisassembler_VariantKind_ARM64_TLVP       5 /* @tvlppage */
-#define LLVMDisassembler_VariantKind_ARM64_TLVOFF     6 /* @tvlppageoff */
+#define LLVMDisassembler_VariantKind_ARM64_TLVP 5       /* @tvlppage */
+#define LLVMDisassembler_VariantKind_ARM64_TLVOFF 6     /* @tvlppageoff */
 
 /**
  * The type for the symbol lookup function.  This may be called by the
@@ -109,11 +110,12 @@ struct LLVMOpInfo1 {
  * indirectly in ReferenceType along with ReferenceName if any, or that is set
  * to NULL.
  */
-typedef const char *(*LLVMSymbolLookupCallback)(void *DisInfo,
-                                                uint64_t ReferenceValue,
-                                                uint64_t *ReferenceType,
-                                                uint64_t ReferencePC,
-                                                const char **ReferenceName);
+typedef const char *(*LLVMSymbolLookupCallback)(
+    void *DisInfo,
+    uint64_t ReferenceValue,
+    uint64_t *ReferenceType,
+    uint64_t ReferencePC,
+    const char **ReferenceName);
 /**
  * The reference types on input and output.
  */

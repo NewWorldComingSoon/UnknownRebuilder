@@ -1,11 +1,10 @@
-#ifndef CONFIG_H
-#define CONFIG_H
+#pragma once
 
 /* Exported configuration */
 #include "unknown/Config/llvm-config.h"
 
 /* Bug report URL. */
-#define BUG_REPORT_URL "https://bugs.llvm.org/"
+#define BUG_REPORT_URL "https://github.com/NewWorldComingSoon/UnknownRebuilder"
 
 /* Define to 1 to enable backtraces, and to 0 otherwise. */
 #define ENABLE_BACKTRACES 1
@@ -301,9 +300,9 @@
 /* Target triple LLVM will generate code for by default */
 /* Doesn't use `cmakedefine` because it is allowed to be empty. */
 #ifdef WIN64
-#define LLVM_DEFAULT_TARGET_TRIPLE "x86_64-pc-windows-msvc"
+#    define LLVM_DEFAULT_TARGET_TRIPLE "x86_64-pc-windows-msvc"
 #else
-#define LLVM_DEFAULT_TARGET_TRIPLE "x86_32-pc-windows-msvc"
+#    define LLVM_DEFAULT_TARGET_TRIPLE "x86_32-pc-windows-msvc"
 #endif
 /* Define if zlib compression is available */
 #define LLVM_ENABLE_ZLIB 0
@@ -324,7 +323,7 @@
 #define LTDL_SHLIB_EXT ".dll"
 
 /* Define to the address where bug reports for this package should be sent. */
-#define PACKAGE_BUGREPORT "https://bugs.llvm.org/"
+#define PACKAGE_BUGREPORT "https://github.com/NewWorldComingSoon/UnknownRebuilder"
 
 /* Define to the full name of this package. */
 #define PACKAGE_NAME "LLVM"
@@ -352,5 +351,3 @@
 
 /* Define to the default GlobalISel coverage file prefix */
 /* #undef LLVM_GISEL_COV_PREFIX */
-
-#endif

@@ -24,8 +24,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_SUPPORT_TRIGRAMINDEX_H
-#define LLVM_SUPPORT_TRIGRAMINDEX_H
+#pragma once
 
 #include "unknown/ADT/SmallVector.h"
 #include "unknown/ADT/StringMap.h"
@@ -37,34 +36,36 @@
 namespace unknown {
 class StringRef;
 
-class TrigramIndex {
- public:
-  /// Inserts a new Regex into the index.
-  void insert(std::string Regex);
+class TrigramIndex
+{
+public:
+    /// Inserts a new Regex into the index.
+    void insert(std::string Regex);
 
-  /// Returns true, if special case list definitely does not have a line
-  /// that matches the query. Returns false, if it's not sure.
-  bool isDefinitelyOut(StringRef Query) const;
+    /// Returns true, if special case list definitely does not have a line
+    /// that matches the query. Returns false, if it's not sure.
+    bool isDefinitelyOut(StringRef Query) const;
 
-  /// Returned true, iff the heuristic is defeated and not useful.
-  /// In this case isDefinitelyOut always returns false.
-  bool isDefeated() { return Defeated; }
- private:
-  // If true, the rules are too complicated for the check to work, and full
-  // regex matching is needed for every rule.
-  bool Defeated = false;
-  // The minimum number of trigrams which should match for a rule to have a
-  // chance to match the query. The number of elements equals the number of
-  // regex rules in the SpecialCaseList.
-  std::vector<unsigned> Counts;
-  // Index holds a list of rules indices for each trigram. The same indices
-  // are used in Counts to store per-rule limits.
-  // If a trigram is too common (>4 rules with it), we stop tracking it,
-  // which increases the probability for a need to match using regex, but
-  // decreases the costs in the regular case.
-  std::unordered_map<unsigned, SmallVector<size_t, 4>> Index{256};
+    /// Returned true, iff the heuristic is defeated and not useful.
+    /// In this case isDefinitelyOut always returns false.
+    bool isDefeated() { return Defeated; }
+
+private:
+    // If true, the rules are too complicated for the check to work, and full
+    // regex matching is needed for every rule.
+    bool Defeated = false;
+    // The minimum number of trigrams which should match for a rule to have a
+    // chance to match the query. The number of elements equals the number of
+    // regex rules in the SpecialCaseList.
+    std::vector<unsigned> Counts;
+    // Index holds a list of rules indices for each trigram. The same indices
+    // are used in Counts to store per-rule limits.
+    // If a trigram is too common (>4 rules with it), we stop tracking it,
+    // which increases the probability for a need to match using regex, but
+    // decreases the costs in the regular case.
+    std::unordered_map<unsigned, SmallVector<size_t, 4>> Index{256};
 };
 
-}  // namespace llvm
+} // namespace unknown
 
-#endif  // LLVM_SUPPORT_TRIGRAMINDEX_H
+#endif // LLVM_SUPPORT_TRIGRAMINDEX_H

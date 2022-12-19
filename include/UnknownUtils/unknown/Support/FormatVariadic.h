@@ -23,8 +23,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_SUPPORT_FORMATVARIADIC_H
-#define LLVM_SUPPORT_FORMATVARIADIC_H
+#pragma once
 
 #include "unknown/ADT/Optional.h"
 #include "unknown/ADT/STLExtras.h"
@@ -42,130 +41,149 @@
 
 namespace unknown {
 
-enum class ReplacementType { Empty, Format, Literal };
-
-struct ReplacementItem {
-  ReplacementItem() = default;
-  explicit ReplacementItem(StringRef Literal)
-      : Type(ReplacementType::Literal), Spec(Literal) {}
-  ReplacementItem(StringRef Spec, size_t Index, size_t Align, AlignStyle Where,
-                  char Pad, StringRef Options)
-      : Type(ReplacementType::Format), Spec(Spec), Index(Index), Align(Align),
-        Where(Where), Pad(Pad), Options(Options) {}
-
-  ReplacementType Type = ReplacementType::Empty;
-  StringRef Spec;
-  size_t Index = 0;
-  size_t Align = 0;
-  AlignStyle Where = AlignStyle::Right;
-  char Pad;
-  StringRef Options;
+enum class ReplacementType
+{
+    Empty,
+    Format,
+    Literal
 };
 
-class formatv_object_base {
+struct ReplacementItem
+{
+    ReplacementItem() = default;
+    explicit ReplacementItem(StringRef Literal) : Type(ReplacementType::Literal), Spec(Literal) {}
+    ReplacementItem(StringRef Spec, size_t Index, size_t Align, AlignStyle Where, char Pad, StringRef Options) :
+        Type(ReplacementType::Format), Spec(Spec), Index(Index), Align(Align), Where(Where), Pad(Pad), Options(Options)
+    {
+    }
+
+    ReplacementType Type = ReplacementType::Empty;
+    StringRef Spec;
+    size_t Index = 0;
+    size_t Align = 0;
+    AlignStyle Where = AlignStyle::Right;
+    char Pad;
+    StringRef Options;
+};
+
+class formatv_object_base
+{
 protected:
-  // The parameters are stored in a std::tuple, which does not provide runtime
-  // indexing capabilities.  In order to enable runtime indexing, we use this
-  // structure to put the parameters into a std::vector.  Since the parameters
-  // are not all the same type, we use some type-erasure by wrapping the
-  // parameters in a template class that derives from a non-template superclass.
-  // Essentially, we are converting a std::tuple<Derived<Ts...>> to a
-  // std::vector<Base*>.
-  struct create_adapters {
-    template <typename... Ts>
-    std::vector<detail::format_adapter *> operator()(Ts &... Items) {
-      return std::vector<detail::format_adapter *>{&Items...};
-    }
-  };
+    // The parameters are stored in a std::tuple, which does not provide runtime
+    // indexing capabilities.  In order to enable runtime indexing, we use this
+    // structure to put the parameters into a std::vector.  Since the parameters
+    // are not all the same type, we use some type-erasure by wrapping the
+    // parameters in a template class that derives from a non-template superclass.
+    // Essentially, we are converting a std::tuple<Derived<Ts...>> to a
+    // std::vector<Base*>.
+    struct create_adapters
+    {
+        template <typename... Ts>
+        std::vector<detail::format_adapter *> operator()(Ts &...Items)
+        {
+            return std::vector<detail::format_adapter *>{&Items...};
+        }
+    };
 
-  StringRef Fmt;
-  std::vector<detail::format_adapter *> Adapters;
-  std::vector<ReplacementItem> Replacements;
+    StringRef Fmt;
+    std::vector<detail::format_adapter *> Adapters;
+    std::vector<ReplacementItem> Replacements;
 
-  static bool consumeFieldLayout(StringRef &Spec, AlignStyle &Where,
-                                 size_t &Align, char &Pad);
+    static bool consumeFieldLayout(StringRef &Spec, AlignStyle &Where, size_t &Align, char &Pad);
 
-  static std::pair<ReplacementItem, StringRef>
-  splitLiteralAndReplacement(StringRef Fmt);
+    static std::pair<ReplacementItem, StringRef> splitLiteralAndReplacement(StringRef Fmt);
 
 public:
-  formatv_object_base(StringRef Fmt, std::size_t ParamCount)
-      : Fmt(Fmt), Replacements(parseFormatString(Fmt)) {
-    Adapters.reserve(ParamCount);
-  }
-
-  formatv_object_base(formatv_object_base const &rhs) = delete;
-
-  formatv_object_base(formatv_object_base &&rhs)
-      : Fmt(std::move(rhs.Fmt)),
-        Adapters(), // Adapters are initialized by formatv_object
-        Replacements(std::move(rhs.Replacements)) {
-    Adapters.reserve(rhs.Adapters.size());
-  };
-
-  void format(raw_ostream &S) const {
-    for (auto &R : Replacements) {
-      if (R.Type == ReplacementType::Empty)
-        continue;
-      if (R.Type == ReplacementType::Literal) {
-        S << R.Spec;
-        continue;
-      }
-      if (R.Index >= Adapters.size()) {
-        S << R.Spec;
-        continue;
-      }
-
-      auto W = Adapters[R.Index];
-
-      FmtAlign Align(*W, R.Where, R.Align, R.Pad);
-      Align.format(S, R.Options);
+    formatv_object_base(StringRef Fmt, std::size_t ParamCount) : Fmt(Fmt), Replacements(parseFormatString(Fmt))
+    {
+        Adapters.reserve(ParamCount);
     }
-  }
-  static std::vector<ReplacementItem> parseFormatString(StringRef Fmt);
 
-  static Optional<ReplacementItem> parseReplacementItem(StringRef Spec);
+    formatv_object_base(formatv_object_base const &rhs) = delete;
 
-  std::string str() const {
-    std::string Result;
-    raw_string_ostream Stream(Result);
-    Stream << *this;
-    Stream.flush();
-    return Result;
-  }
+    formatv_object_base(formatv_object_base &&rhs) :
+        Fmt(std::move(rhs.Fmt)),
+        Adapters(), // Adapters are initialized by formatv_object
+        Replacements(std::move(rhs.Replacements))
+    {
+        Adapters.reserve(rhs.Adapters.size());
+    };
 
-  template <unsigned N> SmallString<N> sstr() const {
-    SmallString<N> Result;
-    raw_svector_ostream Stream(Result);
-    Stream << *this;
-    return Result;
-  }
+    void format(raw_ostream &S) const
+    {
+        for (auto &R : Replacements)
+        {
+            if (R.Type == ReplacementType::Empty)
+                continue;
+            if (R.Type == ReplacementType::Literal)
+            {
+                S << R.Spec;
+                continue;
+            }
+            if (R.Index >= Adapters.size())
+            {
+                S << R.Spec;
+                continue;
+            }
 
-  template <unsigned N> operator SmallString<N>() const { return sstr<N>(); }
+            auto W = Adapters[R.Index];
 
-  operator std::string() const { return str(); }
+            FmtAlign Align(*W, R.Where, R.Align, R.Pad);
+            Align.format(S, R.Options);
+        }
+    }
+    static std::vector<ReplacementItem> parseFormatString(StringRef Fmt);
+
+    static Optional<ReplacementItem> parseReplacementItem(StringRef Spec);
+
+    std::string str() const
+    {
+        std::string Result;
+        raw_string_ostream Stream(Result);
+        Stream << *this;
+        Stream.flush();
+        return Result;
+    }
+
+    template <unsigned N>
+    SmallString<N> sstr() const
+    {
+        SmallString<N> Result;
+        raw_svector_ostream Stream(Result);
+        Stream << *this;
+        return Result;
+    }
+
+    template <unsigned N>
+    operator SmallString<N>() const
+    {
+        return sstr<N>();
+    }
+
+    operator std::string() const { return str(); }
 };
 
-template <typename Tuple> class formatv_object : public formatv_object_base {
-  // Storage for the parameter adapters.  Since the base class erases the type
-  // of the parameters, we have to own the storage for the parameters here, and
-  // have the base class store type-erased pointers into this tuple.
-  Tuple Parameters;
+template <typename Tuple>
+class formatv_object : public formatv_object_base
+{
+    // Storage for the parameter adapters.  Since the base class erases the type
+    // of the parameters, we have to own the storage for the parameters here, and
+    // have the base class store type-erased pointers into this tuple.
+    Tuple Parameters;
 
 public:
-  formatv_object(StringRef Fmt, Tuple &&Params)
-      : formatv_object_base(Fmt, std::tuple_size<Tuple>::value),
-        Parameters(std::move(Params)) {
-    Adapters = apply_tuple(create_adapters(), Parameters);
-  }
+    formatv_object(StringRef Fmt, Tuple &&Params) :
+        formatv_object_base(Fmt, std::tuple_size<Tuple>::value), Parameters(std::move(Params))
+    {
+        Adapters = apply_tuple(create_adapters(), Parameters);
+    }
 
-  formatv_object(formatv_object const &rhs) = delete;
+    formatv_object(formatv_object const &rhs) = delete;
 
-  formatv_object(formatv_object &&rhs)
-      : formatv_object_base(std::move(rhs)),
-        Parameters(std::move(rhs.Parameters)) {
-    Adapters = apply_tuple(create_adapters(), Parameters);
-  }
+    formatv_object(formatv_object &&rhs) : formatv_object_base(std::move(rhs)), Parameters(std::move(rhs.Parameters))
+    {
+        Adapters = apply_tuple(create_adapters(), Parameters);
+    }
 };
 
 // Format text given a format string and replacement parameters.
@@ -251,15 +269,12 @@ public:
 // the details of what that is are undefined.
 //
 template <typename... Ts>
-inline auto formatv(const char *Fmt, Ts &&... Vals) -> formatv_object<decltype(
-    std::make_tuple(detail::build_format_adapter(std::forward<Ts>(Vals))...))> {
-  using ParamTuple = decltype(
-      std::make_tuple(detail::build_format_adapter(std::forward<Ts>(Vals))...));
-  return formatv_object<ParamTuple>(
-      Fmt,
-      std::make_tuple(detail::build_format_adapter(std::forward<Ts>(Vals))...));
+inline auto
+formatv(const char *Fmt, Ts &&...Vals)
+    -> formatv_object<decltype(std::make_tuple(detail::build_format_adapter(std::forward<Ts>(Vals))...))>
+{
+    using ParamTuple = decltype(std::make_tuple(detail::build_format_adapter(std::forward<Ts>(Vals))...));
+    return formatv_object<ParamTuple>(Fmt, std::make_tuple(detail::build_format_adapter(std::forward<Ts>(Vals))...));
 }
 
-} // end namespace llvm
-
-#endif // LLVM_SUPPORT_FORMATVARIADIC_H
+} // namespace unknown

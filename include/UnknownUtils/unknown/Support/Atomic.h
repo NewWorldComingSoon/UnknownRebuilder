@@ -15,29 +15,28 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_SUPPORT_ATOMIC_H
-#define LLVM_SUPPORT_ATOMIC_H
+#pragma once
 
 #include "unknown/Support/DataTypes.h"
 
 // Windows will at times define MemoryFence.
 #ifdef MemoryFence
-#undef MemoryFence
+#    undef MemoryFence
 #endif
 
 namespace unknown {
-  namespace sys {
-    void MemoryFence();
+namespace sys {
+void
+MemoryFence();
 
 #ifdef _MSC_VER
-    typedef long cas_flag;
+typedef long cas_flag;
 #else
-    typedef uint32_t cas_flag;
+typedef uint32_t cas_flag;
 #endif
-    cas_flag CompareAndSwap(volatile cas_flag* ptr,
-                            cas_flag new_value,
-                            cas_flag old_value);
-  }
-}
+cas_flag
+CompareAndSwap(volatile cas_flag *ptr, cas_flag new_value, cas_flag old_value);
+} // namespace sys
+} // namespace unknown
 
 #endif

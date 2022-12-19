@@ -14,7 +14,7 @@
 ///
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_C_DEBUGINFO_H
+#pragma once
 #define LLVM_C_DEBUGINFO_H
 
 #include "unknown/Core.h"
@@ -26,102 +26,103 @@ extern "C" {
 /**
  * Debug info flags.
  */
-typedef enum {
-  LLVMDIFlagZero = 0,
-  LLVMDIFlagPrivate = 1,
-  LLVMDIFlagProtected = 2,
-  LLVMDIFlagPublic = 3,
-  LLVMDIFlagFwdDecl = 1 << 2,
-  LLVMDIFlagAppleBlock = 1 << 3,
-  LLVMDIFlagBlockByrefStruct = 1 << 4,
-  LLVMDIFlagVirtual = 1 << 5,
-  LLVMDIFlagArtificial = 1 << 6,
-  LLVMDIFlagExplicit = 1 << 7,
-  LLVMDIFlagPrototyped = 1 << 8,
-  LLVMDIFlagObjcClassComplete = 1 << 9,
-  LLVMDIFlagObjectPointer = 1 << 10,
-  LLVMDIFlagVector = 1 << 11,
-  LLVMDIFlagStaticMember = 1 << 12,
-  LLVMDIFlagLValueReference = 1 << 13,
-  LLVMDIFlagRValueReference = 1 << 14,
-  LLVMDIFlagReserved = 1 << 15,
-  LLVMDIFlagSingleInheritance = 1 << 16,
-  LLVMDIFlagMultipleInheritance = 2 << 16,
-  LLVMDIFlagVirtualInheritance = 3 << 16,
-  LLVMDIFlagIntroducedVirtual = 1 << 18,
-  LLVMDIFlagBitField = 1 << 19,
-  LLVMDIFlagNoReturn = 1 << 20,
-  LLVMDIFlagMainSubprogram = 1 << 21,
-  LLVMDIFlagTypePassByValue = 1 << 22,
-  LLVMDIFlagTypePassByReference = 1 << 23,
-  LLVMDIFlagEnumClass = 1 << 24,
-  LLVMDIFlagFixedEnum = LLVMDIFlagEnumClass, // Deprecated.
-  LLVMDIFlagThunk = 1 << 25,
-  LLVMDIFlagTrivial = 1 << 26,
-  LLVMDIFlagBigEndian = 1 << 27,
-  LLVMDIFlagLittleEndian = 1 << 28,
-  LLVMDIFlagIndirectVirtualBase = (1 << 2) | (1 << 5),
-  LLVMDIFlagAccessibility = LLVMDIFlagPrivate | LLVMDIFlagProtected |
-                            LLVMDIFlagPublic,
-  LLVMDIFlagPtrToMemberRep = LLVMDIFlagSingleInheritance |
-                             LLVMDIFlagMultipleInheritance |
-                             LLVMDIFlagVirtualInheritance
+typedef enum
+{
+    LLVMDIFlagZero = 0,
+    LLVMDIFlagPrivate = 1,
+    LLVMDIFlagProtected = 2,
+    LLVMDIFlagPublic = 3,
+    LLVMDIFlagFwdDecl = 1 << 2,
+    LLVMDIFlagAppleBlock = 1 << 3,
+    LLVMDIFlagBlockByrefStruct = 1 << 4,
+    LLVMDIFlagVirtual = 1 << 5,
+    LLVMDIFlagArtificial = 1 << 6,
+    LLVMDIFlagExplicit = 1 << 7,
+    LLVMDIFlagPrototyped = 1 << 8,
+    LLVMDIFlagObjcClassComplete = 1 << 9,
+    LLVMDIFlagObjectPointer = 1 << 10,
+    LLVMDIFlagVector = 1 << 11,
+    LLVMDIFlagStaticMember = 1 << 12,
+    LLVMDIFlagLValueReference = 1 << 13,
+    LLVMDIFlagRValueReference = 1 << 14,
+    LLVMDIFlagReserved = 1 << 15,
+    LLVMDIFlagSingleInheritance = 1 << 16,
+    LLVMDIFlagMultipleInheritance = 2 << 16,
+    LLVMDIFlagVirtualInheritance = 3 << 16,
+    LLVMDIFlagIntroducedVirtual = 1 << 18,
+    LLVMDIFlagBitField = 1 << 19,
+    LLVMDIFlagNoReturn = 1 << 20,
+    LLVMDIFlagMainSubprogram = 1 << 21,
+    LLVMDIFlagTypePassByValue = 1 << 22,
+    LLVMDIFlagTypePassByReference = 1 << 23,
+    LLVMDIFlagEnumClass = 1 << 24,
+    LLVMDIFlagFixedEnum = LLVMDIFlagEnumClass, // Deprecated.
+    LLVMDIFlagThunk = 1 << 25,
+    LLVMDIFlagTrivial = 1 << 26,
+    LLVMDIFlagBigEndian = 1 << 27,
+    LLVMDIFlagLittleEndian = 1 << 28,
+    LLVMDIFlagIndirectVirtualBase = (1 << 2) | (1 << 5),
+    LLVMDIFlagAccessibility = LLVMDIFlagPrivate | LLVMDIFlagProtected | LLVMDIFlagPublic,
+    LLVMDIFlagPtrToMemberRep =
+        LLVMDIFlagSingleInheritance | LLVMDIFlagMultipleInheritance | LLVMDIFlagVirtualInheritance
 } LLVMDIFlags;
 
 /**
  * Source languages known by DWARF.
  */
-typedef enum {
-  LLVMDWARFSourceLanguageC89,
-  LLVMDWARFSourceLanguageC,
-  LLVMDWARFSourceLanguageAda83,
-  LLVMDWARFSourceLanguageC_plus_plus,
-  LLVMDWARFSourceLanguageCobol74,
-  LLVMDWARFSourceLanguageCobol85,
-  LLVMDWARFSourceLanguageFortran77,
-  LLVMDWARFSourceLanguageFortran90,
-  LLVMDWARFSourceLanguagePascal83,
-  LLVMDWARFSourceLanguageModula2,
-  // New in DWARF v3:
-  LLVMDWARFSourceLanguageJava,
-  LLVMDWARFSourceLanguageC99,
-  LLVMDWARFSourceLanguageAda95,
-  LLVMDWARFSourceLanguageFortran95,
-  LLVMDWARFSourceLanguagePLI,
-  LLVMDWARFSourceLanguageObjC,
-  LLVMDWARFSourceLanguageObjC_plus_plus,
-  LLVMDWARFSourceLanguageUPC,
-  LLVMDWARFSourceLanguageD,
-  // New in DWARF v4:
-  LLVMDWARFSourceLanguagePython,
-  // New in DWARF v5:
-  LLVMDWARFSourceLanguageOpenCL,
-  LLVMDWARFSourceLanguageGo,
-  LLVMDWARFSourceLanguageModula3,
-  LLVMDWARFSourceLanguageHaskell,
-  LLVMDWARFSourceLanguageC_plus_plus_03,
-  LLVMDWARFSourceLanguageC_plus_plus_11,
-  LLVMDWARFSourceLanguageOCaml,
-  LLVMDWARFSourceLanguageRust,
-  LLVMDWARFSourceLanguageC11,
-  LLVMDWARFSourceLanguageSwift,
-  LLVMDWARFSourceLanguageJulia,
-  LLVMDWARFSourceLanguageDylan,
-  LLVMDWARFSourceLanguageC_plus_plus_14,
-  LLVMDWARFSourceLanguageFortran03,
-  LLVMDWARFSourceLanguageFortran08,
-  LLVMDWARFSourceLanguageRenderScript,
-  LLVMDWARFSourceLanguageBLISS,
-  // Vendor extensions:
-  LLVMDWARFSourceLanguageMips_Assembler,
-  LLVMDWARFSourceLanguageGOOGLE_RenderScript,
-  LLVMDWARFSourceLanguageBORLAND_Delphi
+typedef enum
+{
+    LLVMDWARFSourceLanguageC89,
+    LLVMDWARFSourceLanguageC,
+    LLVMDWARFSourceLanguageAda83,
+    LLVMDWARFSourceLanguageC_plus_plus,
+    LLVMDWARFSourceLanguageCobol74,
+    LLVMDWARFSourceLanguageCobol85,
+    LLVMDWARFSourceLanguageFortran77,
+    LLVMDWARFSourceLanguageFortran90,
+    LLVMDWARFSourceLanguagePascal83,
+    LLVMDWARFSourceLanguageModula2,
+    // New in DWARF v3:
+    LLVMDWARFSourceLanguageJava,
+    LLVMDWARFSourceLanguageC99,
+    LLVMDWARFSourceLanguageAda95,
+    LLVMDWARFSourceLanguageFortran95,
+    LLVMDWARFSourceLanguagePLI,
+    LLVMDWARFSourceLanguageObjC,
+    LLVMDWARFSourceLanguageObjC_plus_plus,
+    LLVMDWARFSourceLanguageUPC,
+    LLVMDWARFSourceLanguageD,
+    // New in DWARF v4:
+    LLVMDWARFSourceLanguagePython,
+    // New in DWARF v5:
+    LLVMDWARFSourceLanguageOpenCL,
+    LLVMDWARFSourceLanguageGo,
+    LLVMDWARFSourceLanguageModula3,
+    LLVMDWARFSourceLanguageHaskell,
+    LLVMDWARFSourceLanguageC_plus_plus_03,
+    LLVMDWARFSourceLanguageC_plus_plus_11,
+    LLVMDWARFSourceLanguageOCaml,
+    LLVMDWARFSourceLanguageRust,
+    LLVMDWARFSourceLanguageC11,
+    LLVMDWARFSourceLanguageSwift,
+    LLVMDWARFSourceLanguageJulia,
+    LLVMDWARFSourceLanguageDylan,
+    LLVMDWARFSourceLanguageC_plus_plus_14,
+    LLVMDWARFSourceLanguageFortran03,
+    LLVMDWARFSourceLanguageFortran08,
+    LLVMDWARFSourceLanguageRenderScript,
+    LLVMDWARFSourceLanguageBLISS,
+    // Vendor extensions:
+    LLVMDWARFSourceLanguageMips_Assembler,
+    LLVMDWARFSourceLanguageGOOGLE_RenderScript,
+    LLVMDWARFSourceLanguageBORLAND_Delphi
 } LLVMDWARFSourceLanguage;
 
 /**
  * The amount of debug information to emit.
  */
-typedef enum {
+typedef enum
+{
     LLVMDWARFEmissionNone = 0,
     LLVMDWARFEmissionFull,
     LLVMDWARFEmissionLineTablesOnly
@@ -130,38 +131,39 @@ typedef enum {
 /**
  * The kind of metadata nodes.
  */
-enum {
-  LLVMMDStringMetadataKind,
-  LLVMConstantAsMetadataMetadataKind,
-  LLVMLocalAsMetadataMetadataKind,
-  LLVMDistinctMDOperandPlaceholderMetadataKind,
-  LLVMMDTupleMetadataKind,
-  LLVMDILocationMetadataKind,
-  LLVMDIExpressionMetadataKind,
-  LLVMDIGlobalVariableExpressionMetadataKind,
-  LLVMGenericDINodeMetadataKind,
-  LLVMDISubrangeMetadataKind,
-  LLVMDIEnumeratorMetadataKind,
-  LLVMDIBasicTypeMetadataKind,
-  LLVMDIDerivedTypeMetadataKind,
-  LLVMDICompositeTypeMetadataKind,
-  LLVMDISubroutineTypeMetadataKind,
-  LLVMDIFileMetadataKind,
-  LLVMDICompileUnitMetadataKind,
-  LLVMDISubprogramMetadataKind,
-  LLVMDILexicalBlockMetadataKind,
-  LLVMDILexicalBlockFileMetadataKind,
-  LLVMDINamespaceMetadataKind,
-  LLVMDIModuleMetadataKind,
-  LLVMDITemplateTypeParameterMetadataKind,
-  LLVMDITemplateValueParameterMetadataKind,
-  LLVMDIGlobalVariableMetadataKind,
-  LLVMDILocalVariableMetadataKind,
-  LLVMDILabelMetadataKind,
-  LLVMDIObjCPropertyMetadataKind,
-  LLVMDIImportedEntityMetadataKind,
-  LLVMDIMacroMetadataKind,
-  LLVMDIMacroFileMetadataKind
+enum
+{
+    LLVMMDStringMetadataKind,
+    LLVMConstantAsMetadataMetadataKind,
+    LLVMLocalAsMetadataMetadataKind,
+    LLVMDistinctMDOperandPlaceholderMetadataKind,
+    LLVMMDTupleMetadataKind,
+    LLVMDILocationMetadataKind,
+    LLVMDIExpressionMetadataKind,
+    LLVMDIGlobalVariableExpressionMetadataKind,
+    LLVMGenericDINodeMetadataKind,
+    LLVMDISubrangeMetadataKind,
+    LLVMDIEnumeratorMetadataKind,
+    LLVMDIBasicTypeMetadataKind,
+    LLVMDIDerivedTypeMetadataKind,
+    LLVMDICompositeTypeMetadataKind,
+    LLVMDISubroutineTypeMetadataKind,
+    LLVMDIFileMetadataKind,
+    LLVMDICompileUnitMetadataKind,
+    LLVMDISubprogramMetadataKind,
+    LLVMDILexicalBlockMetadataKind,
+    LLVMDILexicalBlockFileMetadataKind,
+    LLVMDINamespaceMetadataKind,
+    LLVMDIModuleMetadataKind,
+    LLVMDITemplateTypeParameterMetadataKind,
+    LLVMDITemplateValueParameterMetadataKind,
+    LLVMDIGlobalVariableMetadataKind,
+    LLVMDILocalVariableMetadataKind,
+    LLVMDILabelMetadataKind,
+    LLVMDIObjCPropertyMetadataKind,
+    LLVMDIImportedEntityMetadataKind,
+    LLVMDIMacroMetadataKind,
+    LLVMDIMacroFileMetadataKind
 };
 typedef unsigned LLVMMetadataKind;
 
@@ -173,12 +175,14 @@ typedef unsigned LLVMDWARFTypeEncoding;
 /**
  * The current debug metadata version number.
  */
-unsigned LLVMDebugMetadataVersion(void);
+unsigned
+LLVMDebugMetadataVersion(void);
 
 /**
  * The version of debug metadata that's present in the provided \c Module.
  */
-unsigned LLVMGetModuleDebugMetadataVersion(LLVMModuleRef Module);
+unsigned
+LLVMGetModuleDebugMetadataVersion(LLVMModuleRef Module);
 
 /**
  * Strip debug info in the module if it exists.
@@ -186,31 +190,36 @@ unsigned LLVMGetModuleDebugMetadataVersion(LLVMModuleRef Module);
  * metadata for debugging. We also remove debug locations for instructions.
  * Return true if module is modified.
  */
-LLVMBool LLVMStripModuleDebugInfo(LLVMModuleRef Module);
+LLVMBool
+LLVMStripModuleDebugInfo(LLVMModuleRef Module);
 
 /**
  * Construct a builder for a module, and do not allow for unresolved nodes
  * attached to the module.
  */
-LLVMDIBuilderRef LLVMCreateDIBuilderDisallowUnresolved(LLVMModuleRef M);
+LLVMDIBuilderRef
+LLVMCreateDIBuilderDisallowUnresolved(LLVMModuleRef M);
 
 /**
  * Construct a builder for a module and collect unresolved nodes attached
  * to the module in order to resolve cycles during a call to
  * \c LLVMDIBuilderFinalize.
  */
-LLVMDIBuilderRef LLVMCreateDIBuilder(LLVMModuleRef M);
+LLVMDIBuilderRef
+LLVMCreateDIBuilder(LLVMModuleRef M);
 
 /**
  * Deallocates the \c DIBuilder and everything it owns.
  * @note You must call \c LLVMDIBuilderFinalize before this
  */
-void LLVMDisposeDIBuilder(LLVMDIBuilderRef Builder);
+void
+LLVMDisposeDIBuilder(LLVMDIBuilderRef Builder);
 
 /**
  * Construct any deferred debug info descriptors.
  */
-void LLVMDIBuilderFinalize(LLVMDIBuilderRef Builder);
+void
+LLVMDIBuilderFinalize(LLVMDIBuilderRef Builder);
 
 /**
  * A CompileUnit provides an anchor for all debugging
@@ -240,12 +249,22 @@ void LLVMDIBuilderFinalize(LLVMDIBuilderRef Builder);
  * \param DebugInfoForProfiling Whether to emit extra debug info for
  *                              profile collection.
  */
-LLVMMetadataRef LLVMDIBuilderCreateCompileUnit(
-    LLVMDIBuilderRef Builder, LLVMDWARFSourceLanguage Lang,
-    LLVMMetadataRef FileRef, const char *Producer, size_t ProducerLen,
-    LLVMBool isOptimized, const char *Flags, size_t FlagsLen,
-    unsigned RuntimeVer, const char *SplitName, size_t SplitNameLen,
-    LLVMDWARFEmissionKind Kind, unsigned DWOId, LLVMBool SplitDebugInlining,
+LLVMMetadataRef
+LLVMDIBuilderCreateCompileUnit(
+    LLVMDIBuilderRef Builder,
+    LLVMDWARFSourceLanguage Lang,
+    LLVMMetadataRef FileRef,
+    const char *Producer,
+    size_t ProducerLen,
+    LLVMBool isOptimized,
+    const char *Flags,
+    size_t FlagsLen,
+    unsigned RuntimeVer,
+    const char *SplitName,
+    size_t SplitNameLen,
+    LLVMDWARFEmissionKind Kind,
+    unsigned DWOId,
+    LLVMBool SplitDebugInlining,
     LLVMBool DebugInfoForProfiling);
 
 /**
@@ -257,9 +276,12 @@ LLVMMetadataRef LLVMDIBuilderCreateCompileUnit(
  * \param DirectoryLen The length of the C string passed to \c Directory.
  */
 LLVMMetadataRef
-LLVMDIBuilderCreateFile(LLVMDIBuilderRef Builder, const char *Filename,
-                        size_t FilenameLen, const char *Directory,
-                        size_t DirectoryLen);
+LLVMDIBuilderCreateFile(
+    LLVMDIBuilderRef Builder,
+    const char *Filename,
+    size_t FilenameLen,
+    const char *Directory,
+    size_t DirectoryLen);
 
 /**
  * Creates a new descriptor for a module with the specified parent scope.
@@ -276,11 +298,17 @@ LLVMDIBuilderCreateFile(LLVMDIBuilderRef Builder, const char *Filename,
  * \param ISysRootLen     The length of the C string passed to \c ISysRoot.
  */
 LLVMMetadataRef
-LLVMDIBuilderCreateModule(LLVMDIBuilderRef Builder, LLVMMetadataRef ParentScope,
-                          const char *Name, size_t NameLen,
-                          const char *ConfigMacros, size_t ConfigMacrosLen,
-                          const char *IncludePath, size_t IncludePathLen,
-                          const char *ISysRoot, size_t ISysRootLen);
+LLVMDIBuilderCreateModule(
+    LLVMDIBuilderRef Builder,
+    LLVMMetadataRef ParentScope,
+    const char *Name,
+    size_t NameLen,
+    const char *ConfigMacros,
+    size_t ConfigMacrosLen,
+    const char *IncludePath,
+    size_t IncludePathLen,
+    const char *ISysRoot,
+    size_t ISysRootLen);
 
 /**
  * Creates a new descriptor for a namespace with the specified parent scope.
@@ -292,10 +320,12 @@ LLVMDIBuilderCreateModule(LLVMDIBuilderRef Builder, LLVMMetadataRef ParentScope,
  *                         this is true of C++ inline namespaces.
  */
 LLVMMetadataRef
-LLVMDIBuilderCreateNameSpace(LLVMDIBuilderRef Builder,
-                             LLVMMetadataRef ParentScope,
-                             const char *Name, size_t NameLen,
-                             LLVMBool ExportSymbols);
+LLVMDIBuilderCreateNameSpace(
+    LLVMDIBuilderRef Builder,
+    LLVMMetadataRef ParentScope,
+    const char *Name,
+    size_t NameLen,
+    LLVMBool ExportSymbols);
 
 /**
  * Create a new descriptor for the specified subprogram.
@@ -315,12 +345,22 @@ LLVMDIBuilderCreateNameSpace(LLVMDIBuilderRef Builder,
  *                        used to emit dwarf attributes.
  * \param IsOptimized     True if optimization is ON.
  */
-LLVMMetadataRef LLVMDIBuilderCreateFunction(
-    LLVMDIBuilderRef Builder, LLVMMetadataRef Scope, const char *Name,
-    size_t NameLen, const char *LinkageName, size_t LinkageNameLen,
-    LLVMMetadataRef File, unsigned LineNo, LLVMMetadataRef Ty,
-    LLVMBool IsLocalToUnit, LLVMBool IsDefinition,
-    unsigned ScopeLine, LLVMDIFlags Flags, LLVMBool IsOptimized);
+LLVMMetadataRef
+LLVMDIBuilderCreateFunction(
+    LLVMDIBuilderRef Builder,
+    LLVMMetadataRef Scope,
+    const char *Name,
+    size_t NameLen,
+    const char *LinkageName,
+    size_t LinkageNameLen,
+    LLVMMetadataRef File,
+    unsigned LineNo,
+    LLVMMetadataRef Ty,
+    LLVMBool IsLocalToUnit,
+    LLVMBool IsDefinition,
+    unsigned ScopeLine,
+    LLVMDIFlags Flags,
+    LLVMBool IsOptimized);
 
 /**
  * Create a descriptor for a lexical block with the specified parent context.
@@ -330,9 +370,13 @@ LLVMMetadataRef LLVMDIBuilderCreateFunction(
  * \param Line         The line in the source file.
  * \param Column       The column in the source file.
  */
-LLVMMetadataRef LLVMDIBuilderCreateLexicalBlock(
-    LLVMDIBuilderRef Builder, LLVMMetadataRef Scope,
-    LLVMMetadataRef File, unsigned Line, unsigned Column);
+LLVMMetadataRef
+LLVMDIBuilderCreateLexicalBlock(
+    LLVMDIBuilderRef Builder,
+    LLVMMetadataRef Scope,
+    LLVMMetadataRef File,
+    unsigned Line,
+    unsigned Column);
 
 /**
  * Create a descriptor for a lexical block with a new file attached.
@@ -342,10 +386,11 @@ LLVMMetadataRef LLVMDIBuilderCreateLexicalBlock(
  * \param Discriminator  DWARF path discriminator value.
  */
 LLVMMetadataRef
-LLVMDIBuilderCreateLexicalBlockFile(LLVMDIBuilderRef Builder,
-                                    LLVMMetadataRef Scope,
-                                    LLVMMetadataRef File,
-                                    unsigned Discriminator);
+LLVMDIBuilderCreateLexicalBlockFile(
+    LLVMDIBuilderRef Builder,
+    LLVMMetadataRef Scope,
+    LLVMMetadataRef File,
+    unsigned Discriminator);
 
 /**
  * Create a descriptor for an imported namespace. Suitable for e.g. C++
@@ -356,11 +401,12 @@ LLVMDIBuilderCreateLexicalBlockFile(LLVMDIBuilderRef Builder,
  * \param Line       Line number of the declaration.
  */
 LLVMMetadataRef
-LLVMDIBuilderCreateImportedModuleFromNamespace(LLVMDIBuilderRef Builder,
-                                               LLVMMetadataRef Scope,
-                                               LLVMMetadataRef NS,
-                                               LLVMMetadataRef File,
-                                               unsigned Line);
+LLVMDIBuilderCreateImportedModuleFromNamespace(
+    LLVMDIBuilderRef Builder,
+    LLVMMetadataRef Scope,
+    LLVMMetadataRef NS,
+    LLVMMetadataRef File,
+    unsigned Line);
 
 /**
  * Create a descriptor for an imported module that aliases another
@@ -372,11 +418,12 @@ LLVMDIBuilderCreateImportedModuleFromNamespace(LLVMDIBuilderRef Builder,
  * \param Line           Line number of the declaration.
  */
 LLVMMetadataRef
-LLVMDIBuilderCreateImportedModuleFromAlias(LLVMDIBuilderRef Builder,
-                                           LLVMMetadataRef Scope,
-                                           LLVMMetadataRef ImportedEntity,
-                                           LLVMMetadataRef File,
-                                           unsigned Line);
+LLVMDIBuilderCreateImportedModuleFromAlias(
+    LLVMDIBuilderRef Builder,
+    LLVMMetadataRef Scope,
+    LLVMMetadataRef ImportedEntity,
+    LLVMMetadataRef File,
+    unsigned Line);
 
 /**
  * Create a descriptor for an imported module.
@@ -387,11 +434,12 @@ LLVMDIBuilderCreateImportedModuleFromAlias(LLVMDIBuilderRef Builder,
  * \param Line       Line number of the declaration.
  */
 LLVMMetadataRef
-LLVMDIBuilderCreateImportedModuleFromModule(LLVMDIBuilderRef Builder,
-                                            LLVMMetadataRef Scope,
-                                            LLVMMetadataRef M,
-                                            LLVMMetadataRef File,
-                                            unsigned Line);
+LLVMDIBuilderCreateImportedModuleFromModule(
+    LLVMDIBuilderRef Builder,
+    LLVMMetadataRef Scope,
+    LLVMMetadataRef M,
+    LLVMMetadataRef File,
+    unsigned Line);
 
 /**
  * Create a descriptor for an imported function, type, or variable.  Suitable
@@ -406,12 +454,14 @@ LLVMDIBuilderCreateImportedModuleFromModule(LLVMDIBuilderRef Builder,
  * \param NameLen    The length of the C string passed to \c Name.
  */
 LLVMMetadataRef
-LLVMDIBuilderCreateImportedDeclaration(LLVMDIBuilderRef Builder,
-                                       LLVMMetadataRef Scope,
-                                       LLVMMetadataRef Decl,
-                                       LLVMMetadataRef File,
-                                       unsigned Line,
-                                       const char *Name, size_t NameLen);
+LLVMDIBuilderCreateImportedDeclaration(
+    LLVMDIBuilderRef Builder,
+    LLVMMetadataRef Scope,
+    LLVMMetadataRef Decl,
+    LLVMMetadataRef File,
+    unsigned Line,
+    const char *Name,
+    size_t NameLen);
 
 /**
  * Creates a new DebugLocation that describes a source location.
@@ -424,9 +474,12 @@ LLVMDIBuilderCreateImportedDeclaration(LLVMDIBuilderRef Builder,
  *       attributed to a source line, pass 0 for the line and column.
  */
 LLVMMetadataRef
-LLVMDIBuilderCreateDebugLocation(LLVMContextRef Ctx, unsigned Line,
-                                 unsigned Column, LLVMMetadataRef Scope,
-                                 LLVMMetadataRef InlinedAt);
+LLVMDIBuilderCreateDebugLocation(
+    LLVMContextRef Ctx,
+    unsigned Line,
+    unsigned Column,
+    LLVMMetadataRef Scope,
+    LLVMMetadataRef InlinedAt);
 
 /**
  * Get the line number of this debug location.
@@ -434,7 +487,8 @@ LLVMDIBuilderCreateDebugLocation(LLVMContextRef Ctx, unsigned Line,
  *
  * @see DILocation::getLine()
  */
-unsigned LLVMDILocationGetLine(LLVMMetadataRef Location);
+unsigned
+LLVMDILocationGetLine(LLVMMetadataRef Location);
 
 /**
  * Get the column number of this debug location.
@@ -442,7 +496,8 @@ unsigned LLVMDILocationGetLine(LLVMMetadataRef Location);
  *
  * @see DILocation::getColumn()
  */
-unsigned LLVMDILocationGetColumn(LLVMMetadataRef Location);
+unsigned
+LLVMDILocationGetColumn(LLVMMetadataRef Location);
 
 /**
  * Get the local scope associated with this debug location.
@@ -450,7 +505,8 @@ unsigned LLVMDILocationGetColumn(LLVMMetadataRef Location);
  *
  * @see DILocation::getScope()
  */
-LLVMMetadataRef LLVMDILocationGetScope(LLVMMetadataRef Location);
+LLVMMetadataRef
+LLVMDILocationGetScope(LLVMMetadataRef Location);
 
 /**
  * Create a type array.
@@ -458,9 +514,8 @@ LLVMMetadataRef LLVMDILocationGetScope(LLVMMetadataRef Location);
  * \param Data           The type elements.
  * \param NumElements    Number of type elements.
  */
-LLVMMetadataRef LLVMDIBuilderGetOrCreateTypeArray(LLVMDIBuilderRef Builder,
-                                                  LLVMMetadataRef *Data,
-                                                  size_t NumElements);
+LLVMMetadataRef
+LLVMDIBuilderGetOrCreateTypeArray(LLVMDIBuilderRef Builder, LLVMMetadataRef *Data, size_t NumElements);
 
 /**
  * Create subroutine type.
@@ -473,11 +528,12 @@ LLVMMetadataRef LLVMDIBuilderGetOrCreateTypeArray(LLVMDIBuilderRef Builder,
  *                        These flags are used to emit dwarf attributes.
  */
 LLVMMetadataRef
-LLVMDIBuilderCreateSubroutineType(LLVMDIBuilderRef Builder,
-                                  LLVMMetadataRef File,
-                                  LLVMMetadataRef *ParameterTypes,
-                                  unsigned NumParameterTypes,
-                                  LLVMDIFlags Flags);
+LLVMDIBuilderCreateSubroutineType(
+    LLVMDIBuilderRef Builder,
+    LLVMMetadataRef File,
+    LLVMMetadataRef *ParameterTypes,
+    unsigned NumParameterTypes,
+    LLVMDIFlags Flags);
 
 /**
  * Create debugging information entry for an enumeration.
@@ -493,11 +549,19 @@ LLVMDIBuilderCreateSubroutineType(LLVMDIBuilderRef Builder,
  * \param NumElements    Number of enumeration elements.
  * \param ClassTy        Underlying type of a C++11/ObjC fixed enum.
  */
-LLVMMetadataRef LLVMDIBuilderCreateEnumerationType(
-    LLVMDIBuilderRef Builder, LLVMMetadataRef Scope, const char *Name,
-    size_t NameLen, LLVMMetadataRef File, unsigned LineNumber,
-    uint64_t SizeInBits, uint32_t AlignInBits, LLVMMetadataRef *Elements,
-    unsigned NumElements, LLVMMetadataRef ClassTy);
+LLVMMetadataRef
+LLVMDIBuilderCreateEnumerationType(
+    LLVMDIBuilderRef Builder,
+    LLVMMetadataRef Scope,
+    const char *Name,
+    size_t NameLen,
+    LLVMMetadataRef File,
+    unsigned LineNumber,
+    uint64_t SizeInBits,
+    uint32_t AlignInBits,
+    LLVMMetadataRef *Elements,
+    unsigned NumElements,
+    LLVMMetadataRef ClassTy);
 
 /**
  * Create debugging information entry for a union.
@@ -516,13 +580,22 @@ LLVMMetadataRef LLVMDIBuilderCreateEnumerationType(
  * \param UniqueId     A unique identifier for the union.
  * \param UniqueIdLen  Length of unique identifier.
  */
-LLVMMetadataRef LLVMDIBuilderCreateUnionType(
-    LLVMDIBuilderRef Builder, LLVMMetadataRef Scope, const char *Name,
-    size_t NameLen, LLVMMetadataRef File, unsigned LineNumber,
-    uint64_t SizeInBits, uint32_t AlignInBits, LLVMDIFlags Flags,
-    LLVMMetadataRef *Elements, unsigned NumElements, unsigned RunTimeLang,
-    const char *UniqueId, size_t UniqueIdLen);
-
+LLVMMetadataRef
+LLVMDIBuilderCreateUnionType(
+    LLVMDIBuilderRef Builder,
+    LLVMMetadataRef Scope,
+    const char *Name,
+    size_t NameLen,
+    LLVMMetadataRef File,
+    unsigned LineNumber,
+    uint64_t SizeInBits,
+    uint32_t AlignInBits,
+    LLVMDIFlags Flags,
+    LLVMMetadataRef *Elements,
+    unsigned NumElements,
+    unsigned RunTimeLang,
+    const char *UniqueId,
+    size_t UniqueIdLen);
 
 /**
  * Create debugging information entry for an array.
@@ -534,10 +607,13 @@ LLVMMetadataRef LLVMDIBuilderCreateUnionType(
  * \param NumSubscripts Number of subscripts.
  */
 LLVMMetadataRef
-LLVMDIBuilderCreateArrayType(LLVMDIBuilderRef Builder, uint64_t Size,
-                             uint32_t AlignInBits, LLVMMetadataRef Ty,
-                             LLVMMetadataRef *Subscripts,
-                             unsigned NumSubscripts);
+LLVMDIBuilderCreateArrayType(
+    LLVMDIBuilderRef Builder,
+    uint64_t Size,
+    uint32_t AlignInBits,
+    LLVMMetadataRef Ty,
+    LLVMMetadataRef *Subscripts,
+    unsigned NumSubscripts);
 
 /**
  * Create debugging information entry for a vector type.
@@ -549,10 +625,13 @@ LLVMDIBuilderCreateArrayType(LLVMDIBuilderRef Builder, uint64_t Size,
  * \param NumSubscripts Number of subscripts.
  */
 LLVMMetadataRef
-LLVMDIBuilderCreateVectorType(LLVMDIBuilderRef Builder, uint64_t Size,
-                              uint32_t AlignInBits, LLVMMetadataRef Ty,
-                              LLVMMetadataRef *Subscripts,
-                              unsigned NumSubscripts);
+LLVMDIBuilderCreateVectorType(
+    LLVMDIBuilderRef Builder,
+    uint64_t Size,
+    uint32_t AlignInBits,
+    LLVMMetadataRef Ty,
+    LLVMMetadataRef *Subscripts,
+    unsigned NumSubscripts);
 
 /**
  * Create a DWARF unspecified type.
@@ -561,8 +640,7 @@ LLVMDIBuilderCreateVectorType(LLVMDIBuilderRef Builder, uint64_t Size,
  * \param NameLen   Length of type name.
  */
 LLVMMetadataRef
-LLVMDIBuilderCreateUnspecifiedType(LLVMDIBuilderRef Builder, const char *Name,
-                                   size_t NameLen);
+LLVMDIBuilderCreateUnspecifiedType(LLVMDIBuilderRef Builder, const char *Name, size_t NameLen);
 
 /**
  * Create debugging information entry for a basic
@@ -575,10 +653,13 @@ LLVMDIBuilderCreateUnspecifiedType(LLVMDIBuilderRef Builder, const char *Name,
  * \param Flags       Flags to encode optional attribute like endianity
  */
 LLVMMetadataRef
-LLVMDIBuilderCreateBasicType(LLVMDIBuilderRef Builder, const char *Name,
-                             size_t NameLen, uint64_t SizeInBits,
-                             LLVMDWARFTypeEncoding Encoding,
-                             LLVMDIFlags Flags);
+LLVMDIBuilderCreateBasicType(
+    LLVMDIBuilderRef Builder,
+    const char *Name,
+    size_t NameLen,
+    uint64_t SizeInBits,
+    LLVMDWARFTypeEncoding Encoding,
+    LLVMDIFlags Flags);
 
 /**
  * Create debugging information entry for a pointer.
@@ -590,10 +671,15 @@ LLVMDIBuilderCreateBasicType(LLVMDIBuilderRef Builder, const char *Name,
  * \param Name              Pointer type name. (optional)
  * \param NameLen           Length of pointer type name. (optional)
  */
-LLVMMetadataRef LLVMDIBuilderCreatePointerType(
-    LLVMDIBuilderRef Builder, LLVMMetadataRef PointeeTy,
-    uint64_t SizeInBits, uint32_t AlignInBits, unsigned AddressSpace,
-    const char *Name, size_t NameLen);
+LLVMMetadataRef
+LLVMDIBuilderCreatePointerType(
+    LLVMDIBuilderRef Builder,
+    LLVMMetadataRef PointeeTy,
+    uint64_t SizeInBits,
+    uint32_t AlignInBits,
+    unsigned AddressSpace,
+    const char *Name,
+    size_t NameLen);
 
 /**
  * Create debugging information entry for a struct.
@@ -613,13 +699,24 @@ LLVMMetadataRef LLVMDIBuilderCreatePointerType(
  * \param UniqueId     A unique identifier for the struct.
  * \param UniqueIdLen  Length of the unique identifier for the struct.
  */
-LLVMMetadataRef LLVMDIBuilderCreateStructType(
-    LLVMDIBuilderRef Builder, LLVMMetadataRef Scope, const char *Name,
-    size_t NameLen, LLVMMetadataRef File, unsigned LineNumber,
-    uint64_t SizeInBits, uint32_t AlignInBits, LLVMDIFlags Flags,
-    LLVMMetadataRef DerivedFrom, LLVMMetadataRef *Elements,
-    unsigned NumElements, unsigned RunTimeLang, LLVMMetadataRef VTableHolder,
-    const char *UniqueId, size_t UniqueIdLen);
+LLVMMetadataRef
+LLVMDIBuilderCreateStructType(
+    LLVMDIBuilderRef Builder,
+    LLVMMetadataRef Scope,
+    const char *Name,
+    size_t NameLen,
+    LLVMMetadataRef File,
+    unsigned LineNumber,
+    uint64_t SizeInBits,
+    uint32_t AlignInBits,
+    LLVMDIFlags Flags,
+    LLVMMetadataRef DerivedFrom,
+    LLVMMetadataRef *Elements,
+    unsigned NumElements,
+    unsigned RunTimeLang,
+    LLVMMetadataRef VTableHolder,
+    const char *UniqueId,
+    size_t UniqueIdLen);
 
 /**
  * Create debugging information entry for a member.
@@ -635,11 +732,19 @@ LLVMMetadataRef LLVMDIBuilderCreateStructType(
  * \param Flags        Flags to encode member attribute, e.g. private
  * \param Ty           Parent type.
  */
-LLVMMetadataRef LLVMDIBuilderCreateMemberType(
-    LLVMDIBuilderRef Builder, LLVMMetadataRef Scope, const char *Name,
-    size_t NameLen, LLVMMetadataRef File, unsigned LineNo,
-    uint64_t SizeInBits, uint32_t AlignInBits, uint64_t OffsetInBits,
-    LLVMDIFlags Flags, LLVMMetadataRef Ty);
+LLVMMetadataRef
+LLVMDIBuilderCreateMemberType(
+    LLVMDIBuilderRef Builder,
+    LLVMMetadataRef Scope,
+    const char *Name,
+    size_t NameLen,
+    LLVMMetadataRef File,
+    unsigned LineNo,
+    uint64_t SizeInBits,
+    uint32_t AlignInBits,
+    uint64_t OffsetInBits,
+    LLVMDIFlags Flags,
+    LLVMMetadataRef Ty);
 
 /**
  * Create debugging information entry for a
@@ -657,9 +762,15 @@ LLVMMetadataRef LLVMDIBuilderCreateMemberType(
  */
 LLVMMetadataRef
 LLVMDIBuilderCreateStaticMemberType(
-    LLVMDIBuilderRef Builder, LLVMMetadataRef Scope, const char *Name,
-    size_t NameLen, LLVMMetadataRef File, unsigned LineNumber,
-    LLVMMetadataRef Type, LLVMDIFlags Flags, LLVMValueRef ConstantVal,
+    LLVMDIBuilderRef Builder,
+    LLVMMetadataRef Scope,
+    const char *Name,
+    size_t NameLen,
+    LLVMMetadataRef File,
+    unsigned LineNumber,
+    LLVMMetadataRef Type,
+    LLVMDIFlags Flags,
+    LLVMValueRef ConstantVal,
     uint32_t AlignInBits);
 
 /**
@@ -672,12 +783,13 @@ LLVMDIBuilderCreateStaticMemberType(
  * \param Flags        Flags.
  */
 LLVMMetadataRef
-LLVMDIBuilderCreateMemberPointerType(LLVMDIBuilderRef Builder,
-                                     LLVMMetadataRef PointeeType,
-                                     LLVMMetadataRef ClassType,
-                                     uint64_t SizeInBits,
-                                     uint32_t AlignInBits,
-                                     LLVMDIFlags Flags);
+LLVMDIBuilderCreateMemberPointerType(
+    LLVMDIBuilderRef Builder,
+    LLVMMetadataRef PointeeType,
+    LLVMMetadataRef ClassType,
+    uint64_t SizeInBits,
+    uint32_t AlignInBits,
+    LLVMDIFlags Flags);
 /**
  * Create debugging information entry for Objective-C instance variable.
  * \param Builder      The DIBuilder.
@@ -693,12 +805,18 @@ LLVMDIBuilderCreateMemberPointerType(LLVMDIBuilderRef Builder,
  * \param PropertyNode Property associated with this ivar.
  */
 LLVMMetadataRef
-LLVMDIBuilderCreateObjCIVar(LLVMDIBuilderRef Builder,
-                            const char *Name, size_t NameLen,
-                            LLVMMetadataRef File, unsigned LineNo,
-                            uint64_t SizeInBits, uint32_t AlignInBits,
-                            uint64_t OffsetInBits, LLVMDIFlags Flags,
-                            LLVMMetadataRef Ty, LLVMMetadataRef PropertyNode);
+LLVMDIBuilderCreateObjCIVar(
+    LLVMDIBuilderRef Builder,
+    const char *Name,
+    size_t NameLen,
+    LLVMMetadataRef File,
+    unsigned LineNo,
+    uint64_t SizeInBits,
+    uint32_t AlignInBits,
+    uint64_t OffsetInBits,
+    LLVMDIFlags Flags,
+    LLVMMetadataRef Ty,
+    LLVMMetadataRef PropertyNode);
 
 /**
  * Create debugging information entry for Objective-C property.
@@ -715,13 +833,18 @@ LLVMDIBuilderCreateObjCIVar(LLVMDIBuilderRef Builder,
  * \param Ty                 Type.
  */
 LLVMMetadataRef
-LLVMDIBuilderCreateObjCProperty(LLVMDIBuilderRef Builder,
-                                const char *Name, size_t NameLen,
-                                LLVMMetadataRef File, unsigned LineNo,
-                                const char *GetterName, size_t GetterNameLen,
-                                const char *SetterName, size_t SetterNameLen,
-                                unsigned PropertyAttributes,
-                                LLVMMetadataRef Ty);
+LLVMDIBuilderCreateObjCProperty(
+    LLVMDIBuilderRef Builder,
+    const char *Name,
+    size_t NameLen,
+    LLVMMetadataRef File,
+    unsigned LineNo,
+    const char *GetterName,
+    size_t GetterNameLen,
+    const char *SetterName,
+    size_t SetterNameLen,
+    unsigned PropertyAttributes,
+    LLVMMetadataRef Ty);
 
 /**
  * Create a uniqued DIType* clone with FlagObjectPointer and FlagArtificial set.
@@ -729,8 +852,7 @@ LLVMDIBuilderCreateObjCProperty(LLVMDIBuilderRef Builder,
  * \param Type      The underlying type to which this pointer points.
  */
 LLVMMetadataRef
-LLVMDIBuilderCreateObjectPointerType(LLVMDIBuilderRef Builder,
-                                     LLVMMetadataRef Type);
+LLVMDIBuilderCreateObjectPointerType(LLVMDIBuilderRef Builder, LLVMMetadataRef Type);
 
 /**
  * Create debugging information entry for a qualified
@@ -741,8 +863,7 @@ LLVMDIBuilderCreateObjectPointerType(LLVMDIBuilderRef Builder,
  * \param Type        Base Type.
  */
 LLVMMetadataRef
-LLVMDIBuilderCreateQualifiedType(LLVMDIBuilderRef Builder, unsigned Tag,
-                                 LLVMMetadataRef Type);
+LLVMDIBuilderCreateQualifiedType(LLVMDIBuilderRef Builder, unsigned Tag, LLVMMetadataRef Type);
 
 /**
  * Create debugging information entry for a c++
@@ -752,8 +873,7 @@ LLVMDIBuilderCreateQualifiedType(LLVMDIBuilderRef Builder, unsigned Tag,
  * \param Type      Base Type.
  */
 LLVMMetadataRef
-LLVMDIBuilderCreateReferenceType(LLVMDIBuilderRef Builder, unsigned Tag,
-                                 LLVMMetadataRef Type);
+LLVMDIBuilderCreateReferenceType(LLVMDIBuilderRef Builder, unsigned Tag, LLVMMetadataRef Type);
 
 /**
  * Create C++11 nullptr type.
@@ -772,10 +892,14 @@ LLVMDIBuilderCreateNullPtrType(LLVMDIBuilderRef Builder);
  * \param Scope      The surrounding context for the typedef.
  */
 LLVMMetadataRef
-LLVMDIBuilderCreateTypedef(LLVMDIBuilderRef Builder, LLVMMetadataRef Type,
-                           const char *Name, size_t NameLen,
-                           LLVMMetadataRef File, unsigned LineNo,
-                           LLVMMetadataRef Scope);
+LLVMDIBuilderCreateTypedef(
+    LLVMDIBuilderRef Builder,
+    LLVMMetadataRef Type,
+    const char *Name,
+    size_t NameLen,
+    LLVMMetadataRef File,
+    unsigned LineNo,
+    LLVMMetadataRef Scope);
 
 /**
  * Create debugging information entry to establish inheritance relationship
@@ -788,10 +912,13 @@ LLVMDIBuilderCreateTypedef(LLVMDIBuilderRef Builder, LLVMMetadataRef Type,
  * \param Flags         Flags to describe inheritance attribute, e.g. private
  */
 LLVMMetadataRef
-LLVMDIBuilderCreateInheritance(LLVMDIBuilderRef Builder,
-                               LLVMMetadataRef Ty, LLVMMetadataRef BaseTy,
-                               uint64_t BaseOffset, uint32_t VBPtrOffset,
-                               LLVMDIFlags Flags);
+LLVMDIBuilderCreateInheritance(
+    LLVMDIBuilderRef Builder,
+    LLVMMetadataRef Ty,
+    LLVMMetadataRef BaseTy,
+    uint64_t BaseOffset,
+    uint32_t VBPtrOffset,
+    LLVMDIFlags Flags);
 
 /**
  * Create a permanent forward-declared type.
@@ -809,11 +936,20 @@ LLVMDIBuilderCreateInheritance(LLVMDIBuilderRef Builder,
  * \param UniqueIdentifier    A unique identifier for the type.
  * \param UniqueIdentifierLen Length of the unique identifier.
  */
-LLVMMetadataRef LLVMDIBuilderCreateForwardDecl(
-    LLVMDIBuilderRef Builder, unsigned Tag, const char *Name,
-    size_t NameLen, LLVMMetadataRef Scope, LLVMMetadataRef File, unsigned Line,
-    unsigned RuntimeLang, uint64_t SizeInBits, uint32_t AlignInBits,
-    const char *UniqueIdentifier, size_t UniqueIdentifierLen);
+LLVMMetadataRef
+LLVMDIBuilderCreateForwardDecl(
+    LLVMDIBuilderRef Builder,
+    unsigned Tag,
+    const char *Name,
+    size_t NameLen,
+    LLVMMetadataRef Scope,
+    LLVMMetadataRef File,
+    unsigned Line,
+    unsigned RuntimeLang,
+    uint64_t SizeInBits,
+    uint32_t AlignInBits,
+    const char *UniqueIdentifier,
+    size_t UniqueIdentifierLen);
 
 /**
  * Create a temporary forward-declared type.
@@ -834,10 +970,18 @@ LLVMMetadataRef LLVMDIBuilderCreateForwardDecl(
  */
 LLVMMetadataRef
 LLVMDIBuilderCreateReplaceableCompositeType(
-    LLVMDIBuilderRef Builder, unsigned Tag, const char *Name,
-    size_t NameLen, LLVMMetadataRef Scope, LLVMMetadataRef File, unsigned Line,
-    unsigned RuntimeLang, uint64_t SizeInBits, uint32_t AlignInBits,
-    LLVMDIFlags Flags, const char *UniqueIdentifier,
+    LLVMDIBuilderRef Builder,
+    unsigned Tag,
+    const char *Name,
+    size_t NameLen,
+    LLVMMetadataRef Scope,
+    LLVMMetadataRef File,
+    unsigned Line,
+    unsigned RuntimeLang,
+    uint64_t SizeInBits,
+    uint32_t AlignInBits,
+    LLVMDIFlags Flags,
+    const char *UniqueIdentifier,
     size_t UniqueIdentifierLen);
 
 /**
@@ -855,14 +999,18 @@ LLVMDIBuilderCreateReplaceableCompositeType(
  * \param Type                Parent type.
  */
 LLVMMetadataRef
-LLVMDIBuilderCreateBitFieldMemberType(LLVMDIBuilderRef Builder,
-                                      LLVMMetadataRef Scope,
-                                      const char *Name, size_t NameLen,
-                                      LLVMMetadataRef File, unsigned LineNumber,
-                                      uint64_t SizeInBits,
-                                      uint64_t OffsetInBits,
-                                      uint64_t StorageOffsetInBits,
-                                      LLVMDIFlags Flags, LLVMMetadataRef Type);
+LLVMDIBuilderCreateBitFieldMemberType(
+    LLVMDIBuilderRef Builder,
+    LLVMMetadataRef Scope,
+    const char *Name,
+    size_t NameLen,
+    LLVMMetadataRef File,
+    unsigned LineNumber,
+    uint64_t SizeInBits,
+    uint64_t OffsetInBits,
+    uint64_t StorageOffsetInBits,
+    LLVMDIFlags Flags,
+    LLVMMetadataRef Type);
 
 /**
  * Create debugging information entry for a class.
@@ -886,14 +1034,25 @@ LLVMDIBuilderCreateBitFieldMemberType(LLVMDIBuilderRef Builder,
  * \param UniqueIdentifier    A unique identifier for the type.
  * \param UniqueIdentifierLen Length of the unique identifier.
  */
-LLVMMetadataRef LLVMDIBuilderCreateClassType(LLVMDIBuilderRef Builder,
-    LLVMMetadataRef Scope, const char *Name, size_t NameLen,
-    LLVMMetadataRef File, unsigned LineNumber, uint64_t SizeInBits,
-    uint32_t AlignInBits, uint64_t OffsetInBits, LLVMDIFlags Flags,
+LLVMMetadataRef
+LLVMDIBuilderCreateClassType(
+    LLVMDIBuilderRef Builder,
+    LLVMMetadataRef Scope,
+    const char *Name,
+    size_t NameLen,
+    LLVMMetadataRef File,
+    unsigned LineNumber,
+    uint64_t SizeInBits,
+    uint32_t AlignInBits,
+    uint64_t OffsetInBits,
+    LLVMDIFlags Flags,
     LLVMMetadataRef DerivedFrom,
-    LLVMMetadataRef *Elements, unsigned NumElements,
-    LLVMMetadataRef VTableHolder, LLVMMetadataRef TemplateParamsNode,
-    const char *UniqueIdentifier, size_t UniqueIdentifierLen);
+    LLVMMetadataRef *Elements,
+    unsigned NumElements,
+    LLVMMetadataRef VTableHolder,
+    LLVMMetadataRef TemplateParamsNode,
+    const char *UniqueIdentifier,
+    size_t UniqueIdentifierLen);
 
 /**
  * Create a uniqued DIType* clone with FlagArtificial set.
@@ -901,8 +1060,7 @@ LLVMMetadataRef LLVMDIBuilderCreateClassType(LLVMDIBuilderRef Builder,
  * \param Type        The underlying type.
  */
 LLVMMetadataRef
-LLVMDIBuilderCreateArtificialType(LLVMDIBuilderRef Builder,
-                                  LLVMMetadataRef Type);
+LLVMDIBuilderCreateArtificialType(LLVMDIBuilderRef Builder, LLVMMetadataRef Type);
 
 /**
  * Get the name of this DIType.
@@ -911,7 +1069,8 @@ LLVMDIBuilderCreateArtificialType(LLVMDIBuilderRef Builder,
  *
  * @see DIType::getName()
  */
-const char *LLVMDITypeGetName(LLVMMetadataRef DType, size_t *Length);
+const char *
+LLVMDITypeGetName(LLVMMetadataRef DType, size_t *Length);
 
 /**
  * Get the size of this DIType in bits.
@@ -919,7 +1078,8 @@ const char *LLVMDITypeGetName(LLVMMetadataRef DType, size_t *Length);
  *
  * @see DIType::getSizeInBits()
  */
-uint64_t LLVMDITypeGetSizeInBits(LLVMMetadataRef DType);
+uint64_t
+LLVMDITypeGetSizeInBits(LLVMMetadataRef DType);
 
 /**
  * Get the offset of this DIType in bits.
@@ -927,7 +1087,8 @@ uint64_t LLVMDITypeGetSizeInBits(LLVMMetadataRef DType);
  *
  * @see DIType::getOffsetInBits()
  */
-uint64_t LLVMDITypeGetOffsetInBits(LLVMMetadataRef DType);
+uint64_t
+LLVMDITypeGetOffsetInBits(LLVMMetadataRef DType);
 
 /**
  * Get the alignment of this DIType in bits.
@@ -935,7 +1096,8 @@ uint64_t LLVMDITypeGetOffsetInBits(LLVMMetadataRef DType);
  *
  * @see DIType::getAlignInBits()
  */
-uint32_t LLVMDITypeGetAlignInBits(LLVMMetadataRef DType);
+uint32_t
+LLVMDITypeGetAlignInBits(LLVMMetadataRef DType);
 
 /**
  * Get the source line where this DIType is declared.
@@ -943,7 +1105,8 @@ uint32_t LLVMDITypeGetAlignInBits(LLVMMetadataRef DType);
  *
  * @see DIType::getLine()
  */
-unsigned LLVMDITypeGetLine(LLVMMetadataRef DType);
+unsigned
+LLVMDITypeGetLine(LLVMMetadataRef DType);
 
 /**
  * Get the flags associated with this DIType.
@@ -951,7 +1114,8 @@ unsigned LLVMDITypeGetLine(LLVMMetadataRef DType);
  *
  * @see DIType::getFlags()
  */
-LLVMDIFlags LLVMDITypeGetFlags(LLVMMetadataRef DType);
+LLVMDIFlags
+LLVMDITypeGetFlags(LLVMMetadataRef DType);
 
 /**
  * Create a descriptor for a value range.
@@ -959,9 +1123,8 @@ LLVMDIFlags LLVMDITypeGetFlags(LLVMMetadataRef DType);
  * \param LowerBound Lower bound of the subrange, e.g. 0 for C, 1 for Fortran.
  * \param Count      Count of elements in the subrange.
  */
-LLVMMetadataRef LLVMDIBuilderGetOrCreateSubrange(LLVMDIBuilderRef Builder,
-                                                 int64_t LowerBound,
-                                                 int64_t Count);
+LLVMMetadataRef
+LLVMDIBuilderGetOrCreateSubrange(LLVMDIBuilderRef Builder, int64_t LowerBound, int64_t Count);
 
 /**
  * Create an array of DI Nodes.
@@ -969,9 +1132,8 @@ LLVMMetadataRef LLVMDIBuilderGetOrCreateSubrange(LLVMDIBuilderRef Builder,
  * \param Data           The DI Node elements.
  * \param NumElements    Number of DI Node elements.
  */
-LLVMMetadataRef LLVMDIBuilderGetOrCreateArray(LLVMDIBuilderRef Builder,
-                                              LLVMMetadataRef *Data,
-                                              size_t NumElements);
+LLVMMetadataRef
+LLVMDIBuilderGetOrCreateArray(LLVMDIBuilderRef Builder, LLVMMetadataRef *Data, size_t NumElements);
 
 /**
  * Create a new descriptor for the specified variable which has a complex
@@ -980,8 +1142,8 @@ LLVMMetadataRef LLVMDIBuilderGetOrCreateArray(LLVMDIBuilderRef Builder,
  * \param Addr        An array of complex address operations.
  * \param Length      Length of the address operation array.
  */
-LLVMMetadataRef LLVMDIBuilderCreateExpression(LLVMDIBuilderRef Builder,
-                                              int64_t *Addr, size_t Length);
+LLVMMetadataRef
+LLVMDIBuilderCreateExpression(LLVMDIBuilderRef Builder, int64_t *Addr, size_t Length);
 
 /**
  * Create a new descriptor for the specified variable that does not have an
@@ -990,8 +1152,7 @@ LLVMMetadataRef LLVMDIBuilderCreateExpression(LLVMDIBuilderRef Builder,
  * \param Value       The constant value.
  */
 LLVMMetadataRef
-LLVMDIBuilderCreateConstantValueExpression(LLVMDIBuilderRef Builder,
-                                           int64_t Value);
+LLVMDIBuilderCreateConstantValueExpression(LLVMDIBuilderRef Builder, int64_t Value);
 
 /**
  * Create a new descriptor for the specified variable.
@@ -1012,11 +1173,21 @@ LLVMDIBuilderCreateConstantValueExpression(LLVMDIBuilderRef Builder,
  * \param AlignInBits Variable alignment(or 0 if no alignment attr was
  *                    specified)
  */
-LLVMMetadataRef LLVMDIBuilderCreateGlobalVariableExpression(
-    LLVMDIBuilderRef Builder, LLVMMetadataRef Scope, const char *Name,
-    size_t NameLen, const char *Linkage, size_t LinkLen, LLVMMetadataRef File,
-    unsigned LineNo, LLVMMetadataRef Ty, LLVMBool LocalToUnit,
-    LLVMMetadataRef Expr, LLVMMetadataRef Decl, uint32_t AlignInBits);
+LLVMMetadataRef
+LLVMDIBuilderCreateGlobalVariableExpression(
+    LLVMDIBuilderRef Builder,
+    LLVMMetadataRef Scope,
+    const char *Name,
+    size_t NameLen,
+    const char *Linkage,
+    size_t LinkLen,
+    LLVMMetadataRef File,
+    unsigned LineNo,
+    LLVMMetadataRef Ty,
+    LLVMBool LocalToUnit,
+    LLVMMetadataRef Expr,
+    LLVMMetadataRef Decl,
+    uint32_t AlignInBits);
 /**
  * Create a new temporary \c MDNode.  Suitable for use in constructing cyclic
  * \c MDNode structures. A temporary \c MDNode is not uniqued, may be RAUW'd,
@@ -1025,8 +1196,8 @@ LLVMMetadataRef LLVMDIBuilderCreateGlobalVariableExpression(
  * \param Data           The metadata elements.
  * \param NumElements    Number of metadata elements.
  */
-LLVMMetadataRef LLVMTemporaryMDNode(LLVMContextRef Ctx, LLVMMetadataRef *Data,
-                                    size_t NumElements);
+LLVMMetadataRef
+LLVMTemporaryMDNode(LLVMContextRef Ctx, LLVMMetadataRef *Data, size_t NumElements);
 
 /**
  * Deallocate a temporary node.
@@ -1035,15 +1206,16 @@ LLVMMetadataRef LLVMTemporaryMDNode(LLVMContextRef Ctx, LLVMMetadataRef *Data,
  * references will be reset.
  * \param TempNode    The temporary metadata node.
  */
-void LLVMDisposeTemporaryMDNode(LLVMMetadataRef TempNode);
+void
+LLVMDisposeTemporaryMDNode(LLVMMetadataRef TempNode);
 
 /**
  * Replace all uses of temporary metadata.
  * \param TempTargetMetadata    The temporary metadata node.
  * \param Replacement           The replacement metadata node.
  */
-void LLVMMetadataReplaceAllUsesWith(LLVMMetadataRef TempTargetMetadata,
-                                    LLVMMetadataRef Replacement);
+void
+LLVMMetadataReplaceAllUsesWith(LLVMMetadataRef TempTargetMetadata, LLVMMetadataRef Replacement);
 
 /**
  * Create a new descriptor for the specified global variable that is temporary
@@ -1062,11 +1234,20 @@ void LLVMMetadataReplaceAllUsesWith(LLVMMetadataRef TempTargetMetadata,
  * \param AlignInBits Variable alignment(or 0 if no alignment attr was
  *                    specified)
  */
-LLVMMetadataRef LLVMDIBuilderCreateTempGlobalVariableFwdDecl(
-    LLVMDIBuilderRef Builder, LLVMMetadataRef Scope, const char *Name,
-    size_t NameLen, const char *Linkage, size_t LnkLen, LLVMMetadataRef File,
-    unsigned LineNo, LLVMMetadataRef Ty, LLVMBool LocalToUnit,
-    LLVMMetadataRef Decl, uint32_t AlignInBits);
+LLVMMetadataRef
+LLVMDIBuilderCreateTempGlobalVariableFwdDecl(
+    LLVMDIBuilderRef Builder,
+    LLVMMetadataRef Scope,
+    const char *Name,
+    size_t NameLen,
+    const char *Linkage,
+    size_t LnkLen,
+    LLVMMetadataRef File,
+    unsigned LineNo,
+    LLVMMetadataRef Ty,
+    LLVMBool LocalToUnit,
+    LLVMMetadataRef Decl,
+    uint32_t AlignInBits);
 
 /**
  * Insert a new llvm.dbg.declare intrinsic call before the given instruction.
@@ -1077,9 +1258,14 @@ LLVMMetadataRef LLVMDIBuilderCreateTempGlobalVariableFwdDecl(
  * \param DebugLoc    Debug info location.
  * \param Instr       Instruction acting as a location for the new intrinsic.
  */
-LLVMValueRef LLVMDIBuilderInsertDeclareBefore(
-  LLVMDIBuilderRef Builder, LLVMValueRef Storage, LLVMMetadataRef VarInfo,
-  LLVMMetadataRef Expr, LLVMMetadataRef DebugLoc, LLVMValueRef Instr);
+LLVMValueRef
+LLVMDIBuilderInsertDeclareBefore(
+    LLVMDIBuilderRef Builder,
+    LLVMValueRef Storage,
+    LLVMMetadataRef VarInfo,
+    LLVMMetadataRef Expr,
+    LLVMMetadataRef DebugLoc,
+    LLVMValueRef Instr);
 
 /**
  * Insert a new llvm.dbg.declare intrinsic call at the end of the given basic
@@ -1092,9 +1278,14 @@ LLVMValueRef LLVMDIBuilderInsertDeclareBefore(
  * \param DebugLoc    Debug info location.
  * \param Block       Basic block acting as a location for the new intrinsic.
  */
-LLVMValueRef LLVMDIBuilderInsertDeclareAtEnd(
-    LLVMDIBuilderRef Builder, LLVMValueRef Storage, LLVMMetadataRef VarInfo,
-    LLVMMetadataRef Expr, LLVMMetadataRef DebugLoc, LLVMBasicBlockRef Block);
+LLVMValueRef
+LLVMDIBuilderInsertDeclareAtEnd(
+    LLVMDIBuilderRef Builder,
+    LLVMValueRef Storage,
+    LLVMMetadataRef VarInfo,
+    LLVMMetadataRef Expr,
+    LLVMMetadataRef DebugLoc,
+    LLVMBasicBlockRef Block);
 
 /**
  * Insert a new llvm.dbg.value intrinsic call before the given instruction.
@@ -1105,12 +1296,14 @@ LLVMValueRef LLVMDIBuilderInsertDeclareAtEnd(
  * \param DebugLoc    Debug info location.
  * \param Instr       Instruction acting as a location for the new intrinsic.
  */
-LLVMValueRef LLVMDIBuilderInsertDbgValueBefore(LLVMDIBuilderRef Builder,
-                                               LLVMValueRef Val,
-                                               LLVMMetadataRef VarInfo,
-                                               LLVMMetadataRef Expr,
-                                               LLVMMetadataRef DebugLoc,
-                                               LLVMValueRef Instr);
+LLVMValueRef
+LLVMDIBuilderInsertDbgValueBefore(
+    LLVMDIBuilderRef Builder,
+    LLVMValueRef Val,
+    LLVMMetadataRef VarInfo,
+    LLVMMetadataRef Expr,
+    LLVMMetadataRef DebugLoc,
+    LLVMValueRef Instr);
 
 /**
  * Insert a new llvm.dbg.value intrinsic call at the end of the given basic
@@ -1123,12 +1316,14 @@ LLVMValueRef LLVMDIBuilderInsertDbgValueBefore(LLVMDIBuilderRef Builder,
  * \param DebugLoc    Debug info location.
  * \param Block       Basic block acting as a location for the new intrinsic.
  */
-LLVMValueRef LLVMDIBuilderInsertDbgValueAtEnd(LLVMDIBuilderRef Builder,
-                                              LLVMValueRef Val,
-                                              LLVMMetadataRef VarInfo,
-                                              LLVMMetadataRef Expr,
-                                              LLVMMetadataRef DebugLoc,
-                                              LLVMBasicBlockRef Block);
+LLVMValueRef
+LLVMDIBuilderInsertDbgValueAtEnd(
+    LLVMDIBuilderRef Builder,
+    LLVMValueRef Val,
+    LLVMMetadataRef VarInfo,
+    LLVMMetadataRef Expr,
+    LLVMMetadataRef DebugLoc,
+    LLVMBasicBlockRef Block);
 
 /**
  * Create a new descriptor for a local auto variable.
@@ -1143,10 +1338,18 @@ LLVMValueRef LLVMDIBuilderInsertDbgValueAtEnd(LLVMDIBuilderRef Builder,
  * \param Flags           Flags.
  * \param AlignInBits     Variable alignment.
  */
-LLVMMetadataRef LLVMDIBuilderCreateAutoVariable(
-    LLVMDIBuilderRef Builder, LLVMMetadataRef Scope, const char *Name,
-    size_t NameLen, LLVMMetadataRef File, unsigned LineNo, LLVMMetadataRef Ty,
-    LLVMBool AlwaysPreserve, LLVMDIFlags Flags, uint32_t AlignInBits);
+LLVMMetadataRef
+LLVMDIBuilderCreateAutoVariable(
+    LLVMDIBuilderRef Builder,
+    LLVMMetadataRef Scope,
+    const char *Name,
+    size_t NameLen,
+    LLVMMetadataRef File,
+    unsigned LineNo,
+    LLVMMetadataRef Ty,
+    LLVMBool AlwaysPreserve,
+    LLVMDIFlags Flags,
+    uint32_t AlignInBits);
 
 /**
  * Create a new descriptor for a function parameter variable.
@@ -1161,31 +1364,42 @@ LLVMMetadataRef LLVMDIBuilderCreateAutoVariable(
  * \param AlwaysPreserve  If true, this descriptor will survive optimizations.
  * \param Flags           Flags.
  */
-LLVMMetadataRef LLVMDIBuilderCreateParameterVariable(
-    LLVMDIBuilderRef Builder, LLVMMetadataRef Scope, const char *Name,
-    size_t NameLen, unsigned ArgNo, LLVMMetadataRef File, unsigned LineNo,
-    LLVMMetadataRef Ty, LLVMBool AlwaysPreserve, LLVMDIFlags Flags);
+LLVMMetadataRef
+LLVMDIBuilderCreateParameterVariable(
+    LLVMDIBuilderRef Builder,
+    LLVMMetadataRef Scope,
+    const char *Name,
+    size_t NameLen,
+    unsigned ArgNo,
+    LLVMMetadataRef File,
+    unsigned LineNo,
+    LLVMMetadataRef Ty,
+    LLVMBool AlwaysPreserve,
+    LLVMDIFlags Flags);
 
 /**
  * Get the metadata of the subprogram attached to a function.
  *
  * @see llvm::Function::getSubprogram()
  */
-LLVMMetadataRef LLVMGetSubprogram(LLVMValueRef Func);
+LLVMMetadataRef
+LLVMGetSubprogram(LLVMValueRef Func);
 
 /**
  * Set the subprogram attached to a function.
  *
  * @see llvm::Function::setSubprogram()
  */
-void LLVMSetSubprogram(LLVMValueRef Func, LLVMMetadataRef SP);
+void
+LLVMSetSubprogram(LLVMValueRef Func, LLVMMetadataRef SP);
 
 /**
  * Obtain the enumerated type of a Metadata instance.
  *
  * @see llvm::Metadata::getMetadataID()
  */
-LLVMMetadataKind LLVMGetMetadataKind(LLVMMetadataRef Metadata);
+LLVMMetadataKind
+LLVMGetMetadataKind(LLVMMetadataRef Metadata);
 
 #ifdef __cplusplus
 } /* end extern "C" */

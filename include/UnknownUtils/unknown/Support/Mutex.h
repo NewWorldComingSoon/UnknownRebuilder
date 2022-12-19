@@ -11,8 +11,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_SUPPORT_MUTEX_H
-#define LLVM_SUPPORT_MUTEX_H
+#pragma once
 
 #include "unknown/Config/llvm-config.h"
 #include "unknown/Support/Compiler.h"
@@ -156,6 +155,4 @@ public:
 
 typedef SmartScopedLock<false> ScopedLock;
 } // namespace sys
-} // namespace llvm
-
-#endif
+} // namespace unknown

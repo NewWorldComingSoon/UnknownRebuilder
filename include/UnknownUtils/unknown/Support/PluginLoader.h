@@ -14,24 +14,21 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_SUPPORT_PLUGINLOADER_H
-#define LLVM_SUPPORT_PLUGINLOADER_H
+#pragma once
 
 #include "unknown/Support/CommandLine.h"
 
 namespace unknown {
-  struct PluginLoader {
+struct PluginLoader
+{
     void operator=(const std::string &Filename);
     static unsigned getNumPlugins();
-    static std::string& getPlugin(unsigned num);
-  };
+    static std::string &getPlugin(unsigned num);
+};
 
 #ifndef DONT_GET_PLUGIN_LOADER_OPTION
-  // This causes operator= above to be invoked for every -load option.
-  static cl::opt<PluginLoader, false, cl::parser<std::string> >
-    LoadOpt("load", cl::ZeroOrMore, cl::value_desc("pluginfilename"),
-            cl::desc("Load the specified plugin"));
+// This causes operator= above to be invoked for every -load option.
+static cl::opt<PluginLoader, false, cl::parser<std::string>>
+    LoadOpt("load", cl::ZeroOrMore, cl::value_desc("pluginfilename"), cl::desc("Load the specified plugin"));
 #endif
-}
-
-#endif
+} // namespace unknown

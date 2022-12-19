@@ -18,71 +18,73 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_ADT_INTEQCLASSES_H
-#define LLVM_ADT_INTEQCLASSES_H
+#pragma once
 
 #include "unknown/ADT/SmallVector.h"
 
 namespace unknown {
 
-class IntEqClasses {
-  /// EC - When uncompressed, map each integer to a smaller member of its
-  /// equivalence class. The class leader is the smallest member and maps to
-  /// itself.
-  ///
-  /// When compressed, EC[i] is the equivalence class of i.
-  SmallVector<unsigned, 8> EC;
+class IntEqClasses
+{
+    /// EC - When uncompressed, map each integer to a smaller member of its
+    /// equivalence class. The class leader is the smallest member and maps to
+    /// itself.
+    ///
+    /// When compressed, EC[i] is the equivalence class of i.
+    SmallVector<unsigned, 8> EC;
 
-  /// NumClasses - The number of equivalence classes when compressed, or 0 when
-  /// uncompressed.
-  unsigned NumClasses;
+    /// NumClasses - The number of equivalence classes when compressed, or 0 when
+    /// uncompressed.
+    unsigned NumClasses;
 
 public:
-  /// IntEqClasses - Create an equivalence class mapping for 0 .. N-1.
-  IntEqClasses(unsigned N = 0) : NumClasses(0) { grow(N); }
+    /// IntEqClasses - Create an equivalence class mapping for 0 .. N-1.
+    IntEqClasses(unsigned N = 0) : NumClasses(0) { grow(N); }
 
-  /// grow - Increase capacity to hold 0 .. N-1, putting new integers in unique
-  /// equivalence classes.
-  /// This requires an uncompressed map.
-  void grow(unsigned N);
+    /// grow - Increase capacity to hold 0 .. N-1, putting new integers in unique
+    /// equivalence classes.
+    /// This requires an uncompressed map.
+    void grow(unsigned N);
 
-  /// clear - Clear all classes so that grow() will assign a unique class to
-  /// every integer.
-  void clear() {
-    EC.clear();
-    NumClasses = 0;
-  }
+    /// clear - Clear all classes so that grow() will assign a unique class to
+    /// every integer.
+    void clear()
+    {
+        EC.clear();
+        NumClasses = 0;
+    }
 
-  /// Join the equivalence classes of a and b. After joining classes,
-  /// findLeader(a) == findLeader(b). This requires an uncompressed map.
-  /// Returns the new leader.
-  unsigned join(unsigned a, unsigned b);
+    /// Join the equivalence classes of a and b. After joining classes,
+    /// findLeader(a) == findLeader(b). This requires an uncompressed map.
+    /// Returns the new leader.
+    unsigned join(unsigned a, unsigned b);
 
-  /// findLeader - Compute the leader of a's equivalence class. This is the
-  /// smallest member of the class.
-  /// This requires an uncompressed map.
-  unsigned findLeader(unsigned a) const;
+    /// findLeader - Compute the leader of a's equivalence class. This is the
+    /// smallest member of the class.
+    /// This requires an uncompressed map.
+    unsigned findLeader(unsigned a) const;
 
-  /// compress - Compress equivalence classes by numbering them 0 .. M.
-  /// This makes the equivalence class map immutable.
-  void compress();
+    /// compress - Compress equivalence classes by numbering them 0 .. M.
+    /// This makes the equivalence class map immutable.
+    void compress();
 
-  /// getNumClasses - Return the number of equivalence classes after compress()
-  /// was called.
-  unsigned getNumClasses() const { return NumClasses; }
+    /// getNumClasses - Return the number of equivalence classes after compress()
+    /// was called.
+    unsigned getNumClasses() const { return NumClasses; }
 
-  /// operator[] - Return a's equivalence class number, 0 .. getNumClasses()-1.
-  /// This requires a compressed map.
-  unsigned operator[](unsigned a) const {
-    assert(NumClasses && "operator[] called before compress()");
-    return EC[a];
-  }
+    /// operator[] - Return a's equivalence class number, 0 .. getNumClasses()-1.
+    /// This requires a compressed map.
+    unsigned operator[](unsigned a) const
+    {
+        assert(NumClasses && "operator[] called before compress()");
+        return EC[a];
+    }
 
-  /// uncompress - Change back to the uncompressed representation that allows
-  /// editing.
-  void uncompress();
+    /// uncompress - Change back to the uncompressed representation that allows
+    /// editing.
+    void uncompress();
 };
 
-} // End llvm namespace
+} // namespace unknown
 
 #endif

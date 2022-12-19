@@ -17,8 +17,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_ADT_INDEXEDMAP_H
-#define LLVM_ADT_INDEXEDMAP_H
+#pragma once
 
 #include "unknown/ADT/SmallVector.h"
 #include "unknown/ADT/STLExtras.h"
@@ -27,7 +26,8 @@
 namespace unknown {
 
 template <typename T, typename ToIndexT = identity<unsigned>>
-  class IndexedMap {
+class IndexedMap
+{
     using IndexT = typename ToIndexT::argument_type;
     // Prefer SmallVector with zero inline storage over std::vector. IndexedMaps
     // can grow very large and SmallVector grows more efficiently as long as T
@@ -38,48 +38,39 @@ template <typename T, typename ToIndexT = identity<unsigned>>
     T nullVal_;
     ToIndexT toIndex_;
 
-  public:
+public:
     IndexedMap() : nullVal_(T()) {}
 
-    explicit IndexedMap(const T& val) : nullVal_(val) {}
+    explicit IndexedMap(const T &val) : nullVal_(val) {}
 
-    typename StorageT::reference operator[](IndexT n) {
-      assert(toIndex_(n) < storage_.size() && "index out of bounds!");
-      return storage_[toIndex_(n)];
+    typename StorageT::reference operator[](IndexT n)
+    {
+        assert(toIndex_(n) < storage_.size() && "index out of bounds!");
+        return storage_[toIndex_(n)];
     }
 
-    typename StorageT::const_reference operator[](IndexT n) const {
-      assert(toIndex_(n) < storage_.size() && "index out of bounds!");
-      return storage_[toIndex_(n)];
+    typename StorageT::const_reference operator[](IndexT n) const
+    {
+        assert(toIndex_(n) < storage_.size() && "index out of bounds!");
+        return storage_[toIndex_(n)];
     }
 
-    void reserve(typename StorageT::size_type s) {
-      storage_.reserve(s);
+    void reserve(typename StorageT::size_type s) { storage_.reserve(s); }
+
+    void resize(typename StorageT::size_type s) { storage_.resize(s, nullVal_); }
+
+    void clear() { storage_.clear(); }
+
+    void grow(IndexT n)
+    {
+        unsigned NewSize = toIndex_(n) + 1;
+        if (NewSize > storage_.size())
+            resize(NewSize);
     }
 
-    void resize(typename StorageT::size_type s) {
-      storage_.resize(s, nullVal_);
-    }
+    bool inBounds(IndexT n) const { return toIndex_(n) < storage_.size(); }
 
-    void clear() {
-      storage_.clear();
-    }
+    typename StorageT::size_type size() const { return storage_.size(); }
+};
 
-    void grow(IndexT n) {
-      unsigned NewSize = toIndex_(n) + 1;
-      if (NewSize > storage_.size())
-        resize(NewSize);
-    }
-
-    bool inBounds(IndexT n) const {
-      return toIndex_(n) < storage_.size();
-    }
-
-    typename StorageT::size_type size() const {
-      return storage_.size();
-    }
-  };
-
-} // end namespace llvm
-
-#endif // LLVM_ADT_INDEXEDMAP_H
+} // namespace unknown

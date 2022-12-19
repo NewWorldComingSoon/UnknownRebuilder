@@ -12,16 +12,16 @@
 |*                                                                            *|
 \*===----------------------------------------------------------------------===*/
 
-#ifndef LLVM_C_OPT_REMARKS_H
+#pragma once
 #define LLVM_C_OPT_REMARKS_H
 
 #include "unknown/Core.h"
 #include "unknown/Types.h"
 #ifdef __cplusplus
-#include <cstddef>
+#    include <cstddef>
 extern "C" {
 #else
-#include <stddef.h>
+#    include <stddef.h>
 #endif /* !defined(__cplusplus) */
 
 /**
@@ -39,9 +39,10 @@ extern "C" {
  *
  * \since OPT_REMARKS_API_VERSION=0
  */
-typedef struct {
-  const char *Str;
-  uint32_t Len;
+typedef struct
+{
+    const char *Str;
+    uint32_t Len;
 } LLVMOptRemarkStringRef;
 
 /**
@@ -49,13 +50,14 @@ typedef struct {
  *
  * \since OPT_REMARKS_API_VERSION=0
  */
-typedef struct {
-  // File:
-  LLVMOptRemarkStringRef SourceFile;
-  // Line:
-  uint32_t SourceLineNumber;
-  // Column:
-  uint32_t SourceColumnNumber;
+typedef struct
+{
+    // File:
+    LLVMOptRemarkStringRef SourceFile;
+    // Line:
+    uint32_t SourceLineNumber;
+    // Column:
+    uint32_t SourceColumnNumber;
 } LLVMOptRemarkDebugLoc;
 
 /**
@@ -65,14 +67,15 @@ typedef struct {
  *
  * \since OPT_REMARKS_API_VERSION=0
  */
-typedef struct {
-  // e.g. "Callee"
-  LLVMOptRemarkStringRef Key;
-  // e.g. "malloc"
-  LLVMOptRemarkStringRef Value;
+typedef struct
+{
+    // e.g. "Callee"
+    LLVMOptRemarkStringRef Key;
+    // e.g. "malloc"
+    LLVMOptRemarkStringRef Value;
 
-  // "DebugLoc": Optional
-  LLVMOptRemarkDebugLoc DebugLoc;
+    // "DebugLoc": Optional
+    LLVMOptRemarkDebugLoc DebugLoc;
 } LLVMOptRemarkArg;
 
 /**
@@ -80,23 +83,24 @@ typedef struct {
  *
  * \since OPT_REMARKS_API_VERSION=0
  */
-typedef struct {
-  // e.g. !Missed, !Passed
-  LLVMOptRemarkStringRef RemarkType;
-  // "Pass": Required
-  LLVMOptRemarkStringRef PassName;
-  // "Name": Required
-  LLVMOptRemarkStringRef RemarkName;
-  // "Function": Required
-  LLVMOptRemarkStringRef FunctionName;
+typedef struct
+{
+    // e.g. !Missed, !Passed
+    LLVMOptRemarkStringRef RemarkType;
+    // "Pass": Required
+    LLVMOptRemarkStringRef PassName;
+    // "Name": Required
+    LLVMOptRemarkStringRef RemarkName;
+    // "Function": Required
+    LLVMOptRemarkStringRef FunctionName;
 
-  // "DebugLoc": Optional
-  LLVMOptRemarkDebugLoc DebugLoc;
-  // "Hotness": Optional
-  uint32_t Hotness;
-  // "Args": Optional. It is an array of `num_args` elements.
-  uint32_t NumArgs;
-  LLVMOptRemarkArg *Args;
+    // "DebugLoc": Optional
+    LLVMOptRemarkDebugLoc DebugLoc;
+    // "Hotness": Optional
+    uint32_t Hotness;
+    // "Args": Optional. It is an array of `num_args` elements.
+    uint32_t NumArgs;
+    LLVMOptRemarkArg *Args;
 } LLVMOptRemarkEntry;
 
 typedef struct LLVMOptRemarkOpaqueParser *LLVMOptRemarkParserRef;
@@ -112,8 +116,8 @@ typedef struct LLVMOptRemarkOpaqueParser *LLVMOptRemarkParserRef;
  *
  * \since OPT_REMARKS_API_VERSION=0
  */
-extern LLVMOptRemarkParserRef LLVMOptRemarkParserCreate(const void *Buf,
-                                                        uint64_t Size);
+extern LLVMOptRemarkParserRef
+LLVMOptRemarkParserCreate(const void *Buf, uint64_t Size);
 
 /**
  * Returns the next remark in the file.
@@ -163,7 +167,8 @@ LLVMOptRemarkParserGetNext(LLVMOptRemarkParserRef Parser);
  *
  * \since OPT_REMARKS_API_VERSION=0
  */
-extern LLVMBool LLVMOptRemarkParserHasError(LLVMOptRemarkParserRef Parser);
+extern LLVMBool
+LLVMOptRemarkParserHasError(LLVMOptRemarkParserRef Parser);
 
 /**
  * Returns a null-terminated string containing an error message.
@@ -184,14 +189,16 @@ LLVMOptRemarkParserGetErrorMessage(LLVMOptRemarkParserRef Parser);
  *
  * \since OPT_REMARKS_API_VERSION=0
  */
-extern void LLVMOptRemarkParserDispose(LLVMOptRemarkParserRef Parser);
+extern void
+LLVMOptRemarkParserDispose(LLVMOptRemarkParserRef Parser);
 
 /**
  * Returns the version of the opt-remarks dylib.
  *
  * \since OPT_REMARKS_API_VERSION=0
  */
-extern uint32_t LLVMOptRemarkVersion(void);
+extern uint32_t
+LLVMOptRemarkVersion(void);
 
 /**
  * @} // endgoup LLVMCOPTREMARKS

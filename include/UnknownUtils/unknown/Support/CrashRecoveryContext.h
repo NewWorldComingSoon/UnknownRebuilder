@@ -7,8 +7,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_SUPPORT_CRASHRECOVERYCONTEXT_H
-#define LLVM_SUPPORT_CRASHRECOVERYCONTEXT_H
+#pragma once
 
 #include "unknown/ADT/STLExtras.h"
 
@@ -44,63 +43,65 @@ class CrashRecoveryContextCleanup;
 /// To assist recovery the class allows specifying set of actions that will be
 /// executed in any case, whether crash occurs or not. These actions may be used
 /// to reclaim resources in the case of crash.
-class CrashRecoveryContext {
-  void *Impl;
-  CrashRecoveryContextCleanup *head;
+class CrashRecoveryContext
+{
+    void *Impl;
+    CrashRecoveryContextCleanup *head;
 
 public:
-  CrashRecoveryContext() : Impl(nullptr), head(nullptr) {}
-  ~CrashRecoveryContext();
+    CrashRecoveryContext() : Impl(nullptr), head(nullptr) {}
+    ~CrashRecoveryContext();
 
-  /// Register cleanup handler, which is used when the recovery context is
-  /// finished.
-  /// The recovery context owns the handler.
-  void registerCleanup(CrashRecoveryContextCleanup *cleanup);
+    /// Register cleanup handler, which is used when the recovery context is
+    /// finished.
+    /// The recovery context owns the handler.
+    void registerCleanup(CrashRecoveryContextCleanup *cleanup);
 
-  void unregisterCleanup(CrashRecoveryContextCleanup *cleanup);
+    void unregisterCleanup(CrashRecoveryContextCleanup *cleanup);
 
-  /// Enable crash recovery.
-  static void Enable();
+    /// Enable crash recovery.
+    static void Enable();
 
-  /// Disable crash recovery.
-  static void Disable();
+    /// Disable crash recovery.
+    static void Disable();
 
-  /// Return the active context, if the code is currently executing in a
-  /// thread which is in a protected context.
-  static CrashRecoveryContext *GetCurrent();
+    /// Return the active context, if the code is currently executing in a
+    /// thread which is in a protected context.
+    static CrashRecoveryContext *GetCurrent();
 
-  /// Return true if the current thread is recovering from a crash.
-  static bool isRecoveringFromCrash();
+    /// Return true if the current thread is recovering from a crash.
+    static bool isRecoveringFromCrash();
 
-  /// Execute the provided callback function (with the given arguments) in
-  /// a protected context.
-  ///
-  /// \return True if the function completed successfully, and false if the
-  /// function crashed (or HandleCrash was called explicitly). Clients should
-  /// make as little assumptions as possible about the program state when
-  /// RunSafely has returned false.
-  bool RunSafely(function_ref<void()> Fn);
-  bool RunSafely(void (*Fn)(void*), void *UserData) {
-    return RunSafely([&]() { Fn(UserData); });
-  }
+    /// Execute the provided callback function (with the given arguments) in
+    /// a protected context.
+    ///
+    /// \return True if the function completed successfully, and false if the
+    /// function crashed (or HandleCrash was called explicitly). Clients should
+    /// make as little assumptions as possible about the program state when
+    /// RunSafely has returned false.
+    bool RunSafely(function_ref<void()> Fn);
+    bool RunSafely(void (*Fn)(void *), void *UserData)
+    {
+        return RunSafely([&]() { Fn(UserData); });
+    }
 
-  /// Execute the provide callback function (with the given arguments) in
-  /// a protected context which is run in another thread (optionally with a
-  /// requested stack size).
-  ///
-  /// See RunSafely() and llvm_execute_on_thread().
-  ///
-  /// On Darwin, if PRIO_DARWIN_BG is set on the calling thread, it will be
-  /// propagated to the new thread as well.
-  bool RunSafelyOnThread(function_ref<void()>, unsigned RequestedStackSize = 0);
-  bool RunSafelyOnThread(void (*Fn)(void*), void *UserData,
-                         unsigned RequestedStackSize = 0) {
-    return RunSafelyOnThread([&]() { Fn(UserData); }, RequestedStackSize);
-  }
+    /// Execute the provide callback function (with the given arguments) in
+    /// a protected context which is run in another thread (optionally with a
+    /// requested stack size).
+    ///
+    /// See RunSafely() and llvm_execute_on_thread().
+    ///
+    /// On Darwin, if PRIO_DARWIN_BG is set on the calling thread, it will be
+    /// propagated to the new thread as well.
+    bool RunSafelyOnThread(function_ref<void()>, unsigned RequestedStackSize = 0);
+    bool RunSafelyOnThread(void (*Fn)(void *), void *UserData, unsigned RequestedStackSize = 0)
+    {
+        return RunSafelyOnThread([&]() { Fn(UserData); }, RequestedStackSize);
+    }
 
-  /// Explicitly trigger a crash recovery in the current process, and
-  /// return failure from RunSafely(). This function does not return.
-  void HandleCrash();
+    /// Explicitly trigger a crash recovery in the current process, and
+    /// return failure from RunSafely(). This function does not return.
+    void HandleCrash();
 };
 
 /// Abstract base class of cleanup handlers.
@@ -110,25 +111,23 @@ public:
 ///
 /// Cleanup handlers are stored in a double list, which is owned and managed by
 /// a crash recovery context.
-class CrashRecoveryContextCleanup {
+class CrashRecoveryContextCleanup
+{
 protected:
-  CrashRecoveryContext *context;
-  CrashRecoveryContextCleanup(CrashRecoveryContext *context)
-      : context(context), cleanupFired(false) {}
+    CrashRecoveryContext *context;
+    CrashRecoveryContextCleanup(CrashRecoveryContext *context) : context(context), cleanupFired(false) {}
 
 public:
-  bool cleanupFired;
+    bool cleanupFired;
 
-  virtual ~CrashRecoveryContextCleanup();
-  virtual void recoverResources() = 0;
+    virtual ~CrashRecoveryContextCleanup();
+    virtual void recoverResources() = 0;
 
-  CrashRecoveryContext *getContext() const {
-    return context;
-  }
+    CrashRecoveryContext *getContext() const { return context; }
 
 private:
-  friend class CrashRecoveryContext;
-  CrashRecoveryContextCleanup *prev, *next;
+    friend class CrashRecoveryContext;
+    CrashRecoveryContextCleanup *prev, *next;
 };
 
 /// Base class of cleanup handler that controls recovery of resources of the
@@ -142,65 +141,72 @@ private:
 ///
 /// This class factors out creation of a cleanup handler. The latter requires
 /// knowledge of the current recovery context, which is provided by this class.
-template<typename Derived, typename T>
-class CrashRecoveryContextCleanupBase : public CrashRecoveryContextCleanup {
+template <typename Derived, typename T>
+class CrashRecoveryContextCleanupBase : public CrashRecoveryContextCleanup
+{
 protected:
-  T *resource;
-  CrashRecoveryContextCleanupBase(CrashRecoveryContext *context, T *resource)
-      : CrashRecoveryContextCleanup(context), resource(resource) {}
+    T *resource;
+    CrashRecoveryContextCleanupBase(CrashRecoveryContext *context, T *resource) :
+        CrashRecoveryContextCleanup(context), resource(resource)
+    {
+    }
 
 public:
-  /// Creates cleanup handler.
-  /// \param x Pointer to the resource recovered by this handler.
-  /// \return New handler or null if the method was called outside a recovery
-  ///         context.
-  static Derived *create(T *x) {
-    if (x) {
-      if (CrashRecoveryContext *context = CrashRecoveryContext::GetCurrent())
-        return new Derived(context, x);
+    /// Creates cleanup handler.
+    /// \param x Pointer to the resource recovered by this handler.
+    /// \return New handler or null if the method was called outside a recovery
+    ///         context.
+    static Derived *create(T *x)
+    {
+        if (x)
+        {
+            if (CrashRecoveryContext *context = CrashRecoveryContext::GetCurrent())
+                return new Derived(context, x);
+        }
+        return nullptr;
     }
-    return nullptr;
-  }
 };
 
 /// Cleanup handler that reclaims resource by calling destructor on it.
 template <typename T>
-class CrashRecoveryContextDestructorCleanup : public
-  CrashRecoveryContextCleanupBase<CrashRecoveryContextDestructorCleanup<T>, T> {
+class CrashRecoveryContextDestructorCleanup
+    : public CrashRecoveryContextCleanupBase<CrashRecoveryContextDestructorCleanup<T>, T>
+{
 public:
-  CrashRecoveryContextDestructorCleanup(CrashRecoveryContext *context,
-                                        T *resource)
-      : CrashRecoveryContextCleanupBase<
-            CrashRecoveryContextDestructorCleanup<T>, T>(context, resource) {}
+    CrashRecoveryContextDestructorCleanup(CrashRecoveryContext *context, T *resource) :
+        CrashRecoveryContextCleanupBase<CrashRecoveryContextDestructorCleanup<T>, T>(context, resource)
+    {
+    }
 
-  virtual void recoverResources() {
-    this->resource->~T();
-  }
+    virtual void recoverResources() { this->resource->~T(); }
 };
 
 /// Cleanup handler that reclaims resource by calling 'delete' on it.
 template <typename T>
-class CrashRecoveryContextDeleteCleanup : public
-  CrashRecoveryContextCleanupBase<CrashRecoveryContextDeleteCleanup<T>, T> {
+class CrashRecoveryContextDeleteCleanup
+    : public CrashRecoveryContextCleanupBase<CrashRecoveryContextDeleteCleanup<T>, T>
+{
 public:
-  CrashRecoveryContextDeleteCleanup(CrashRecoveryContext *context, T *resource)
-    : CrashRecoveryContextCleanupBase<
-        CrashRecoveryContextDeleteCleanup<T>, T>(context, resource) {}
+    CrashRecoveryContextDeleteCleanup(CrashRecoveryContext *context, T *resource) :
+        CrashRecoveryContextCleanupBase<CrashRecoveryContextDeleteCleanup<T>, T>(context, resource)
+    {
+    }
 
-  void recoverResources() override { delete this->resource; }
+    void recoverResources() override { delete this->resource; }
 };
 
 /// Cleanup handler that reclaims resource by calling its method 'Release'.
 template <typename T>
-class CrashRecoveryContextReleaseRefCleanup : public
-  CrashRecoveryContextCleanupBase<CrashRecoveryContextReleaseRefCleanup<T>, T> {
+class CrashRecoveryContextReleaseRefCleanup
+    : public CrashRecoveryContextCleanupBase<CrashRecoveryContextReleaseRefCleanup<T>, T>
+{
 public:
-  CrashRecoveryContextReleaseRefCleanup(CrashRecoveryContext *context,
-                                        T *resource)
-    : CrashRecoveryContextCleanupBase<CrashRecoveryContextReleaseRefCleanup<T>,
-          T>(context, resource) {}
+    CrashRecoveryContextReleaseRefCleanup(CrashRecoveryContext *context, T *resource) :
+        CrashRecoveryContextCleanupBase<CrashRecoveryContextReleaseRefCleanup<T>, T>(context, resource)
+    {
+    }
 
-  void recoverResources() override { this->resource->Release(); }
+    void recoverResources() override { this->resource->Release(); }
 };
 
 /// Helper class for managing resource cleanups.
@@ -234,25 +240,25 @@ public:
 /// destructor of std::unique_ptr. If crash happens, destructors are not called
 /// and the resource is reclaimed by cleanup object registered in the recovery
 /// context by the constructor of CrashRecoveryContextCleanupRegistrar.
-template <typename T, typename Cleanup = CrashRecoveryContextDeleteCleanup<T> >
-class CrashRecoveryContextCleanupRegistrar {
-  CrashRecoveryContextCleanup *cleanup;
+template <typename T, typename Cleanup = CrashRecoveryContextDeleteCleanup<T>>
+class CrashRecoveryContextCleanupRegistrar
+{
+    CrashRecoveryContextCleanup *cleanup;
 
 public:
-  CrashRecoveryContextCleanupRegistrar(T *x)
-    : cleanup(Cleanup::create(x)) {
-    if (cleanup)
-      cleanup->getContext()->registerCleanup(cleanup);
-  }
+    CrashRecoveryContextCleanupRegistrar(T *x) : cleanup(Cleanup::create(x))
+    {
+        if (cleanup)
+            cleanup->getContext()->registerCleanup(cleanup);
+    }
 
-  ~CrashRecoveryContextCleanupRegistrar() { unregister(); }
+    ~CrashRecoveryContextCleanupRegistrar() { unregister(); }
 
-  void unregister() {
-    if (cleanup && !cleanup->cleanupFired)
-      cleanup->getContext()->unregisterCleanup(cleanup);
-    cleanup = nullptr;
-  }
+    void unregister()
+    {
+        if (cleanup && !cleanup->cleanupFired)
+            cleanup->getContext()->unregisterCleanup(cleanup);
+        cleanup = nullptr;
+    }
 };
-} // end namespace llvm
-
-#endif // LLVM_SUPPORT_CRASHRECOVERYCONTEXT_H
+} // namespace unknown

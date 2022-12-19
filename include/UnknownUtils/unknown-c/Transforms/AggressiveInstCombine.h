@@ -12,7 +12,7 @@
 |*                                                                            *|
 \*===----------------------------------------------------------------------===*/
 
-#ifndef LLVM_C_TRANSFORMS_AGGRESSIVEINSTCOMBINE_H
+#pragma once
 #define LLVM_C_TRANSFORMS_AGGRESSIVEINSTCOMBINE_H
 
 #include "unknown/Types.h"
@@ -29,7 +29,8 @@ extern "C" {
  */
 
 /** See llvm::createAggressiveInstCombinerPass function. */
-void LLVMAddAggressiveInstCombinerPass(LLVMPassManagerRef PM);
+void
+LLVMAddAggressiveInstCombinerPass(LLVMPassManagerRef PM);
 
 /**
  * @}
@@ -40,4 +41,3 @@ void LLVMAddAggressiveInstCombinerPass(LLVMPassManagerRef PM);
 #endif /* defined(__cplusplus) */
 
 #endif
-

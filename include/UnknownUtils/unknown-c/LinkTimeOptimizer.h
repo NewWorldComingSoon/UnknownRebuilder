@@ -13,7 +13,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_C_LINKTIMEOPTIMIZER_H
+#pragma once
 #define LLVM_C_LINKTIMEOPTIMIZER_H
 
 #ifdef __cplusplus
@@ -27,12 +27,13 @@ extern "C" {
  * @{
  */
 
-  /// This provides a dummy type for pointers to the LTO object.
-  typedef void* llvm_lto_t;
+/// This provides a dummy type for pointers to the LTO object.
+typedef void *llvm_lto_t;
 
-  /// This provides a C-visible enumerator to manage status codes.
-  /// This should map exactly onto the C++ enumerator LTOStatus.
-  typedef enum llvm_lto_status {
+/// This provides a C-visible enumerator to manage status codes.
+/// This should map exactly onto the C++ enumerator LTOStatus.
+typedef enum llvm_lto_status
+{
     LLVM_LTO_UNKNOWN,
     LLVM_LTO_OPT_SUCCESS,
     LLVM_LTO_READ_SUCCESS,
@@ -45,18 +46,20 @@ extern "C" {
 
     //  Added C-specific error codes
     LLVM_LTO_NULL_OBJECT
-  } llvm_lto_status_t;
+} llvm_lto_status_t;
 
-  /// This provides C interface to initialize link time optimizer. This allows
-  /// linker to use dlopen() interface to dynamically load LinkTimeOptimizer.
-  /// extern "C" helps, because dlopen() interface uses name to find the symbol.
-  extern llvm_lto_t llvm_create_optimizer(void);
-  extern void llvm_destroy_optimizer(llvm_lto_t lto);
+/// This provides C interface to initialize link time optimizer. This allows
+/// linker to use dlopen() interface to dynamically load LinkTimeOptimizer.
+/// extern "C" helps, because dlopen() interface uses name to find the symbol.
+extern llvm_lto_t
+llvm_create_optimizer(void);
+extern void
+llvm_destroy_optimizer(llvm_lto_t lto);
 
-  extern llvm_lto_status_t llvm_read_object_file
-    (llvm_lto_t lto, const char* input_filename);
-  extern llvm_lto_status_t llvm_optimize_modules
-    (llvm_lto_t lto, const char* output_filename);
+extern llvm_lto_status_t
+llvm_read_object_file(llvm_lto_t lto, const char *input_filename);
+extern llvm_lto_status_t
+llvm_optimize_modules(llvm_lto_t lto, const char *output_filename);
 
 /**
  * @}

@@ -7,8 +7,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_SUPPORT_LLVM_H
-#define LLVM_SUPPORT_LLVM_H
+#pragma once
 
 #include "unknown/ADT/SmallVector.h"
 #include "unknown/Support/Allocator.h"
@@ -28,19 +27,19 @@
 // InitLLVM calls llvm_shutdown() on destruction, which cleans up
 // ManagedStatic objects.
 namespace unknown {
-class InitLLVM {
+class InitLLVM
+{
 public:
-  InitLLVM(int &Argc, const char **&Argv);
-  InitLLVM(int &Argc, char **&Argv)
-      : InitLLVM(Argc, const_cast<const char **&>(Argv)) {}
+    InitLLVM(int &Argc, const char **&Argv);
+    InitLLVM(int &Argc, char **&Argv) : InitLLVM(Argc, const_cast<const char **&>(Argv)) {}
 
-  ~InitLLVM();
+    ~InitLLVM();
 
 private:
-  BumpPtrAllocator Alloc;
-  SmallVector<const char *, 0> Args;
-  PrettyStackTraceProgram StackPrinter;
+    BumpPtrAllocator Alloc;
+    SmallVector<const char *, 0> Args;
+    PrettyStackTraceProgram StackPrinter;
 };
-} // namespace llvm
+} // namespace unknown
 
 #endif

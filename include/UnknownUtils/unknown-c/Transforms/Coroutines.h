@@ -16,7 +16,7 @@
 |*                                                                            *|
 \*===----------------------------------------------------------------------===*/
 
-#ifndef LLVM_C_TRANSFORMS_COROUTINES_H
+#pragma once
 #define LLVM_C_TRANSFORMS_COROUTINES_H
 
 #include "unknown/Types.h"
@@ -33,16 +33,20 @@ extern "C" {
  */
 
 /** See llvm::createCoroEarlyPass function. */
-void LLVMAddCoroEarlyPass(LLVMPassManagerRef PM);
+void
+LLVMAddCoroEarlyPass(LLVMPassManagerRef PM);
 
 /** See llvm::createCoroSplitPass function. */
-void LLVMAddCoroSplitPass(LLVMPassManagerRef PM);
+void
+LLVMAddCoroSplitPass(LLVMPassManagerRef PM);
 
 /** See llvm::createCoroElidePass function. */
-void LLVMAddCoroElidePass(LLVMPassManagerRef PM);
+void
+LLVMAddCoroElidePass(LLVMPassManagerRef PM);
 
 /** See llvm::createCoroCleanupPass function. */
-void LLVMAddCoroCleanupPass(LLVMPassManagerRef PM);
+void
+LLVMAddCoroCleanupPass(LLVMPassManagerRef PM);
 
 /**
  * @}

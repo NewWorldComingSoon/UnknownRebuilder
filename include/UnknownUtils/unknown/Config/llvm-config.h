@@ -11,13 +11,10 @@
    can be in exported headers and won't override package specific directives.
    This is a C header that can be included in the llvm-c headers. */
 
-#ifndef LLVM_CONFIG_H
-#define LLVM_CONFIG_H
+#pragma once
 
 #ifdef WIN64
-#include"llvm-config-win-64.h"
+#    include "llvm-config-win-64.h"
 #else
-#include"llvm-config-win-32.h"
-#endif
-
+#    include "llvm-config-win-32.h"
 #endif

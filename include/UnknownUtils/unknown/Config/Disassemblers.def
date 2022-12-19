@@ -20,7 +20,7 @@
 |*                                                                            *|
 \*===----------------------------------------------------------------------===*/
 
-#ifndef LLVM_DISASSEMBLER
+#pragma once
 #  error Please define the macro LLVM_DISASSEMBLER(TargetName)
 #endif
 

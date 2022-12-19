@@ -20,7 +20,7 @@
 |*                                                                            *|
 \*===----------------------------------------------------------------------===*/
 
-#ifndef LLVM_ASM_PRINTER
+#pragma once
 #  error Please define the macro LLVM_ASM_PRINTER(TargetName)
 #endif
 

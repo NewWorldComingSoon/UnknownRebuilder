@@ -11,23 +11,23 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_SUPPORT_DJB_H
-#define LLVM_SUPPORT_DJB_H
+#pragma once
 
 #include "unknown/ADT/StringRef.h"
 
 namespace unknown {
 
 /// The Bernstein hash function used by the DWARF accelerator tables.
-inline uint32_t djbHash(StringRef Buffer, uint32_t H = 5381) {
-  for (unsigned char C : Buffer.bytes())
-    H = (H << 5) + H + C;
-  return H;
+inline uint32_t
+djbHash(StringRef Buffer, uint32_t H = 5381)
+{
+    for (unsigned char C : Buffer.bytes())
+        H = (H << 5) + H + C;
+    return H;
 }
 
 /// Computes the Bernstein hash after folding the input according to the Dwarf 5
 /// standard case folding rules.
-uint32_t caseFoldingDjbHash(StringRef Buffer, uint32_t H = 5381);
-} // namespace llvm
-
-#endif // LLVM_SUPPORT_DJB_H
+uint32_t
+caseFoldingDjbHash(StringRef Buffer, uint32_t H = 5381);
+} // namespace unknown

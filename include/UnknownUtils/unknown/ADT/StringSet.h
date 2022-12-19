@@ -11,8 +11,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_ADT_STRINGSET_H
-#define LLVM_ADT_STRINGSET_H
+#pragma once
 
 #include "unknown/ADT/StringMap.h"
 #include "unknown/ADT/StringRef.h"
@@ -23,30 +22,32 @@
 
 namespace unknown {
 
-  /// StringSet - A wrapper for StringMap that provides set-like functionality.
-  template <class AllocatorTy = MallocAllocator>
-  class StringSet : public StringMap<char, AllocatorTy> {
+/// StringSet - A wrapper for StringMap that provides set-like functionality.
+template <class AllocatorTy = MallocAllocator>
+class StringSet : public StringMap<char, AllocatorTy>
+{
     using base = StringMap<char, AllocatorTy>;
 
-  public:
+public:
     StringSet() = default;
-    StringSet(std::initializer_list<StringRef> S) {
-      for (StringRef X : S)
-        insert(X);
+    StringSet(std::initializer_list<StringRef> S)
+    {
+        for (StringRef X : S)
+            insert(X);
     }
 
-    std::pair<typename base::iterator, bool> insert(StringRef Key) {
-      assert(!Key.empty());
-      return base::insert(std::make_pair(Key, '\0'));
+    std::pair<typename base::iterator, bool> insert(StringRef Key)
+    {
+        assert(!Key.empty());
+        return base::insert(std::make_pair(Key, '\0'));
     }
 
     template <typename InputIt>
-    void insert(const InputIt &Begin, const InputIt &End) {
-      for (auto It = Begin; It != End; ++It)
-        base::insert(std::make_pair(*It, '\0'));
+    void insert(const InputIt &Begin, const InputIt &End)
+    {
+        for (auto It = Begin; It != End; ++It)
+            base::insert(std::make_pair(*It, '\0'));
     }
-  };
+};
 
-} // end namespace llvm
-
-#endif // LLVM_ADT_STRINGSET_H
+} // namespace unknown

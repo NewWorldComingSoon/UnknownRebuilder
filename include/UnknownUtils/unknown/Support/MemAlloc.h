@@ -14,8 +14,7 @@
 ///
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_SUPPORT_MEMALLOC_H
-#define LLVM_SUPPORT_MEMALLOC_H
+#pragma once
 
 #include "unknown/Support/Compiler.h"
 #include "unknown/Support/ErrorHandling.h"
@@ -23,30 +22,34 @@
 
 namespace unknown {
 
-LLVM_ATTRIBUTE_RETURNS_NONNULL inline void *safe_malloc(size_t Sz) {
-  void *Result = std::malloc(Sz);
-  //gmh delete
-  //if (Result == nullptr)
-    //report_bad_alloc_error("Allocation failed");
-  return Result;
+LLVM_ATTRIBUTE_RETURNS_NONNULL inline void *
+safe_malloc(size_t Sz)
+{
+    void *Result = std::malloc(Sz);
+    // gmh delete
+    // if (Result == nullptr)
+    // report_bad_alloc_error("Allocation failed");
+    return Result;
 }
 
-LLVM_ATTRIBUTE_RETURNS_NONNULL inline void *safe_calloc(size_t Count,
-                                                        size_t Sz) {
-  void *Result = std::calloc(Count, Sz);
-  //gmh delete
-  //if (Result == nullptr)
-    //report_bad_alloc_error("Allocation failed");
-  return Result;
+LLVM_ATTRIBUTE_RETURNS_NONNULL inline void *
+safe_calloc(size_t Count, size_t Sz)
+{
+    void *Result = std::calloc(Count, Sz);
+    // gmh delete
+    // if (Result == nullptr)
+    // report_bad_alloc_error("Allocation failed");
+    return Result;
 }
 
-LLVM_ATTRIBUTE_RETURNS_NONNULL inline void *safe_realloc(void *Ptr, size_t Sz) {
-  void *Result = std::realloc(Ptr, Sz);
-  //gmh delete
-  //if (Result == nullptr)
-    //report_bad_alloc_error("Allocation failed");
-  return Result;
+LLVM_ATTRIBUTE_RETURNS_NONNULL inline void *
+safe_realloc(void *Ptr, size_t Sz)
+{
+    void *Result = std::realloc(Ptr, Sz);
+    // gmh delete
+    // if (Result == nullptr)
+    // report_bad_alloc_error("Allocation failed");
+    return Result;
 }
 
-}
-#endif
+} // namespace unknown

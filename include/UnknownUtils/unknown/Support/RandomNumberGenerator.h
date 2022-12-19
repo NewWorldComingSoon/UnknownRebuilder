@@ -13,8 +13,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_SUPPORT_RANDOMNUMBERGENERATOR_H_
-#define LLVM_SUPPORT_RANDOMNUMBERGENERATOR_H_
+#pragma once
 
 #include "unknown/Support/Compiler.h"
 #include "unknown/Support/DataTypes.h" // Needed for uint64_t on Windows.
@@ -30,41 +29,42 @@ class StringRef;
 /// seed should be set by passing the -rng-seed=<uint64> option. Use
 /// Module::createRNG to create a new RNG instance for use with that
 /// module.
-class RandomNumberGenerator {
-
-  // 64-bit Mersenne Twister by Matsumoto and Nishimura, 2000
-  // http://en.cppreference.com/w/cpp/numeric/random/mersenne_twister_engine
-  // This RNG is deterministically portable across C++11
-  // implementations.
-  using generator_type = std::mt19937_64;
+class RandomNumberGenerator
+{
+    // 64-bit Mersenne Twister by Matsumoto and Nishimura, 2000
+    // http://en.cppreference.com/w/cpp/numeric/random/mersenne_twister_engine
+    // This RNG is deterministically portable across C++11
+    // implementations.
+    using generator_type = std::mt19937_64;
 
 public:
-  using result_type = generator_type::result_type;
+    using result_type = generator_type::result_type;
 
-  /// Returns a random number in the range [0, Max).
-  result_type operator()();
+    /// Returns a random number in the range [0, Max).
+    result_type operator()();
 
-  static constexpr result_type min() { return generator_type::min(); }
-  static constexpr result_type max() { return generator_type::max(); }
+    static constexpr result_type min() { return generator_type::min(); }
+    static constexpr result_type max() { return generator_type::max(); }
 
 private:
-  /// Seeds and salts the underlying RNG engine.
-  ///
-  /// This constructor should not be used directly. Instead use
-  /// Module::createRNG to create a new RNG salted with the Module ID.
-  RandomNumberGenerator(StringRef Salt);
+    /// Seeds and salts the underlying RNG engine.
+    ///
+    /// This constructor should not be used directly. Instead use
+    /// Module::createRNG to create a new RNG salted with the Module ID.
+    RandomNumberGenerator(StringRef Salt);
 
-  generator_type Generator;
+    generator_type Generator;
 
-  // Noncopyable.
-  RandomNumberGenerator(const RandomNumberGenerator &other) = delete;
-  RandomNumberGenerator &operator=(const RandomNumberGenerator &other) = delete;
+    // Noncopyable.
+    RandomNumberGenerator(const RandomNumberGenerator &other) = delete;
+    RandomNumberGenerator &operator=(const RandomNumberGenerator &other) = delete;
 
-  friend class Module;
+    friend class Module;
 };
 
 // Get random vector of specified size
-std::error_code getRandomBytes(void *Buffer, size_t Size);
-}
+std::error_code
+getRandomBytes(void *Buffer, size_t Size);
+} // namespace unknown
 
 #endif

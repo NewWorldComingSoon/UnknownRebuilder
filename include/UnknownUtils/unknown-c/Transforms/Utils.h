@@ -16,7 +16,7 @@
 |*                                                                            *|
 \*===----------------------------------------------------------------------===*/
 
-#ifndef LLVM_C_TRANSFORMS_UTILS_H
+#pragma once
 #define LLVM_C_TRANSFORMS_UTILS_H
 
 #include "unknown/Types.h"
@@ -33,10 +33,12 @@ extern "C" {
  */
 
 /** See llvm::createLowerSwitchPass function. */
-void LLVMAddLowerSwitchPass(LLVMPassManagerRef PM);
+void
+LLVMAddLowerSwitchPass(LLVMPassManagerRef PM);
 
 /** See llvm::createPromoteMemoryToRegisterPass function. */
-void LLVMAddPromoteMemoryToRegisterPass(LLVMPassManagerRef PM);
+void
+LLVMAddPromoteMemoryToRegisterPass(LLVMPassManagerRef PM);
 
 /**
  * @}
@@ -47,4 +49,3 @@ void LLVMAddPromoteMemoryToRegisterPass(LLVMPassManagerRef PM);
 #endif /* defined(__cplusplus) */
 
 #endif
-

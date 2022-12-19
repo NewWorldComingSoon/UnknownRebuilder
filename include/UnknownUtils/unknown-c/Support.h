@@ -11,8 +11,7 @@
 |*                                                                            *|
 \*===----------------------------------------------------------------------===*/
 
-#ifndef LLVM_C_SUPPORT_H
-#define LLVM_C_SUPPORT_H
+#pragma once
 
 #include "unknown-c/DataTypes.h"
 #include "unknown-c/Types.h"
@@ -26,8 +25,9 @@ extern "C" {
  * It is safe to call this function multiple times for the same library.
  *
  * @see sys::DynamicLibrary::LoadLibraryPermanently()
-  */
-LLVMBool LLVMLoadLibraryPermanently(const char* Filename);
+ */
+LLVMBool
+LLVMLoadLibraryPermanently(const char *Filename);
 
 /**
  * This function parses the given arguments using the LLVM command line parser.
@@ -37,8 +37,8 @@ LLVMBool LLVMLoadLibraryPermanently(const char* Filename);
  *
  * @see llvm::cl::ParseCommandLineOptions()
  */
-void LLVMParseCommandLineOptions(int argc, const char *const *argv,
-                                 const char *Overview);
+void
+LLVMParseCommandLineOptions(int argc, const char *const *argv, const char *Overview);
 
 /**
  * This function will search through all previously loaded dynamic
@@ -47,7 +47,8 @@ void LLVMParseCommandLineOptions(int argc, const char *const *argv,
  *
  * @see sys::DynamicLibrary::SearchForAddressOfSymbol()
  */
-void *LLVMSearchForAddressOfSymbol(const char *symbolName);
+void *
+LLVMSearchForAddressOfSymbol(const char *symbolName);
 
 /**
  * This functions permanently adds the symbol \p symbolName with the
@@ -56,10 +57,9 @@ void *LLVMSearchForAddressOfSymbol(const char *symbolName);
  *
  * @see sys::DynamicLibrary::AddSymbol()
  */
-void LLVMAddSymbol(const char *symbolName, void *symbolValue);
+void
+LLVMAddSymbol(const char *symbolName, void *symbolValue);
 
 #ifdef __cplusplus
 }
-#endif
-
 #endif

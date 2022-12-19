@@ -11,8 +11,7 @@
 |*                                                                            *|
 \*===----------------------------------------------------------------------===*/
 
-#ifndef LLVM_C_ERROR_HANDLING_H
-#define LLVM_C_ERROR_HANDLING_H
+#pragma once
 
 #ifdef __cplusplus
 extern "C" {
@@ -27,23 +26,24 @@ typedef void (*LLVMFatalErrorHandler)(const char *Reason);
  * function allows you to install a callback that will be invoked prior to the
  * call to exit(1).
  */
-void LLVMInstallFatalErrorHandler(LLVMFatalErrorHandler Handler);
+void
+LLVMInstallFatalErrorHandler(LLVMFatalErrorHandler Handler);
 
 /**
  * Reset the fatal error handler. This resets LLVM's fatal error handling
  * behavior to the default.
  */
-void LLVMResetFatalErrorHandler(void);
+void
+LLVMResetFatalErrorHandler(void);
 
 /**
  * Enable LLVM's built-in stack trace code. This intercepts the OS's crash
  * signals and prints which component of LLVM you were in at the time if the
  * crash.
  */
-void LLVMEnablePrettyStackTrace(void);
+void
+LLVMEnablePrettyStackTrace(void);
 
 #ifdef __cplusplus
 }
-#endif
-
 #endif

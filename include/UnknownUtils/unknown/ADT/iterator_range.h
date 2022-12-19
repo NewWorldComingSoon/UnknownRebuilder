@@ -16,8 +16,7 @@
 ///
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_ADT_ITERATOR_RANGE_H
-#define LLVM_ADT_ITERATOR_RANGE_H
+#pragma once
 
 #include <iterator>
 #include <utility>
@@ -29,41 +28,51 @@ namespace unknown {
 /// This just wraps two iterators into a range-compatible interface. Nothing
 /// fancy at all.
 template <typename IteratorT>
-class iterator_range {
-  IteratorT begin_iterator, end_iterator;
+class iterator_range
+{
+    IteratorT begin_iterator, end_iterator;
 
 public:
-  //TODO: Add SFINAE to test that the Container's iterators match the range's
-  //      iterators.
-  template <typename Container>
-  iterator_range(Container &&c)
-  //TODO: Consider ADL/non-member begin/end calls.
-      : begin_iterator(c.begin()), end_iterator(c.end()) {}
-  iterator_range(IteratorT begin_iterator, IteratorT end_iterator)
-      : begin_iterator(std::move(begin_iterator)),
-        end_iterator(std::move(end_iterator)) {}
+    // TODO: Add SFINAE to test that the Container's iterators match the range's
+    //      iterators.
+    template <typename Container>
+    iterator_range(Container &&c)
+        // TODO: Consider ADL/non-member begin/end calls.
+        :
+        begin_iterator(c.begin()), end_iterator(c.end())
+    {
+    }
+    iterator_range(IteratorT begin_iterator, IteratorT end_iterator) :
+        begin_iterator(std::move(begin_iterator)), end_iterator(std::move(end_iterator))
+    {
+    }
 
-  IteratorT begin() const { return begin_iterator; }
-  IteratorT end() const { return end_iterator; }
+    IteratorT begin() const { return begin_iterator; }
+    IteratorT end() const { return end_iterator; }
 };
 
 /// Convenience function for iterating over sub-ranges.
 ///
 /// This provides a bit of syntactic sugar to make using sub-ranges
 /// in for loops a bit easier. Analogous to std::make_pair().
-template <class T> iterator_range<T> make_range(T x, T y) {
-  return iterator_range<T>(std::move(x), std::move(y));
-}
-
-template <typename T> iterator_range<T> make_range(std::pair<T, T> p) {
-  return iterator_range<T>(std::move(p.first), std::move(p.second));
+template <class T>
+iterator_range<T>
+make_range(T x, T y)
+{
+    return iterator_range<T>(std::move(x), std::move(y));
 }
 
 template <typename T>
-iterator_range<decltype(adl_begin(std::declval<T>()))> drop_begin(T &&t,
-                                                                  int n) {
-  return make_range(std::next(adl_begin(t), n), adl_end(t));
-}
+iterator_range<T>
+make_range(std::pair<T, T> p)
+{
+    return iterator_range<T>(std::move(p.first), std::move(p.second));
 }
 
-#endif
+template <typename T>
+iterator_range<decltype(adl_begin(std::declval<T>()))>
+drop_begin(T &&t, int n)
+{
+    return make_range(std::next(adl_begin(t), n), adl_end(t));
+}
+} // namespace unknown

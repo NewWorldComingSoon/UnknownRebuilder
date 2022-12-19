@@ -11,8 +11,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_SUPPORT_MEMORY_H
-#define LLVM_SUPPORT_MEMORY_H
+#pragma once
 
 #include "unknown/Support/DataTypes.h"
 #include <string>
@@ -21,34 +20,37 @@
 namespace unknown {
 namespace sys {
 
-  /// This class encapsulates the notion of a memory block which has an address
-  /// and a size. It is used by the Memory class (a friend) as the result of
-  /// various memory allocation operations.
-  /// @see Memory
-  /// Memory block abstraction.
-  class MemoryBlock {
-  public:
-    MemoryBlock() : Address(nullptr), Size(0) { }
-    MemoryBlock(void *addr, size_t size) : Address(addr), Size(size) { }
+/// This class encapsulates the notion of a memory block which has an address
+/// and a size. It is used by the Memory class (a friend) as the result of
+/// various memory allocation operations.
+/// @see Memory
+/// Memory block abstraction.
+class MemoryBlock
+{
+public:
+    MemoryBlock() : Address(nullptr), Size(0) {}
+    MemoryBlock(void *addr, size_t size) : Address(addr), Size(size) {}
     void *base() const { return Address; }
     size_t size() const { return Size; }
 
-  private:
-    void *Address;    ///< Address of first byte of memory area
-    size_t Size;      ///< Size, in bytes of the memory area
+private:
+    void *Address; ///< Address of first byte of memory area
+    size_t Size;   ///< Size, in bytes of the memory area
     friend class Memory;
-  };
+};
 
-  /// This class provides various memory handling functions that manipulate
-  /// MemoryBlock instances.
-  /// @since 1.4
-  /// An abstraction for memory operations.
-  class Memory {
-  public:
-    enum ProtectionFlags {
-      MF_READ  = 0x1000000,
-      MF_WRITE = 0x2000000,
-      MF_EXEC  = 0x4000000
+/// This class provides various memory handling functions that manipulate
+/// MemoryBlock instances.
+/// @since 1.4
+/// An abstraction for memory operations.
+class Memory
+{
+public:
+    enum ProtectionFlags
+    {
+        MF_READ = 0x1000000,
+        MF_WRITE = 0x2000000,
+        MF_EXEC = 0x4000000
     };
 
     /// This method allocates a block of memory that is suitable for loading
@@ -75,10 +77,8 @@ namespace sys {
     /// otherwise a null MemoryBlock is with \p EC describing the error.
     ///
     /// Allocate mapped memory.
-    static MemoryBlock allocateMappedMemory(size_t NumBytes,
-                                            const MemoryBlock *const NearBlock,
-                                            unsigned Flags,
-                                            std::error_code &EC);
+    static MemoryBlock
+    allocateMappedMemory(size_t NumBytes, const MemoryBlock *const NearBlock, unsigned Flags, std::error_code &EC);
 
     /// This method releases a block of memory that was allocated with the
     /// allocateMappedMemory method. It should not be used to release any
@@ -106,40 +106,39 @@ namespace sys {
     /// describing the failure if an error occurred.
     ///
     /// Set memory protection state.
-    static std::error_code protectMappedMemory(const MemoryBlock &Block,
-                                               unsigned Flags);
+    static std::error_code protectMappedMemory(const MemoryBlock &Block, unsigned Flags);
 
     /// InvalidateInstructionCache - Before the JIT can run a block of code
     /// that has been emitted it must invalidate the instruction cache on some
     /// platforms.
     static void InvalidateInstructionCache(const void *Addr, size_t Len);
-  };
+};
 
-  /// Owning version of MemoryBlock.
-  class OwningMemoryBlock {
-  public:
+/// Owning version of MemoryBlock.
+class OwningMemoryBlock
+{
+public:
     OwningMemoryBlock() = default;
     explicit OwningMemoryBlock(MemoryBlock M) : M(M) {}
-    OwningMemoryBlock(OwningMemoryBlock &&Other) {
-      M = Other.M;
-      Other.M = MemoryBlock();
+    OwningMemoryBlock(OwningMemoryBlock &&Other)
+    {
+        M = Other.M;
+        Other.M = MemoryBlock();
     }
-    OwningMemoryBlock& operator=(OwningMemoryBlock &&Other) {
-      M = Other.M;
-      Other.M = MemoryBlock();
-      return *this;
+    OwningMemoryBlock &operator=(OwningMemoryBlock &&Other)
+    {
+        M = Other.M;
+        Other.M = MemoryBlock();
+        return *this;
     }
-    ~OwningMemoryBlock() {
-      Memory::releaseMappedMemory(M);
-    }
+    ~OwningMemoryBlock() { Memory::releaseMappedMemory(M); }
     void *base() const { return M.base(); }
     size_t size() const { return M.size(); }
     MemoryBlock getMemoryBlock() const { return M; }
-  private:
+
+private:
     MemoryBlock M;
-  };
+};
 
-}
-}
-
-#endif
+} // namespace sys
+} // namespace unknown

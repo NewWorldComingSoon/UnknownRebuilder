@@ -13,8 +13,7 @@
 ///
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_SUPPORT_ERROROR_H
-#define LLVM_SUPPORT_ERROROR_H
+#pragma once
 
 #include "unknown/Support/AlignOf.h"
 #include <cassert>
@@ -53,227 +52,223 @@ namespace unknown {
 /// reference.
 ///
 /// T cannot be a rvalue reference.
-template<class T>
-class ErrorOr {
-  template <class OtherT> friend class ErrorOr;
+template <class T>
+class ErrorOr
+{
+    template <class OtherT>
+    friend class ErrorOr;
 
-  static const bool isRef = std::is_reference<T>::value;
+    static const bool isRef = std::is_reference<T>::value;
 
-  using wrap = std::reference_wrapper<typename std::remove_reference<T>::type>;
-
-public:
-  using storage_type = typename std::conditional<isRef, wrap, T>::type;
-
-private:
-  using reference = typename std::remove_reference<T>::type &;
-  using const_reference = const typename std::remove_reference<T>::type &;
-  using pointer = typename std::remove_reference<T>::type *;
-  using const_pointer = const typename std::remove_reference<T>::type *;
+    using wrap = std::reference_wrapper<typename std::remove_reference<T>::type>;
 
 public:
-  template <class E>
-  ErrorOr(E ErrorCode,
-          typename std::enable_if<std::is_error_code_enum<E>::value ||
-                                      std::is_error_condition_enum<E>::value,
-                                  void *>::type = nullptr)
-      : HasError(true) {
-    new (getErrorStorage()) std::error_code(make_error_code(ErrorCode));
-  }
-
-  ErrorOr(std::error_code EC) : HasError(true) {
-    new (getErrorStorage()) std::error_code(EC);
-  }
-
-  template <class OtherT>
-  ErrorOr(OtherT &&Val,
-          typename std::enable_if<std::is_convertible<OtherT, T>::value>::type
-              * = nullptr)
-      : HasError(false) {
-    new (getStorage()) storage_type(std::forward<OtherT>(Val));
-  }
-
-  ErrorOr(const ErrorOr &Other) {
-    copyConstruct(Other);
-  }
-
-  template <class OtherT>
-  ErrorOr(
-      const ErrorOr<OtherT> &Other,
-      typename std::enable_if<std::is_convertible<OtherT, T>::value>::type * =
-          nullptr) {
-    copyConstruct(Other);
-  }
-
-  template <class OtherT>
-  explicit ErrorOr(
-      const ErrorOr<OtherT> &Other,
-      typename std::enable_if<
-          !std::is_convertible<OtherT, const T &>::value>::type * = nullptr) {
-    copyConstruct(Other);
-  }
-
-  ErrorOr(ErrorOr &&Other) {
-    moveConstruct(std::move(Other));
-  }
-
-  template <class OtherT>
-  ErrorOr(
-      ErrorOr<OtherT> &&Other,
-      typename std::enable_if<std::is_convertible<OtherT, T>::value>::type * =
-          nullptr) {
-    moveConstruct(std::move(Other));
-  }
-
-  // This might eventually need SFINAE but it's more complex than is_convertible
-  // & I'm too lazy to write it right now.
-  template <class OtherT>
-  explicit ErrorOr(
-      ErrorOr<OtherT> &&Other,
-      typename std::enable_if<!std::is_convertible<OtherT, T>::value>::type * =
-          nullptr) {
-    moveConstruct(std::move(Other));
-  }
-
-  ErrorOr &operator=(const ErrorOr &Other) {
-    copyAssign(Other);
-    return *this;
-  }
-
-  ErrorOr &operator=(ErrorOr &&Other) {
-    moveAssign(std::move(Other));
-    return *this;
-  }
-
-  ~ErrorOr() {
-    if (!HasError)
-      getStorage()->~storage_type();
-  }
-
-  /// Return false if there is an error.
-  explicit operator bool() const {
-    return !HasError;
-  }
-
-  reference get() { return *getStorage(); }
-  const_reference get() const { return const_cast<ErrorOr<T> *>(this)->get(); }
-
-  std::error_code getError() const {
-    return HasError ? *getErrorStorage() : std::error_code();
-  }
-
-  pointer operator ->() {
-    return toPointer(getStorage());
-  }
-
-  const_pointer operator->() const { return toPointer(getStorage()); }
-
-  reference operator *() {
-    return *getStorage();
-  }
-
-  const_reference operator*() const { return *getStorage(); }
+    using storage_type = typename std::conditional<isRef, wrap, T>::type;
 
 private:
-  template <class OtherT>
-  void copyConstruct(const ErrorOr<OtherT> &Other) {
-    if (!Other.HasError) {
-      // Get the other value.
-      HasError = false;
-      new (getStorage()) storage_type(*Other.getStorage());
-    } else {
-      // Get other's error.
-      HasError = true;
-      new (getErrorStorage()) std::error_code(Other.getError());
+    using reference = typename std::remove_reference<T>::type &;
+    using const_reference = const typename std::remove_reference<T>::type &;
+    using pointer = typename std::remove_reference<T>::type *;
+    using const_pointer = const typename std::remove_reference<T>::type *;
+
+public:
+    template <class E>
+    ErrorOr(
+        E ErrorCode,
+        typename std::enable_if<std::is_error_code_enum<E>::value || std::is_error_condition_enum<E>::value, void *>::
+            type = nullptr) :
+        HasError(true)
+    {
+        new (getErrorStorage()) std::error_code(make_error_code(ErrorCode));
     }
-  }
 
-  template <class T1>
-  static bool compareThisIfSameType(const T1 &a, const T1 &b) {
-    return &a == &b;
-  }
+    ErrorOr(std::error_code EC) : HasError(true) { new (getErrorStorage()) std::error_code(EC); }
 
-  template <class T1, class T2>
-  static bool compareThisIfSameType(const T1 &a, const T2 &b) {
-    return false;
-  }
-
-  template <class OtherT>
-  void copyAssign(const ErrorOr<OtherT> &Other) {
-    if (compareThisIfSameType(*this, Other))
-      return;
-
-    this->~ErrorOr();
-    new (this) ErrorOr(Other);
-  }
-
-  template <class OtherT>
-  void moveConstruct(ErrorOr<OtherT> &&Other) {
-    if (!Other.HasError) {
-      // Get the other value.
-      HasError = false;
-      new (getStorage()) storage_type(std::move(*Other.getStorage()));
-    } else {
-      // Get other's error.
-      HasError = true;
-      new (getErrorStorage()) std::error_code(Other.getError());
+    template <class OtherT>
+    ErrorOr(OtherT &&Val, typename std::enable_if<std::is_convertible<OtherT, T>::value>::type * = nullptr) :
+        HasError(false)
+    {
+        new (getStorage()) storage_type(std::forward<OtherT>(Val));
     }
-  }
 
-  template <class OtherT>
-  void moveAssign(ErrorOr<OtherT> &&Other) {
-    if (compareThisIfSameType(*this, Other))
-      return;
+    ErrorOr(const ErrorOr &Other) { copyConstruct(Other); }
 
-    this->~ErrorOr();
-    new (this) ErrorOr(std::move(Other));
-  }
+    template <class OtherT>
+    ErrorOr(
+        const ErrorOr<OtherT> &Other,
+        typename std::enable_if<std::is_convertible<OtherT, T>::value>::type * = nullptr)
+    {
+        copyConstruct(Other);
+    }
 
-  pointer toPointer(pointer Val) {
-    return Val;
-  }
+    template <class OtherT>
+    explicit ErrorOr(
+        const ErrorOr<OtherT> &Other,
+        typename std::enable_if<!std::is_convertible<OtherT, const T &>::value>::type * = nullptr)
+    {
+        copyConstruct(Other);
+    }
 
-  const_pointer toPointer(const_pointer Val) const { return Val; }
+    ErrorOr(ErrorOr &&Other) { moveConstruct(std::move(Other)); }
 
-  pointer toPointer(wrap *Val) {
-    return &Val->get();
-  }
+    template <class OtherT>
+    ErrorOr(ErrorOr<OtherT> &&Other, typename std::enable_if<std::is_convertible<OtherT, T>::value>::type * = nullptr)
+    {
+        moveConstruct(std::move(Other));
+    }
 
-  const_pointer toPointer(const wrap *Val) const { return &Val->get(); }
+    // This might eventually need SFINAE but it's more complex than is_convertible
+    // & I'm too lazy to write it right now.
+    template <class OtherT>
+    explicit ErrorOr(
+        ErrorOr<OtherT> &&Other,
+        typename std::enable_if<!std::is_convertible<OtherT, T>::value>::type * = nullptr)
+    {
+        moveConstruct(std::move(Other));
+    }
 
-  storage_type *getStorage() {
-    assert(!HasError && "Cannot get value when an error exists!");
-    return reinterpret_cast<storage_type*>(TStorage.buffer);
-  }
+    ErrorOr &operator=(const ErrorOr &Other)
+    {
+        copyAssign(Other);
+        return *this;
+    }
 
-  const storage_type *getStorage() const {
-    assert(!HasError && "Cannot get value when an error exists!");
-    return reinterpret_cast<const storage_type*>(TStorage.buffer);
-  }
+    ErrorOr &operator=(ErrorOr &&Other)
+    {
+        moveAssign(std::move(Other));
+        return *this;
+    }
 
-  std::error_code *getErrorStorage() {
-    assert(HasError && "Cannot get error when a value exists!");
-    return reinterpret_cast<std::error_code *>(ErrorStorage.buffer);
-  }
+    ~ErrorOr()
+    {
+        if (!HasError)
+            getStorage()->~storage_type();
+    }
 
-  const std::error_code *getErrorStorage() const {
-    return const_cast<ErrorOr<T> *>(this)->getErrorStorage();
-  }
+    /// Return false if there is an error.
+    explicit operator bool() const { return !HasError; }
 
-  union {
-    AlignedCharArrayUnion<storage_type> TStorage;
-    AlignedCharArrayUnion<std::error_code> ErrorStorage;
-  };
-  bool HasError : 1;
+    reference get() { return *getStorage(); }
+    const_reference get() const { return const_cast<ErrorOr<T> *>(this)->get(); }
+
+    std::error_code getError() const { return HasError ? *getErrorStorage() : std::error_code(); }
+
+    pointer operator->() { return toPointer(getStorage()); }
+
+    const_pointer operator->() const { return toPointer(getStorage()); }
+
+    reference operator*() { return *getStorage(); }
+
+    const_reference operator*() const { return *getStorage(); }
+
+private:
+    template <class OtherT>
+    void copyConstruct(const ErrorOr<OtherT> &Other)
+    {
+        if (!Other.HasError)
+        {
+            // Get the other value.
+            HasError = false;
+            new (getStorage()) storage_type(*Other.getStorage());
+        }
+        else
+        {
+            // Get other's error.
+            HasError = true;
+            new (getErrorStorage()) std::error_code(Other.getError());
+        }
+    }
+
+    template <class T1>
+    static bool compareThisIfSameType(const T1 &a, const T1 &b)
+    {
+        return &a == &b;
+    }
+
+    template <class T1, class T2>
+    static bool compareThisIfSameType(const T1 &a, const T2 &b)
+    {
+        return false;
+    }
+
+    template <class OtherT>
+    void copyAssign(const ErrorOr<OtherT> &Other)
+    {
+        if (compareThisIfSameType(*this, Other))
+            return;
+
+        this->~ErrorOr();
+        new (this) ErrorOr(Other);
+    }
+
+    template <class OtherT>
+    void moveConstruct(ErrorOr<OtherT> &&Other)
+    {
+        if (!Other.HasError)
+        {
+            // Get the other value.
+            HasError = false;
+            new (getStorage()) storage_type(std::move(*Other.getStorage()));
+        }
+        else
+        {
+            // Get other's error.
+            HasError = true;
+            new (getErrorStorage()) std::error_code(Other.getError());
+        }
+    }
+
+    template <class OtherT>
+    void moveAssign(ErrorOr<OtherT> &&Other)
+    {
+        if (compareThisIfSameType(*this, Other))
+            return;
+
+        this->~ErrorOr();
+        new (this) ErrorOr(std::move(Other));
+    }
+
+    pointer toPointer(pointer Val) { return Val; }
+
+    const_pointer toPointer(const_pointer Val) const { return Val; }
+
+    pointer toPointer(wrap *Val) { return &Val->get(); }
+
+    const_pointer toPointer(const wrap *Val) const { return &Val->get(); }
+
+    storage_type *getStorage()
+    {
+        assert(!HasError && "Cannot get value when an error exists!");
+        return reinterpret_cast<storage_type *>(TStorage.buffer);
+    }
+
+    const storage_type *getStorage() const
+    {
+        assert(!HasError && "Cannot get value when an error exists!");
+        return reinterpret_cast<const storage_type *>(TStorage.buffer);
+    }
+
+    std::error_code *getErrorStorage()
+    {
+        assert(HasError && "Cannot get error when a value exists!");
+        return reinterpret_cast<std::error_code *>(ErrorStorage.buffer);
+    }
+
+    const std::error_code *getErrorStorage() const { return const_cast<ErrorOr<T> *>(this)->getErrorStorage(); }
+
+    union
+    {
+        AlignedCharArrayUnion<storage_type> TStorage;
+        AlignedCharArrayUnion<std::error_code> ErrorStorage;
+    };
+    bool HasError : 1;
 };
 
 template <class T, class E>
-typename std::enable_if<std::is_error_code_enum<E>::value ||
-                            std::is_error_condition_enum<E>::value,
-                        bool>::type
-operator==(const ErrorOr<T> &Err, E Code) {
-  return Err.getError() == Code;
+typename std::enable_if<std::is_error_code_enum<E>::value || std::is_error_condition_enum<E>::value, bool>::type
+operator==(const ErrorOr<T> &Err, E Code)
+{
+    return Err.getError() == Code;
 }
 
-} // end namespace llvm
-
-#endif // LLVM_SUPPORT_ERROROR_H
+} // namespace unknown

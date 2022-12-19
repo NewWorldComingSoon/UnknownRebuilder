@@ -11,8 +11,7 @@
    can be in exported headers and won't override package specific directives.
    This is a C header that can be included in the llvm-c headers. */
 
-#ifndef LLVM_CONFIG32_H
-#define LLVM_CONFIG32_H
+#pragma once
 
 /* Define if LLVM_ENABLE_DUMP is enabled */
 /* #undef LLVM_ENABLE_DUMP */
@@ -81,5 +80,3 @@
  * PrintStatistics() or PrintStatisticsJSON()
  */
 #define LLVM_FORCE_ENABLE_STATS 0
-
-#endif

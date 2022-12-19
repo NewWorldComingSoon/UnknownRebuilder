@@ -11,7 +11,7 @@
 |*                                                                            *|
 \*===----------------------------------------------------------------------===*/
 
-#ifndef LLVM_C_COMDAT_H
+#pragma once
 #define LLVM_C_COMDAT_H
 
 #include "unknown/Types.h"
@@ -20,16 +20,17 @@
 extern "C" {
 #endif
 
-typedef enum {
-  LLVMAnyComdatSelectionKind,        ///< The linker may choose any COMDAT.
-  LLVMExactMatchComdatSelectionKind, ///< The data referenced by the COMDAT must
-                                     ///< be the same.
-  LLVMLargestComdatSelectionKind,    ///< The linker will choose the largest
-                                     ///< COMDAT.
-  LLVMNoDuplicatesComdatSelectionKind, ///< No other Module may specify this
-                                       ///< COMDAT.
-  LLVMSameSizeComdatSelectionKind ///< The data referenced by the COMDAT must be
-                                  ///< the same size.
+typedef enum
+{
+    LLVMAnyComdatSelectionKind,          ///< The linker may choose any COMDAT.
+    LLVMExactMatchComdatSelectionKind,   ///< The data referenced by the COMDAT must
+                                         ///< be the same.
+    LLVMLargestComdatSelectionKind,      ///< The linker will choose the largest
+                                         ///< COMDAT.
+    LLVMNoDuplicatesComdatSelectionKind, ///< No other Module may specify this
+                                         ///< COMDAT.
+    LLVMSameSizeComdatSelectionKind      ///< The data referenced by the COMDAT must be
+                                         ///< the same size.
 } LLVMComdatSelectionKind;
 
 /**
@@ -38,35 +39,40 @@ typedef enum {
  *
  * @see llvm::Module::getOrInsertComdat()
  */
-LLVMComdatRef LLVMGetOrInsertComdat(LLVMModuleRef M, const char *Name);
+LLVMComdatRef
+LLVMGetOrInsertComdat(LLVMModuleRef M, const char *Name);
 
 /**
  * Get the Comdat assigned to the given global object.
  *
  * @see llvm::GlobalObject::getComdat()
  */
-LLVMComdatRef LLVMGetComdat(LLVMValueRef V);
+LLVMComdatRef
+LLVMGetComdat(LLVMValueRef V);
 
 /**
  * Assign the Comdat to the given global object.
  *
  * @see llvm::GlobalObject::setComdat()
  */
-void LLVMSetComdat(LLVMValueRef V, LLVMComdatRef C);
+void
+LLVMSetComdat(LLVMValueRef V, LLVMComdatRef C);
 
 /*
  * Get the conflict resolution selection kind for the Comdat.
  *
  * @see llvm::Comdat::getSelectionKind()
  */
-LLVMComdatSelectionKind LLVMGetComdatSelectionKind(LLVMComdatRef C);
+LLVMComdatSelectionKind
+LLVMGetComdatSelectionKind(LLVMComdatRef C);
 
 /*
  * Set the conflict resolution selection kind for the Comdat.
  *
  * @see llvm::Comdat::setSelectionKind()
  */
-void LLVMSetComdatSelectionKind(LLVMComdatRef C, LLVMComdatSelectionKind Kind);
+void
+LLVMSetComdatSelectionKind(LLVMComdatRef C, LLVMComdatSelectionKind Kind);
 
 #ifdef __cplusplus
 }
