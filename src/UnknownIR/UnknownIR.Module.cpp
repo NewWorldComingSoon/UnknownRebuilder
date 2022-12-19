@@ -40,6 +40,19 @@ Module::getFunctionList()
     return mFunctionList;
 }
 
+// Get global variable list
+const std::unordered_set<GlobalVariable *> &
+Module::getGlobalVariableList() const
+{
+    return mGlobalVariableList;
+}
+
+std::unordered_set<GlobalVariable *> &
+Module::getGlobalVariableList()
+{
+    return mGlobalVariableList;
+}
+
 ////////////////////////////////////////////////////////////
 // Context
 // Get context
