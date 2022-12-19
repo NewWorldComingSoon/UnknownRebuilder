@@ -10,7 +10,8 @@ namespace uir {
 ////////////////////////////////////////////////////////////
 //     LocalVariable
 //
-LocalVariable::LocalVariable(Type *Ty, const char *LocalVariableName) : Constant(Ty, LocalVariableName)
+LocalVariable::LocalVariable(Type *Ty, const char *LocalVariableName, uint64_t LocalVariableAddress) :
+    Constant(Ty, LocalVariableName), mLocalVariableAddress(LocalVariableAddress)
 {
     //
     //
@@ -20,6 +21,22 @@ LocalVariable::~LocalVariable()
 {
     //
     //
+}
+
+////////////////////////////////////////////////////////////
+// Get/Set
+// Get the address of this local variable
+uint64_t
+LocalVariable::getLocalVariableAddress() const
+{
+    return mLocalVariableAddress;
+}
+
+// Set the address of this local variable
+void
+LocalVariable::setLocalVariableAddress(uint64_t LocalVariableAddress)
+{
+    mLocalVariableAddress = LocalVariableAddress;
 }
 
 ////////////////////////////////////////////////////////////

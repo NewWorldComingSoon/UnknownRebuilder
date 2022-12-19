@@ -10,7 +10,8 @@ namespace uir {
 ////////////////////////////////////////////////////////////
 //     GlobalVariable
 //
-GlobalVariable::GlobalVariable(Type *Ty, const char *GlobalVariableName) : Constant(Ty, GlobalVariableName)
+GlobalVariable::GlobalVariable(Type *Ty, const char *GlobalVariableName, uint64_t GlobalVariableAddress) :
+    Constant(Ty, GlobalVariableName), mGlobalVariableAddress(GlobalVariableAddress)
 {
     //
     //
@@ -35,6 +36,20 @@ GlobalVariable::getReadableName() const
     ReadableName += mType->getTypeName();
 
     return ReadableName;
+}
+
+// Get the address of this global variable
+uint64_t
+GlobalVariable::getGlobalVariableAddress() const
+{
+    return mGlobalVariableAddress;
+}
+
+// Set the address of this global variable
+void
+GlobalVariable::setGlobalVariableAddress(uint64_t GlobalVariableAddress)
+{
+    mGlobalVariableAddress = GlobalVariableAddress;
 }
 
 ////////////////////////////////////////////////////////////

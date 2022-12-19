@@ -5,13 +5,23 @@ namespace uir {
 
 class GlobalVariable : public Constant
 {
+private:
+    uint64_t mGlobalVariableAddress;
+
 public:
-    explicit GlobalVariable(Type *Ty, const char *GlobalVariableName);
+    explicit GlobalVariable(Type *Ty, const char *GlobalVariableName, uint64_t GlobalVariableAddress);
     virtual ~GlobalVariable();
 
 public:
+    // Get/Set
     // Get the readable name of this object
     virtual std::string getReadableName() const override;
+
+    // Get the address of this global variable
+    uint64_t getGlobalVariableAddress() const;
+
+    // Set the address of this global variable
+    void setGlobalVariableAddress(uint64_t GlobalVariableAddress);
 
 public:
     // Static
