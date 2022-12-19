@@ -39,6 +39,32 @@ Function::getReadableName() const
     return ReadableName;
 }
 
+// Get the begin/end address of this function
+uint64_t
+Function::getFunctionBeginAddress() const
+{
+    return mFunctionAddressBegin;
+}
+
+uint64_t
+Function::getFunctionEndAddress() const
+{
+    return mFunctionAddressEnd;
+}
+
+// Set the begin/end address of this function
+void
+Function::setFunctionBeginAddress(uint64_t FunctionBeginAddress)
+{
+    mFunctionAddressBegin = FunctionBeginAddress;
+}
+
+void
+Function::setFunctionEndAddress(uint64_t FunctionEndAddress)
+{
+    mFunctionAddressEnd = FunctionEndAddress;
+}
+
 ////////////////////////////////////////////////////////////
 // Static
 // Generate a new function name by order

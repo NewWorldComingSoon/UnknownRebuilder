@@ -62,12 +62,18 @@ public:
 
     // Get the specified function by name in the module
     Function *getFunction(const char *FunctionName) const;
-
-    // Insert a function into the module
-    void insertFunction(Function *Function);
+    // Get the specified function by address in the module
+    Function *getFunction(uint64_t Address) const;
 
     // Get the specified global variable by name in the module
     GlobalVariable *getGlobalVariable(const char *GlobalVariableName) const;
+    // Get the specified global variable by address in the module
+    GlobalVariable *getGlobalVariable(uint64_t Address) const;
+
+public:
+    // Insert
+    // Insert a function into the module
+    void insertFunction(Function *Function);
 
     // Insert a global variable into the module
     void insertGlobalVariable(GlobalVariable *GV);

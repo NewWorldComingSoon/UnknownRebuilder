@@ -15,8 +15,17 @@ public:
     virtual ~Function();
 
 public:
+    // Get/Set
     // Get the readable name of this object
     virtual std::string getReadableName() const override;
+
+    // Get the begin/end address of this function
+    uint64_t getFunctionBeginAddress() const;
+    uint64_t getFunctionEndAddress() const;
+
+    // Set the begin/end address of this function
+    void setFunctionBeginAddress(uint64_t FunctionBeginAddress);
+    void setFunctionEndAddress(uint64_t FunctionEndAddress);
 
 public:
     // Static

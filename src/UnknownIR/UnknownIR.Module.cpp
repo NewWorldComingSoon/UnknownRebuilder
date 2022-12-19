@@ -92,15 +92,18 @@ Module::getFunction(const char *FunctionName) const
     return nullptr;
 }
 
-// Insert a function into the module
-void
-Module::insertFunction(Function *Function)
+// Get the specified function by address in the module
+Function *
+Module::getFunction(uint64_t Address) const
 {
-    auto It = mFunctionList.find(Function);
-    if (It == mFunctionList.end())
+    for (Function *Func : mFunctionList)
     {
-        mFunctionList.insert(Function);
+        if (Func->getFunctionBeginAddress() == Address)
+        {
+            return Func;
+        }
     }
+    return nullptr;
 }
 
 // Get the specified global variable by name in the module
@@ -116,6 +119,34 @@ Module::getGlobalVariable(const char *GlobalVariableName) const
     }
 
     return nullptr;
+}
+
+// Get the specified global variable by address in the module
+GlobalVariable *
+Module::getGlobalVariable(uint64_t Address) const
+{
+    for (GlobalVariable *GV : mGlobalVariableList)
+    {
+        if (GV->getGlobalVariableAddress() == Address)
+        {
+            return GV;
+        }
+    }
+
+    return nullptr;
+}
+
+////////////////////////////////////////////////////////////
+// Insert
+// Insert a function into the module
+void
+Module::insertFunction(Function *Function)
+{
+    auto It = mFunctionList.find(Function);
+    if (It == mFunctionList.end())
+    {
+        mFunctionList.insert(Function);
+    }
 }
 
 // Insert a global variable into the module
