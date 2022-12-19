@@ -5,7 +5,7 @@ namespace uir {
 
 class GlobalVariable : public Constant
 {
-private:
+protected:
     uint64_t mGlobalVariableAddress;
 
 public:
