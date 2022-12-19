@@ -124,6 +124,10 @@ target_include_directories(UnknownIR PUBLIC
 	"include/UnknownIR"
 )
 
+target_link_libraries(UnknownIR PUBLIC
+	UnknownUtils-LLVMSupport
+)
+
 # Target: UnknownFrontend
 set(UnknownFrontend_SOURCES
 	"src/UnknownFrontend/UnknownFrontend.cpp"

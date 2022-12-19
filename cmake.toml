@@ -26,7 +26,9 @@ include-directories = ["src/UnknownIR", "include", "include/UnknownIR"]
 headers = ["include/UnknownIR/**.h"]
 sources = ["src/UnknownIR/**.cpp", "src/UnknownIR/**.hpp", "src/UnknownIR/**.h"]
 compile-features = ["cxx_std_20"]
-
+link-libraries = [
+"UnknownUtils-LLVMSupport"
+]
 
 [target.UnknownFrontend]
 type = "library"
