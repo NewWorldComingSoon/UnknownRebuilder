@@ -3,7 +3,7 @@ on: [pull_request]
 
 jobs:
   cpplint:
-    runs-on: windows-2019
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@master
     - uses: reviewdog/action-cpplint@master
@@ -21,7 +21,7 @@ jobs:
           " # Optional
   shellcheck:
     name: runner / shellcheck
-    runs-on: windows-2019
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
       - name: shellcheck
