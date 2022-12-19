@@ -26,13 +26,3 @@ endif()
 add_subdirectory(keystone-retdec)
 set(CMAKE_FOLDER ${CMKR_CMAKE_FOLDER})
 
-# Subdirectory: UnknownUtils
-set(CMKR_CMAKE_FOLDER ${CMAKE_FOLDER})
-if(CMAKE_FOLDER)
-	set(CMAKE_FOLDER "${CMAKE_FOLDER}/UnknownUtils")
-else()
-	set(CMAKE_FOLDER UnknownUtils)
-endif()
-add_subdirectory(UnknownUtils)
-set(CMAKE_FOLDER ${CMKR_CMAKE_FOLDER})
-

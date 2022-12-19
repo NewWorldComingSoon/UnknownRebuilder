@@ -1,0 +1,85 @@
+// RetDec: This file was created by the RetDec authors by moving its code from
+// source *.cpp files to this source file.
+// RetDec: This file was taken from LLVM commit: 438784aaf3397778212bd41bf5333f86e04b4814.
+//
+
+#include "unknown/Demangle/Allocator.h"
+#include "unknown/Demangle/ItaniumDemangle.h"
+
+namespace unknown {
+namespace itanium_demangle {
+
+void
+BumpPointerAllocator::grow()
+{
+    char *NewMeta = static_cast<char *>(std::malloc(AllocSize));
+    if (NewMeta == nullptr)
+        std::terminate();
+    BlockList = new (NewMeta) BlockMeta{BlockList, 0};
+}
+
+void *
+BumpPointerAllocator::allocateMassive(size_t NBytes)
+{
+    NBytes += sizeof(BlockMeta);
+    BlockMeta *NewMeta = reinterpret_cast<BlockMeta *>(std::malloc(NBytes));
+    if (NewMeta == nullptr)
+        std::terminate();
+    BlockList->Next = new (NewMeta) BlockMeta{BlockList->Next, 0};
+    return static_cast<void *>(NewMeta + 1);
+}
+
+BumpPointerAllocator::BumpPointerAllocator() : BlockList(new (InitialBuffer) BlockMeta{nullptr, 0}) {}
+
+void *
+BumpPointerAllocator::allocate(size_t N)
+{
+    N = (N + 15u) & ~15u;
+    if (N + BlockList->Current >= UsableAllocSize)
+    {
+        if (N > UsableAllocSize)
+            return allocateMassive(N);
+        grow();
+    }
+    BlockList->Current += N;
+    return static_cast<void *>(reinterpret_cast<char *>(BlockList + 1) + BlockList->Current - N);
+}
+
+void
+BumpPointerAllocator::reset()
+{
+    while (BlockList)
+    {
+        BlockMeta *Tmp = BlockList;
+        BlockList = BlockList->Next;
+        if (reinterpret_cast<char *>(Tmp) != InitialBuffer)
+            std::free(Tmp);
+    }
+    BlockList = new (InitialBuffer) BlockMeta{nullptr, 0};
+}
+
+BumpPointerAllocator::~BumpPointerAllocator()
+{
+    reset();
+}
+
+void
+DefaultAllocator::reset()
+{
+    Alloc.reset();
+}
+
+void *
+DefaultAllocator::allocateNodeArray(size_t sz)
+{
+    return Alloc.allocate(sizeof(Node *) * sz);
+}
+
+void *
+DefaultAllocator::allocateBytes(size_t sz)
+{
+    return Alloc.allocate(sz);
+}
+
+} // namespace itanium_demangle
+} // namespace unknown

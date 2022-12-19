@@ -13,11 +13,19 @@ add_definitions(-DUNKNOWN_REBUILDER_SRC_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
 """
 test_mode.cmake-after = "add_definitions(-DENABLE_TEST)"
 
+
 [subdir.test]
 condition = "test_mode"
-
 [subdir.3rdparty]
 [subdir.tools]
+
+
+[target.UnknownUtils]
+type = "library"
+include-directories = ["src/UnknownUtils", "include", "include/UnknownUtils"]
+headers = ["include/UnknownUtils/**.h"]
+sources = ["src/UnknownUtils/**.cpp", "src/UnknownUtils/**.hpp", "src/UnknownUtils/**.h"]
+compile-features = ["cxx_std_20"]
 
 
 [target.UnknownIR]
@@ -27,8 +35,9 @@ headers = ["include/UnknownIR/**.h"]
 sources = ["src/UnknownIR/**.cpp", "src/UnknownIR/**.hpp", "src/UnknownIR/**.h"]
 compile-features = ["cxx_std_20"]
 link-libraries = [
-"UnknownUtils-LLVMSupport"
+"UnknownUtils"
 ]
+
 
 [target.UnknownFrontend]
 type = "library"
