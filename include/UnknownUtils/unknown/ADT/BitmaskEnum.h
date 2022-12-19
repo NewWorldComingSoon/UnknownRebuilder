@@ -161,5 +161,3 @@ operator^=(E &LHS, E RHS)
 LLVM_ENABLE_BITMASK_ENUMS_IN_NAMESPACE();
 
 } // namespace unknown
-
-#endif
