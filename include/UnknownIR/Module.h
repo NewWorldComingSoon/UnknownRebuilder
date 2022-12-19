@@ -65,6 +65,12 @@ public:
 
     // Insert a function into the module
     void insertFunction(Function *Function);
+
+    // Get the specified global variable by name in the module
+    GlobalVariable *getGlobalVariable(const char *GlobalVariableName) const;
+
+    // Insert a global variable into the module
+    void insertGlobalVariable(GlobalVariable *GV);
 };
 
 } // namespace uir

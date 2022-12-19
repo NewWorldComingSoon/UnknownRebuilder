@@ -103,4 +103,30 @@ Module::insertFunction(Function *Function)
     }
 }
 
+// Get the specified global variable by name in the module
+GlobalVariable *
+Module::getGlobalVariable(const char *GlobalVariableName) const
+{
+    for (GlobalVariable *GV : mGlobalVariableList)
+    {
+        if (GV->getName().compare(GlobalVariableName) == 0)
+        {
+            return GV;
+        }
+    }
+
+    return nullptr;
+}
+
+// Insert a global variable into the module
+void
+Module::insertGlobalVariable(GlobalVariable *GV)
+{
+    auto It = mGlobalVariableList.find(GV);
+    if (It == mGlobalVariableList.end())
+    {
+        mGlobalVariableList.insert(GV);
+    }
+}
+
 } // namespace uir
