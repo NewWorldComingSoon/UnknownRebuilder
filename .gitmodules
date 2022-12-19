@@ -4,6 +4,3 @@
 [submodule "3rdparty/keystone-retdec"]
 	path = 3rdparty/keystone-retdec
 	url = https://github.com/NewWorldComingSoon/keystone-retdec
-[submodule "3rdparty/UnknownUtils"]
-	path = 3rdparty/UnknownUtils
-	url = https://github.com/NewWorldComingSoon/UnknownUtils
