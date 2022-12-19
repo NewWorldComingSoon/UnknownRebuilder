@@ -84,7 +84,7 @@ void
 Module::insertFunction(Function *Function)
 {
     auto It = mFunctionList.find(Function);
-    if (It != mFunctionList.end())
+    if (It == mFunctionList.end())
     {
         mFunctionList.insert(Function);
     }

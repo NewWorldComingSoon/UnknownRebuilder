@@ -148,7 +148,7 @@ void
 Value::user_insert(User *U)
 {
     auto It = mUsers.find(U);
-    if (It != mUsers.end())
+    if (It == mUsers.end())
     {
         mUsers.insert(U);
     }
