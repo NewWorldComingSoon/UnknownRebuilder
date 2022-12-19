@@ -142,7 +142,7 @@ enum NumOccurrencesFlag
 
 enum ValueExpected
 { // Is a value required for the option?
-    // zero reserved for the unspecified value
+  // zero reserved for the unspecified value
     ValueOptional = 0x01,  // The value can appear... or not
     ValueRequired = 0x02,  // The value is required to appear!
     ValueDisallowed = 0x03 // A value may not be specified (for flags)
