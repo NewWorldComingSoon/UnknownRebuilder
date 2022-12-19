@@ -17,6 +17,7 @@ include-directories = [
 ]
 
 link-libraries = [
+"UnknownUtils",
 "UnknownIR",
 "gtest"
 ]

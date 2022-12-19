@@ -99,6 +99,8 @@ set(UnknownUtils_SOURCES
 	"src/UnknownUtils/UnknownUtils.Twine.cpp"
 	"src/UnknownUtils/UnknownUtils.raw_os_ostream.cpp"
 	"src/UnknownUtils/UnknownUtils.raw_ostream.cpp"
+	"src/UnknownUtils/Unix/Unix.h"
+	"src/UnknownUtils/Windows/WindowsSupport.h"
 	"include/UnknownUtils/unknown-c/Analysis.h"
 	"include/UnknownUtils/unknown-c/BitReader.h"
 	"include/UnknownUtils/unknown-c/BitWriter.h"

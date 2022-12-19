@@ -43,6 +43,7 @@ target_include_directories(test-uir PRIVATE
 )
 
 target_link_libraries(test-uir PRIVATE
+	UnknownUtils
 	UnknownIR
 	gtest
 )

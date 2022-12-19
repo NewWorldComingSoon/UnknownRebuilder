@@ -18,18 +18,21 @@ using namespace unknown;
 
 StringPool::StringPool() {}
 
-StringPool::~StringPool() {
-  assert(InternTable.empty() && "PooledStringPtr leaked!");
+StringPool::~StringPool()
+{
+    assert(InternTable.empty() && "PooledStringPtr leaked!");
 }
 
-PooledStringPtr StringPool::intern(StringRef Key) {
-  table_t::iterator I = InternTable.find(Key);
-  if (I != InternTable.end())
-    return PooledStringPtr(&*I);
+PooledStringPtr
+StringPool::intern(StringRef Key)
+{
+    table_t::iterator I = InternTable.find(Key);
+    if (I != InternTable.end())
+        return PooledStringPtr(&*I);
 
-  entry_t *S = entry_t::Create(Key);
-  S->getValue().Pool = this;
-  InternTable.insert(S);
+    entry_t *S = entry_t::Create(Key);
+    S->getValue().Pool = this;
+    InternTable.insert(S);
 
-  return PooledStringPtr(S);
+    return PooledStringPtr(S);
 }

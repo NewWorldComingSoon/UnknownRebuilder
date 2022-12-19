@@ -18,8 +18,8 @@
 
 // Include the platform-specific parts of this class.
 #ifdef LLVM_ON_UNIX
-#include "Unix/Memory.inc"
+#    include "Unix/Memory.inc"
 #endif
 #ifdef _WIN32
-#include "Windows/Memory.inc"
+#    include "Windows/Memory.inc"
 #endif
