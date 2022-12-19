@@ -160,4 +160,16 @@ Module::insertGlobalVariable(GlobalVariable *GV)
     }
 }
 
+////////////////////////////////////////////////////////////
+// Print
+// Print the module
+void
+Module::print(unknown::raw_ostream &OS) const
+{
+    OS << "Module:";
+    OS << "\n";
+
+    // TODO
+}
+
 } // namespace uir

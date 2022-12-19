@@ -4,6 +4,8 @@
 #include <UnknownIR/Function.h>
 #include <UnknownIR/GlobalVariable.h>
 
+#include <UnknownUtils/unknown/Support/raw_ostream.h>
+
 namespace uir {
 
 class Module
@@ -77,6 +79,11 @@ public:
 
     // Insert a global variable into the module
     void insertGlobalVariable(GlobalVariable *GV);
+
+public:
+    // Print
+    // Print the module
+    void print(unknown::raw_ostream &OS) const;
 };
 
 } // namespace uir
