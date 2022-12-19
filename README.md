@@ -1,7 +1,7 @@
 #  UnknownRebuilder
 [![CMake-windows-latest](https://github.com/NewWorldComingSoon/UnknownRebuilder/actions/workflows/CMake-windows-latest.yml/badge.svg)](https://github.com/NewWorldComingSoon/UnknownRebuilder/actions/workflows/CMake-windows-latest.yml)
 
-X86 native code rebuilder using UnknownIR(UIR).
+X86 native code rebuilder using UnknownIR(UIR)..
 
 ## Motivation
 Just for learning. Maybe it can help others too.
