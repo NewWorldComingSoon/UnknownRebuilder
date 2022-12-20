@@ -144,4 +144,20 @@ User::setOperand(uint32_t Index, Value *Val)
     mOperandList[Index] = Val;
 }
 
+void
+User::setOperandAndUpdateUsers(uint32_t Index, Value *Val)
+{
+    assert(Index < mOperandList.size() && "setOperandAndUpdateUsers() out of range!");
+    auto OldVal = mOperandList[Index];
+    if (OldVal != Val)
+    {
+        // Set operand
+        mOperandList[Index] = Val;
+
+        // Update user
+        OldVal->user_erase(this);
+        Val->user_insert(this);
+    }
+}
+
 } // namespace uir
