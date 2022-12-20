@@ -30,7 +30,7 @@ struct OpCodeComponent
     OpCodeID mOpCodeID;
     std::string mOpCodeName;
     uint32_t mNumberOfOperands;
-    bool mHasEFlags;
+    bool mHasEOrRFlags;
 };
 
 // clang-format off
