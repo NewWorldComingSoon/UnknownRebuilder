@@ -9,10 +9,12 @@ namespace uir {
 class Instruction : public User
 {
 private:
+    OpCodeID mOpCodeID;
     uint64_t mInstructionAddress;
 
 public:
     Instruction();
+    Instruction(OpCodeID OpCodeId);
     virtual ~Instruction();
 
 public:

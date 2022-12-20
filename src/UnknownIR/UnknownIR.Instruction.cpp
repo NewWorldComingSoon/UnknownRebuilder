@@ -2,7 +2,13 @@
 
 namespace uir {
 
-Instruction::Instruction() : mInstructionAddress(0)
+Instruction::Instruction() : Instruction(uir::OpCodeID::Unknown)
+{
+    //
+    //
+}
+
+Instruction::Instruction(uir::OpCodeID OpCodeId) : mOpCodeID(OpCodeId), mInstructionAddress(0)
 {
     //
     //
