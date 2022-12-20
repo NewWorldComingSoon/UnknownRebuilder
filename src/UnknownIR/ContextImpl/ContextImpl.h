@@ -16,12 +16,12 @@ private:
     Context &mContext;
 
 public:
-    //Ordered index
+    // Ordered index
     uint64_t mOrderedLocalVarNameIndex;
     uint64_t mOrderedGlobalVarNameIndex;
     uint64_t mOrderedFunctionNameIndex;
     uint64_t mOrderedBlockNameIndex;
-	
+
     // Basic type instances
     Type mVoidTy;
     Type mFloatTy;
@@ -44,8 +44,7 @@ public:
     std::unordered_map<Type *, PointerType *> mPointerTypes;
 
     // IntConstants map
-    using ConstantIntMapTy = std::unordered_map<uint64_t, ConstantInt *>;
-    ConstantIntMapTy mIntConstants;
+    std::unordered_map<uint64_t, ConstantInt *> mIntConstants;
 
 public:
     explicit ContextImpl(Context &C);

@@ -8,9 +8,20 @@ namespace uir {
 
 class Instruction : public User
 {
+private:
+    uint64_t mInstructionAddress;
+
 public:
     Instruction();
     virtual ~Instruction();
+
+public:
+    // Get/Set
+    // Get the address of this instruction
+    uint64_t getInstructionAddress() const;
+
+    // Set the address of this instruction
+    void setInstructionAddress(uint64_t InstructionAddress);
 
 public:
     // Print
