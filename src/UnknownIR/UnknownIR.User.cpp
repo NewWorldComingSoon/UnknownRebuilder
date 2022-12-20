@@ -9,7 +9,13 @@ User::User() : Value() {}
 
 User::User(Type *Ty, const char *UserName) : Value(Ty, UserName) {}
 
-User::~User() {}
+User::~User()
+{
+    for (Value *Val : mOperandList)
+    {
+        Val->user_erase(this);
+    }
+}
 
 ////////////////////////////////////////////////////////////
 // OperandList
