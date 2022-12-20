@@ -23,10 +23,10 @@ Type::~Type() {}
 ////////////////////////////////////////////////////////////
 // Get/Set
 // Get/Set the name of the type
-std::string
+unknown::StringRef
 Type::getTypeName() const
 {
-    return mTypeName;
+    return unknown::StringRef(mTypeName);
 }
 
 void

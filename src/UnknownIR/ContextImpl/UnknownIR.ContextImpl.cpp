@@ -70,7 +70,7 @@ ContextImpl::getPointerType(Type *ElmtTy)
     }
 
     // i8*/i16*/i32*/i64*
-    std::string PtrTyName = ElmtTy->getTypeName() + UIR_PTR_TYPE_NAME_SUFFIX;
+    std::string PtrTyName = ElmtTy->getTypeName().str() + UIR_PTR_TYPE_NAME_SUFFIX;
     PointerType *PtrTy = new PointerType(mContext, ElmtTy, PtrTyName.c_str());
     mPointerTypes[ElmtTy] = PtrTy;
     return PtrTy;

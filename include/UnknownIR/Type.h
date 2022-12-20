@@ -2,6 +2,8 @@
 #include <cstdint>
 #include <string>
 
+#include <UnknownUtils/unknown/ADT/StringRef.h>
+
 namespace uir {
 
 class Context;
@@ -41,7 +43,7 @@ public:
 
 public:
     // Get/Set the name of the type
-    std::string getTypeName() const;
+    unknown::StringRef getTypeName() const;
     void setTypeName(const char *TypeName);
 
     // Get/Set the id of the type
