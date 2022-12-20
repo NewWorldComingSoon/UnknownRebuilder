@@ -13,7 +13,10 @@ User::~User()
 {
     for (Value *Val : mOperandList)
     {
-        Val->user_erase(this);
+        if (Val)
+        {
+            Val->user_erase(this);
+        }
     }
 }
 
