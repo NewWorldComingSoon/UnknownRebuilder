@@ -1,7 +1,8 @@
 #pragma once
 #include <cstdint>
-#include <string>
 #include <vector>
+
+#include <UnknownUtils/unknown/ADT/StringRef.h>
 
 namespace uir {
 
@@ -28,7 +29,7 @@ enum class OpCodeID : uint8_t
 struct OpCodeComponent
 {
     OpCodeID mOpCodeID;
-    std::string mOpCodeName;
+    unknown::StringRef mOpCodeName;
     uint32_t mNumberOfOperands;
     bool mHasEOrRFlags;
 };
