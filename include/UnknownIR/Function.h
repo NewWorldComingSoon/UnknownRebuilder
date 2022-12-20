@@ -1,6 +1,8 @@
 #pragma once
 #include <UnknownIR/Constant.h>
 
+#include <UnknownUtils/unknown/Support/raw_ostream.h>
+
 namespace uir {
 
 class Function : public Constant
@@ -31,6 +33,11 @@ public:
     // Static
     // Generate a new function name by order
     static std::string generateOrderedFunctionName(Context &C);
+
+public:
+    // Print
+    // Print the function
+    void print(unknown::raw_ostream &OS) const;
 };
 
 } // namespace uir

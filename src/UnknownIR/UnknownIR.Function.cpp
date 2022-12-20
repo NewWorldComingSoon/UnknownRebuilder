@@ -75,4 +75,13 @@ Function::generateOrderedFunctionName(Context &C)
     return std::to_string(CurIdx);
 }
 
+////////////////////////////////////////////////////////////
+// Print
+// Print the function
+void
+Function::print(unknown::raw_ostream &OS) const
+{
+    // TODO
+}
+
 } // namespace uir
