@@ -434,7 +434,6 @@ set(UnknownIR_SOURCES
 	"include/UnknownIR/Module.h"
 	"include/UnknownIR/Object.h"
 	"include/UnknownIR/OpCode.h"
-	"include/UnknownIR/OpCode/x86/OpCode.x86.h"
 	"include/UnknownIR/Type.h"
 	"include/UnknownIR/UnknownIR.h"
 	"include/UnknownIR/User.h"
