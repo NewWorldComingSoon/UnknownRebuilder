@@ -166,8 +166,7 @@ Module::insertGlobalVariable(GlobalVariable *GV)
 void
 Module::print(unknown::raw_ostream &OS) const
 {
-    OS << "Module:";
-    OS << "\n";
+    OS << "Module:\n";
 
     // TODO
 }
