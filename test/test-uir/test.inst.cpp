@@ -11,8 +11,5 @@ TEST(test_uir, test_uir_inst_1)
     CTX.setArch(Context::ArchX86);
     CTX.setMode(Context::Mode64);
 
-    for (auto &Item : GlobalOpCodeComponents)
-    {
-        printf("OpCodeName = %s\n", Item.mOpCodeName.c_str());
-    }
+    printf("AddOpCodeName = %s\n", AddComponent.mOpCodeName.c_str());
 }

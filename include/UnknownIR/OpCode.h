@@ -34,42 +34,46 @@ struct OpCodeComponent
 };
 
 // clang-format off
-const std::vector<OpCodeComponent> GlobalOpCodeComponents = {
-    // Binary operators instructions
-        // op3 = op1 + op2
-    {   OpCodeID::Add,         "uir.add",      3,      true    },
-        // op3 = op1 - op2
-    {   OpCodeID::Sub,         "uir.sub",      3,      true    },
+// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Binary operators instructions
+// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// op3 = op1 + op2
+const OpCodeComponent AddComponent        = {    OpCodeID::Add,       "uir.add",      3,      true};
 
-    // Bitwise instructions
-        // op3 = op1 ^ op2
-    {   OpCodeID::Xor,         "uir.xor",      3,      true    },
-        // op3 = op1 | op2
-    {   OpCodeID::Or,          "uir.or",       3,      true    },
-        // op3 = op1 & op2
-    {   OpCodeID::And,         "uir.and",      3,      true    },
-        // op2 = ~op1
-    {   OpCodeID::Not,         "uir.not",      2,      false   },
-	
-    // Terminator instructions
-        // ret
-    {   OpCodeID::Ret,         "uir.ret",      0,      false   },
-        // ret imm
-    {   OpCodeID::RetIMM,      "uir.retimm",   1,      false   },
+// op3 = op1 - op2
+const OpCodeComponent SubComponent        = {    OpCodeID::Sub,       "uir.sub",      3,      true};
 
-        // Unknown
-    {   OpCodeID::Unknown,     "uir.unknown",  0,      false   },
-};
+
+// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Bitwise instructions
+// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// op3 = op1 ^ op2
+const OpCodeComponent XorComponent        = {    OpCodeID::Xor,       "uir.xor",      3,      true};
+
+// op3 = op1 | op2
+const OpCodeComponent OrComponent         = {    OpCodeID::Or,        "uir.or",       3,      true};
+
+// op3 = op1 & op2
+const OpCodeComponent AndComponent        = {    OpCodeID::And,       "uir.and",      3,      true};
+
+// op2 = ~op1
+const OpCodeComponent NotComponent        = {    OpCodeID::Not,       "uir.not",      2,      false};
+
+
+// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Terminator instructions
+// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ret
+const OpCodeComponent RetComponent        = {    OpCodeID::Ret,       "uir.ret",      0,      false};
+
+// ret imm
+const OpCodeComponent RetIMMComponent     = {    OpCodeID::RetIMM,    "uir.retimm",   1,      false};
+
+
+// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Unknown
+// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const OpCodeComponent UnknownComponent    = {    OpCodeID::Unknown,   "uir.unknown",  0,      false};
 // clang-format on
-
-////////////////////////////////////////////////////////////////////
-// Function
-// Get OpCode component by ID
-const OpCodeComponent &
-getOpCodeComponent(OpCodeID ID);
-
-// Get OpCode component by name
-const OpCodeComponent &
-getOpCodeComponent(const char *Name);
 
 } // namespace uir
