@@ -1,4 +1,5 @@
 #include <Instruction.h>
+#include <BasicBlock.h>
 
 namespace uir {
 
@@ -8,7 +9,7 @@ Instruction::Instruction() : Instruction(OpCodeID::Unknown)
     //
 }
 
-Instruction::Instruction(OpCodeID OpCodeId) : mOpCodeID(OpCodeId), mInstructionAddress(0)
+Instruction::Instruction(OpCodeID OpCodeId) : mOpCodeID(OpCodeId), mInstructionAddress(0), mParent(nullptr)
 {
     //
     //
@@ -34,6 +35,20 @@ void
 Instruction::setInstructionAddress(uint64_t InstructionAddress)
 {
     mInstructionAddress = InstructionAddress;
+}
+
+// Get the parent of this instruction
+const BasicBlock *
+Instruction::getParent() const
+{
+    return mParent;
+}
+
+// Set the parent of this instruction
+void
+Instruction::setParent(BasicBlock *BB)
+{
+    mParent = BB;
 }
 
 ////////////////////////////////////////////////////////////
