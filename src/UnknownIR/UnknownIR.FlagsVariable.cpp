@@ -42,6 +42,12 @@ FlagsVariable::setFlags(Flags Flag)
 }
 
 void
+FlagsVariable::setFlagsValue(uint32_t FlagsVal)
+{
+    mFlags.FlagsValue = FlagsVal;
+}
+
+void
 FlagsVariable::setCarryFlag(bool Set)
 {
     mFlags.CarryFlag = Set ? 1 : 0;

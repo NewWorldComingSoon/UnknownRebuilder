@@ -37,6 +37,7 @@ public:
 
     // Set the flags value
     void setFlags(Flags Flag);
+    void setFlagsValue(uint32_t FlagsVal);
 
     // Set the CarryFlag
     void setCarryFlag(bool Set = true);
