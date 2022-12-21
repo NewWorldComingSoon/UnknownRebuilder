@@ -1,6 +1,8 @@
 #include <User.h>
 #include <assert.h>
 
+#include <Internal/InternalErrors/InternalErrors.h>
+
 namespace uir {
 
 ////////////////////////////////////////////////////////////
@@ -138,7 +140,7 @@ User::replaceAllUsesWith(Value *V)
 
 ////////////////////////////////////////////////////////////
 // Get/Set
-// Get/Set the operand at the specified index.
+// Get the operand at the specified index.
 Value *
 User::getOperand(uint32_t Index) const
 {
@@ -146,6 +148,7 @@ User::getOperand(uint32_t Index) const
     return mOperandList[Index];
 }
 
+// Set the operand at the specified index.
 void
 User::setOperand(uint32_t Index, Value *Val)
 {
@@ -153,6 +156,7 @@ User::setOperand(uint32_t Index, Value *Val)
     mOperandList[Index] = Val;
 }
 
+// Set the operand at the specified index and update the user list.
 void
 User::setOperandAndUpdateUsers(uint32_t Index, Value *Val)
 {
@@ -161,11 +165,52 @@ User::setOperandAndUpdateUsers(uint32_t Index, Value *Val)
     if (OldVal != Val)
     {
         // Set operand
-        mOperandList[Index] = Val;
+        setOperand(Index, Val);
 
         // Update user
-        OldVal->user_erase(this);
+        if (OldVal)
+        {
+            OldVal->user_erase(this);
+        }
+        else
+        {
+            uir_unreachable("OldVal == nullptr in User::setOperandAndUpdateUsers");
+        }
+
+        if (Val)
+        {
+            Val->user_insert(this);
+        }
+        else
+        {
+            uir_unreachable("Val == nullptr in User::setOperandAndUpdateUsers");
+        }
+    }
+}
+
+////////////////////////////////////////////////////////////
+// Insert
+// Insert the specified value.
+void
+User::insertOperand(Value *Val)
+{
+    op_push(Val);
+}
+
+// Insert the specified value and update the user list.
+void
+User::insertOperandAndUpdateUsers(Value *Val)
+{
+    // Insert the specified value.
+    insertOperand(Val);
+    if (Val)
+    {
+        // Insert user
         Val->user_insert(this);
+    }
+    else
+    {
+        uir_unreachable("Val == nullptr in User::insertOperandAndUpdateUsers");
     }
 }
 

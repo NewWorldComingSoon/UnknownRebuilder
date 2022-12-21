@@ -49,10 +49,22 @@ public:
 
 public:
     // Get/Set
-    // Get/Set the operand at the specified index.
+    // Get the operand at the specified index.
     Value *getOperand(uint32_t Index) const;
+
+    // Set the operand at the specified index.
     void setOperand(uint32_t Index, Value *Val);
+
+    // Set the operand at the specified index and update the user list.
     void setOperandAndUpdateUsers(uint32_t Index, Value *Val);
+
+public:
+    // Insert
+    // Insert the specified value.
+    void insertOperand(Value *Val);
+
+    // Insert the specified value and update the user list.
+    void insertOperandAndUpdateUsers(Value *Val);
 };
 
 } // namespace uir
