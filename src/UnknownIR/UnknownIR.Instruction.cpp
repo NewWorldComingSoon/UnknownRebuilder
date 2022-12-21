@@ -89,4 +89,12 @@ Instruction::print(unknown::raw_ostream &OS) const
     // TODO
 }
 
+////////////////////////////////////////////////////////////
+// Static
+Instruction *
+Instruction::get(OpCodeID OpCodeId)
+{
+    return new Instruction(OpCodeId);
+}
+
 } // namespace uir

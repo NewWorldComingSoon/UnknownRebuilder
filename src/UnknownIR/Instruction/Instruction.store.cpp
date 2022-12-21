@@ -76,4 +76,12 @@ StoreInst::setVolatile(bool IsVolatile)
     mIsVolatile = IsVolatile;
 }
 
+////////////////////////////////////////////////////////////
+// Static
+StoreInst *
+get(Value *Val, Value *Ptr, bool IsVolatile)
+{
+    return new StoreInst(Val, Ptr, IsVolatile);
+}
+
 } // namespace uir

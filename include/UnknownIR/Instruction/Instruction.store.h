@@ -35,6 +35,10 @@ public:
 
     // Set the volatile of this instruction
     void setVolatile(bool IsVolatile);
+
+public:
+    // Static
+    static StoreInst *get(Value *Val, Value *Ptr, bool IsVolatile = false);
 };
 
 } // namespace uir

@@ -52,6 +52,10 @@ public:
     // Print
     // Print the instruction
     void print(unknown::raw_ostream &OS) const;
+
+public:
+    // Static
+    static Instruction *get(OpCodeID OpCodeId);
 };
 
 } // namespace uir
