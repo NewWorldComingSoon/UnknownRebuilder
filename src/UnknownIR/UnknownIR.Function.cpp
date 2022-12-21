@@ -32,7 +32,7 @@ Function::~Function()
 std::string
 Function::getReadableName() const
 {
-    // $func1
+    // function.func1
     std::string ReadableName = UIR_FUNCTION_VARIABLE_NAME_PREFIX;
     ReadableName += mFunctionName;
 
