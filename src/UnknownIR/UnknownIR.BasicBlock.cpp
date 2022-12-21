@@ -38,9 +38,9 @@ BasicBlock::~BasicBlock()
 std::string
 BasicBlock::getReadableName() const
 {
-    // block:
-    std::string ReadableName = mBasicBlockName;
-    ReadableName += UIR_BLOCK_VARIABLE_NAME_PREFIX;
+    // block:bbname
+    std::string ReadableName = UIR_BLOCK_VARIABLE_NAME_PREFIX;
+    ReadableName += mBasicBlockName;
 
     return ReadableName;
 }
