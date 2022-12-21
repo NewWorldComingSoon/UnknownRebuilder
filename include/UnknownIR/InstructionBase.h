@@ -34,6 +34,12 @@ public:
     // Set the parent of this instruction
     void setParent(BasicBlock *BB);
 
+    // Get the opcode of this instruction
+    const OpCodeID getOpCodeID() const;
+
+    // Set the opcode of this instruction
+    void setOpCodeID(OpCodeID OpCodeId);
+
 public:
     // Print
     // Print the instruction

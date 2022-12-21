@@ -51,6 +51,20 @@ Instruction::setParent(BasicBlock *BB)
     mParent = BB;
 }
 
+// Get the opcode of this instruction
+const OpCodeID
+Instruction::getOpCodeID() const
+{
+    return mOpCodeID;
+}
+
+// Set the opcode of this instruction
+void
+Instruction::setOpCodeID(OpCodeID OpCodeId)
+{
+    mOpCodeID = OpCodeId;
+}
+
 ////////////////////////////////////////////////////////////
 // Print
 // Print the instruction
