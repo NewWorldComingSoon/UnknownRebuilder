@@ -7,7 +7,7 @@ namespace uir {
 class Object
 {
 public:
-    Object();
+    Object() = default;
     virtual ~Object() = default;
 
 public:
