@@ -12,7 +12,7 @@ namespace uir {
 //
 FlagsVariable::FlagsVariable(Type *Ty) : LocalVariable(Ty, "Flags", 0)
 {
-    mFlags.FlagValue = 0;
+    mFlags.FlagsValue = 0;
 }
 
 FlagsVariable::~FlagsVariable()
@@ -27,6 +27,12 @@ const FlagsVariable::Flags
 FlagsVariable::getFlags() const
 {
     return mFlags;
+}
+
+const uint32_t
+FlagsVariable::getFlagsValue() const
+{
+    return mFlags.FlagsValue;
 }
 
 void

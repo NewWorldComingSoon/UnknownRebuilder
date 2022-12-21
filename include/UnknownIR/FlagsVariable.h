@@ -8,7 +8,7 @@ class FlagsVariable : public LocalVariable
 public:
     union Flags
     {
-        uint32_t FlagValue;
+        uint32_t FlagsValue;
 
         struct
         {
@@ -33,6 +33,7 @@ public:
     // Get/Set
     // Get the flags value
     const Flags getFlags() const;
+    const uint32_t getFlagsValue() const;
 
     // Set the flags value
     void setFlags(Flags Flag);
