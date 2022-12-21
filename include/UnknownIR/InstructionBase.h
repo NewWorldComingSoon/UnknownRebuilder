@@ -1,6 +1,7 @@
 #pragma once
 #include <UnknownIR/OpCode.h>
 #include <UnknownIR/User.h>
+#include <UnknownIR/FlagsVariable.h>
 
 #include <UnknownUtils/unknown/Support/raw_ostream.h>
 
@@ -14,6 +15,7 @@ protected:
     OpCodeID mOpCodeID;
     uint64_t mInstructionAddress;
     BasicBlock *mParent;
+    FlagsVariable *mFlagsVariable;
 
 public:
     Instruction();
@@ -39,6 +41,12 @@ public:
 
     // Set the opcode of this instruction
     void setOpCodeID(OpCodeID OpCodeId);
+
+    // Get the flags variable of this instruction
+    const FlagsVariable *getFlagsVariable() const;
+
+    // Set the flags variable of this instruction
+    void setFlagsVariable(FlagsVariable *FV);
 
 public:
     // Print

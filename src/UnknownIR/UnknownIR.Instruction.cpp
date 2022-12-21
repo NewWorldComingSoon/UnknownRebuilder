@@ -9,7 +9,8 @@ Instruction::Instruction() : Instruction(OpCodeID::Unknown)
     //
 }
 
-Instruction::Instruction(OpCodeID OpCodeId) : mOpCodeID(OpCodeId), mInstructionAddress(0), mParent(nullptr)
+Instruction::Instruction(OpCodeID OpCodeId) :
+    mOpCodeID(OpCodeId), mInstructionAddress(0), mParent(nullptr), mFlagsVariable(nullptr)
 {
     //
     //
@@ -63,6 +64,20 @@ void
 Instruction::setOpCodeID(OpCodeID OpCodeId)
 {
     mOpCodeID = OpCodeId;
+}
+
+// Get the flags variable of this instruction
+const FlagsVariable *
+Instruction::getFlagsVariable() const
+{
+    return mFlagsVariable;
+}
+
+// Set the flags variable of this instruction
+void
+Instruction::setFlagsVariable(FlagsVariable *FV)
+{
+    mFlagsVariable = FV;
 }
 
 ////////////////////////////////////////////////////////////

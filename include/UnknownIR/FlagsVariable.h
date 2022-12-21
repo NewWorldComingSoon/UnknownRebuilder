@@ -31,16 +31,31 @@ public:
 
 public:
     // Get/Set
+    // Get the flags value
     const Flags getFlags() const;
 
+    // Set the flags value
     void setFlags(Flags Flag);
 
+    // Set the CarryFlag
     void setCarryFlag(bool Set = true);
+
+    // Set the ParityFlag
     void setParityFlag(bool Set = true);
+
+    // Set the AuxParityFlag
     void setAuxParityFlag(bool Set = true);
+
+    // Set the ZeroFlag
     void setZeroFlag(bool Set = true);
+
+    // Set the SignFlag
     void setSignFlag(bool Set = true);
+
+    // Set the DirectionFlag
     void setDirectionFlag(bool Set = true);
+
+    // Set the OverflowFlag
     void setOverflowFlag(bool Set = true);
 };
 
