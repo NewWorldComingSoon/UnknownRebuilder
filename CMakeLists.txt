@@ -407,6 +407,8 @@ target_include_directories(UnknownUtils PUBLIC
 set(UnknownIR_SOURCES
 	"src/UnknownIR/ContextImpl/UnknownIR.ContextImpl.cpp"
 	"src/UnknownIR/Instruction/Instruction.add.cpp"
+	"src/UnknownIR/Instruction/Instruction.load.cpp"
+	"src/UnknownIR/Instruction/Instruction.store.cpp"
 	"src/UnknownIR/Instruction/Instruction.terminator.cpp"
 	"src/UnknownIR/Internal/InternalErrors/UnknownIR.InternalErrors.cpp"
 	"src/UnknownIR/UnknownIR.BasicBlock.cpp"
@@ -435,6 +437,8 @@ set(UnknownIR_SOURCES
 	"include/UnknownIR/IRBuilder.h"
 	"include/UnknownIR/Instruction.h"
 	"include/UnknownIR/Instruction/Instruction.add.h"
+	"include/UnknownIR/Instruction/Instruction.load.h"
+	"include/UnknownIR/Instruction/Instruction.store.h"
 	"include/UnknownIR/Instruction/Instruction.terminator.h"
 	"include/UnknownIR/InstructionBase.h"
 	"include/UnknownIR/LocalVariable.h"
