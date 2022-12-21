@@ -15,6 +15,17 @@ public:
     virtual ~StoreInst();
 
 public:
+    // Virtual
+    // Get the opcode name of this instruction
+    virtual unknown::StringRef getOpcodeName() const;
+
+    // Get the default number of operands
+    virtual uint32_t getDefaultNumberOfOperands() const;
+
+    // Is this instruction with flags?
+    virtual bool hasFlags() const;
+
+public:
     // Get/Set
     // Get the value operand of this instruction
     Value *getValueOperand();

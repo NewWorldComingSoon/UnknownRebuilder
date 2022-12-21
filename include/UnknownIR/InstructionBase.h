@@ -4,6 +4,7 @@
 #include <UnknownIR/FlagsVariable.h>
 
 #include <UnknownUtils/unknown/Support/raw_ostream.h>
+#include <UnknownUtils/unknown/ADT/StringRef.h>
 
 namespace uir {
 
@@ -21,6 +22,17 @@ public:
     Instruction();
     Instruction(OpCodeID OpCodeId);
     virtual ~Instruction();
+
+public:
+    // Virtual
+    // Get the opcode name of this instruction
+    virtual unknown::StringRef getOpcodeName() const;
+
+    // Get the default number of operands
+    virtual uint32_t getDefaultNumberOfOperands() const;
+
+    // Is this instruction with flags?
+    virtual bool hasFlags() const;
 
 public:
     // Get/Set

@@ -23,6 +23,29 @@ Instruction::~Instruction()
 }
 
 ////////////////////////////////////////////////////////////
+// Virtual
+// Get the opcode name of this instruction
+unknown::StringRef
+Instruction::getOpcodeName() const
+{
+    return UnknownComponent.mOpCodeName;
+}
+
+// Get the default number of operands
+uint32_t
+Instruction::getDefaultNumberOfOperands() const
+{
+    return UnknownComponent.mNumberOfOperands;
+}
+
+// Is this instruction with flags?
+bool
+Instruction::hasFlags() const
+{
+    return UnknownComponent.mHasFlags;
+}
+
+////////////////////////////////////////////////////////////
 // Get/Set
 // Get the address of this instruction
 uint64_t

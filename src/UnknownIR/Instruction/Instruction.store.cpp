@@ -21,6 +21,29 @@ StoreInst::~StoreInst()
 }
 
 ////////////////////////////////////////////////////////////
+// Virtual
+// Get the opcode name of this instruction
+unknown::StringRef
+StoreInst::getOpcodeName() const
+{
+    return StoreComponent.mOpCodeName;
+}
+
+// Get the default number of operands
+uint32_t
+StoreInst::getDefaultNumberOfOperands() const
+{
+    return StoreComponent.mNumberOfOperands;
+}
+
+// Is this instruction with flags?
+bool
+StoreInst::hasFlags() const
+{
+    return StoreComponent.mHasFlags;
+}
+
+////////////////////////////////////////////////////////////
 // Get/Set
 // Get the value operand of this instruction
 Value *
