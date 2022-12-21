@@ -30,20 +30,6 @@ enum class OpCodeID : uint8_t
     Unknown
 };
 
-// clang-format off
-enum class Flags : uint32_t
-{
-    NullFlag            =       0,
-    CarryFlag           =       1,            // CF
-    ParityFlag          =       (1 << 2),     // PF
-    AuxParityFlag       =       (1 << 4),     // AF
-    ZeroFlag            =       (1 << 6),     // ZF
-    SignFlag            =       (1 << 7),     // SF
-    DirectionFlag       =       (1 << 10),    // DF
-    OverflowFlag        =       (1 << 11),    // OF
-};
-// clang-format on
-
 struct OpCodeComponent
 {
     OpCodeID mOpCodeID;
