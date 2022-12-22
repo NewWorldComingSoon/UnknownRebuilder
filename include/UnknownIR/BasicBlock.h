@@ -22,6 +22,7 @@ public:
     virtual ~BasicBlock();
 
 public:
+    // Virtual functions
     // Get the readable name of this object
     virtual std::string getReadableName() const override;
 

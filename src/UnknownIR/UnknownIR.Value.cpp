@@ -153,7 +153,7 @@ Value::user_clear()
 }
 
 ////////////////////////////////////////////////////////////
-// Virtual
+// Virtual functions
 // Get the name of the value
 std::string
 Value::getName() const

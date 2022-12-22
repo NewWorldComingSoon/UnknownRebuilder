@@ -64,7 +64,7 @@ public:
     void user_clear();
 
 public:
-    // Virtual
+    // Virtual functions
     // Get the name of the value
     virtual std::string getName() const override;
 

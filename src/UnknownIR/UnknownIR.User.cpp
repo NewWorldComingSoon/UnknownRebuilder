@@ -113,7 +113,7 @@ User::op_empty() const
 }
 
 ////////////////////////////////////////////////////////////
-// Virtual
+// Virtual functions
 // Replaces all references to the "From" definition with references to the "To"
 void
 User::replaceUsesOfWith(Value *From, Value *To)
