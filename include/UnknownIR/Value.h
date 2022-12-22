@@ -36,8 +36,6 @@ public:
 
 public:
     // Get/Set the name of the value
-    virtual std::string getName() const override;
-    virtual std::string getReadableName() const override;
     bool hasName() const;
     void setName(const char *ValueName);
 
@@ -67,6 +65,12 @@ public:
 
 public:
     // Virtual
+    // Get the name of the value
+    virtual std::string getName() const override;
+
+    // Get the readable name of the value
+    virtual std::string getReadableName() const override;
+
     // Replaces all references to the "From" definition with references to the "To"
     virtual void replaceUsesOfWith(Value *From, Value *To) = 0;
 

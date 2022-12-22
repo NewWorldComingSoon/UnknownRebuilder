@@ -38,24 +38,6 @@ Value::getUsers()
 ////////////////////////////////////////////////////////////
 // Get/Set
 // Get/Set the name of the value
-std::string
-Value::getName() const
-{
-    return mValueName;
-}
-
-std::string
-Value::getReadableName() const
-{
-    // %var i32
-    std::string ReadableName = UIR_LOCAL_VARIABLE_NAME_PREFIX;
-    ReadableName += mValueName;
-    ReadableName += " ";
-    ReadableName += mType->getTypeName();
-
-    return ReadableName;
-}
-
 bool
 Value::hasName() const
 {
@@ -168,6 +150,28 @@ void
 Value::user_clear()
 {
     mUsers.clear();
+}
+
+////////////////////////////////////////////////////////////
+// Virtual
+// Get the name of the value
+std::string
+Value::getName() const
+{
+    return mValueName;
+}
+
+// Get the readable name of the value
+std::string
+Value::getReadableName() const
+{
+    // %var i32
+    std::string ReadableName = UIR_LOCAL_VARIABLE_NAME_PREFIX;
+    ReadableName += mValueName;
+    ReadableName += " ";
+    ReadableName += mType->getTypeName();
+
+    return ReadableName;
 }
 
 } // namespace uir
