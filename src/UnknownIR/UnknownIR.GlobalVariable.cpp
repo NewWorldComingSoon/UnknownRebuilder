@@ -25,19 +25,6 @@ GlobalVariable::~GlobalVariable()
 
 ////////////////////////////////////////////////////////////
 // Get/Set
-// Get the readable name of this object
-std::string
-GlobalVariable::getReadableName() const
-{
-    // %global i32
-    std::string ReadableName = UIR_GLOBAL_VARIABLE_NAME_PREFIX;
-    ReadableName += mValueName;
-    ReadableName += " ";
-    ReadableName += mType->getTypeName();
-
-    return ReadableName;
-}
-
 // Get the address of this global variable
 uint64_t
 GlobalVariable::getGlobalVariableAddress() const
@@ -50,6 +37,21 @@ void
 GlobalVariable::setGlobalVariableAddress(uint64_t GlobalVariableAddress)
 {
     mGlobalVariableAddress = GlobalVariableAddress;
+}
+
+////////////////////////////////////////////////////////////
+// Virtual functions
+// Get the readable name of this object
+std::string
+GlobalVariable::getReadableName() const
+{
+    // %global i32
+    std::string ReadableName = UIR_GLOBAL_VARIABLE_NAME_PREFIX;
+    ReadableName += mValueName;
+    ReadableName += " ";
+    ReadableName += mType->getTypeName();
+
+    return ReadableName;
 }
 
 ////////////////////////////////////////////////////////////
