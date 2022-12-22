@@ -11,7 +11,7 @@ public:
     virtual ~Object() = default;
 
 public:
-    // Name
+    // Pure virtual functions
     // Get the name of this object
     virtual std::string getName() const = 0;
     // Get the readable name of this object
