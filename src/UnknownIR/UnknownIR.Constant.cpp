@@ -46,18 +46,6 @@ ConstantInt::~ConstantInt()
 
 ////////////////////////////////////////////////////////////
 // Get/Set
-// Get the readable name of this object
-std::string
-ConstantInt::getReadableName() const
-{
-    // 0x7b i32
-    std::string ReadableName = getName();
-    ReadableName += " ";
-    ReadableName += mType->getTypeName();
-
-    return ReadableName;
-}
-
 // Get/Set the value of ConstantInt
 uint64_t
 ConstantInt::getValue() const
@@ -107,6 +95,20 @@ uint32_t
 ConstantInt::getBitWidth() const
 {
     return getValueBits();
+}
+
+////////////////////////////////////////////////////////////
+// Virtual functions
+// Get the readable name of this object
+std::string
+ConstantInt::getReadableName() const
+{
+    // 0x7b i32
+    std::string ReadableName = getName();
+    ReadableName += " ";
+    ReadableName += mType->getTypeName();
+
+    return ReadableName;
 }
 
 ////////////////////////////////////////////////////////////

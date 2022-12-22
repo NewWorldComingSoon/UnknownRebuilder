@@ -21,9 +21,6 @@ public:
     virtual ~ConstantInt();
 
 public:
-    // Get the readable name of this object
-    virtual std::string getReadableName() const override;
-
     // Get/Set the value of ConstantInt
     uint64_t getValue() const;
     uint64_t getZExtValue() const;
@@ -34,6 +31,11 @@ public:
 
     // Return the bitwidth of this constant.
     uint32_t getBitWidth() const;
+
+public:
+    // Virtual functions
+    // Get the readable name of this object
+    virtual std::string getReadableName() const override;
 
 public:
     // Static
