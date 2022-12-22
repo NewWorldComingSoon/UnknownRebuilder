@@ -1,4 +1,6 @@
 #include <BasicBlock.h>
+#include <Instruction.h>
+#include <Function.h>
 
 #include <Context.h>
 #include <ContextImpl/ContextImpl.h>
