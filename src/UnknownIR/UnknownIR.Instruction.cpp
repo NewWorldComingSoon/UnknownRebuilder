@@ -10,7 +10,7 @@ Instruction::Instruction() : Instruction(OpCodeID::Unknown)
 }
 
 Instruction::Instruction(OpCodeID OpCodeId) :
-    mOpCodeID(OpCodeId), mInstructionAddress(0), mParent(nullptr), mFlagsVariable(nullptr)
+    mOpCodeID(OpCodeId), mInstructionAddress(0), mParent(nullptr), mFlagsVariable(nullptr), mStackVariable(nullptr)
 {
     //
     //
@@ -101,6 +101,20 @@ void
 Instruction::setFlagsVariable(FlagsVariable *FV)
 {
     mFlagsVariable = FV;
+}
+
+// Get the stack variable of this instruction
+const LocalVariable *
+Instruction::getStackVariable() const
+{
+    return mStackVariable;
+}
+
+// Set the stack variable of this instruction
+void
+Instruction::setStackVariable(LocalVariable *SV)
+{
+    mStackVariable = SV;
 }
 
 ////////////////////////////////////////////////////////////

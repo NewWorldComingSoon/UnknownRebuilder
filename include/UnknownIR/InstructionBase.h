@@ -17,6 +17,7 @@ protected:
     uint64_t mInstructionAddress;
     BasicBlock *mParent;
     FlagsVariable *mFlagsVariable;
+    LocalVariable *mStackVariable;
 
 public:
     Instruction();
@@ -59,6 +60,12 @@ public:
 
     // Set the flags variable of this instruction
     void setFlagsVariable(FlagsVariable *FV);
+
+    // Get the stack variable of this instruction
+    const LocalVariable *getStackVariable() const;
+
+    // Set the stack variable of this instruction
+    void setStackVariable(LocalVariable *SV);
 
 public:
     // Print
