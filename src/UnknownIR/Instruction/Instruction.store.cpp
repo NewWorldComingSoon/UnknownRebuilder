@@ -4,8 +4,7 @@
 namespace uir {
 ////////////////////////////////////////////////////////////
 // Ctor/Dtor
-StoreInst::StoreInst(Value *Val, Value *Ptr, bool IsVolatile) :
-    Instruction(OpCodeID::Store), mValueOperand(Val), mPointerOperand(Ptr), mIsVolatile(IsVolatile)
+StoreInst::StoreInst(Value *Val, Value *Ptr, bool IsVolatile) : Instruction(OpCodeID::Store), mIsVolatile(IsVolatile)
 {
     // Insert value   -> op1
     insertOperandAndUpdateUsers(Val);
@@ -49,40 +48,40 @@ StoreInst::hasFlags() const
 Value *
 StoreInst::getValueOperand()
 {
-    return mValueOperand;
+    return getOperand(0);
 }
 
 const Value *
 StoreInst::getValueOperand() const
 {
-    return mValueOperand;
+    return getOperand(0);
 }
 
 // Set the value operand of this instruction
 void
 StoreInst::setValueOperand(Value *Val)
 {
-    mValueOperand = Val;
+    setOperandAndUpdateUsers(0, Val);
 }
 
 // Get the pointer operand of this instruction
 Value *
 StoreInst::getPointerOperand()
 {
-    return mPointerOperand;
+    return getOperand(1);
 }
 
 const Value *
 StoreInst::getPointerOperand() const
 {
-    return mPointerOperand;
+    return getOperand(1);
 }
 
 // Set the pointer operand of this instruction
 void
 StoreInst::setPointerOperand(Value *Ptr)
 {
-    mPointerOperand = Ptr;
+    setOperandAndUpdateUsers(1, Ptr);
 }
 
 // Get the is volatile of this instruction

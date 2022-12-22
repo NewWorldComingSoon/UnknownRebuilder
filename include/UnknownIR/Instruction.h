@@ -7,4 +7,6 @@
 #include <UnknownIR/Instruction/Instruction.add.h>
 #include <UnknownIR/Instruction/Instruction.sub.h>
 
+#include <UnknownIR/Instruction/Instruction.return.h>
+
 #include <UnknownIR/Instruction/Instruction.terminator.h>

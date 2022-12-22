@@ -7,8 +7,6 @@ class StoreInst : public Instruction
 {
 private:
     bool mIsVolatile;
-    Value *mValueOperand;
-    Value *mPointerOperand;
 
 public:
     StoreInst(Value *Val, Value *Ptr, bool IsVolatile = false);

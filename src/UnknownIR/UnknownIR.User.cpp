@@ -141,8 +141,15 @@ User::replaceAllUsesWith(Value *V)
 ////////////////////////////////////////////////////////////
 // Get/Set
 // Get the operand at the specified index.
-Value *
+const Value *
 User::getOperand(uint32_t Index) const
+{
+    assert(Index < mOperandList.size() && "getOperand() out of range!");
+    return mOperandList[Index];
+}
+
+Value *
+User::getOperand(uint32_t Index)
 {
     assert(Index < mOperandList.size() && "getOperand() out of range!");
     return mOperandList[Index];

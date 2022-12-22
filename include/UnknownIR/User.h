@@ -50,7 +50,8 @@ public:
 public:
     // Get/Set
     // Get the operand at the specified index.
-    Value *getOperand(uint32_t Index) const;
+    const Value *getOperand(uint32_t Index) const;
+    Value *getOperand(uint32_t Index);
 
     // Set the operand at the specified index.
     void setOperand(uint32_t Index, Value *Val);
