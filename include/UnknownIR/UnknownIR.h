@@ -6,8 +6,10 @@
 #include <UnknownIR/Constant.h>
 #include <UnknownIR/GlobalVariable.h>
 #include <UnknownIR/LocalVariable.h>
+#include <UnknownIR/FlagsVariable.h>
 #include <UnknownIR/OpCode.h>
 #include <UnknownIR/Instruction.h>
+#include <UnknownIR/IRBuilder.h>
 #include <UnknownIR/Module.h>
 #include <UnknownIR/BasicBlock.h>
 #include <UnknownIR/Function.h>

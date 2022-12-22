@@ -66,7 +66,7 @@ public:
     void user_clear();
 
 public:
-    // Replace
+    // Virtual
     // Replaces all references to the "From" definition with references to the "To"
     virtual void replaceUsesOfWith(Value *From, Value *To) = 0;
 
