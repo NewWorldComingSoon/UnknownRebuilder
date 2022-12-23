@@ -507,7 +507,9 @@ target_link_libraries(UnknownFrontend PUBLIC
 # Target: UnknownBackend
 set(UnknownBackend_SOURCES
 	"src/UnknownBackend/UnknownBacktend.cpp"
+	"src/UnknownBackend/x86/UnknownBacktend.x86.cpp"
 	"include/UnknownBackend/UnknownBacktend.h"
+	"include/UnknownBackend/x86/UnknownBacktend.x86.h"
 	cmake.toml
 )
 
