@@ -54,7 +54,7 @@ StoreInst::print(unknown::raw_ostream &OS) const
     OS << getOpcodeName();
     OS << " ";
     OS << getValueOperand()->getReadableName();
-    OS << ",";
+    OS << ", ";
     OS << getPointerOperand()->getReadableName();
     OS << "\n";
 }
@@ -118,7 +118,7 @@ StoreInst::setVolatile(bool IsVolatile)
 ////////////////////////////////////////////////////////////
 // Static
 StoreInst *
-get(Value *Val, Value *Ptr, bool IsVolatile)
+StoreInst::get(Value *Val, Value *Ptr, bool IsVolatile)
 {
     return new StoreInst(Val, Ptr, IsVolatile);
 }
