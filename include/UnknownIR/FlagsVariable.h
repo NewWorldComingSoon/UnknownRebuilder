@@ -59,6 +59,10 @@ public:
 
     // Set the OverflowFlag
     void setOverflowFlag(bool Set = true);
+
+public:
+    // Static
+    static FlagsVariable *get(Type *Ty);
 };
 
 } // namespace uir

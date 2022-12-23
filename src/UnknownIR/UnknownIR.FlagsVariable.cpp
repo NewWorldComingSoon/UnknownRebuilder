@@ -89,4 +89,12 @@ FlagsVariable::setOverflowFlag(bool Set)
     mFlags.OverflowFlag = Set ? 1 : 0;
 }
 
+////////////////////////////////////////////////////////////
+// Static
+FlagsVariable *
+FlagsVariable::get(Type *Ty)
+{
+    return new FlagsVariable(Ty);
+}
+
 } // namespace uir
