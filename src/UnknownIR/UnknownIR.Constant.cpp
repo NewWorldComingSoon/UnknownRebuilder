@@ -12,6 +12,8 @@
 #include <Internal/InternalErrors/InternalErrors.h>
 #include <Internal/InternalConfig/InternalConfig.h>
 
+#include <unknown/ADT/StringExtras.h>
+
 namespace uir {
 ////////////////////////////////////////////////////////////
 //     Constant
@@ -32,7 +34,7 @@ Constant::~Constant()
 //     ConstantInt
 //
 ConstantInt::ConstantInt(Type *Ty, uint64_t Val) :
-    Constant(Ty, toHexString(setValue(Val, Ty->getTypeBits(), true), Ty->getTypeBits()).c_str())
+    Constant(Ty, unknown::utohexstr(setValue(Val, Ty->getTypeBits(), true), Ty->getTypeBits()).c_str())
 {
     //
     //
@@ -151,27 +153,6 @@ ConstantInt::convertValue(uint64_t Val, uint32_t BitWidth)
     }
 
     return NewVal;
-}
-
-// Using BitWidth to convert a value to a new hex string
-std::string
-ConstantInt::toHexString(uint64_t Val, uint32_t BitWidth)
-{
-    uint64_t NewVal = convertValue(Val, BitWidth);
-    std::stringstream SS;
-    SS << "0x";
-    SS << std::hex << NewVal;
-    return SS.str();
-}
-
-// Using BitWidth to convert a value to a new decimal string
-std::string
-ConstantInt::toDecimalString(uint64_t Val, uint32_t BitWidth)
-{
-    uint64_t NewVal = convertValue(Val, BitWidth);
-    std::stringstream SS;
-    SS << NewVal;
-    return SS.str();
 }
 
 // Get a ConstantInt from a value
