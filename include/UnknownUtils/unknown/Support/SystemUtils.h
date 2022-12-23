@@ -29,4 +29,4 @@ CheckBitcodeOutputToConsole(
 
 } // namespace unknown
 
-#endif
+

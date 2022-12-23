@@ -252,5 +252,3 @@ enum
 
 } // namespace ARMBuildAttrs
 } // namespace unknown
-
-#endif

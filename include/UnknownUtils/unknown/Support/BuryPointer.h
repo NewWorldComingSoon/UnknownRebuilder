@@ -30,4 +30,3 @@ BuryPointer(std::unique_ptr<T> Ptr)
 
 } // namespace unknown
 
-#endif

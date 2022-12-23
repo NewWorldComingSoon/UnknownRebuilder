@@ -24,6 +24,7 @@ set(test-uir_SOURCES
 	"test-uir/main.cpp"
 	"test-uir/test.inst.cpp"
 	"test-uir/test.type.cpp"
+	"test-uir/test.utils.cpp"
 	"test-uir/test.value.cpp"
 	cmake.toml
 )

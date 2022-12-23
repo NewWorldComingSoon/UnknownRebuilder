@@ -410,5 +410,3 @@ using DictScope = DelimitedScope<'{', '}'>;
 using ListScope = DelimitedScope<'[', ']'>;
 
 } // namespace unknown
-
-#endif

@@ -24,7 +24,7 @@ condition = "test_mode"
 type = "library"
 include-directories = ["src/UnknownUtils", "include", "include/UnknownUtils"]
 headers = ["include/UnknownUtils/**.h"]
-sources = ["src/UnknownUtils/**.cpp", "src/UnknownUtils/**.hpp", "src/UnknownUtils/**.h"]
+sources = ["src/UnknownUtils/**.cpp", "src/UnknownUtils/**.hpp", "src/UnknownUtils/**.h", "src/UnknownUtils/**.inc"]
 compile-features = ["cxx_std_20"]
 
 

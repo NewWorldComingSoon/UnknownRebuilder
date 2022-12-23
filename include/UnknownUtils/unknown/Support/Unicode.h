@@ -70,5 +70,3 @@ foldCharSimple(int C);
 } // namespace unicode
 } // namespace sys
 } // namespace unknown
-
-#endif

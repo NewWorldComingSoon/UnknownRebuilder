@@ -47,4 +47,3 @@ crc32(StringRef Buffer);
 
 } // namespace unknown
 
-#endif

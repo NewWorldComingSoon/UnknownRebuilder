@@ -179,4 +179,4 @@ getIsaVersion(StringRef GPU);
 
 } // namespace unknown
 
-#endif
+

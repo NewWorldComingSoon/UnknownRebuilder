@@ -210,5 +210,3 @@ extern unsigned
 getSLEB128Size(int64_t Value);
 
 } // namespace unknown
-
-#endif // LLVM_SYSTEM_LEB128_H

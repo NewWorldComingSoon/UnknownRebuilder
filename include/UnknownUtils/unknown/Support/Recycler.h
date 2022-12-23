@@ -122,5 +122,3 @@ Recycler<T, Size, Align>::PrintStats()
 }
 
 } // namespace unknown
-
-#endif

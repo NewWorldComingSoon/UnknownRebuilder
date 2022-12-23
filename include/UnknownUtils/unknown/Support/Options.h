@@ -119,5 +119,3 @@ public:
 };
 
 } // namespace unknown
-
-#endif

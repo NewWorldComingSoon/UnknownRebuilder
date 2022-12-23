@@ -185,4 +185,3 @@ private:
     static const unsigned VARNAME = DebugCounter::registerCounter(COUNTERNAME, DESC)
 
 } // namespace unknown
-#endif

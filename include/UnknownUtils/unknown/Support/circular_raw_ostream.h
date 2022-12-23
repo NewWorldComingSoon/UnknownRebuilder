@@ -161,5 +161,3 @@ private:
     }
 };
 } // namespace unknown
-
-#endif

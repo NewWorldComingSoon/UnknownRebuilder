@@ -233,4 +233,4 @@ BranchProbability::normalizeProbabilities(ProbabilityIter Begin, ProbabilityIter
 
 } // namespace unknown
 
-#endif
+

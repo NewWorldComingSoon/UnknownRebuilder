@@ -806,5 +806,3 @@ struct format_provider<unknown::json::Value>
     static void format(const unknown::json::Value &, raw_ostream &, StringRef);
 };
 } // namespace unknown
-
-#endif

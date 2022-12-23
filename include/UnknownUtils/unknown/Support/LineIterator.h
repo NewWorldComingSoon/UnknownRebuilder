@@ -82,5 +82,3 @@ private:
     void advance();
 };
 } // namespace unknown
-
-#endif

@@ -125,5 +125,3 @@ fmt_consume(Error &&Item)
     return detail::ErrorAdapter(std::move(Item));
 }
 } // namespace unknown
-
-#endif
