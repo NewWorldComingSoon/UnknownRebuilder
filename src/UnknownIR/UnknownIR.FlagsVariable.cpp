@@ -10,7 +10,7 @@ namespace uir {
 ////////////////////////////////////////////////////////////
 //     FlagsVariable
 //
-FlagsVariable::FlagsVariable(Type *Ty) : LocalVariable(Ty, "Flags", 0)
+FlagsVariable::FlagsVariable(Type *Ty) : LocalVariable(Ty, "flags", 0)
 {
     mFlags.FlagsValue = 0;
 }
