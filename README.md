@@ -7,13 +7,13 @@ X86 native code rebuilder using UnknownIR(UIR) and UnknownMC(UMC).
 
 ```mermaid
 flowchart LR
-A1[X86] -->| | B(UIR)
-A2[ARM] -->| | B(UIR)
-B -->| | C(UIR Pass)
-C -->| | D(UMC)
-D -->| | E(UMC Pass)
-E -->| | F1[X86]
-E -->| | F2[ARM]
+A1[X86] -->B(UIR)
+A2[ARM] -->B(UIR)
+B -->C(UIR Pass)
+C -->D(UMC)
+D -->E(UMC Pass)
+E -->F1[X86]
+E -->F2[ARM]
 ```
 
 
