@@ -1,6 +1,8 @@
 #include <Instruction.h>
 #include <BasicBlock.h>
 
+#include <Internal/InternalErrors/InternalErrors.h>
+
 namespace uir {
 
 Instruction::Instruction() : Instruction(OpCodeID::Unknown)
@@ -118,8 +120,23 @@ Instruction::setFlagsVariableAndUpdateUsers(FlagsVariable *FV)
     setFlagsVariable(FV);
 
     // Update its users
-    OldFlagsVariable->user_erase(this);
-    FV->user_insert(this);
+    if (OldFlagsVariable)
+    {
+        OldFlagsVariable->user_erase(this);
+    }
+    else
+    {
+        uir_unreachable("OldFlagsVariable == nullptr in Instruction::setFlagsVariableAndUpdateUsers");
+    }
+
+    if (FV)
+    {
+        FV->user_insert(this);
+    }
+    else
+    {
+        uir_unreachable("FV == nullptr in Instruction::setFlagsVariableAndUpdateUsers");
+    }
 }
 
 // Get the stack variable of this instruction
@@ -151,8 +168,23 @@ Instruction::setStackVariableAndUpdateUsers(LocalVariable *SV)
     setStackVariable(SV);
 
     // Update its users
-    OldStackVariable->user_erase(this);
-    SV->user_insert(this);
+    if (OldStackVariable)
+    {
+        OldStackVariable->user_erase(this);
+    }
+    else
+    {
+        uir_unreachable("OldStackVariable == nullptr in Instruction::setStackVariableAndUpdateUsers");
+    }
+
+    if (SV)
+    {
+        SV->user_insert(this);
+    }
+    else
+    {
+        uir_unreachable("SV == nullptr in Instruction::setStackVariableAndUpdateUsers");
+    }
 }
 
 ////////////////////////////////////////////////////////////
