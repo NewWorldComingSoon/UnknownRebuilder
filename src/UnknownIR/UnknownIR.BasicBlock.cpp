@@ -12,7 +12,7 @@ namespace uir {
 ////////////////////////////////////////////////////////////
 //     BasicBlock
 //
-BasicBlock::BasicBlock(Context &C) : BasicBlock(C, "BasicBlock", 0, 0)
+BasicBlock::BasicBlock(Context &C) : BasicBlock(C, BasicBlock::generateOrderedBasicBlockName(C), 0, 0)
 {
     //
     //
@@ -46,7 +46,7 @@ BasicBlock::~BasicBlock()
 std::string
 BasicBlock::getReadableName() const
 {
-    // block:bbname
+    // block.bbname
     std::string ReadableName = UIR_BLOCK_VARIABLE_NAME_PREFIX;
     ReadableName += mBasicBlockName;
 
