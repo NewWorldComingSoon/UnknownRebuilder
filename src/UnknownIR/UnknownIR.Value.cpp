@@ -174,4 +174,12 @@ Value::getReadableName() const
     return ReadableName;
 }
 
+// Print the object name
+void
+Value::print(unknown::raw_ostream &OS) const
+{
+    OS << getReadableName();
+    OS << "\n";
+}
+
 } // namespace uir

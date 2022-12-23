@@ -16,6 +16,7 @@ TEST(test_uir, test_uir_inst_RetIMM_1)
     auto ReturnImmIst = ReturnImmInst::get(ConstantInt::get(CTX, 1, 32));
     ReturnImmIst->setInstructionAddress(0x401000);
     ReturnImmIst->print(unknown::outs());
+    unknown::outs() << *ReturnImmIst;
 
     auto ImmCstInt = ReturnImmIst->getImmConstantInt();
     if (ImmCstInt)
@@ -28,6 +29,7 @@ TEST(test_uir, test_uir_inst_RetIMM_1)
         std::cout << std::format("ImmCstInt2->getZExtValue() = {}", ImmCstInt->getZExtValue()) << std::endl;
         ReturnImmIst->setInstructionAddress(0x401001);
         ReturnImmIst->print(unknown::outs());
+        unknown::outs() << *ReturnImmIst;
     }
 }
 
@@ -45,6 +47,7 @@ TEST(test_uir, test_uir_inst_Store_1)
     auto StoreIst = StoreInst::get(Val, Ptr);
     StoreIst->setInstructionAddress(0x401000);
     StoreIst->print(unknown::outs());
+    unknown::outs() << *StoreIst;
 }
 
 TEST(test_uir, test_uir_inst_Ret_1)
@@ -58,4 +61,5 @@ TEST(test_uir, test_uir_inst_Ret_1)
     auto RetIst = ReturnInst::get();
     RetIst->setInstructionAddress(0x401000);
     RetIst->print(unknown::outs());
+    unknown::outs() << *RetIst;
 }
