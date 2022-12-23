@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <list>
 #include <cstdint>
 
 #include <UnknownIR/Value.h>
@@ -9,8 +10,11 @@ namespace uir {
 
 class User : public Value
 {
+public:
+    using OperandListType = std::vector<Value *>;
+
 private:
-    std::vector<Value *> mOperandList;
+    OperandListType mOperandList;
 
 public:
     User();
@@ -20,13 +24,13 @@ public:
 public:
     // OperandList
     // Returns the list of operands for this instruction.
-    std::vector<Value *> &getOperandList();
-    const std::vector<Value *> &getOperandList() const;
+    OperandListType &getOperandList();
+    const OperandListType &getOperandList() const;
 
 public:
     // Iterator
-    using op_iterator = std::vector<Value *>::iterator;
-    using const_op_iterator = std::vector<Value *>::const_iterator;
+    using op_iterator = OperandListType::iterator;
+    using const_op_iterator = OperandListType::const_iterator;
     op_iterator op_begin();
     const_op_iterator op_begin() const;
     op_iterator op_end();

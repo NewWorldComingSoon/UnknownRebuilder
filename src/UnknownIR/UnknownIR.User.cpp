@@ -25,13 +25,13 @@ User::~User()
 ////////////////////////////////////////////////////////////
 // OperandList
 // Returns the list of operands for this instruction.
-std::vector<Value *> &
+User::OperandListType &
 User::getOperandList()
 {
     return mOperandList;
 }
 
-const std::vector<Value *> &
+const User::OperandListType &
 User::getOperandList() const
 {
     return mOperandList;

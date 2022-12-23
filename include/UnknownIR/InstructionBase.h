@@ -74,6 +74,14 @@ public:
     void setStackVariableAndUpdateUsers(LocalVariable *SV);
 
 public:
+    // Remove/Erase/Insert
+    // Remove this instruction from its parent, but does not delete it.
+    void removeFromParent();
+
+    // Remove this instruction from its parent and delete it.
+    void eraseFromParent();
+
+public:
     // Print
     // Print the instruction
     void print(unknown::raw_ostream &OS) const;

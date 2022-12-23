@@ -23,13 +23,13 @@ Value::getContext() const
 
 ////////////////////////////////////////////////////////////
 // User
-const std::unordered_set<User *> &
+const Value::UsersListType &
 Value::getUsers() const
 {
     return mUsers;
 }
 
-std::unordered_set<User *> &
+Value::UsersListType &
 Value::getUsers()
 {
     return mUsers;

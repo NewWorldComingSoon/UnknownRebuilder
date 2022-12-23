@@ -188,6 +188,39 @@ Instruction::setStackVariableAndUpdateUsers(LocalVariable *SV)
 }
 
 ////////////////////////////////////////////////////////////
+// Remove/Erase/Insert
+// Remove this instruction from its parent, but does not delete it.
+void
+Instruction::removeFromParent()
+{
+    if (mParent == nullptr)
+    {
+        return;
+    }
+
+    mParent->getInstList().remove(this);
+}
+
+// Remove this instruction from its parent and delete it.
+void
+Instruction::eraseFromParent()
+{
+    if (mParent == nullptr)
+    {
+        return;
+    }
+
+    for (auto It = mParent->getInstList().begin(); It != mParent->getInstList().end(); ++It)
+    {
+        if (*It == this)
+        {
+            mParent->getInstList().erase(It);
+            break;
+        }
+    }
+}
+
+////////////////////////////////////////////////////////////
 // Print
 // Print the instruction
 void

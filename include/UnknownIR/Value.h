@@ -13,12 +13,15 @@ class User;
 
 class Value : public Object
 {
+public:
+    using UsersListType = std::unordered_set<User *>;
+
 protected:
     Type *mType;
     std::string mValueName;
 
 protected:
-    std::unordered_set<User *> mUsers;
+    UsersListType mUsers;
 
 public:
     Value();
@@ -31,8 +34,8 @@ public:
 
 public:
     // User
-    const std::unordered_set<User *> &getUsers() const;
-    std::unordered_set<User *> &getUsers();
+    const UsersListType &getUsers() const;
+    UsersListType &getUsers();
 
 public:
     // Get/Set the name of the value
@@ -49,8 +52,8 @@ public:
 
 public:
     // Iterator
-    using user_iterator = std::unordered_set<User *>::iterator;
-    using const_user_iterator = std::unordered_set<User *>::const_iterator;
+    using user_iterator = UsersListType::iterator;
+    using const_user_iterator = UsersListType::const_iterator;
     user_iterator user_begin();
     const_user_iterator user_begin() const;
     user_iterator user_end();

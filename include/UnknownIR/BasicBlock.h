@@ -7,12 +7,15 @@ class Instruction;
 
 class BasicBlock : public Constant
 {
+public:
+    using InstListType = std::list<Instruction *>;
+
 private:
     std::string mBasicBlockName;
     uint64_t mBasicBlockAddressBegin;
     uint64_t mBasicBlockAddressEnd;
     Function *mParent;
-    std::vector<Instruction *> mInstList;
+    InstListType mInstList;
 
 public:
     explicit BasicBlock(Context &C);
@@ -25,11 +28,16 @@ public:
     virtual ~BasicBlock();
 
 public:
+    // BasicBlock
+    const InstListType &getInstList() const { return mInstList; }
+    InstListType &getInstList() { return mInstList; }
+
+public:
     // Instruction iterators
-    using iterator = std::vector<Instruction *>::iterator;
-    using const_iterator = std::vector<Instruction *>::const_iterator;
-    using reverse_iterator = std::vector<Instruction *>::reverse_iterator;
-    using const_reverse_iterator = std::vector<Instruction *>::const_reverse_iterator;
+    using iterator = InstListType::iterator;
+    using const_iterator = InstListType::const_iterator;
+    using reverse_iterator = InstListType::reverse_iterator;
+    using const_reverse_iterator = InstListType::const_reverse_iterator;
 
     iterator begin() { return mInstList.begin(); }
     const_iterator begin() const { return mInstList.begin(); }
