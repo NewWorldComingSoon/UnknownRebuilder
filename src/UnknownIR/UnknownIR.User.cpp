@@ -223,4 +223,14 @@ User::insertOperandAndUpdateUsers(Value *Val)
     }
 }
 
+// Drop all references to operands.
+void
+User::dropAllReferences()
+{
+    for (Value *Op : mOperandList)
+    {
+        Op->user_erase(this);
+    }
+}
+
 } // namespace uir

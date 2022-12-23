@@ -64,12 +64,15 @@ public:
     void setOperandAndUpdateUsers(uint32_t Index, Value *Val);
 
 public:
-    // Insert
+    // Insert/Drop
     // Insert the specified value.
     void insertOperand(Value *Val);
 
     // Insert the specified value and update the user list.
     void insertOperandAndUpdateUsers(Value *Val);
+
+    // Drop all references to operands.
+    void dropAllReferences();
 };
 
 } // namespace uir
