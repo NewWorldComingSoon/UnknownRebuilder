@@ -1,7 +1,7 @@
 #include <UnknownIR.h>
 #include <gtest/gtest.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <format>
+#include <iostream>
 
 using namespace uir;
 
