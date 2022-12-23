@@ -20,8 +20,15 @@ Instruction::Instruction(OpCodeID OpCodeId) :
 
 Instruction::~Instruction()
 {
-    //
-    //
+    if (mFlagsVariable)
+    {
+        mFlagsVariable->user_erase(this);
+    }
+
+    if (mStackVariable)
+    {
+        mStackVariable->user_erase(this);
+    }
 }
 
 ////////////////////////////////////////////////////////////

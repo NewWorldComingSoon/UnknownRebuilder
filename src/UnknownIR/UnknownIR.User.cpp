@@ -13,13 +13,8 @@ User::User(Type *Ty, unknown::StringRef UserName) : Value(Ty, UserName) {}
 
 User::~User()
 {
-    for (Value *Val : mOperandList)
-    {
-        if (Val)
-        {
-            Val->user_erase(this);
-        }
-    }
+    // Drop all references to operands.
+    dropAllReferences();
 }
 
 ////////////////////////////////////////////////////////////
@@ -229,7 +224,10 @@ User::dropAllReferences()
 {
     for (Value *Op : mOperandList)
     {
-        Op->user_erase(this);
+        if (Op)
+        {
+            Op->user_erase(this);
+        }
     }
 }
 
