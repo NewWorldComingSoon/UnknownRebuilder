@@ -12,8 +12,8 @@ A2[ARM] -->| | B(UIR)
 B -->|Opt| C(UIR Pass)
 C -->|Codegen| D(UMC)
 D -->|Opt| E(UMC Pass)
-E -->|Output| F1[X86]
-E -->|Output| F2[ARM]
+E -->| | F1[X86]
+E -->| | F2[ARM]
 ```
 
 
