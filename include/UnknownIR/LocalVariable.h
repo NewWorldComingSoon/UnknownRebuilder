@@ -11,7 +11,7 @@ private:
     uint64_t mLocalVariableAddress;
 
 public:
-    explicit LocalVariable(Type *Ty, const char *LocalVariableName, uint64_t LocalVariableAddress);
+    explicit LocalVariable(Type *Ty, unknown::StringRef LocalVariableName, uint64_t LocalVariableAddress);
     virtual ~LocalVariable();
 
 public:

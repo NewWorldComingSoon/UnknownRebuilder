@@ -20,7 +20,7 @@ BasicBlock::BasicBlock(Context &C) : BasicBlock(C, "BasicBlock", 0, 0)
 
 BasicBlock::BasicBlock(
     Context &C,
-    const char *BasicBlockName,
+    unknown::StringRef BasicBlockName,
     uint64_t BasicBlockAddressBegin,
     uint64_t BasicBlockAddressEnd,
     Function *Parent /*= nullptr*/) :

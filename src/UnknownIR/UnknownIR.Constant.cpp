@@ -16,7 +16,7 @@ namespace uir {
 ////////////////////////////////////////////////////////////
 //     Constant
 //
-Constant::Constant(Type *Ty, const char *ConstantName) : User(Ty, ConstantName)
+Constant::Constant(Type *Ty, unknown::StringRef ConstantName) : User(Ty, ConstantName)
 {
     //
     //

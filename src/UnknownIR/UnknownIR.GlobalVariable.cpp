@@ -10,7 +10,7 @@ namespace uir {
 ////////////////////////////////////////////////////////////
 //     GlobalVariable
 //
-GlobalVariable::GlobalVariable(Type *Ty, const char *GlobalVariableName, uint64_t GlobalVariableAddress) :
+GlobalVariable::GlobalVariable(Type *Ty, unknown::StringRef GlobalVariableName, uint64_t GlobalVariableAddress) :
     Constant(Ty, GlobalVariableName), mGlobalVariableAddress(GlobalVariableAddress)
 {
     //

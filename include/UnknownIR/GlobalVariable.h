@@ -9,7 +9,7 @@ protected:
     uint64_t mGlobalVariableAddress;
 
 public:
-    explicit GlobalVariable(Type *Ty, const char *GlobalVariableName, uint64_t GlobalVariableAddress);
+    explicit GlobalVariable(Type *Ty, unknown::StringRef GlobalVariableName, uint64_t GlobalVariableAddress);
     virtual ~GlobalVariable();
 
 public:

@@ -22,7 +22,7 @@ protected:
 
 public:
     Value();
-    explicit Value(Type *Ty, const char *ValueName);
+    explicit Value(Type *Ty, unknown::StringRef ValueName);
     virtual ~Value();
 
 public:

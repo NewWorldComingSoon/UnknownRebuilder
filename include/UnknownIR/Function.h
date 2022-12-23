@@ -13,7 +13,11 @@ private:
     uint64_t mFunctionAddressEnd;
 
 public:
-    explicit Function(Context &C, const char *FunctionName, uint64_t FunctionAddressBegin, uint64_t FunctionAddressEnd);
+    explicit Function(
+        Context &C,
+        unknown::StringRef FunctionName,
+        uint64_t FunctionAddressBegin,
+        uint64_t FunctionAddressEnd);
     virtual ~Function();
 
 public:

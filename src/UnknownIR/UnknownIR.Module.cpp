@@ -13,7 +13,7 @@ namespace uir {
 
 ////////////////////////////////////////////////////////////
 // Ctor/Dtor
-Module::Module(Context &C, const char *ModuleName) : mContext(C), mModuleName(ModuleName)
+Module::Module(Context &C, unknown::StringRef ModuleName) : mContext(C), mModuleName(ModuleName)
 {
     //
     //
@@ -72,14 +72,14 @@ Module::getModuleName() const
 }
 
 void
-Module::setModuleName(const char *ModuleName)
+Module::setModuleName(unknown::StringRef ModuleName)
 {
     mModuleName = ModuleName;
 }
 
 // Get the specified function in the module
 Function *
-Module::getFunction(const char *FunctionName) const
+Module::getFunction(unknown::StringRef FunctionName) const
 {
     for (Function *Func : mFunctionList)
     {
@@ -108,7 +108,7 @@ Module::getFunction(uint64_t Address) const
 
 // Get the specified global variable by name in the module
 GlobalVariable *
-Module::getGlobalVariable(const char *GlobalVariableName) const
+Module::getGlobalVariable(unknown::StringRef GlobalVariableName) const
 {
     for (GlobalVariable *GV : mGlobalVariableList)
     {

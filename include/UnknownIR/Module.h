@@ -17,7 +17,7 @@ protected:
     std::unordered_set<GlobalVariable *> mGlobalVariableList;
 
 public:
-    explicit Module(Context &C, const char *ModuleName);
+    explicit Module(Context &C, unknown::StringRef ModuleName);
     virtual ~Module();
 
 public:
@@ -60,15 +60,15 @@ public:
     // Get/Set
     // Get/Set the name of module
     std::string getModuleName() const;
-    void setModuleName(const char *ModuleName);
+    void setModuleName(unknown::StringRef ModuleName);
 
     // Get the specified function by name in the module
-    Function *getFunction(const char *FunctionName) const;
+    Function *getFunction(unknown::StringRef FunctionName) const;
     // Get the specified function by address in the module
     Function *getFunction(uint64_t Address) const;
 
     // Get the specified global variable by name in the module
-    GlobalVariable *getGlobalVariable(const char *GlobalVariableName) const;
+    GlobalVariable *getGlobalVariable(unknown::StringRef GlobalVariableName) const;
     // Get the specified global variable by address in the module
     GlobalVariable *getGlobalVariable(uint64_t Address) const;
 

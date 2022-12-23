@@ -7,7 +7,7 @@ class Context;
 class Constant : public User
 {
 public:
-    explicit Constant(Type *Ty, const char *ConstantName);
+    explicit Constant(Type *Ty, unknown::StringRef ConstantName);
     virtual ~Constant();
 };
 

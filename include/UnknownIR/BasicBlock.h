@@ -18,7 +18,7 @@ public:
     explicit BasicBlock(Context &C);
     explicit BasicBlock(
         Context &C,
-        const char *BasicBlockName,
+        unknown::StringRef BasicBlockName,
         uint64_t BasicBlockAddressBegin,
         uint64_t BasicBlockAddressEnd,
         Function *Parent = nullptr);
