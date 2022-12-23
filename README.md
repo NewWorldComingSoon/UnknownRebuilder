@@ -5,6 +5,18 @@
 
 X86 native code rebuilder using UnknownIR(UIR).
 
+```mermaid
+flowchart LR
+A1[Frontend-X86] -->|Translate| B(UIR)
+A2[Frontend-ARM] -->|Translate| B(UIR)
+B -->|Optimize| C(UIR Pass)
+C -->|Codegen| D(UMC)
+D -->|Optimize| E(UMC Pass)
+E -->|Output| F1[Backend-X86]
+E -->|Output| F2[Backend-ARM]
+```
+
+
 ## Motivation
 Just for learning. Maybe it can help others too.
 
