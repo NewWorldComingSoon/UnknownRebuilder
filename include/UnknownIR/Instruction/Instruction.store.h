@@ -23,6 +23,9 @@ public:
     // Is this instruction with flags?
     virtual bool hasFlags() const override;
 
+    // Print the instruction
+    virtual void print(unknown::raw_ostream &OS) const override;
+
 public:
     // Get/Set
     // Get the value operand of this instruction

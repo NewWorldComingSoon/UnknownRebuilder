@@ -42,6 +42,13 @@ StoreInst::hasFlags() const
     return StoreComponent.mHasFlags;
 }
 
+// Print the instruction
+void
+StoreInst::print(unknown::raw_ostream &OS) const
+{
+    // TODO
+}
+
 ////////////////////////////////////////////////////////////
 // Get/Set
 // Get the value operand of this instruction

@@ -35,6 +35,9 @@ public:
     // Is this instruction with flags?
     virtual bool hasFlags() const;
 
+    // Print the instruction
+    virtual void print(unknown::raw_ostream &OS) const;
+
 public:
     // Get/Set
     // Get the address of this instruction
@@ -95,11 +98,6 @@ public:
 
     // Insert an unlinked instructions into a basic block immediately after the specified instruction.
     void insertAfter(Instruction *InsertPos);
-
-public:
-    // Print
-    // Print the instruction
-    void print(unknown::raw_ostream &OS) const;
 
 public:
     // Static

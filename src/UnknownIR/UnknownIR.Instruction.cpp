@@ -47,6 +47,13 @@ Instruction::hasFlags() const
     return UnknownComponent.mHasFlags;
 }
 
+// Print the instruction
+void
+Instruction::print(unknown::raw_ostream &OS) const
+{
+    // TODO
+}
+
 ////////////////////////////////////////////////////////////
 // Get/Set
 // Get the address of this instruction
@@ -282,15 +289,6 @@ Instruction::insertAfter(Instruction *InsertPos)
     }
 
     InsertPos->getParent()->getInstList().insert(InsertPosIt, this);
-}
-
-////////////////////////////////////////////////////////////
-// Print
-// Print the instruction
-void
-Instruction::print(unknown::raw_ostream &OS) const
-{
-    // TODO
 }
 
 ////////////////////////////////////////////////////////////

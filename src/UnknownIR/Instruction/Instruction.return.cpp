@@ -38,6 +38,13 @@ ReturnInst::hasFlags() const
     return RetComponent.mHasFlags;
 }
 
+// Print the instruction
+void
+ReturnInst::print(unknown::raw_ostream &OS) const
+{
+    // TODO
+}
+
 ////////////////////////////////////////////////////////////
 // Static
 ReturnInst *
@@ -81,6 +88,13 @@ bool
 ReturnImmInst::hasFlags() const
 {
     return RetIMMComponent.mHasFlags;
+}
+
+// Print the instruction
+void
+ReturnImmInst::print(unknown::raw_ostream &OS) const
+{
+    // TODO
 }
 
 ////////////////////////////////////////////////////////////

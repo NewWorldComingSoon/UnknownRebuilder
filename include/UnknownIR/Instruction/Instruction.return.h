@@ -21,6 +21,9 @@ public:
     // Is this instruction with flags?
     virtual bool hasFlags() const override;
 
+    // Print the instruction
+    virtual void print(unknown::raw_ostream &OS) const override;
+
 public:
     // Static
     static ReturnInst *get();
@@ -42,6 +45,9 @@ public:
 
     // Is this instruction with flags?
     virtual bool hasFlags() const override;
+
+    // Print the instruction
+    virtual void print(unknown::raw_ostream &OS) const override;
 
 public:
     // Get/Set
