@@ -61,11 +61,17 @@ public:
     // Set the flags variable of this instruction
     void setFlagsVariable(FlagsVariable *FV);
 
+    // Set the flags variable of this instruction and update its users
+    void setFlagsVariableAndUpdateUsers(FlagsVariable *FV);
+
     // Get the stack variable of this instruction
     const LocalVariable *getStackVariable() const;
 
     // Set the stack variable of this instruction
     void setStackVariable(LocalVariable *SV);
+
+    // Set the stack variable of this instruction and update its users
+    void setStackVariableAndUpdateUsers(LocalVariable *SV);
 
 public:
     // Print

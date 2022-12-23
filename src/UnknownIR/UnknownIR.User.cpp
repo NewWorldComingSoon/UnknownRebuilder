@@ -169,29 +169,31 @@ User::setOperandAndUpdateUsers(uint32_t Index, Value *Val)
 {
     assert(Index < mOperandList.size() && "setOperandAndUpdateUsers() out of range!");
     auto OldVal = mOperandList[Index];
-    if (OldVal != Val)
+    if (OldVal == Val)
     {
-        // Set operand
-        setOperand(Index, Val);
+        return;
+    }
 
-        // Update user
-        if (OldVal)
-        {
-            OldVal->user_erase(this);
-        }
-        else
-        {
-            uir_unreachable("OldVal == nullptr in User::setOperandAndUpdateUsers");
-        }
+    // Set operand
+    setOperand(Index, Val);
 
-        if (Val)
-        {
-            Val->user_insert(this);
-        }
-        else
-        {
-            uir_unreachable("Val == nullptr in User::setOperandAndUpdateUsers");
-        }
+    // Update user
+    if (OldVal)
+    {
+        OldVal->user_erase(this);
+    }
+    else
+    {
+        uir_unreachable("OldVal == nullptr in User::setOperandAndUpdateUsers");
+    }
+
+    if (Val)
+    {
+        Val->user_insert(this);
+    }
+    else
+    {
+        uir_unreachable("Val == nullptr in User::setOperandAndUpdateUsers");
     }
 }
 

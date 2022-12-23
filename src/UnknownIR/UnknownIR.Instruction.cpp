@@ -103,6 +103,25 @@ Instruction::setFlagsVariable(FlagsVariable *FV)
     mFlagsVariable = FV;
 }
 
+// Set the flags variable of this instruction and update its users
+void
+Instruction::setFlagsVariableAndUpdateUsers(FlagsVariable *FV)
+{
+    if (mFlagsVariable == FV)
+    {
+        return;
+    }
+
+    auto OldFlagsVariable = mFlagsVariable;
+
+    // Set the new flags variable
+    setFlagsVariable(FV);
+
+    // Update its users
+    OldFlagsVariable->user_erase(this);
+    FV->user_insert(this);
+}
+
 // Get the stack variable of this instruction
 const LocalVariable *
 Instruction::getStackVariable() const
@@ -115,6 +134,25 @@ void
 Instruction::setStackVariable(LocalVariable *SV)
 {
     mStackVariable = SV;
+}
+
+// Set the stack variable of this instruction and update its users
+void
+Instruction::setStackVariableAndUpdateUsers(LocalVariable *SV)
+{
+    if (mStackVariable == SV)
+    {
+        return;
+    }
+
+    auto OldStackVariable = mStackVariable;
+
+    // Set the new variable
+    setStackVariable(SV);
+
+    // Update its users
+    OldStackVariable->user_erase(this);
+    SV->user_insert(this);
 }
 
 ////////////////////////////////////////////////////////////
