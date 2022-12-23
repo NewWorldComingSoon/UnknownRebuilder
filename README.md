@@ -16,15 +16,14 @@ E -->F1[X86]
 E -->F2[ARM]
 ```
 
-
-## Motivation
-Just for learning. Maybe it can help others too.
-
 ## What's UIR?
 Yet another Intermediate Representation(IR) called UnknownIR(UIR).
 
 ## What's UMC?
 Yet another Machine Code(MC) called UnknownMC(UMC).
+
+## Motivation
+Just for learning. Maybe it can help others too.
 
 ## Credit
 - [cmkr](https://github.com/build-cpp/cmkr)
