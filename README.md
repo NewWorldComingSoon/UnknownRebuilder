@@ -23,6 +23,9 @@ Just for learning. Maybe it can help others too.
 ## What's UIR?
 Yet another Intermediate Representation(IR) called UnknownIR(UIR).
 
+## What's UMC?
+Yet another Machine Code(MC) called UnknownMC(UMC).
+
 ## Credit
 - [cmkr](https://github.com/build-cpp/cmkr)
 - [LLVM](https://github.com/llvm/llvm-project)
