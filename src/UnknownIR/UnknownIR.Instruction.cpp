@@ -70,6 +70,13 @@ Instruction::getParent() const
     return mParent;
 }
 
+// Get the parent of this instruction
+BasicBlock *
+Instruction::getParent()
+{
+    return mParent;
+}
+
 // Set the parent of this instruction
 void
 Instruction::setParent(BasicBlock *BB)
@@ -94,6 +101,13 @@ Instruction::setOpCodeID(OpCodeID OpCodeId)
 // Get the flags variable of this instruction
 const FlagsVariable *
 Instruction::getFlagsVariable() const
+{
+    return mFlagsVariable;
+}
+
+// Get the flags variable of this instruction
+FlagsVariable *
+Instruction::getFlagsVariable()
 {
     return mFlagsVariable;
 }
@@ -142,6 +156,13 @@ Instruction::setFlagsVariableAndUpdateUsers(FlagsVariable *FV)
 // Get the stack variable of this instruction
 const LocalVariable *
 Instruction::getStackVariable() const
+{
+    return mStackVariable;
+}
+
+// Get the stack variable of this instruction
+LocalVariable *
+Instruction::getStackVariable()
 {
     return mStackVariable;
 }
@@ -218,6 +239,49 @@ Instruction::eraseFromParent()
             break;
         }
     }
+}
+
+// Insert an unlinked instructions into a basic block immediately before the specified instruction.
+void
+Instruction::insertBefore(Instruction *InsertPos)
+{
+    if (InsertPos->getParent() == nullptr)
+    {
+        return;
+    }
+
+    auto InsertPosIt = InsertPos->getParent()->getInstList().begin();
+    for (; InsertPosIt != InsertPos->getParent()->getInstList().end(); ++InsertPosIt)
+    {
+        if (*InsertPosIt == InsertPos)
+        {
+            break;
+        }
+    }
+
+    InsertPos->getParent()->getInstList().insert(InsertPosIt, this);
+}
+
+// Insert an unlinked instructions into a basic block immediately after the specified instruction.
+void
+Instruction::insertAfter(Instruction *InsertPos)
+{
+    if (InsertPos->getParent() == nullptr)
+    {
+        return;
+    }
+
+    auto InsertPosIt = InsertPos->getParent()->getInstList().begin();
+    for (; InsertPosIt != InsertPos->getParent()->getInstList().end(); ++InsertPosIt)
+    {
+        if (*InsertPosIt == InsertPos)
+        {
+            ++InsertPosIt;
+            break;
+        }
+    }
+
+    InsertPos->getParent()->getInstList().insert(InsertPosIt, this);
 }
 
 ////////////////////////////////////////////////////////////

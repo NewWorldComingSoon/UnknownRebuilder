@@ -46,6 +46,9 @@ public:
     // Get the parent of this instruction
     const BasicBlock *getParent() const;
 
+    // Get the parent of this instruction
+    BasicBlock *getParent();
+
     // Set the parent of this instruction
     void setParent(BasicBlock *BB);
 
@@ -58,6 +61,9 @@ public:
     // Get the flags variable of this instruction
     const FlagsVariable *getFlagsVariable() const;
 
+    // Get the flags variable of this instruction
+    FlagsVariable *getFlagsVariable();
+
     // Set the flags variable of this instruction
     void setFlagsVariable(FlagsVariable *FV);
 
@@ -66,6 +72,9 @@ public:
 
     // Get the stack variable of this instruction
     const LocalVariable *getStackVariable() const;
+
+    // Get the stack variable of this instruction
+    LocalVariable *getStackVariable();
 
     // Set the stack variable of this instruction
     void setStackVariable(LocalVariable *SV);
@@ -80,6 +89,12 @@ public:
 
     // Remove this instruction from its parent and delete it.
     void eraseFromParent();
+
+    // Insert an unlinked instructions into a basic block immediately before the specified instruction.
+    void insertBefore(Instruction *InsertPos);
+
+    // Insert an unlinked instructions into a basic block immediately after the specified instruction.
+    void insertAfter(Instruction *InsertPos);
 
 public:
     // Print
