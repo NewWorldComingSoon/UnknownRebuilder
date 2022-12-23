@@ -6,12 +6,12 @@
 namespace uir {
 /////////////////////////////////////////////////////////
 // Ctor/Dtor
-Context::Context() : mImpl(new ContextImpl(*this)), mArch(ArchX86), mMode(Mode32) {}
+Context::Context() : Context(ArchX86, Mode32) {}
 
-Context::Context(Arch arch, Mode mode) : Context()
+Context::Context(Arch arch, Mode mode) : mImpl(new ContextImpl(*this)), mArch(arch), mMode(mode)
 {
-    mArch = arch;
-    mMode = mode;
+    //
+    //
 }
 
 Context::~Context()
