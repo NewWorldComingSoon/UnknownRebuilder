@@ -88,6 +88,7 @@ set(UnknownUtils_SOURCES
 	"src/UnknownUtils/UnknownUtils.BinaryStreamReader.cpp"
 	"src/UnknownUtils/UnknownUtils.BinaryStreamRef.cpp"
 	"src/UnknownUtils/UnknownUtils.BinaryStreamWriter.cpp"
+	"src/UnknownUtils/UnknownUtils.BlockFrequency.cpp"
 	"src/UnknownUtils/UnknownUtils.BranchProbability.cpp"
 	"src/UnknownUtils/UnknownUtils.BuryPointer.cpp"
 	"src/UnknownUtils/UnknownUtils.CachePruning.cpp"
