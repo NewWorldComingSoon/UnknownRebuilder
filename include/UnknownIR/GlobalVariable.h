@@ -9,6 +9,7 @@ protected:
     uint64_t mGlobalVariableAddress;
 
 public:
+    explicit GlobalVariable(Type *Ty);
     explicit GlobalVariable(Type *Ty, unknown::StringRef GlobalVariableName, uint64_t GlobalVariableAddress);
     virtual ~GlobalVariable();
 
@@ -29,6 +30,10 @@ public:
     // Static
     // Generate a new value name by order
     static std::string generateOrderedGlobalVarName(Context &C);
+
+    // New a GlobalVariable
+    static GlobalVariable *get(Type *Ty, unknown::StringRef GlobalVariableName, uint64_t GlobalVariableAddress);
+    static GlobalVariable *get(Type *Ty);
 };
 
 } // namespace uir

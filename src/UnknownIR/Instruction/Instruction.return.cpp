@@ -1,6 +1,8 @@
 #pragma once
 #include <Instruction.h>
 
+#include <unknown/ADT/StringExtras.h>
+
 namespace uir {
 ////////////////////////////////////////////////////////////
 //     ReturnInst
@@ -42,7 +44,11 @@ ReturnInst::hasFlags() const
 void
 ReturnInst::print(unknown::raw_ostream &OS) const
 {
-    // TODO
+    // address\tinst
+    OS << "0x" << unknown::utohexstr(getInstructionAddress());
+    OS << "\t";
+    OS << getOpcodeName();
+    OS << "\n";
 }
 
 ////////////////////////////////////////////////////////////
@@ -94,7 +100,13 @@ ReturnImmInst::hasFlags() const
 void
 ReturnImmInst::print(unknown::raw_ostream &OS) const
 {
-    // TODO
+    // address\tinst
+    OS << "0x" << unknown::utohexstr(getInstructionAddress());
+    OS << "\t";
+    OS << getOpcodeName();
+    OS << " ";
+    OS << getImmConstantInt()->getReadableName();
+    OS << "\n";
 }
 
 ////////////////////////////////////////////////////////////

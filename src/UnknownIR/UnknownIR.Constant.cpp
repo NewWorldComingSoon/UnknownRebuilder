@@ -31,6 +31,14 @@ Constant::~Constant()
 }
 
 ////////////////////////////////////////////////////////////
+// Static
+Constant *
+Constant::get(Type *Ty, unknown::StringRef ConstantName)
+{
+    return new Constant(Ty, ConstantName);
+}
+
+////////////////////////////////////////////////////////////
 //     ConstantInt
 //
 ConstantInt::ConstantInt(Type *Ty, uint64_t Val) :

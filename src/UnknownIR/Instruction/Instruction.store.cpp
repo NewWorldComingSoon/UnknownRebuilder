@@ -1,6 +1,8 @@
 #pragma once
 #include <Instruction.h>
 
+#include <unknown/ADT/StringExtras.h>
+
 namespace uir {
 ////////////////////////////////////////////////////////////
 // Ctor/Dtor
@@ -46,7 +48,15 @@ StoreInst::hasFlags() const
 void
 StoreInst::print(unknown::raw_ostream &OS) const
 {
-    // TODO
+    // address\tinst
+    OS << "0x" << unknown::utohexstr(getInstructionAddress());
+    OS << "\t";
+    OS << getOpcodeName();
+    OS << " ";
+    OS << getValueOperand()->getReadableName();
+    OS << ",";
+    OS << getPointerOperand()->getReadableName();
+    OS << "\n";
 }
 
 ////////////////////////////////////////////////////////////

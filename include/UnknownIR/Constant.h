@@ -9,6 +9,10 @@ class Constant : public User
 public:
     explicit Constant(Type *Ty, unknown::StringRef ConstantName);
     virtual ~Constant();
+
+public:
+    // Static
+    static Constant *get(Type *Ty, unknown::StringRef ConstantName);
 };
 
 class ConstantInt : public Constant

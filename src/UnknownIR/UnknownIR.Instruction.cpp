@@ -3,6 +3,8 @@
 
 #include <Internal/InternalErrors/InternalErrors.h>
 
+#include <unknown/ADT/StringExtras.h>
+
 namespace uir {
 
 Instruction::Instruction() : Instruction(OpCodeID::Unknown)
@@ -58,7 +60,10 @@ Instruction::hasFlags() const
 void
 Instruction::print(unknown::raw_ostream &OS) const
 {
-    // TODO
+    // address\tinst
+    OS << "0x" << unknown::utohexstr(getInstructionAddress());
+    OS << "\t";
+    OS << getOpcodeName();
 }
 
 ////////////////////////////////////////////////////////////

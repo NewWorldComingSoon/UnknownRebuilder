@@ -10,6 +10,12 @@ namespace uir {
 ////////////////////////////////////////////////////////////
 //     GlobalVariable
 //
+GlobalVariable::GlobalVariable(Type *Ty) : GlobalVariable(Ty, generateOrderedGlobalVarName(Ty->getContext()), 0)
+{
+    //
+    //
+}
+
 GlobalVariable::GlobalVariable(Type *Ty, unknown::StringRef GlobalVariableName, uint64_t GlobalVariableAddress) :
     Constant(Ty, GlobalVariableName), mGlobalVariableAddress(GlobalVariableAddress)
 {
@@ -62,6 +68,19 @@ GlobalVariable::generateOrderedGlobalVarName(Context &C)
 {
     auto CurIdx = C.mImpl->mOrderedGlobalVarNameIndex++;
     return std::to_string(CurIdx);
+}
+
+// New a GlobalVariable
+GlobalVariable *
+GlobalVariable::get(Type *Ty, unknown::StringRef GlobalVariableName, uint64_t GlobalVariableAddress)
+{
+    return new GlobalVariable(Ty, GlobalVariableName, GlobalVariableAddress);
+}
+
+GlobalVariable *
+GlobalVariable::get(Type *Ty)
+{
+    return new GlobalVariable(Ty);
 }
 
 } // namespace uir
