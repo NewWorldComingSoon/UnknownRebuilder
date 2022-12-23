@@ -29,7 +29,7 @@ public:
 class ReturnImmInst : public Instruction
 {
 public:
-    ReturnImmInst(ConstantInt *ImmConstantInt);
+    explicit ReturnImmInst(ConstantInt *ImmConstantInt);
     virtual ~ReturnImmInst();
 
 public:

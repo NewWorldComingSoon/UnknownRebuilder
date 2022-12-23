@@ -15,6 +15,7 @@ private:
     std::vector<Instruction *> mInstList;
 
 public:
+    explicit BasicBlock(Context &C);
     explicit BasicBlock(
         Context &C,
         const char *BasicBlockName,

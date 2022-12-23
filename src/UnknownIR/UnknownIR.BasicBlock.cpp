@@ -12,6 +12,12 @@ namespace uir {
 ////////////////////////////////////////////////////////////
 //     BasicBlock
 //
+BasicBlock::BasicBlock(Context &C) : BasicBlock(C, "BasicBlock", 0, 0)
+{
+    //
+    //
+}
+
 BasicBlock::BasicBlock(
     Context &C,
     const char *BasicBlockName,

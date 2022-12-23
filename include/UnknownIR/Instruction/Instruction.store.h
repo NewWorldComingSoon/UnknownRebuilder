@@ -9,7 +9,7 @@ private:
     bool mIsVolatile;
 
 public:
-    StoreInst(Value *Val, Value *Ptr, bool IsVolatile = false);
+    explicit StoreInst(Value *Val, Value *Ptr, bool IsVolatile = false);
     virtual ~StoreInst();
 
 public:

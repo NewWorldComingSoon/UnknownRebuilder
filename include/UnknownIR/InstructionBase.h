@@ -21,7 +21,7 @@ protected:
 
 public:
     Instruction();
-    Instruction(OpCodeID OpCodeId);
+    explicit Instruction(OpCodeID OpCodeId);
     virtual ~Instruction();
 
 public:
