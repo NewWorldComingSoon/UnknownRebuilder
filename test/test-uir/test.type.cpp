@@ -12,24 +12,24 @@ TEST(test_uir, test_uir_type_1)
     CTX.setMode(Context::Mode64);
 
     auto Ptr8Ty = Type::getInt8PtrTy(CTX);
-    printf("Ptr8Ty ElementTypeBits = %d\n", Ptr8Ty->getElementTypeBits());
-    printf("Ptr8Ty TypeBits = %d\n", Ptr8Ty->getTypeBits());
-    printf("Ptr8Ty PointerBits = %d\n", Ptr8Ty->getPointerBits());
+    std::cout << std::format("Ptr8Ty ElementTypeBits = {}", Ptr8Ty->getElementTypeBits()) << std::endl;
+    std::cout << std::format("Ptr8Ty TypeBits = {}", Ptr8Ty->getTypeBits()) << std::endl;
+    std::cout << std::format("Ptr8Ty PointerBits = {}", Ptr8Ty->getPointerBits()) << std::endl;
 
     auto Ptr16Ty = Type::getInt16PtrTy(CTX);
-    printf("Ptr16Ty ElementTypeBits = %d\n", Ptr16Ty->getElementTypeBits());
-    printf("Ptr16Ty TypeBits = %d\n", Ptr16Ty->getTypeBits());
-    printf("Ptr16Ty PointerBits = %d\n", Ptr16Ty->getPointerBits());
+    std::cout << std::format("Ptr16Ty ElementTypeBits = {}", Ptr16Ty->getElementTypeBits()) << std::endl;
+    std::cout << std::format("Ptr16Ty TypeBits = {}", Ptr16Ty->getTypeBits()) << std::endl;
+    std::cout << std::format("Ptr16Ty PointerBits = {}", Ptr16Ty->getPointerBits()) << std::endl;
 
     auto Ptr32Ty = Type::getInt32PtrTy(CTX);
-    printf("Ptr32Ty ElementTypeBits = %d\n", Ptr32Ty->getElementTypeBits());
-    printf("Ptr32Ty TypeBits = %d\n", Ptr32Ty->getTypeBits());
-    printf("Ptr32Ty PointerBits = %d\n", Ptr32Ty->getPointerBits());
+    std::cout << std::format("Ptr16Ty ElementTypeBits = {}", Ptr32Ty->getElementTypeBits()) << std::endl;
+    std::cout << std::format("Ptr16Ty TypeBits = {}", Ptr32Ty->getTypeBits()) << std::endl;
+    std::cout << std::format("Ptr16Ty PointerBits = {}", Ptr32Ty->getPointerBits()) << std::endl;
 
     auto Ptr64Ty = Type::getInt64PtrTy(CTX);
-    printf("Ptr64Ty ElementTypeBits = %d\n", Ptr64Ty->getElementTypeBits());
-    printf("Ptr64Ty TypeBits = %d\n", Ptr64Ty->getTypeBits());
-    printf("Ptr64Ty PointerBits = %d\n", Ptr64Ty->getPointerBits());
+    std::cout << std::format("Ptr16Ty ElementTypeBits = {}", Ptr64Ty->getElementTypeBits()) << std::endl;
+    std::cout << std::format("Ptr16Ty TypeBits = {}", Ptr64Ty->getTypeBits()) << std::endl;
+    std::cout << std::format("Ptr16Ty PointerBits = {}", Ptr64Ty->getPointerBits()) << std::endl;
 }
 
 TEST(test_uir, test_uir_type_2)
@@ -39,19 +39,19 @@ TEST(test_uir, test_uir_type_2)
     CTX.setMode(Context::Mode32);
 
     auto Ptr8Ty = Type::getInt8PtrTy(CTX);
-    printf("Ptr8Ty ElementTypeBits = %d\n", Ptr8Ty->getElementTypeBits());
-    printf("Ptr8Ty TypeBits = %d\n", Ptr8Ty->getTypeBits());
-    printf("Ptr8Ty PointerBits = %d\n", Ptr8Ty->getPointerBits());
+    std::cout << std::format("Ptr8Ty ElementTypeBits = {}", Ptr8Ty->getElementTypeBits()) << std::endl;
+    std::cout << std::format("Ptr8Ty TypeBits = {}", Ptr8Ty->getTypeBits()) << std::endl;
+    std::cout << std::format("Ptr8Ty PointerBits = {}", Ptr8Ty->getPointerBits()) << std::endl;
 
     auto Ptr16Ty = Type::getInt16PtrTy(CTX);
-    printf("Ptr16Ty ElementTypeBits = %d\n", Ptr16Ty->getElementTypeBits());
-    printf("Ptr16Ty TypeBits = %d\n", Ptr16Ty->getTypeBits());
-    printf("Ptr16Ty PointerBits = %d\n", Ptr16Ty->getPointerBits());
+    std::cout << std::format("Ptr16Ty ElementTypeBits = {}", Ptr16Ty->getElementTypeBits()) << std::endl;
+    std::cout << std::format("Ptr16Ty TypeBits = {}", Ptr16Ty->getTypeBits()) << std::endl;
+    std::cout << std::format("Ptr16Ty PointerBits = {}", Ptr16Ty->getPointerBits()) << std::endl;
 
     auto Ptr32Ty = Type::getInt32PtrTy(CTX);
-    printf("Ptr32Ty ElementTypeBits = %d\n", Ptr32Ty->getElementTypeBits());
-    printf("Ptr32Ty TypeBits = %d\n", Ptr32Ty->getTypeBits());
-    printf("Ptr32Ty PointerBits = %d\n", Ptr32Ty->getPointerBits());
+    std::cout << std::format("Ptr32Ty ElementTypeBits = {}", Ptr32Ty->getElementTypeBits()) << std::endl;
+    std::cout << std::format("Ptr32Ty TypeBits = {}", Ptr32Ty->getTypeBits()) << std::endl;
+    std::cout << std::format("Ptr32Ty PointerBits = {}", Ptr32Ty->getPointerBits()) << std::endl;
 
     // auto Ptr64Ty = Type::getInt64PtrTy(CTX);
     // printf("Ptr64Ty ElementTypeBits = %d\n", Ptr64Ty->getElementTypeBits());
@@ -66,19 +66,19 @@ TEST(test_uir, test_uir_type_3)
     CTX.setMode(Context::Mode64);
 
     auto Int8Ty = Type::getInt8Ty(CTX);
-    printf("Int8Ty TypeBits = %d\n", Int8Ty->getTypeBits());
+    std::cout << std::format("Int8Ty TypeBits = {}", Int8Ty->getTypeBits()) << std::endl;
 
     auto Int16Ty = Type::getInt16Ty(CTX);
-    printf("Int16Ty TypeBits = %d\n", Int16Ty->getTypeBits());
+    std::cout << std::format("Int16Ty TypeBits = {}", Int16Ty->getTypeBits()) << std::endl;
 
     auto Int32Ty = Type::getInt32Ty(CTX);
-    printf("Int32Ty TypeBits = %d\n", Int32Ty->getTypeBits());
+    std::cout << std::format("Int32Ty TypeBits = {}", Int32Ty->getTypeBits()) << std::endl;
 
     auto Int64Ty = Type::getInt64Ty(CTX);
-    printf("Int64Ty TypeBits = %d\n", Int64Ty->getTypeBits());
+    std::cout << std::format("Int64Ty TypeBits = {}", Int64Ty->getTypeBits()) << std::endl;
 
     auto Int128Ty = Type::getInt128Ty(CTX);
-    printf("Int128Ty TypeBits = %d\n", Int128Ty->getTypeBits());
+    std::cout << std::format("Int128Ty TypeBits = {}", Int128Ty->getTypeBits()) << std::endl;
 }
 
 TEST(test_uir, test_uir_type_4)
@@ -88,17 +88,17 @@ TEST(test_uir, test_uir_type_4)
     CTX.setMode(Context::Mode32);
 
     auto Int8Ty = Type::getInt8Ty(CTX);
-    printf("Int8Ty TypeBits = %d\n", Int8Ty->getTypeBits());
+    std::cout << std::format("Int8Ty TypeBits = {}", Int8Ty->getTypeBits()) << std::endl;
 
     auto Int16Ty = Type::getInt16Ty(CTX);
-    printf("Int16Ty TypeBits = %d\n", Int16Ty->getTypeBits());
+    std::cout << std::format("Int16Ty TypeBits = {}", Int16Ty->getTypeBits()) << std::endl;
 
     auto Int32Ty = Type::getInt32Ty(CTX);
-    printf("Int32Ty TypeBits = %d\n", Int32Ty->getTypeBits());
+    std::cout << std::format("Int32Ty TypeBits = {}", Int32Ty->getTypeBits()) << std::endl;
 
     auto Int64Ty = Type::getInt64Ty(CTX);
-    printf("Int64Ty TypeBits = %d\n", Int64Ty->getTypeBits());
+    std::cout << std::format("Int64Ty TypeBits = {}", Int64Ty->getTypeBits()) << std::endl;
 
     auto Int128Ty = Type::getInt128Ty(CTX);
-    printf("Int128Ty TypeBits = %d\n", Int128Ty->getTypeBits());
+    std::cout << std::format("Int128Ty TypeBits = {}", Int128Ty->getTypeBits()) << std::endl;
 }
