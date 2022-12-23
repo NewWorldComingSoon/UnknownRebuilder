@@ -28,26 +28,26 @@ Module::~Module()
 ////////////////////////////////////////////////////////////
 // FunctionList
 // Get function list
-const std::unordered_set<Function *> &
+const Module::FunctionSetType &
 Module::getFunctionList() const
 {
     return mFunctionList;
 }
 
-std::unordered_set<Function *> &
+Module::FunctionSetType &
 Module::getFunctionList()
 {
     return mFunctionList;
 }
 
 // Get global variable list
-const std::unordered_set<GlobalVariable *> &
+const Module::GlobalVariableSetType &
 Module::getGlobalVariableList() const
 {
     return mGlobalVariableList;
 }
 
-std::unordered_set<GlobalVariable *> &
+Module::GlobalVariableSetType &
 Module::getGlobalVariableList()
 {
     return mGlobalVariableList;

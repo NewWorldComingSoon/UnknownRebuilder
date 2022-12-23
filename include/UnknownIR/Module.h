@@ -10,11 +10,15 @@ namespace uir {
 
 class Module
 {
+public:
+    using FunctionSetType = std::unordered_set<Function *>;
+    using GlobalVariableSetType = std::unordered_set<GlobalVariable *>;
+
 protected:
     Context &mContext;
     std::string mModuleName;
-    std::unordered_set<Function *> mFunctionList;
-    std::unordered_set<GlobalVariable *> mGlobalVariableList;
+    FunctionSetType mFunctionList;
+    GlobalVariableSetType mGlobalVariableList;
 
 public:
     explicit Module(Context &C, unknown::StringRef ModuleName);
@@ -23,12 +27,12 @@ public:
 public:
     // List
     // Get function list
-    const std::unordered_set<Function *> &getFunctionList() const;
-    std::unordered_set<Function *> &getFunctionList();
+    const FunctionSetType &getFunctionList() const;
+    FunctionSetType &getFunctionList();
 
     // Get global variable list
-    const std::unordered_set<GlobalVariable *> &getGlobalVariableList() const;
-    std::unordered_set<GlobalVariable *> &getGlobalVariableList();
+    const GlobalVariableSetType &getGlobalVariableList() const;
+    GlobalVariableSetType &getGlobalVariableList();
 
 public:
     // Context
@@ -37,8 +41,8 @@ public:
 public:
     // Iterators
     // Function Iterators
-    using iterator = std::unordered_set<Function *>::iterator;
-    using const_iterator = std::unordered_set<Function *>::const_iterator;
+    using iterator = FunctionSetType::iterator;
+    using const_iterator = FunctionSetType::const_iterator;
     iterator begin() { return mFunctionList.begin(); }
     const_iterator begin() const { return mFunctionList.cbegin(); }
     iterator end() { return mFunctionList.end(); }
@@ -47,8 +51,8 @@ public:
     bool empty() const { return mFunctionList.empty(); }
 
     // Function Iterators
-    using global_iterator = std::unordered_set<GlobalVariable *>::iterator;
-    using const_global_iterator = std::unordered_set<GlobalVariable *>::const_iterator;
+    using global_iterator = GlobalVariableSetType::iterator;
+    using const_global_iterator = GlobalVariableSetType::const_iterator;
     global_iterator global_begin() { return mGlobalVariableList.begin(); }
     const_global_iterator global_begin() const { return mGlobalVariableList.cbegin(); }
     global_iterator global_end() { return mGlobalVariableList.end(); }
