@@ -115,11 +115,17 @@ public:
     // Get the size of this block
     uint64_t getBasicBlockSize() const;
 
-    // Get the terminator instruction
+    // Get the terminator instruction of this block
     TerminatorInst *getTerminator();
 
-    // Get the terminator instruction
+    // Get the terminator instruction of this block
     const TerminatorInst *getTerminator() const;
+
+    // Get the first predecessor of this block
+    BasicBlock *getFirstPredecessor();
+
+    // Get the first predecessor of this block
+    const BasicBlock *getFirstPredecessor() const;
 
 public:
     // Virtual functions

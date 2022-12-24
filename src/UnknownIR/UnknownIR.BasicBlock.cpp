@@ -187,7 +187,7 @@ BasicBlock::getBasicBlockSize() const
     return mBasicBlockAddressEnd - mBasicBlockAddressBegin;
 }
 
-// Get the terminator instruction
+// Get the terminator instruction of this block
 TerminatorInst *
 BasicBlock::getTerminator()
 {
@@ -199,7 +199,7 @@ BasicBlock::getTerminator()
     return dynamic_cast<TerminatorInst *>(*rbegin());
 }
 
-// Get the terminator instruction
+// Get the terminator instruction of this block
 const TerminatorInst *
 BasicBlock::getTerminator() const
 {
@@ -209,6 +209,20 @@ BasicBlock::getTerminator() const
     }
 
     return dynamic_cast<const TerminatorInst *>(*rbegin());
+}
+
+// Get the first predecessor of this block
+BasicBlock *
+BasicBlock::getFirstPredecessor()
+{
+    return *predecessor_begin();
+}
+
+// Get the first predecessor of this block
+const BasicBlock *
+BasicBlock::getFirstPredecessor() const
+{
+    return *predecessor_begin();
 }
 
 ////////////////////////////////////////////////////////////
