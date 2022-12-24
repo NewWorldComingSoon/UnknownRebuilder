@@ -28,7 +28,7 @@ public:
     // Generate a new value name by order
     static std::string generateOrderedLocalVarName(Context &C);
 
-    // New a LocalVariable
+    // Allocate a LocalVariable
     static LocalVariable *get(Type *Ty, unknown::StringRef LocalVariableName, uint64_t LocalVariableAddress);
     static LocalVariable *get(Type *Ty);
 };

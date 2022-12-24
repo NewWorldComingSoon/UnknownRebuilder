@@ -55,7 +55,7 @@ LocalVariable::generateOrderedLocalVarName(Context &C)
     return std::to_string(CurIdx);
 }
 
-// New a LocalVariable
+// Allocate a LocalVariable
 LocalVariable *
 LocalVariable::get(Type *Ty, unknown::StringRef LocalVariableName, uint64_t LocalVariableAddress)
 {

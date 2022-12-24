@@ -70,7 +70,7 @@ GlobalVariable::generateOrderedGlobalVarName(Context &C)
     return std::to_string(CurIdx);
 }
 
-// New a GlobalVariable
+// Allocate a GlobalVariable
 GlobalVariable *
 GlobalVariable::get(Type *Ty, unknown::StringRef GlobalVariableName, uint64_t GlobalVariableAddress)
 {
