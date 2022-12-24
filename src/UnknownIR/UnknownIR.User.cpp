@@ -137,14 +137,14 @@ User::replaceAllUsesWith(Value *V)
 // Get/Set
 // Get the operand at the specified index.
 const Value *
-User::getOperand(uint32_t Index) const
+User::getOperand(size_t Index) const
 {
     assert(Index < mOperandList.size() && "getOperand() out of range!");
     return mOperandList[Index];
 }
 
 Value *
-User::getOperand(uint32_t Index)
+User::getOperand(size_t Index)
 {
     assert(Index < mOperandList.size() && "getOperand() out of range!");
     if (!mOperandList.empty())
@@ -157,7 +157,7 @@ User::getOperand(uint32_t Index)
 
 // Set the operand at the specified index.
 void
-User::setOperand(uint32_t Index, Value *Val)
+User::setOperand(size_t Index, Value *Val)
 {
     assert(Index < mOperandList.size() && "setOperand() out of range!");
     mOperandList[Index] = Val;
@@ -165,7 +165,7 @@ User::setOperand(uint32_t Index, Value *Val)
 
 // Set the operand at the specified index and update the user list.
 void
-User::setOperandAndUpdateUsers(uint32_t Index, Value *Val)
+User::setOperandAndUpdateUsers(size_t Index, Value *Val)
 {
     assert(Index < mOperandList.size() && "setOperandAndUpdateUsers() out of range!");
     auto OldVal = mOperandList[Index];

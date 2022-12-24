@@ -54,14 +54,14 @@ public:
 public:
     // Get/Set
     // Get the operand at the specified index.
-    const Value *getOperand(uint32_t Index) const;
-    Value *getOperand(uint32_t Index);
+    const Value *getOperand(size_t Index) const;
+    Value *getOperand(size_t Index);
 
     // Set the operand at the specified index.
-    void setOperand(uint32_t Index, Value *Val);
+    void setOperand(size_t Index, Value *Val);
 
     // Set the operand at the specified index and update the user list.
-    void setOperandAndUpdateUsers(uint32_t Index, Value *Val);
+    void setOperandAndUpdateUsers(size_t Index, Value *Val);
 
 public:
     // Insert/Drop
