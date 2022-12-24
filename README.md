@@ -9,9 +9,9 @@ X86 native code rebuilder using UnknownIR(UIR) and UnknownMC(UMC).
 flowchart LR
 A1[X86] -->|Lift| B(UIR)
 A2[ARM] -->|Lift| B(UIR)
-B -->C(UIR Pass)
+B -->C(Pass)
 C -->D(UMC)
-D -->E(UMC Pass)
+D -->E(Pass)
 E -->|Build| F1[X86]
 E -->|Build| F2[ARM]
 ```
