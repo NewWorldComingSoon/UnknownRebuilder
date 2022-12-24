@@ -30,6 +30,7 @@ Constant::~Constant()
 
 ////////////////////////////////////////////////////////////
 // Static
+// Get a Constant object
 Constant *
 Constant::get(Type *Ty, unknown::StringRef ConstantName)
 {

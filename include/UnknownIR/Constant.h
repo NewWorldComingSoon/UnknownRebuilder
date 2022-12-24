@@ -12,6 +12,7 @@ public:
 
 public:
     // Static
+    // Get a Constant object
     static Constant *get(Type *Ty, unknown::StringRef ConstantName);
 };
 
