@@ -57,6 +57,38 @@ public:
     Instruction &back() { return *mInstList.back(); }
 
 public:
+    // Get/Set
+    // Get the name of this block
+    std::string getBasicBlockName() const;
+
+    // Set the name of this block
+    void setBasicBlockName(unknown::StringRef BlockName);
+
+    // Get the parent of this block
+    const Function *getParent() const;
+
+    // Get the parent of this block
+    Function *getParent();
+
+    // Set the parent of this block
+    void setParent(Function *F);
+
+    // Get the begin address of this block
+    uint64_t getBasicBlockAddressBegin() const;
+
+    // Get the end address of this block
+    uint64_t getBasicBlockAddressEnd() const;
+
+    // Set the begin address of this block
+    void setBasicBlockAddressBegin(uint64_t BasicBlockAddressBegin);
+
+    // Set the end address of this block
+    void setBasicBlockAddressEnd(uint64_t BasicBlockAddressEnd);
+
+    // Get the size of this block
+    uint64_t getBasicBlockSize() const;
+
+public:
     // Virtual functions
     // Get the readable name of this object
     virtual std::string getReadableName() const override;

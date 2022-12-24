@@ -39,9 +39,80 @@ BasicBlock::~BasicBlock()
     //
     //
 }
-
 ////////////////////////////////////////////////////////////
 // Get/Set
+// Get the name of block
+std::string
+BasicBlock::getBasicBlockName() const
+{
+    return mBasicBlockName;
+}
+
+// Set the name of block
+void
+BasicBlock::setBasicBlockName(unknown::StringRef BlockName)
+{
+    mBasicBlockName = BlockName;
+}
+
+// Get the parent of this block
+const Function *
+BasicBlock::getParent() const
+{
+    return mParent;
+}
+
+// Get the parent of this block
+Function *
+BasicBlock::getParent()
+{
+    return mParent;
+}
+
+// Set the parent of this block
+void
+BasicBlock::setParent(Function *F)
+{
+    mParent = F;
+}
+
+// Get the begin address of this block
+uint64_t
+BasicBlock::getBasicBlockAddressBegin() const
+{
+    return mBasicBlockAddressBegin;
+}
+
+// Get the end address of this block
+uint64_t
+BasicBlock::getBasicBlockAddressEnd() const
+{
+    return mBasicBlockAddressEnd;
+}
+
+// Set the begin address of this block
+void
+BasicBlock::setBasicBlockAddressBegin(uint64_t BasicBlockAddressBegin)
+{
+    mBasicBlockAddressBegin = BasicBlockAddressBegin;
+}
+
+// Set the end address of this block
+void
+BasicBlock::setBasicBlockAddressEnd(uint64_t BasicBlockAddressEnd)
+{
+    mBasicBlockAddressEnd = BasicBlockAddressEnd;
+}
+
+// Get the size of this block
+uint64_t
+BasicBlock::getBasicBlockSize() const
+{
+    return mBasicBlockAddressEnd - mBasicBlockAddressBegin;
+}
+
+////////////////////////////////////////////////////////////
+// Virtual functions
 // Get the readable name of this object
 std::string
 BasicBlock::getReadableName() const
