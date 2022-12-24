@@ -111,6 +111,29 @@ BasicBlock::getBasicBlockSize() const
     return mBasicBlockAddressEnd - mBasicBlockAddressBegin;
 }
 
+// Returns the terminator instruction
+TerminatorInst *
+BasicBlock::getTerminator()
+{
+    if (empty())
+    {
+        return nullptr;
+    }
+
+    return dynamic_cast<TerminatorInst *>(*rbegin());
+}
+
+const TerminatorInst *
+BasicBlock::getTerminator() const
+{
+    if (empty())
+    {
+        return nullptr;
+    }
+
+    return dynamic_cast<const TerminatorInst *>(*rbegin());
+}
+
 ////////////////////////////////////////////////////////////
 // Virtual functions
 // Get the readable name of this object

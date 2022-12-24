@@ -7,6 +7,8 @@ class Instruction;
 
 class BasicBlock : public Constant
 {
+    friend class TerminatorInst;
+
 public:
     using InstListType = std::list<Instruction *>;
 
@@ -87,6 +89,10 @@ public:
 
     // Get the size of this block
     uint64_t getBasicBlockSize() const;
+
+    // Returns the terminator instruction
+    TerminatorInst *getTerminator();
+    const TerminatorInst *getTerminator() const;
 
 public:
     // Virtual functions
