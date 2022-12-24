@@ -103,6 +103,8 @@ public:
 
     // Creates a new BasicBlock.
     static BasicBlock *get(Context &C);
+
+    // Creates a new BasicBlock.
     static BasicBlock *create(Context &C);
 
     // Creates a new BasicBlock.
@@ -112,6 +114,8 @@ public:
         uint64_t BasicBlockAddressBegin = 0,
         uint64_t BasicBlockAddressEnd = 0,
         Function *Parent = nullptr);
+
+    // Creates a new BasicBlock.
     static BasicBlock *create(
         Context &C,
         unknown::StringRef BasicBlockName,

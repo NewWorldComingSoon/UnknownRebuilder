@@ -148,6 +148,7 @@ BasicBlock::get(Context &C)
     return new BasicBlock(C);
 }
 
+// Creates a new BasicBlock.
 BasicBlock *
 BasicBlock::create(Context &C)
 {
@@ -166,6 +167,7 @@ BasicBlock::get(
     return new BasicBlock(C, BasicBlockName, BasicBlockAddressBegin, BasicBlockAddressEnd, Parent);
 }
 
+// Creates a new BasicBlock.
 BasicBlock *
 BasicBlock::create(
     Context &C,
