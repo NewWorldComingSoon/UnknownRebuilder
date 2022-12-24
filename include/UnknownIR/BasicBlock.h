@@ -90,8 +90,10 @@ public:
     // Get the size of this block
     uint64_t getBasicBlockSize() const;
 
-    // Returns the terminator instruction
+    // Get the terminator instruction
     TerminatorInst *getTerminator();
+
+    // Get the terminator instruction
     const TerminatorInst *getTerminator() const;
 
 public:
