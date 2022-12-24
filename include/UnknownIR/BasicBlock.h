@@ -128,6 +128,20 @@ public:
     const BasicBlock *getFirstPredecessor() const;
 
 public:
+    // Remove/Erase/Insert
+    // Remove the block from the its parent, but does not delete it.
+    void removeFromParent();
+
+    // Remove the block from the its parent and delete it.
+    void eraseFromParent();
+
+    // Insert an unlinked BasicBlock into a function immediately before the specified BasicBlock.
+    void insertBefore(BasicBlock *InsertPos);
+
+    // Insert an unlinked BasicBlock into a function immediately after the specified BasicBlock.
+    void insertAfter(BasicBlock *InsertPos);
+
+public:
     // Virtual functions
     // Get the readable name of this object
     virtual std::string getReadableName() const override;

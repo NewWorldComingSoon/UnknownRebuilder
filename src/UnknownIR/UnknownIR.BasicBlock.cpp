@@ -226,6 +226,82 @@ BasicBlock::getFirstPredecessor() const
 }
 
 ////////////////////////////////////////////////////////////
+// Remove/Erase/Insert
+// Remove the block from the its parent, but does not delete it.
+void
+BasicBlock::removeFromParent()
+{
+    if (mParent == nullptr)
+    {
+        return;
+    }
+
+    mParent->getBasicBlockList().remove(this);
+}
+
+// Remove the block from the its parent and delete it.
+void
+BasicBlock::eraseFromParent()
+{
+    if (mParent == nullptr)
+    {
+        return;
+    }
+
+    for (auto It = mParent->getBasicBlockList().begin(); It != mParent->getBasicBlockList().end(); ++It)
+    {
+        if (*It == this)
+        {
+            mParent->getBasicBlockList().erase(It);
+            break;
+        }
+    }
+}
+
+// Insert an unlinked BasicBlock into a function immediately before the specified BasicBlock.
+void
+BasicBlock::insertBefore(BasicBlock *InsertPos)
+{
+    if (InsertPos->getParent() == nullptr)
+    {
+        return;
+    }
+
+    auto InsertPosIt = InsertPos->getParent()->getBasicBlockList().begin();
+    for (; InsertPosIt != InsertPos->getParent()->getBasicBlockList().end(); ++InsertPosIt)
+    {
+        if (*InsertPosIt == InsertPos)
+        {
+            break;
+        }
+    }
+
+    InsertPos->getParent()->getBasicBlockList().insert(InsertPosIt, this);
+}
+
+// Insert an unlinked BasicBlock into a function immediately after the specified BasicBlock.
+void
+BasicBlock::insertAfter(BasicBlock *InsertPos)
+{
+    if (InsertPos->getParent() == nullptr)
+    {
+        return;
+    }
+
+    auto InsertPosIt = InsertPos->getParent()->getBasicBlockList().begin();
+    for (; InsertPosIt != InsertPos->getParent()->getBasicBlockList().end(); ++InsertPosIt)
+    {
+        if (*InsertPosIt == InsertPos)
+        {
+            ++InsertPosIt;
+            break;
+        }
+    }
+
+    InsertPos->getParent()->getBasicBlockList().insert(InsertPosIt, this);
+}
+
+////////////////////////////////////////////////////////////
 // Virtual functions
 // Get the readable name of this object
 std::string
