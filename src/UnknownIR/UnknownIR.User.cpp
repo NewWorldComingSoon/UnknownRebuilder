@@ -147,7 +147,12 @@ Value *
 User::getOperand(uint32_t Index)
 {
     assert(Index < mOperandList.size() && "getOperand() out of range!");
-    return mOperandList[Index];
+    if (!mOperandList.empty())
+    {
+        return mOperandList[Index];
+    }
+
+    return nullptr;
 }
 
 // Set the operand at the specified index.

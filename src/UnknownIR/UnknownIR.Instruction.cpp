@@ -415,7 +415,12 @@ BasicBlock *
 TerminatorInst::getSuccessor(size_t Index) const
 {
     assert(Index < mSuccessorsList.size() && "getSuccessor() out of range!");
-    return mSuccessorsList[Index];
+    if (!mSuccessorsList.empty())
+    {
+        return mSuccessorsList[Index];
+    }
+
+    return nullptr;
 }
 
 // Set the specified successor to point at the provided block.
