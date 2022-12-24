@@ -12,8 +12,8 @@ A2[ARM] -->|Lift| B(UIR)
 B -->C(UIR Pass)
 C -->D(UMC)
 D -->E(UMC Pass)
-E -->|Rebuild| F1[X86]
-E -->|Rebuild| F2[ARM]
+E -->|Build| F1[X86]
+E -->|Build| F2[ARM]
 ```
 
 ## What's UIR?
