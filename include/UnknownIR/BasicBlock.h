@@ -22,8 +22,8 @@ public:
     explicit BasicBlock(
         Context &C,
         unknown::StringRef BasicBlockName,
-        uint64_t BasicBlockAddressBegin,
-        uint64_t BasicBlockAddressEnd,
+        uint64_t BasicBlockAddressBegin = 0,
+        uint64_t BasicBlockAddressEnd = 0,
         Function *Parent = nullptr);
     virtual ~BasicBlock();
 
@@ -109,14 +109,14 @@ public:
     static BasicBlock *
     get(Context &C,
         unknown::StringRef BasicBlockName,
-        uint64_t BasicBlockAddressBegin,
-        uint64_t BasicBlockAddressEnd,
+        uint64_t BasicBlockAddressBegin = 0,
+        uint64_t BasicBlockAddressEnd = 0,
         Function *Parent = nullptr);
     static BasicBlock *create(
         Context &C,
         unknown::StringRef BasicBlockName,
-        uint64_t BasicBlockAddressBegin,
-        uint64_t BasicBlockAddressEnd,
+        uint64_t BasicBlockAddressBegin = 0,
+        uint64_t BasicBlockAddressEnd = 0,
         Function *Parent = nullptr);
 };
 

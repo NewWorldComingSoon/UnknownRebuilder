@@ -16,8 +16,8 @@ public:
     explicit Function(
         Context &C,
         unknown::StringRef FunctionName,
-        uint64_t FunctionAddressBegin,
-        uint64_t FunctionAddressEnd);
+        uint64_t FunctionAddressBegin = 0,
+        uint64_t FunctionAddressEnd = 0);
     virtual ~Function();
 
 public:
