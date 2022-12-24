@@ -60,6 +60,8 @@ public:
     Instruction &front() { return *mInstList.front(); }
     const Instruction &back() const { return *mInstList.back(); }
     Instruction &back() { return *mInstList.back(); }
+    void push(Instruction *I) { mInstList.push_back(I); }
+    void pop() { mInstList.pop_back(); }
 
 public:
     // PredecessorsList
@@ -140,6 +142,9 @@ public:
 
     // Insert an unlinked BasicBlock into a function immediately after the specified BasicBlock.
     void insertAfter(BasicBlock *InsertPos);
+
+    // Insert an unlinked instructions into a block
+    void insertInst(Instruction *I);
 
 public:
     // Virtual functions

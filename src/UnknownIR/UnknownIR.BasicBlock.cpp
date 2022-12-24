@@ -301,6 +301,14 @@ BasicBlock::insertAfter(BasicBlock *InsertPos)
     InsertPos->getParent()->getBasicBlockList().insert(InsertPosIt, this);
 }
 
+// Insert an unlinked instructions into a block
+void
+BasicBlock::insertInst(Instruction *I)
+{
+    push(I);
+    I->setParent(this);
+}
+
 ////////////////////////////////////////////////////////////
 // Virtual functions
 // Get the readable name of this object
