@@ -127,7 +127,7 @@ public:
     virtual std::string getReadableName() const override;
 
     // Print the BasicBlock
-    virtual void print(unknown::raw_ostream &OS) const;
+    virtual void print(unknown::raw_ostream &OS) const override;
 
 public:
     // Static

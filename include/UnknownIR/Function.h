@@ -68,7 +68,7 @@ public:
     virtual std::string getReadableName() const override;
 
     // Print the function
-    void print(unknown::raw_ostream &OS) const;
+    virtual void print(unknown::raw_ostream &OS) const override;
 };
 
 } // namespace uir
