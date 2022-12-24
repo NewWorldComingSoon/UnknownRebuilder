@@ -6,7 +6,7 @@
 X86 native code rebuilder using UnknownIR(UIR) and UnknownMC(UMC).
 
 ```mermaid
-flowchart TD
+flowchart TB
 A1[Frontend-X86] -->|Lift| B(UIR)
 A2[Frontend-ARM] -->|Lift| B(UIR)
 B -->|Optimize| C(UIR Pass)
