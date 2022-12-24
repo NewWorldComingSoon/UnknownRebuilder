@@ -6,7 +6,9 @@
 #include <unknown/ADT/StringExtras.h>
 
 namespace uir {
-
+////////////////////////////////////////////////////////////
+//     Instruction
+//
 Instruction::Instruction() : Instruction(OpCodeID::Unknown)
 {
     //
@@ -309,6 +311,119 @@ Instruction *
 Instruction::get(OpCodeID OpCodeId)
 {
     return new Instruction(OpCodeId);
+}
+
+////////////////////////////////////////////////////////////
+//     TerminatorInst
+//
+TerminatorInst::TerminatorInst(OpCodeID OpCodeId) : Instruction(OpCodeID::Unknown)
+{
+    //
+}
+
+TerminatorInst::~TerminatorInst()
+{
+    //
+}
+
+////////////////////////////////////////////////////////////
+// Iterator
+TerminatorInst::successor_iterator
+TerminatorInst::successor_begin()
+{
+    return mSuccessorsList.begin();
+}
+
+TerminatorInst::const_successor_iterator
+TerminatorInst::successor_begin() const
+{
+    return mSuccessorsList.cbegin();
+}
+
+TerminatorInst::successor_iterator
+TerminatorInst::successor_end()
+{
+    return mSuccessorsList.end();
+}
+
+TerminatorInst::const_successor_iterator
+TerminatorInst::successor_end() const
+{
+    return mSuccessorsList.cend();
+}
+
+BasicBlock *
+TerminatorInst::successor_back()
+{
+    return mSuccessorsList.back();
+}
+
+BasicBlock *
+TerminatorInst::successor_front()
+{
+    return mSuccessorsList.front();
+}
+
+void
+TerminatorInst::successor_push(BasicBlock *BB)
+{
+    return mSuccessorsList.push_back(BB);
+}
+
+void
+TerminatorInst::successor_pop()
+{
+    return mSuccessorsList.pop_back();
+}
+
+size_t
+TerminatorInst::successor_count() const
+{
+    return mSuccessorsList.size();
+}
+
+void
+TerminatorInst::successor_erase(BasicBlock *BB)
+{
+    for (auto It = mSuccessorsList.begin(); It != mSuccessorsList.end(); ++It)
+    {
+        if (*It == BB)
+        {
+            mSuccessorsList.erase(It);
+            break;
+        }
+    }
+}
+
+bool
+TerminatorInst::successor_empty() const
+{
+    return mSuccessorsList.empty();
+}
+
+////////////////////////////////////////////////////////////
+// Get/Set
+// Get the number of successors that this terminator has.
+size_t
+TerminatorInst::getNumSuccessors() const
+{
+    return successor_count();
+}
+
+// Get the specified successor.
+BasicBlock *
+TerminatorInst::getSuccessor(size_t Index) const
+{
+    assert(Index < mSuccessorsList.size() && "getSuccessor() out of range!");
+    return mSuccessorsList[Index];
+}
+
+// Set the specified successor to point at the provided block.
+void
+TerminatorInst::setSuccessor(size_t Index, BasicBlock *BB)
+{
+    assert(Index < mSuccessorsList.size() && "setSuccessor() out of range!");
+    mSuccessorsList[Index] = BB;
 }
 
 } // namespace uir

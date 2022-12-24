@@ -1,6 +1,5 @@
 #pragma once
 #include <UnknownIR/InstructionBase.h>
-#include <UnknownIR/Instruction/Instruction.terminator.h>
 #include <UnknownIR/Constant.h>
 
 namespace uir {
