@@ -36,9 +36,9 @@ public:
     using iterator = BasicBlockListType::iterator;
     using const_iterator = BasicBlockListType::const_iterator;
     iterator begin() { return mBasicBlocksList.begin(); }
-    const_iterator begin() const { return mBasicBlocksList.begin(); }
+    const_iterator begin() const { return mBasicBlocksList.cbegin(); }
     iterator end() { return mBasicBlocksList.end(); }
-    const_iterator end() const { return mBasicBlocksList.end(); }
+    const_iterator end() const { return mBasicBlocksList.cend(); }
 
     size_t size() const { return mBasicBlocksList.size(); }
     bool empty() const { return mBasicBlocksList.empty(); }
@@ -49,9 +49,6 @@ public:
 
 public:
     // Get/Set
-    // Get the readable name of this object
-    virtual std::string getReadableName() const override;
-
     // Get the begin/end address of this function
     uint64_t getFunctionBeginAddress() const;
     uint64_t getFunctionEndAddress() const;
@@ -66,7 +63,10 @@ public:
     static std::string generateOrderedFunctionName(Context &C);
 
 public:
-    // Print
+    // Virtual functions
+    // Get the readable name of this object
+    virtual std::string getReadableName() const override;
+
     // Print the function
     void print(unknown::raw_ostream &OS) const;
 };

@@ -4,6 +4,7 @@
 namespace uir {
 class Function;
 class Instruction;
+class TerminatorInst;
 
 class BasicBlock : public Constant
 {
@@ -44,14 +45,14 @@ public:
     using const_reverse_iterator = InstListType::const_reverse_iterator;
 
     iterator begin() { return mInstList.begin(); }
-    const_iterator begin() const { return mInstList.begin(); }
+    const_iterator begin() const { return mInstList.cbegin(); }
     iterator end() { return mInstList.end(); }
-    const_iterator end() const { return mInstList.end(); }
+    const_iterator end() const { return mInstList.cend(); }
 
     reverse_iterator rbegin() { return mInstList.rbegin(); }
-    const_reverse_iterator rbegin() const { return mInstList.rbegin(); }
+    const_reverse_iterator rbegin() const { return mInstList.crbegin(); }
     reverse_iterator rend() { return mInstList.rend(); }
-    const_reverse_iterator rend() const { return mInstList.rend(); }
+    const_reverse_iterator rend() const { return mInstList.crend(); }
 
     size_t size() const { return mInstList.size(); }
     bool empty() const { return mInstList.empty(); }

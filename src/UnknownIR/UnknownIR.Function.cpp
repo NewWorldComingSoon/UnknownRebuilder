@@ -33,17 +33,6 @@ Function::~Function()
 
 ////////////////////////////////////////////////////////////
 // Get/Set
-// Get the readable name of this object
-std::string
-Function::getReadableName() const
-{
-    // function.func1
-    std::string ReadableName = UIR_FUNCTION_VARIABLE_NAME_PREFIX;
-    ReadableName += mFunctionName;
-
-    return ReadableName;
-}
-
 // Get the begin/end address of this function
 uint64_t
 Function::getFunctionBeginAddress() const
@@ -81,7 +70,18 @@ Function::generateOrderedFunctionName(Context &C)
 }
 
 ////////////////////////////////////////////////////////////
-// Print
+// Virtual functions
+// Get the readable name of this object
+std::string
+Function::getReadableName() const
+{
+    // function.func1
+    std::string ReadableName = UIR_FUNCTION_VARIABLE_NAME_PREFIX;
+    ReadableName += mFunctionName;
+
+    return ReadableName;
+}
+
 // Print the function
 void
 Function::print(unknown::raw_ostream &OS) const
