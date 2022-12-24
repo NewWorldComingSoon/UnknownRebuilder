@@ -415,7 +415,7 @@ BasicBlock *
 TerminatorInst::getSuccessor(size_t Index) const
 {
     assert(Index < mSuccessorsList.size() && "getSuccessor() out of range!");
-    if (!mSuccessorsList.empty())
+    if (!successor_empty())
     {
         return mSuccessorsList[Index];
     }

@@ -147,7 +147,7 @@ Value *
 User::getOperand(size_t Index)
 {
     assert(Index < mOperandList.size() && "getOperand() out of range!");
-    if (!mOperandList.empty())
+    if (!op_empty())
     {
         return mOperandList[Index];
     }
