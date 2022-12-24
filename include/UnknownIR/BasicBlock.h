@@ -11,6 +11,7 @@ class BasicBlock : public Constant
 
 public:
     using InstListType = std::list<Instruction *>;
+    using PredecessorsListType = std::vector<BasicBlock *>;
 
 private:
     std::string mBasicBlockName;
@@ -18,6 +19,7 @@ private:
     uint64_t mBasicBlockAddressEnd;
     Function *mParent;
     InstListType mInstList;
+    PredecessorsListType mPredecessorsList;
 
 public:
     explicit BasicBlock(Context &C);
@@ -57,6 +59,28 @@ public:
     Instruction &front() { return *mInstList.front(); }
     const Instruction &back() const { return *mInstList.back(); }
     Instruction &back() { return *mInstList.back(); }
+
+public:
+    // PredecessorsList
+    // Returns the list of predecessor of this terminator instruction
+    PredecessorsListType &getPredecessorsList() { return mPredecessorsList; }
+    const PredecessorsListType &getPredecessorsList() const { return mPredecessorsList; }
+
+public:
+    // Predecessors iterators
+    using predecessor_iterator = PredecessorsListType::iterator;
+    using const_predecessor_iterator = PredecessorsListType::const_iterator;
+    predecessor_iterator predecessor_begin();
+    const_predecessor_iterator predecessor_begin() const;
+    predecessor_iterator predecessor_end();
+    const_predecessor_iterator predecessor_end() const;
+    BasicBlock *predecessor_back();
+    BasicBlock *predecessor_front();
+    void predecessor_push(BasicBlock *BB);
+    void predecessor_pop();
+    size_t predecessor_count() const;
+    void predecessor_erase(BasicBlock *BB);
+    bool predecessor_empty() const;
 
 public:
     // Get/Set

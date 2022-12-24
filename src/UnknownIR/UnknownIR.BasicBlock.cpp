@@ -39,6 +39,82 @@ BasicBlock::~BasicBlock()
     //
     //
 }
+
+////////////////////////////////////////////////////////////
+// Predecessors iterators
+BasicBlock::predecessor_iterator
+BasicBlock::predecessor_begin()
+{
+    return mPredecessorsList.begin();
+}
+
+BasicBlock::const_predecessor_iterator
+BasicBlock::predecessor_begin() const
+{
+    return mPredecessorsList.cbegin();
+}
+
+BasicBlock::predecessor_iterator
+BasicBlock::predecessor_end()
+{
+    return mPredecessorsList.end();
+}
+
+BasicBlock::const_predecessor_iterator
+BasicBlock::predecessor_end() const
+{
+    return mPredecessorsList.cend();
+}
+
+BasicBlock *
+BasicBlock::predecessor_back()
+{
+    return mPredecessorsList.back();
+}
+
+BasicBlock *
+BasicBlock::predecessor_front()
+{
+    return mPredecessorsList.front();
+}
+
+void
+BasicBlock::predecessor_push(BasicBlock *BB)
+{
+    mPredecessorsList.push_back(BB);
+}
+
+void
+BasicBlock::predecessor_pop()
+{
+    mPredecessorsList.pop_back();
+}
+
+size_t
+BasicBlock::predecessor_count() const
+{
+    return mPredecessorsList.size();
+}
+
+void
+BasicBlock::predecessor_erase(BasicBlock *BB)
+{
+    for (auto It = mPredecessorsList.begin(); It != mPredecessorsList.end(); ++It)
+    {
+        if (*It == BB)
+        {
+            mPredecessorsList.erase(It);
+            break;
+        }
+    }
+}
+
+bool
+BasicBlock::predecessor_empty() const
+{
+    return mPredecessorsList.empty();
+}
+
 ////////////////////////////////////////////////////////////
 // Get/Set
 // Get the name of block
