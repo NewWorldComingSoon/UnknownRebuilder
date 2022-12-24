@@ -67,6 +67,7 @@ StoreInst::getValueOperand()
     return getOperand(0);
 }
 
+// Get the value operand of this instruction
 const Value *
 StoreInst::getValueOperand() const
 {
@@ -87,6 +88,7 @@ StoreInst::getPointerOperand()
     return getOperand(1);
 }
 
+// Get the pointer operand of this instruction
 const Value *
 StoreInst::getPointerOperand() const
 {

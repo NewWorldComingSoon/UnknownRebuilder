@@ -30,6 +30,8 @@ public:
     // Get/Set
     // Get the value operand of this instruction
     Value *getValueOperand();
+
+    // Get the value operand of this instruction
     const Value *getValueOperand() const;
 
     // Set the value operand of this instruction
@@ -37,6 +39,8 @@ public:
 
     // Get the pointer operand of this instruction
     Value *getPointerOperand();
+
+    // Get the pointer operand of this instruction
     const Value *getPointerOperand() const;
 
     // Set the pointer operand of this instruction
