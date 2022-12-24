@@ -27,7 +27,7 @@ Yet another Intermediate Representation(IR) called UnknownIR(UIR).
 Yet another Machine Code(MC) called UnknownMC(UMC).
 
 ## Motivation
-Just for learning. Maybe it can help others too.
+Just for fun. Maybe it can help others too.
 
 ## Credit
 - [cmkr](https://github.com/build-cpp/cmkr)
