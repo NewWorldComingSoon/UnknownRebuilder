@@ -32,7 +32,7 @@ public:
     virtual ~BasicBlock();
 
 public:
-    // BasicBlock
+    // InstList
     const InstListType &getInstList() const { return mInstList; }
     InstListType &getInstList() { return mInstList; }
 

@@ -5,12 +5,18 @@
 
 namespace uir {
 
+class BasicBlock;
+
 class Function : public Constant
 {
+public:
+    using BasicBlockListType = std::list<BasicBlock *>;
+
 private:
     std::string mFunctionName;
     uint64_t mFunctionAddressBegin;
     uint64_t mFunctionAddressEnd;
+    BasicBlockListType mBasicBlocksList;
 
 public:
     explicit Function(
@@ -19,6 +25,27 @@ public:
         uint64_t FunctionAddressBegin = 0,
         uint64_t FunctionAddressEnd = 0);
     virtual ~Function();
+
+public:
+    // BasicBlocksList
+    const BasicBlockListType &getBasicBlockList() const { return mBasicBlocksList; }
+    BasicBlockListType &getBasicBlockList() { return mBasicBlocksList; }
+
+public:
+    // BasicBlock iterators
+    using iterator = BasicBlockListType::iterator;
+    using const_iterator = BasicBlockListType::const_iterator;
+    iterator begin() { return mBasicBlocksList.begin(); }
+    const_iterator begin() const { return mBasicBlocksList.begin(); }
+    iterator end() { return mBasicBlocksList.end(); }
+    const_iterator end() const { return mBasicBlocksList.end(); }
+
+    size_t size() const { return mBasicBlocksList.size(); }
+    bool empty() const { return mBasicBlocksList.empty(); }
+    const BasicBlock &front() const { return *mBasicBlocksList.front(); }
+    BasicBlock &front() { return *mBasicBlocksList.front(); }
+    const BasicBlock &back() const { return *mBasicBlocksList.back(); }
+    BasicBlock &back() { return *mBasicBlocksList.back(); }
 
 public:
     // Get/Set
