@@ -100,6 +100,24 @@ public:
     // Static
     // Generate a new block name by order
     static std::string generateOrderedBasicBlockName(Context &C);
+
+    // Creates a new BasicBlock.
+    static BasicBlock *get(Context &C);
+    static BasicBlock *create(Context &C);
+
+    // Creates a new BasicBlock.
+    static BasicBlock *
+    get(Context &C,
+        unknown::StringRef BasicBlockName,
+        uint64_t BasicBlockAddressBegin,
+        uint64_t BasicBlockAddressEnd,
+        Function *Parent = nullptr);
+    static BasicBlock *create(
+        Context &C,
+        unknown::StringRef BasicBlockName,
+        uint64_t BasicBlockAddressBegin,
+        uint64_t BasicBlockAddressEnd,
+        Function *Parent = nullptr);
 };
 
 } // namespace uir

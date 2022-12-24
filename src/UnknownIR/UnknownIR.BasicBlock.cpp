@@ -141,4 +141,40 @@ BasicBlock::generateOrderedBasicBlockName(Context &C)
     return std::to_string(CurIdx);
 }
 
+// Creates a new BasicBlock.
+BasicBlock *
+BasicBlock::get(Context &C)
+{
+    return new BasicBlock(C);
+}
+
+BasicBlock *
+BasicBlock::create(Context &C)
+{
+    return get(C);
+}
+
+// Creates a new BasicBlock.
+BasicBlock *
+BasicBlock::get(
+    Context &C,
+    unknown::StringRef BasicBlockName,
+    uint64_t BasicBlockAddressBegin,
+    uint64_t BasicBlockAddressEnd,
+    Function *Parent)
+{
+    return new BasicBlock(C, BasicBlockName, BasicBlockAddressBegin, BasicBlockAddressEnd, Parent);
+}
+
+BasicBlock *
+BasicBlock::create(
+    Context &C,
+    unknown::StringRef BasicBlockName,
+    uint64_t BasicBlockAddressBegin,
+    uint64_t BasicBlockAddressEnd,
+    Function *Parent)
+{
+    return get(C, BasicBlockName, BasicBlockAddressBegin, BasicBlockAddressEnd, Parent);
+}
+
 } // namespace uir
