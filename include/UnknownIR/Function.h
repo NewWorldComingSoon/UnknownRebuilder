@@ -51,11 +51,21 @@ public:
     // Get/Set
     // Get the begin/end address of this function
     uint64_t getFunctionBeginAddress() const;
+
+    // Get the begin/end address of this function
     uint64_t getFunctionEndAddress() const;
 
-    // Set the begin/end address of this function
+    // Set the begin address of this function
     void setFunctionBeginAddress(uint64_t FunctionBeginAddress);
+
+    // Set the end address of this function
     void setFunctionEndAddress(uint64_t FunctionEndAddress);
+
+    // Get the entry block of this function
+    const BasicBlock &getEntryBlock() const { return front(); }
+
+    // Get the entry block of this function
+    BasicBlock &getEntryBlock() { return front(); }
 
 public:
     // Static

@@ -40,19 +40,21 @@ Function::getFunctionBeginAddress() const
     return mFunctionAddressBegin;
 }
 
+// Get the begin/end address of this function
 uint64_t
 Function::getFunctionEndAddress() const
 {
     return mFunctionAddressEnd;
 }
 
-// Set the begin/end address of this function
+// Set the begin address of this function
 void
 Function::setFunctionBeginAddress(uint64_t FunctionBeginAddress)
 {
     mFunctionAddressBegin = FunctionBeginAddress;
 }
 
+// Set the end address of this function
 void
 Function::setFunctionEndAddress(uint64_t FunctionEndAddress)
 {
