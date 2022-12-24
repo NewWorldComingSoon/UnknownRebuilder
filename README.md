@@ -8,21 +8,15 @@ X86 native code rebuilder using UnknownIR(UIR) and UnknownMC(UMC).
 ```mermaid
 graph TB
 
-subgraph Frontend
-A1[X86] -->|Lift| B(UIR)
-A2[ARM] -->|Lift| B(UIR)
-end
+A1[Frontend-X86] -->|Lift| B(UIR)
+A2[Frontend-ARM] -->|Lift| B(UIR)
 
-subgraph Intermediate Representation
-B ---|Optimize| C(UIR Pass)
+B -->|Optimize| C(UIR Pass)
 C -->|Codegen| D(UMC)
 D -->|Optimize| E(UMC Pass)
-end
 
-subgraph Backend
-E -->|Build| F1[X86]
-E -->|Build| F2[ARM]
-end
+E -->|Build| F1[Backend-X86]
+E -->|Build| F2[Backend-ARM]
 
 ```
 
