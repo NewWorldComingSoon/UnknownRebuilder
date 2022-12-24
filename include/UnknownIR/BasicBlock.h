@@ -61,6 +61,9 @@ public:
     // Get the readable name of this object
     virtual std::string getReadableName() const override;
 
+    // Print the BasicBlock
+    virtual void print(unknown::raw_ostream &OS) const;
+
 public:
     // Static
     // Generate a new block name by order

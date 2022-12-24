@@ -53,6 +53,13 @@ BasicBlock::getReadableName() const
     return ReadableName;
 }
 
+// Print the BasicBlock
+void
+BasicBlock::print(unknown::raw_ostream &OS) const
+{
+    // TODO
+}
+
 ////////////////////////////////////////////////////////////
 // Static
 // Generate a new block name by order
