@@ -1,4 +1,3 @@
-#pragma once
 #include <Instruction.h>
 
 #include <unknown/ADT/StringExtras.h>
@@ -7,7 +6,7 @@ namespace uir {
 ////////////////////////////////////////////////////////////
 //     ReturnInst
 //
-ReturnInst::ReturnInst() : Instruction(OpCodeID::Ret)
+ReturnInst::ReturnInst() : TerminatorInst(OpCodeID::Ret)
 {
     //
 }
@@ -62,7 +61,7 @@ ReturnInst::get()
 ////////////////////////////////////////////////////////////
 //     ReturnImmInst
 //
-ReturnImmInst::ReturnImmInst(ConstantInt *ImmConstantInt) : Instruction(OpCodeID::RetIMM)
+ReturnImmInst::ReturnImmInst(ConstantInt *ImmConstantInt) : TerminatorInst(OpCodeID::RetIMM)
 {
     // Insert ImmConstantInt   -> op1
     insertOperandAndUpdateUsers(ImmConstantInt);

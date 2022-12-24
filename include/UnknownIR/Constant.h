@@ -6,7 +6,7 @@ class Context;
 
 class Constant : public User
 {
-public:
+protected:
     explicit Constant(Type *Ty, unknown::StringRef ConstantName);
     virtual ~Constant();
 

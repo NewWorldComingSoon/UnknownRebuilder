@@ -1,10 +1,11 @@
 #pragma once
 #include <UnknownIR/InstructionBase.h>
+#include <UnknownIR/Instruction/Instruction.terminator.h>
 #include <UnknownIR/Constant.h>
 
 namespace uir {
 
-class ReturnInst : public Instruction
+class ReturnInst : public TerminatorInst
 {
 public:
     ReturnInst();
@@ -29,7 +30,7 @@ public:
     static ReturnInst *get();
 };
 
-class ReturnImmInst : public Instruction
+class ReturnImmInst : public TerminatorInst
 {
 public:
     explicit ReturnImmInst(ConstantInt *ImmConstantInt);

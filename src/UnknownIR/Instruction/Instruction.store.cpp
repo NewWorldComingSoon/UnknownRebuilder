@@ -1,4 +1,3 @@
-#pragma once
 #include <Instruction.h>
 
 #include <unknown/ADT/StringExtras.h>

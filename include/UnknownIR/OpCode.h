@@ -22,7 +22,7 @@ enum class OpCodeID : uint8_t
     And,
     Not,
 
-    // Return instructions
+    // Terminator instructions
     Ret,
     RetIMM,
 
@@ -75,7 +75,7 @@ const OpCodeComponent NotComponent        = {    OpCodeID::Not,       "uir.not",
 
 
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Return instructions
+// Terminator instructions
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // ret
 const OpCodeComponent RetComponent        = {    OpCodeID::Ret,       "uir.ret",      0,      false};
