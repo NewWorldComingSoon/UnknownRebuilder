@@ -557,6 +557,34 @@ target_link_libraries(UnknownIR PUBLIC
 	UnknownUtils
 )
 
+# Target: UnknownMC
+set(UnknownMC_SOURCES
+	"src/UnknownMC/UnknownMC.cpp"
+	"src/UnknownMC/x86/UnknownMC.x86.cpp"
+	"include/UnknownMC/UnknownMC.h"
+	"include/UnknownMC/x86/UnknownMC.x86.h"
+	cmake.toml
+)
+
+add_library(UnknownMC)
+
+target_sources(UnknownMC PRIVATE ${UnknownMC_SOURCES})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${UnknownMC_SOURCES})
+
+target_compile_features(UnknownMC PUBLIC
+	cxx_std_20
+)
+
+target_include_directories(UnknownMC PUBLIC
+	"src/UnknownMC"
+	include
+	"include/UnknownMC"
+)
+
+target_link_libraries(UnknownMC PUBLIC
+	UnknownIR
+)
+
 # Target: UnknownFrontend
 set(UnknownFrontend_SOURCES
 	"src/UnknownFrontend/UnknownFrontend.cpp"
@@ -612,6 +640,6 @@ target_include_directories(UnknownBackend PUBLIC
 )
 
 target_link_libraries(UnknownBackend PUBLIC
-	UnknownIR
+	UnknownMC
 )
 
