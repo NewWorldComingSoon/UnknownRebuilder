@@ -98,7 +98,7 @@ BasicBlock::predecessor_count() const
 void
 BasicBlock::predecessor_erase(BasicBlock *BB)
 {
-    for (auto It = mPredecessorsList.begin(); It != mPredecessorsList.end(); ++It)
+    for (auto It = predecessor_begin(); It != predecessor_end(); ++It)
     {
         if (*It == BB)
         {
