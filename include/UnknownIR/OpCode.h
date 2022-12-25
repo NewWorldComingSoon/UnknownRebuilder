@@ -81,10 +81,10 @@ const OpCodeComponent NotComponent        = {    OpCodeID::Not,         "uir.not
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Terminator instructions
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// ret
+// Ret
 const OpCodeComponent RetComponent        = {    OpCodeID::Ret,         "uir.ret",          0,      false};
 
-// ret imm
+// Ret imm
 const OpCodeComponent RetIMMComponent     = {    OpCodeID::RetIMM,      "uir.ret.imm",      1,      false};
 
 // JmpAddr address
