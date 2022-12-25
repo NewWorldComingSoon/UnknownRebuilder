@@ -324,6 +324,13 @@ BasicBlock::insertInst(Instruction *I)
     I->setParent(this);
 }
 
+// Clear all instructions in this block.
+void
+BasicBlock::clearAllInstructions()
+{
+    // TODO
+}
+
 ////////////////////////////////////////////////////////////
 // Virtual functions
 // Get the readable name of this object

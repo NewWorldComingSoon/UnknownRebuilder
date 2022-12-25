@@ -312,6 +312,13 @@ Instruction::insertAfter(Instruction *InsertPos)
     insertBeforeOrAfter(InsertPos, false);
 }
 
+// Clear all operands in this instruction.
+void
+Instruction::clearAllOperands()
+{
+    // TODO
+}
+
 ////////////////////////////////////////////////////////////
 // Static
 Instruction *

@@ -130,7 +130,7 @@ public:
     const BasicBlock *getFirstPredecessor() const;
 
 public:
-    // Remove/Erase/Insert
+    // Remove/Erase/Insert/Clear
     // Remove the block from the its parent, but does not delete it.
     void removeFromParent();
 
@@ -148,6 +148,9 @@ public:
 
     // Insert an unlinked instructions into a block
     void insertInst(Instruction *I);
+
+    // Clear all instructions in this block.
+    void clearAllInstructions();
 
 public:
     // Virtual functions

@@ -86,7 +86,7 @@ public:
     void setStackVariableAndUpdateUsers(LocalVariable *SV);
 
 public:
-    // Remove/Erase/Insert
+    // Remove/Erase/Insert/Clear
     // Remove this instruction from its parent, but does not delete it.
     void removeFromParent();
 
@@ -101,6 +101,9 @@ public:
 
     // Insert an unlinked instructions into a basic block immediately after the specified instruction.
     void insertAfter(Instruction *InsertPos);
+
+    // Clear all operands in this instruction.
+    void clearAllOperands();
 
 public:
     // Static
