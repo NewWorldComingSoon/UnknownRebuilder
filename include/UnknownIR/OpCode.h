@@ -81,7 +81,7 @@ const OpCodeComponent NotComponent        = {    OpCodeID::Not,       "uir.not",
 const OpCodeComponent RetComponent        = {    OpCodeID::Ret,       "uir.ret",      0,      false};
 
 // ret imm
-const OpCodeComponent RetIMMComponent     = {    OpCodeID::RetIMM,    "uir.retimm",   1,      false};
+const OpCodeComponent RetIMMComponent     = {    OpCodeID::RetIMM,    "uir.ret.imm",   1,      false};
 
 
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
