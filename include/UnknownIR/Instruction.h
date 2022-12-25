@@ -8,3 +8,5 @@
 #include <UnknownIR/Instruction/Instruction.sub.h>
 
 #include <UnknownIR/Instruction/Instruction.return.h>
+#include <UnknownIR/Instruction/Instruction.jmp.h>
+#include <UnknownIR/Instruction/Instruction.jcc.h>
