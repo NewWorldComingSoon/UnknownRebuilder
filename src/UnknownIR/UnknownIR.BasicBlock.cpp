@@ -344,9 +344,9 @@ BasicBlock::clearAllInstructions()
             Inst->setParent(nullptr);
             delete Inst;
         }
-
-        clear();
     }
+
+    clear();
 }
 
 ////////////////////////////////////////////////////////////
