@@ -6,7 +6,7 @@
 X86 native code rebuilder using UnknownIR(UIR) and UnknownMC(UMC).
 
 ```mermaid
-graph LR
+graph TD
 
 A1[X86] -->|Lift| B(UIR)
 A2[ARM] -->|Lift| B(UIR)
