@@ -31,6 +31,12 @@ TEST(test_uir, test_uir_inst_RetIMM_1)
         ReturnImmIst->print(unknown::outs());
         unknown::outs() << *ReturnImmIst;
     }
+
+    for (auto OpIt = ReturnImmIst->op_begin(); OpIt != ReturnImmIst->op_end(); ++OpIt)
+    {
+        auto Op = *OpIt;
+        std::cout << std::format("Op = {}", Op->getName()) << std::endl;
+    }
 }
 
 TEST(test_uir, test_uir_inst_Store_1)
@@ -48,6 +54,12 @@ TEST(test_uir, test_uir_inst_Store_1)
     StoreIst->setInstructionAddress(0x401000);
     StoreIst->print(unknown::outs());
     unknown::outs() << *StoreIst;
+
+    for (auto OpIt = StoreIst->op_begin(); OpIt != StoreIst->op_end(); ++OpIt)
+    {
+        auto Op = *OpIt;
+        std::cout << std::format("Op = {}", Op->getName()) << std::endl;
+    }
 }
 
 TEST(test_uir, test_uir_inst_Ret_1)
