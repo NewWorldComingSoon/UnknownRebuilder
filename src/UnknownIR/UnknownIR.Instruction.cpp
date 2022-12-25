@@ -399,7 +399,7 @@ TerminatorInst::successor_count() const
 void
 TerminatorInst::successor_erase(BasicBlock *BB)
 {
-    for (auto It = mSuccessorsList.begin(); It != mSuccessorsList.end(); ++It)
+    for (auto It = successor_begin(); It != successor_end(); ++It)
     {
         if (*It == BB)
         {
