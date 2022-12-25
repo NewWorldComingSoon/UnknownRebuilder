@@ -73,7 +73,7 @@ void
 Instruction::print(unknown::raw_ostream &OS) const
 {
     // address\tinst
-    OS << "0x" << unknown::utohexstr(getInstructionAddress());
+    OS << "0x" << unknown::APInt(64, getInstructionAddress()).toString(16, false);
     OS << "\t";
     OS << getOpcodeName();
 }
