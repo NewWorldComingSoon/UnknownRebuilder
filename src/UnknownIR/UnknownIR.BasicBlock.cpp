@@ -328,7 +328,10 @@ BasicBlock::insertInst(Instruction *I)
 void
 BasicBlock::clearAllInstructions()
 {
-    // TODO
+    for (auto InstIt = mInstList.begin(); InstIt != mInstList.end(); ++InstIt)
+    {
+        (*InstIt)->clearAllOperands();
+    }
 }
 
 ////////////////////////////////////////////////////////////
