@@ -18,6 +18,8 @@ protected:
     BasicBlock *mParent;
     FlagsVariable *mFlagsVariable;
     LocalVariable *mStackVariable;
+    std::string mExtraInfo;
+    std::string mComment;
 
 public:
     Instruction();
@@ -84,6 +86,18 @@ public:
 
     // Set the stack variable of this instruction and update its users
     void setStackVariableAndUpdateUsers(LocalVariable *SV);
+
+    // Get the extra info of this instruction
+    const std::string getExtraInfo() const;
+
+    // Set the extra info of this instruction
+    void setExtraInfo(unknown::StringRef ExtraInfo);
+
+    // Get the comment of this instruction
+    const std::string getComment() const;
+
+    // Set the comment of this instruction
+    void setComment(unknown::StringRef Comment);
 
 public:
     // Remove/Erase/Insert/Clear

@@ -18,6 +18,9 @@ Instruction::Instruction() : Instruction(OpCodeID::Unknown)
 Instruction::Instruction(OpCodeID OpCodeId) :
     mOpCodeID(OpCodeId), mInstructionAddress(0), mParent(nullptr), mFlagsVariable(nullptr), mStackVariable(nullptr)
 {
+    mExtraInfo = "";
+    mComment = "";
+
     if (mFlagsVariable)
     {
         mFlagsVariable->user_insert(this);
@@ -234,6 +237,34 @@ Instruction::setStackVariableAndUpdateUsers(LocalVariable *SV)
     {
         uir_unreachable("SV == nullptr in Instruction::setStackVariableAndUpdateUsers");
     }
+}
+
+// Get the extra info of this instruction
+const std::string
+Instruction::getExtraInfo() const
+{
+    return mExtraInfo;
+}
+
+// Set the extra info of this instruction
+void
+Instruction::setExtraInfo(unknown::StringRef ExtraInfo)
+{
+    mExtraInfo = ExtraInfo;
+}
+
+// Get the comment of this instruction
+const std::string
+Instruction::getComment() const
+{
+    return mComment;
+}
+
+// Set the comment of this instruction
+void
+Instruction::setComment(unknown::StringRef Comment)
+{
+    mComment = Comment;
 }
 
 ////////////////////////////////////////////////////////////
