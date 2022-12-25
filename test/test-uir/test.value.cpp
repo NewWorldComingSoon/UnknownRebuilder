@@ -78,7 +78,7 @@ TEST(test_uir, test_uir_value_4)
     CTX.setArch(Context::ArchX86);
     CTX.setMode(Context::Mode64);
 
-    auto CSTInt = ConstantInt::get(CTX, unknown::APInt(32, 25474));
+    auto CSTInt = ConstantInt::get(CTX, unknown::APInt(32, 0x25474));
     std::cout << std::format("CSTInt getZExtValue =  {}", CSTInt->getZExtValue()) << std::endl;
     std::cout << std::format("CSTInt ReadableName =  {}", CSTInt->getReadableName()) << std::endl;
     unknown::outs() << "CSTInt ReadableName = " << *CSTInt;
