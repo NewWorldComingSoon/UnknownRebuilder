@@ -25,6 +25,10 @@ enum class OpCodeID : uint8_t
     // Terminator instructions
     Ret,
     RetIMM,
+    JmpAddr,
+    JmpBB,
+    JccAddr,
+    JccBB,
 
     // Unknown
     Unknown
@@ -82,6 +86,18 @@ const OpCodeComponent RetComponent        = {    OpCodeID::Ret,         "uir.ret
 
 // ret imm
 const OpCodeComponent RetIMMComponent     = {    OpCodeID::RetIMM,      "uir.ret.imm",      1,      false};
+
+// JmpAddr address
+const OpCodeComponent JmpAddrComponent    = {    OpCodeID::JmpAddr,     "uir.jmp.addr",     1,      false};
+
+// JmpBB targetBB
+const OpCodeComponent JmpBBComponent      = {    OpCodeID::JmpBB,       "uir.jmp.bb",       1,      false};
+
+// JccAddr targetAddr, nextAddr
+const OpCodeComponent JccAddrComponent    = {    OpCodeID::JccAddr,     "uir.jcc.addr",     2,      true};
+
+// JccBB targetBB, nextBB
+const OpCodeComponent JccBBComponent      = {    OpCodeID::JccBB,       "uir.jcc.bb",       2,      true};
 
 
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
