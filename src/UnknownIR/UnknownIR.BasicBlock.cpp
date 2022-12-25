@@ -283,6 +283,7 @@ BasicBlock::insertBeforeOrAfter(BasicBlock *InsertPos, bool Before)
             {
                 ++InsertPosIt;
             }
+
             break;
         }
     }
