@@ -37,6 +37,7 @@ Just for learning and fun. Maybe it can help others too.
 - [Capstone](https://github.com/NewWorldComingSoon/capstone-retdec) 
 - [Keystone](https://github.com/NewWorldComingSoon/keystone-retdec)
 - [RawPDB](https://github.com/NewWorldComingSoon/raw_pdb)
+- [toml11](https://github.com/NewWorldComingSoon/toml11)
 
 ## Build
 Only tested on Windows, other systems have not been tested.
