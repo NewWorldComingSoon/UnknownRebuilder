@@ -78,4 +78,85 @@ JmpAddrInstruction::get(ConstantInt *JmpDest)
     return new JmpAddrInstruction(JmpDest);
 }
 
+////////////////////////////////////////////////////////////
+//     JmpBBInstruction
+//
+JmpBBInstruction::JmpBBInstruction(BasicBlock *DestBB) : TerminatorInstruction(OpCodeID::JmpBB)
+{
+    insertSuccessor(DestBB);
+}
+
+JmpBBInstruction::~JmpBBInstruction()
+{
+    //
+    //
+}
+
+////////////////////////////////////////////////////////////
+// Virtual
+// Get the opcode name of this instruction
+unknown::StringRef
+JmpBBInstruction::getOpcodeName() const
+{
+    return JmpBBComponent.mOpCodeName;
+}
+
+// Get the default number of operands
+uint32_t
+JmpBBInstruction::getDefaultNumberOfOperands() const
+{
+    return JmpBBComponent.mNumberOfOperands;
+}
+
+// Is this instruction with flags?
+bool
+JmpBBInstruction::hasFlags() const
+{
+    return JmpBBComponent.mHasFlags;
+}
+
+// Print the instruction
+void
+JmpBBInstruction::print(unknown::raw_ostream &OS) const
+{
+    // address\tinst
+    OS << "0x" << unknown::utohexstr(getInstructionAddress());
+    OS << "\t";
+    OS << getOpcodeName();
+    OS << " ";
+    OS << getDestinationBlock()->getReadableName();
+    OS << "\n";
+}
+
+////////////////////////////////////////////////////////////
+// Get/Set
+// Get the destination basic block
+const BasicBlock *
+JmpBBInstruction::getDestinationBlock() const
+{
+    return *successor_begin();
+}
+
+// Set the destination basic block
+void
+JmpBBInstruction::setDestinationBlock(BasicBlock *DestBB)
+{
+    setSuccessor(0, DestBB);
+}
+
+// Set the destination basic block and update its predecessor.
+void
+JmpBBInstruction::setDestinationBlockAndUpdatePredecessor(BasicBlock *DestBB)
+{
+    setSuccessorAndUpdatePredecessor(0, DestBB);
+}
+
+////////////////////////////////////////////////////////////
+// Static
+JmpBBInstruction *
+JmpBBInstruction::get(BasicBlock *DestBB)
+{
+    return new JmpBBInstruction(DestBB);
+}
+
 } // namespace uir

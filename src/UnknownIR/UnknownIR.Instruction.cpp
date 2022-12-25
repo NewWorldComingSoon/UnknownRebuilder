@@ -491,10 +491,52 @@ TerminatorInstruction::getSuccessor(size_t Index) const
 
 // Set the specified successor to point at the provided block.
 void
-TerminatorInstruction::setSuccessor(size_t Index, BasicBlock *BB)
+TerminatorInstruction::setSuccessor(size_t Index, BasicBlock *Successor)
 {
     assert(Index < mSuccessorsList.size() && "setSuccessor() out of range!");
-    mSuccessorsList[Index] = BB;
+    assert(Successor != nullptr && "setSuccessor() Successor == nullptr!");
+    mSuccessorsList[Index] = Successor;
+}
+
+// Set the specified successor to point at the provided block and update its predecessor.
+void
+TerminatorInstruction::setSuccessorAndUpdatePredecessor(size_t Index, BasicBlock *Successor)
+{
+    assert(Index < mSuccessorsList.size() && "setSuccessorAndUpdatePredecessor() out of range!");
+    assert(Successor != nullptr && "setSuccessorAndUpdatePredecessor() Successor == nullptr!");
+
+    auto OldSuccessor = mSuccessorsList[Index];
+    if (OldSuccessor == Successor)
+    {
+        return;
+    }
+    assert(OldSuccessor != nullptr && "setSuccessorAndUpdatePredecessor() OldSuccessor == nullptr!");
+
+    // Set the new successor.
+    setSuccessor(Index, Successor);
+
+    // Erase the predecessor list of the old successor.
+    OldSuccessor->predecessor_erase(this->getParent());
+
+    // Update the predecessor list of the new successor.
+    Successor->predecessor_push(this->getParent());
+}
+
+// Insert a new successor into the terminator instruction.
+void
+TerminatorInstruction::insertSuccessor(BasicBlock *BB)
+{
+    if (std::find(successor_begin(), successor_end(), BB) == successor_end())
+    {
+        successor_push(BB);
+    }
+}
+
+// Erase a successor into the terminator instruction.
+void
+TerminatorInstruction::eraseSuccessor(BasicBlock *BB)
+{
+    successor_erase(BB);
 }
 
 } // namespace uir

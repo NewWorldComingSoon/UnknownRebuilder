@@ -173,7 +173,16 @@ public:
     BasicBlock *getSuccessor(size_t Index) const;
 
     // Set the specified successor to point at the provided block.
-    void setSuccessor(size_t Index, BasicBlock *BB);
+    void setSuccessor(size_t Index, BasicBlock *Successor);
+
+    // Set the specified successor to point at the provided block and update its predecessor.
+    void setSuccessorAndUpdatePredecessor(size_t Index, BasicBlock *Successor);
+
+    // Insert a new successor into the terminator instruction.
+    void insertSuccessor(BasicBlock *Successor);
+
+    // Erase a successor into the terminator instruction.
+    void eraseSuccessor(BasicBlock *Successor);
 };
 
 } // namespace uir
