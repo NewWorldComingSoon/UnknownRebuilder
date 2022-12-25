@@ -62,6 +62,7 @@ public:
     Instruction &back() { return *mInstList.back(); }
     void push(Instruction *I) { mInstList.push_back(I); }
     void pop() { mInstList.pop_back(); }
+    void clear() { mInstList.clear(); }
 
 public:
     // PredecessorsList

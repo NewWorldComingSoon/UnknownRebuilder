@@ -36,8 +36,7 @@ BasicBlock::BasicBlock(
 
 BasicBlock::~BasicBlock()
 {
-    //
-    //
+    clearAllInstructions();
 }
 
 ////////////////////////////////////////////////////////////
@@ -328,9 +327,18 @@ BasicBlock::insertInst(Instruction *I)
 void
 BasicBlock::clearAllInstructions()
 {
-    for (auto InstIt = mInstList.begin(); InstIt != mInstList.end(); ++InstIt)
+    for (auto InstIt = begin(); InstIt != end(); ++InstIt)
     {
-        (*InstIt)->clearAllOperands();
+        auto Inst = *InstIt;
+        Inst->clearAllOperands();
+    }
+
+    for (auto InstIt = begin(); InstIt != end(); ++InstIt)
+    {
+        auto Inst = *InstIt;
+        Inst->setParent(nullptr);
+        delete Inst;
+        clear();
     }
 }
 
