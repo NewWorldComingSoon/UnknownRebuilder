@@ -75,3 +75,32 @@ TEST(test_uir, test_uir_inst_Ret_1)
     RetInst->print(unknown::outs());
     unknown::outs() << *RetInst;
 }
+
+TEST(test_uir, test_uir_inst_JmpAddr_1)
+{
+    Context CTX;
+    CTX.setArch(Context::ArchX86);
+    CTX.setMode(Context::Mode64);
+
+    std::cout << std::format("JmpAddrComponent = {}", JmpAddrComponent.mOpCodeName.data()) << std::endl;
+
+    auto JmpAddrInst = JmpAddrInstruction::get(ConstantInt::get(CTX, unknown::APInt(64, 0x406000)));
+    JmpAddrInst->setInstructionAddress(0x401000);
+    JmpAddrInst->print(unknown::outs());
+    unknown::outs() << *JmpAddrInst;
+}
+
+TEST(test_uir, test_uir_inst_JmpBB_1)
+{
+    Context CTX;
+    CTX.setArch(Context::ArchX86);
+    CTX.setMode(Context::Mode64);
+
+    std::cout << std::format("JmpBBComponent = {}", JmpBBComponent.mOpCodeName.data()) << std::endl;
+
+    auto BB = BasicBlock::get(CTX, "bb1", 0x406000, 0x406005);
+    auto JmpBBInst = JmpBBInstruction::get(BB);
+    JmpBBInst->setInstructionAddress(0x401000);
+    JmpBBInst->print(unknown::outs());
+    unknown::outs() << *JmpBBInst;
+}
