@@ -3,14 +3,14 @@
 
 namespace uir {
 
-class StoreInst : public Instruction
+class StoreInstruction : public Instruction
 {
 private:
     bool mIsVolatile;
 
 public:
-    explicit StoreInst(Value *Val, Value *Ptr, bool IsVolatile = false);
-    virtual ~StoreInst();
+    explicit StoreInstruction(Value *Val, Value *Ptr, bool IsVolatile = false);
+    virtual ~StoreInstruction();
 
 public:
     // Virtual
@@ -54,7 +54,7 @@ public:
 
 public:
     // Static
-    static StoreInst *get(Value *Val, Value *Ptr, bool IsVolatile = false);
+    static StoreInstruction *get(Value *Val, Value *Ptr, bool IsVolatile = false);
 };
 
 } // namespace uir

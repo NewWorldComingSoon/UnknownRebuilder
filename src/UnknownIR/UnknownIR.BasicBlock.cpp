@@ -187,7 +187,7 @@ BasicBlock::getBasicBlockSize() const
 }
 
 // Get the terminator instruction of this block
-TerminatorInst *
+TerminatorInstruction *
 BasicBlock::getTerminator()
 {
     if (empty())
@@ -201,11 +201,11 @@ BasicBlock::getTerminator()
         return nullptr;
     }
 
-    return dynamic_cast<TerminatorInst *>(Inst);
+    return dynamic_cast<TerminatorInstruction *>(Inst);
 }
 
 // Get the terminator instruction of this block
-const TerminatorInst *
+const TerminatorInstruction *
 BasicBlock::getTerminator() const
 {
     if (empty())
@@ -219,7 +219,7 @@ BasicBlock::getTerminator() const
         return nullptr;
     }
 
-    return dynamic_cast<const TerminatorInst *>(Inst);
+    return dynamic_cast<const TerminatorInstruction *>(Inst);
 }
 
 // Get the first predecessor of this block

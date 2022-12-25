@@ -335,76 +335,76 @@ Instruction::get(OpCodeID OpCodeId)
 }
 
 ////////////////////////////////////////////////////////////
-//     TerminatorInst
+//     TerminatorInstruction
 //
-TerminatorInst::TerminatorInst(OpCodeID OpCodeId) : Instruction(OpCodeID::Unknown)
+TerminatorInstruction::TerminatorInstruction(OpCodeID OpCodeId) : Instruction(OpCodeID::Unknown)
 {
     //
 }
 
-TerminatorInst::~TerminatorInst()
+TerminatorInstruction::~TerminatorInstruction()
 {
     //
 }
 
 ////////////////////////////////////////////////////////////
 // Iterator
-TerminatorInst::successor_iterator
-TerminatorInst::successor_begin()
+TerminatorInstruction::successor_iterator
+TerminatorInstruction::successor_begin()
 {
     return mSuccessorsList.begin();
 }
 
-TerminatorInst::const_successor_iterator
-TerminatorInst::successor_begin() const
+TerminatorInstruction::const_successor_iterator
+TerminatorInstruction::successor_begin() const
 {
     return mSuccessorsList.cbegin();
 }
 
-TerminatorInst::successor_iterator
-TerminatorInst::successor_end()
+TerminatorInstruction::successor_iterator
+TerminatorInstruction::successor_end()
 {
     return mSuccessorsList.end();
 }
 
-TerminatorInst::const_successor_iterator
-TerminatorInst::successor_end() const
+TerminatorInstruction::const_successor_iterator
+TerminatorInstruction::successor_end() const
 {
     return mSuccessorsList.cend();
 }
 
 BasicBlock *
-TerminatorInst::successor_back()
+TerminatorInstruction::successor_back()
 {
     return mSuccessorsList.back();
 }
 
 BasicBlock *
-TerminatorInst::successor_front()
+TerminatorInstruction::successor_front()
 {
     return mSuccessorsList.front();
 }
 
 void
-TerminatorInst::successor_push(BasicBlock *BB)
+TerminatorInstruction::successor_push(BasicBlock *BB)
 {
     return mSuccessorsList.push_back(BB);
 }
 
 void
-TerminatorInst::successor_pop()
+TerminatorInstruction::successor_pop()
 {
     return mSuccessorsList.pop_back();
 }
 
 size_t
-TerminatorInst::successor_count() const
+TerminatorInstruction::successor_count() const
 {
     return mSuccessorsList.size();
 }
 
 void
-TerminatorInst::successor_erase(BasicBlock *BB)
+TerminatorInstruction::successor_erase(BasicBlock *BB)
 {
     for (auto It = successor_begin(); It != successor_end(); ++It)
     {
@@ -417,7 +417,7 @@ TerminatorInst::successor_erase(BasicBlock *BB)
 }
 
 bool
-TerminatorInst::successor_empty() const
+TerminatorInstruction::successor_empty() const
 {
     return mSuccessorsList.empty();
 }
@@ -426,14 +426,14 @@ TerminatorInst::successor_empty() const
 // Get/Set
 // Get the number of successors that this terminator has.
 size_t
-TerminatorInst::getNumSuccessors() const
+TerminatorInstruction::getNumSuccessors() const
 {
     return successor_count();
 }
 
 // Get the specified successor.
 BasicBlock *
-TerminatorInst::getSuccessor(size_t Index) const
+TerminatorInstruction::getSuccessor(size_t Index) const
 {
     assert(Index < mSuccessorsList.size() && "getSuccessor() out of range!");
     if (!successor_empty())
@@ -446,7 +446,7 @@ TerminatorInst::getSuccessor(size_t Index) const
 
 // Set the specified successor to point at the provided block.
 void
-TerminatorInst::setSuccessor(size_t Index, BasicBlock *BB)
+TerminatorInstruction::setSuccessor(size_t Index, BasicBlock *BB)
 {
     assert(Index < mSuccessorsList.size() && "setSuccessor() out of range!");
     mSuccessorsList[Index] = BB;

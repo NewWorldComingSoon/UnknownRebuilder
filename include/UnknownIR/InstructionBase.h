@@ -110,7 +110,7 @@ public:
     static Instruction *get(OpCodeID OpCodeId);
 };
 
-class TerminatorInst : public Instruction
+class TerminatorInstruction : public Instruction
 {
 public:
     using SuccessorsListType = std::vector<BasicBlock *>;
@@ -119,8 +119,8 @@ protected:
     SuccessorsListType mSuccessorsList;
 
 protected:
-    TerminatorInst(OpCodeID OpCodeId);
-    virtual ~TerminatorInst();
+    TerminatorInstruction(OpCodeID OpCodeId);
+    virtual ~TerminatorInstruction();
 
 public:
     // SuccessorsList

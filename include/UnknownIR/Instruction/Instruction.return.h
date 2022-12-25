@@ -4,11 +4,11 @@
 
 namespace uir {
 
-class ReturnInst : public TerminatorInst
+class ReturnInstruction : public TerminatorInstruction
 {
 public:
-    ReturnInst();
-    virtual ~ReturnInst();
+    ReturnInstruction();
+    virtual ~ReturnInstruction();
 
 public:
     // Virtual
@@ -26,14 +26,14 @@ public:
 
 public:
     // Static
-    static ReturnInst *get();
+    static ReturnInstruction *get();
 };
 
-class ReturnImmInst : public TerminatorInst
+class ReturnImmInstruction : public TerminatorInstruction
 {
 public:
-    explicit ReturnImmInst(ConstantInt *ImmConstantInt);
-    virtual ~ReturnImmInst();
+    explicit ReturnImmInstruction(ConstantInt *ImmConstantInt);
+    virtual ~ReturnImmInstruction();
 
 public:
     // Virtual
@@ -59,7 +59,7 @@ public:
 
 public:
     // Static
-    static ReturnImmInst *get(ConstantInt *ImmConstantInt);
+    static ReturnImmInstruction *get(ConstantInt *ImmConstantInt);
 };
 
 } // namespace uir

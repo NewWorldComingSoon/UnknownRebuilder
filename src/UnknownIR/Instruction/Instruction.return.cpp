@@ -4,14 +4,14 @@
 
 namespace uir {
 ////////////////////////////////////////////////////////////
-//     ReturnInst
+//     ReturnInstruction
 //
-ReturnInst::ReturnInst() : TerminatorInst(OpCodeID::Ret)
+ReturnInstruction::ReturnInstruction() : TerminatorInstruction(OpCodeID::Ret)
 {
     //
 }
 
-ReturnInst::~ReturnInst()
+ReturnInstruction::~ReturnInstruction()
 {
     //
 }
@@ -20,28 +20,28 @@ ReturnInst::~ReturnInst()
 // Virtual
 // Get the opcode name of this instruction
 unknown::StringRef
-ReturnInst::getOpcodeName() const
+ReturnInstruction::getOpcodeName() const
 {
     return RetComponent.mOpCodeName;
 }
 
 // Get the default number of operands
 uint32_t
-ReturnInst::getDefaultNumberOfOperands() const
+ReturnInstruction::getDefaultNumberOfOperands() const
 {
     return RetComponent.mNumberOfOperands;
 }
 
 // Is this instruction with flags?
 bool
-ReturnInst::hasFlags() const
+ReturnInstruction::hasFlags() const
 {
     return RetComponent.mHasFlags;
 }
 
 // Print the instruction
 void
-ReturnInst::print(unknown::raw_ostream &OS) const
+ReturnInstruction::print(unknown::raw_ostream &OS) const
 {
     // address\tinst
     OS << "0x" << unknown::utohexstr(getInstructionAddress());
@@ -52,22 +52,22 @@ ReturnInst::print(unknown::raw_ostream &OS) const
 
 ////////////////////////////////////////////////////////////
 // Static
-ReturnInst *
-ReturnInst::get()
+ReturnInstruction *
+ReturnInstruction::get()
 {
-    return new ReturnInst();
+    return new ReturnInstruction();
 }
 
 ////////////////////////////////////////////////////////////
-//     ReturnImmInst
+//     ReturnImmInstruction
 //
-ReturnImmInst::ReturnImmInst(ConstantInt *ImmConstantInt) : TerminatorInst(OpCodeID::RetIMM)
+ReturnImmInstruction::ReturnImmInstruction(ConstantInt *ImmConstantInt) : TerminatorInstruction(OpCodeID::RetIMM)
 {
     // Insert ImmConstantInt   -> op1
     insertOperandAndUpdateUsers(ImmConstantInt);
 }
 
-ReturnImmInst::~ReturnImmInst()
+ReturnImmInstruction::~ReturnImmInstruction()
 {
     //
 }
@@ -76,28 +76,28 @@ ReturnImmInst::~ReturnImmInst()
 // Virtual
 // Get the opcode name of this instruction
 unknown::StringRef
-ReturnImmInst::getOpcodeName() const
+ReturnImmInstruction::getOpcodeName() const
 {
     return RetIMMComponent.mOpCodeName;
 }
 
 // Get the default number of operands
 uint32_t
-ReturnImmInst::getDefaultNumberOfOperands() const
+ReturnImmInstruction::getDefaultNumberOfOperands() const
 {
     return RetIMMComponent.mNumberOfOperands;
 }
 
 // Is this instruction with flags?
 bool
-ReturnImmInst::hasFlags() const
+ReturnImmInstruction::hasFlags() const
 {
     return RetIMMComponent.mHasFlags;
 }
 
 // Print the instruction
 void
-ReturnImmInst::print(unknown::raw_ostream &OS) const
+ReturnImmInstruction::print(unknown::raw_ostream &OS) const
 {
     // address\tinst
     OS << "0x" << unknown::utohexstr(getInstructionAddress());
@@ -112,24 +112,24 @@ ReturnImmInst::print(unknown::raw_ostream &OS) const
 // Get/Set
 // Get the immediate constant int
 const ConstantInt *
-ReturnImmInst::getImmConstantInt() const
+ReturnImmInstruction::getImmConstantInt() const
 {
     return dynamic_cast<const ConstantInt *>(getOperand(0));
 }
 
 // Set the immediate constant int
 void
-ReturnImmInst::setImmConstantInt(ConstantInt *ImmConstantInt)
+ReturnImmInstruction::setImmConstantInt(ConstantInt *ImmConstantInt)
 {
     setOperandAndUpdateUsers(0, ImmConstantInt);
 }
 
 ////////////////////////////////////////////////////////////
 // Static
-ReturnImmInst *
-ReturnImmInst::get(ConstantInt *ImmConstantInt)
+ReturnImmInstruction *
+ReturnImmInstruction::get(ConstantInt *ImmConstantInt)
 {
-    return new ReturnImmInst(ImmConstantInt);
+    return new ReturnImmInstruction(ImmConstantInt);
 }
 
 } // namespace uir

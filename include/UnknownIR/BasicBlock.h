@@ -4,11 +4,11 @@
 namespace uir {
 class Function;
 class Instruction;
-class TerminatorInst;
+class TerminatorInstruction;
 
 class BasicBlock : public Constant
 {
-    friend class TerminatorInst;
+    friend class TerminatorInstruction;
 
 public:
     using InstListType = std::list<Instruction *>;
@@ -119,10 +119,10 @@ public:
     uint64_t getBasicBlockSize() const;
 
     // Get the terminator instruction of this block
-    TerminatorInst *getTerminator();
+    TerminatorInstruction *getTerminator();
 
     // Get the terminator instruction of this block
-    const TerminatorInst *getTerminator() const;
+    const TerminatorInstruction *getTerminator() const;
 
     // Get the first predecessor of this block
     BasicBlock *getFirstPredecessor();
