@@ -253,6 +253,13 @@ Instruction::setExtraInfo(unknown::StringRef ExtraInfo)
     mExtraInfo = ExtraInfo;
 }
 
+// Append the extra info of this instruction
+void
+Instruction::appendExtraInfo(unknown::StringRef ExtraInfo)
+{
+    mExtraInfo += ExtraInfo;
+}
+
 // Get the comment of this instruction
 const std::string
 Instruction::getComment() const
@@ -265,6 +272,13 @@ void
 Instruction::setComment(unknown::StringRef Comment)
 {
     mComment = Comment;
+}
+
+// Append the comment of this instruction
+void
+Instruction::appendComment(unknown::StringRef Comment)
+{
+    mComment += Comment;
 }
 
 ////////////////////////////////////////////////////////////

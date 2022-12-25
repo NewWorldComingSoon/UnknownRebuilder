@@ -93,11 +93,17 @@ public:
     // Set the extra info of this instruction
     void setExtraInfo(unknown::StringRef ExtraInfo);
 
+    // Append the extra info of this instruction
+    void appendExtraInfo(unknown::StringRef ExtraInfo);
+
     // Get the comment of this instruction
     const std::string getComment() const;
 
     // Set the comment of this instruction
     void setComment(unknown::StringRef Comment);
+
+    // Append the comment of this instruction
+    void appendComment(unknown::StringRef Comment);
 
 public:
     // Remove/Erase/Insert/Clear
