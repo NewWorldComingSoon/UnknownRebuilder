@@ -92,6 +92,9 @@ public:
 
     static const WordType WORDTYPE_MAX = ~WordType(0);
 
+public:
+    bool operator<(const APInt &RHS) const { return compare(RHS) == -1; }
+
 private:
     /// This union is used to store the integer value. When the
     /// integer bit-width <= 64, it uses VAL, otherwise it uses pVal.
@@ -976,12 +979,18 @@ public:
     /// Left logical shift operator.
     ///
     /// Shifts this APInt left by \p Bits and returns the result.
-    APInt operator<<(unsigned Bits) const { return shl(Bits); }
+    APInt operator<<(unsigned Bits) const
+    {
+        return shl(Bits);
+    }
 
     /// Left logical shift operator.
     ///
     /// Shifts this APInt left by \p Bits and returns the result.
-    APInt operator<<(const APInt &Bits) const { return shl(Bits); }
+    APInt operator<<(const APInt &Bits) const
+    {
+        return shl(Bits);
+    }
 
     /// Arithmetic right-shift function.
     ///
@@ -1190,7 +1199,10 @@ public:
     /// relationship.
     ///
     /// \returns true if *this == Val
-    bool operator==(uint64_t Val) const { return (isSingleWord() || getActiveBits() <= 64) && getZExtValue() == Val; }
+    bool operator==(uint64_t Val) const
+    {
+        return (isSingleWord() || getActiveBits() <= 64) && getZExtValue() == Val;
+    }
 
     /// Equality comparison.
     ///
@@ -1198,7 +1210,10 @@ public:
     /// relationship.
     ///
     /// \returns true if *this == Val
-    bool eq(const APInt &RHS) const { return (*this) == RHS; }
+    bool eq(const APInt &RHS) const
+    {
+        return (*this) == RHS;
+    }
 
     /// Inequality operator.
     ///
@@ -1206,7 +1221,10 @@ public:
     /// relationship.
     ///
     /// \returns true if *this != Val
-    bool operator!=(const APInt &RHS) const { return !((*this) == RHS); }
+    bool operator!=(const APInt &RHS) const
+    {
+        return !((*this) == RHS);
+    }
 
     /// Inequality operator.
     ///
@@ -1214,7 +1232,10 @@ public:
     /// relationship.
     ///
     /// \returns true if *this != Val
-    bool operator!=(uint64_t Val) const { return !((*this) == Val); }
+    bool operator!=(uint64_t Val) const
+    {
+        return !((*this) == Val);
+    }
 
     /// Inequality comparison
     ///
@@ -1222,7 +1243,10 @@ public:
     /// relationship.
     ///
     /// \returns true if *this != Val
-    bool ne(const APInt &RHS) const { return !((*this) == RHS); }
+    bool ne(const APInt &RHS) const
+    {
+        return !((*this) == RHS);
+    }
 
     /// Unsigned less than comparison
     ///
@@ -1230,7 +1254,10 @@ public:
     /// the validity of the less-than relationship.
     ///
     /// \returns true if *this < RHS when both are considered unsigned.
-    bool ult(const APInt &RHS) const { return compare(RHS) < 0; }
+    bool ult(const APInt &RHS) const
+    {
+        return compare(RHS) < 0;
+    }
 
     /// Unsigned less than comparison
     ///
@@ -1250,7 +1277,10 @@ public:
     /// validity of the less-than relationship.
     ///
     /// \returns true if *this < RHS when both are considered signed.
-    bool slt(const APInt &RHS) const { return compareSigned(RHS) < 0; }
+    bool slt(const APInt &RHS) const
+    {
+        return compareSigned(RHS) < 0;
+    }
 
     /// Signed less than comparison
     ///
@@ -1269,7 +1299,10 @@ public:
     /// validity of the less-or-equal relationship.
     ///
     /// \returns true if *this <= RHS when both are considered unsigned.
-    bool ule(const APInt &RHS) const { return compare(RHS) <= 0; }
+    bool ule(const APInt &RHS) const
+    {
+        return compare(RHS) <= 0;
+    }
 
     /// Unsigned less or equal comparison
     ///
@@ -1277,7 +1310,10 @@ public:
     /// the validity of the less-or-equal relationship.
     ///
     /// \returns true if *this <= RHS when considered unsigned.
-    bool ule(uint64_t RHS) const { return !ugt(RHS); }
+    bool ule(uint64_t RHS) const
+    {
+        return !ugt(RHS);
+    }
 
     /// Signed less or equal comparison
     ///
@@ -1285,7 +1321,10 @@ public:
     /// validity of the less-or-equal relationship.
     ///
     /// \returns true if *this <= RHS when both are considered signed.
-    bool sle(const APInt &RHS) const { return compareSigned(RHS) <= 0; }
+    bool sle(const APInt &RHS) const
+    {
+        return compareSigned(RHS) <= 0;
+    }
 
     /// Signed less or equal comparison
     ///
@@ -1293,7 +1332,10 @@ public:
     /// validity of the less-or-equal relationship.
     ///
     /// \returns true if *this <= RHS when considered signed.
-    bool sle(uint64_t RHS) const { return !sgt(RHS); }
+    bool sle(uint64_t RHS) const
+    {
+        return !sgt(RHS);
+    }
 
     /// Unsigned greather than comparison
     ///
@@ -1301,7 +1343,10 @@ public:
     /// the validity of the greater-than relationship.
     ///
     /// \returns true if *this > RHS when both are considered unsigned.
-    bool ugt(const APInt &RHS) const { return !ule(RHS); }
+    bool ugt(const APInt &RHS) const
+    {
+        return !ule(RHS);
+    }
 
     /// Unsigned greater than comparison
     ///
@@ -1321,7 +1366,10 @@ public:
     /// validity of the greater-than relationship.
     ///
     /// \returns true if *this > RHS when both are considered signed.
-    bool sgt(const APInt &RHS) const { return !sle(RHS); }
+    bool sgt(const APInt &RHS) const
+    {
+        return !sle(RHS);
+    }
 
     /// Signed greater than comparison
     ///
@@ -1340,7 +1388,10 @@ public:
     /// validity of the greater-or-equal relationship.
     ///
     /// \returns true if *this >= RHS when both are considered unsigned.
-    bool uge(const APInt &RHS) const { return !ult(RHS); }
+    bool uge(const APInt &RHS) const
+    {
+        return !ult(RHS);
+    }
 
     /// Unsigned greater or equal comparison
     ///
@@ -1348,7 +1399,10 @@ public:
     /// the validity of the greater-or-equal relationship.
     ///
     /// \returns true if *this >= RHS when considered unsigned.
-    bool uge(uint64_t RHS) const { return !ult(RHS); }
+    bool uge(uint64_t RHS) const
+    {
+        return !ult(RHS);
+    }
 
     /// Signed greater or equal comparison
     ///
@@ -1356,7 +1410,10 @@ public:
     /// validity of the greater-or-equal relationship.
     ///
     /// \returns true if *this >= RHS when both are considered signed.
-    bool sge(const APInt &RHS) const { return !slt(RHS); }
+    bool sge(const APInt &RHS) const
+    {
+        return !slt(RHS);
+    }
 
     /// Signed greater or equal comparison
     ///
@@ -1364,7 +1421,10 @@ public:
     /// the validity of the greater-or-equal relationship.
     ///
     /// \returns true if *this >= RHS when considered signed.
-    bool sge(int64_t RHS) const { return !slt(RHS); }
+    bool sge(int64_t RHS) const
+    {
+        return !slt(RHS);
+    }
 
     /// This operation tests if there are any pairs of corresponding bits
     /// between this APInt and RHS that are both set.
@@ -1464,7 +1524,10 @@ public:
     }
 
     /// Set the sign bit to 1.
-    void setSignBit() { setBit(BitWidth - 1); }
+    void setSignBit()
+    {
+        setBit(BitWidth - 1);
+    }
 
     /// Set the bits from loBit (inclusive) to hiBit (exclusive) to 1.
     void setBits(unsigned loBit, unsigned hiBit)
@@ -1490,13 +1553,22 @@ public:
     }
 
     /// Set the top bits starting from loBit.
-    void setBitsFrom(unsigned loBit) { return setBits(loBit, BitWidth); }
+    void setBitsFrom(unsigned loBit)
+    {
+        return setBits(loBit, BitWidth);
+    }
 
     /// Set the bottom loBits bits.
-    void setLowBits(unsigned loBits) { return setBits(0, loBits); }
+    void setLowBits(unsigned loBits)
+    {
+        return setBits(0, loBits);
+    }
 
     /// Set the top hiBits bits.
-    void setHighBits(unsigned hiBits) { return setBits(BitWidth - hiBits, BitWidth); }
+    void setHighBits(unsigned hiBits)
+    {
+        return setBits(BitWidth - hiBits, BitWidth);
+    }
 
     /// Set every bit to 0.
     void clearAllBits()
@@ -1521,7 +1593,10 @@ public:
     }
 
     /// Set the sign bit to 0.
-    void clearSignBit() { clearBit(BitWidth - 1); }
+    void clearSignBit()
+    {
+        clearBit(BitWidth - 1);
+    }
 
     /// Toggle every bit to its opposite value.
     void flipAllBits()
@@ -1561,14 +1636,20 @@ public:
     /// @{
 
     /// Return the number of bits in the APInt.
-    unsigned getBitWidth() const { return BitWidth; }
+    unsigned getBitWidth() const
+    {
+        return BitWidth;
+    }
 
     /// Get the number of words.
     ///
     /// Here one word's bitwidth equals to that of uint64_t.
     ///
     /// \returns the number of words to hold the integer value of this APInt.
-    unsigned getNumWords() const { return getNumWords(BitWidth); }
+    unsigned getNumWords() const
+    {
+        return getNumWords(BitWidth);
+    }
 
     /// Get the number of words.
     ///
@@ -1586,7 +1667,10 @@ public:
     /// This function returns the number of active bits which is defined as the
     /// bit width minus the number of leading zeros. This is used in several
     /// computations to see how "wide" the value is.
-    unsigned getActiveBits() const { return BitWidth - countLeadingZeros(); }
+    unsigned getActiveBits() const
+    {
+        return BitWidth - countLeadingZeros();
+    }
 
     /// Compute the number of active words in the value of this APInt.
     ///
@@ -1680,7 +1764,10 @@ public:
 
     /// Computes the number of leading bits of this APInt that are equal to its
     /// sign bit.
-    unsigned getNumSignBits() const { return isNegative() ? countLeadingOnes() : countLeadingZeros(); }
+    unsigned getNumSignBits() const
+    {
+        return isNegative() ? countLeadingOnes() : countLeadingZeros();
+    }
 
     /// Count the number of trailing zero bits.
     ///
@@ -1736,11 +1823,17 @@ public:
 
     /// Considers the APInt to be unsigned and converts it into a string in the
     /// radix given. The radix can be 2, 8, 10 16, or 36.
-    void toStringUnsigned(SmallVectorImpl<char> &Str, unsigned Radix = 10) const { toString(Str, Radix, false, false); }
+    void toStringUnsigned(SmallVectorImpl<char> &Str, unsigned Radix = 10) const
+    {
+        toString(Str, Radix, false, false);
+    }
 
     /// Considers the APInt to be signed and converts it into a string in the
     /// radix given. The radix can be 2, 8, 10, 16, or 36.
-    void toStringSigned(SmallVectorImpl<char> &Str, unsigned Radix = 10) const { toString(Str, Radix, true, false); }
+    void toStringSigned(SmallVectorImpl<char> &Str, unsigned Radix = 10) const
+    {
+        toString(Str, Radix, true, false);
+    }
 
     /// Return the APInt as a std::string.
     ///
@@ -1760,43 +1853,64 @@ public:
     double roundToDouble(bool isSigned) const;
 
     /// Converts this unsigned APInt to a double value.
-    double roundToDouble() const { return roundToDouble(false); }
+    double roundToDouble() const
+    {
+        return roundToDouble(false);
+    }
 
     /// Converts this signed APInt to a double value.
-    double signedRoundToDouble() const { return roundToDouble(true); }
+    double signedRoundToDouble() const
+    {
+        return roundToDouble(true);
+    }
 
     /// Converts APInt bits to a double
     ///
     /// The conversion does not do a translation from integer to double, it just
     /// re-interprets the bits as a double. Note that it is valid to do this on
     /// any bit width. Exactly 64 bits will be translated.
-    double bitsToDouble() const { return BitsToDouble(getWord(0)); }
+    double bitsToDouble() const
+    {
+        return BitsToDouble(getWord(0));
+    }
 
     /// Converts APInt bits to a double
     ///
     /// The conversion does not do a translation from integer to float, it just
     /// re-interprets the bits as a float. Note that it is valid to do this on
     /// any bit width. Exactly 32 bits will be translated.
-    float bitsToFloat() const { return BitsToFloat(getWord(0)); }
+    float bitsToFloat() const
+    {
+        return BitsToFloat(getWord(0));
+    }
 
     /// Converts a double to APInt bits.
     ///
     /// The conversion does not do a translation from double to integer, it just
     /// re-interprets the bits of the double.
-    static APInt doubleToBits(double V) { return APInt(sizeof(double) * CHAR_BIT, DoubleToBits(V)); }
+    static APInt doubleToBits(double V)
+    {
+        return APInt(sizeof(double) * CHAR_BIT, DoubleToBits(V));
+    }
 
     /// Converts a float to APInt bits.
     ///
     /// The conversion does not do a translation from float to integer, it just
     /// re-interprets the bits of the float.
-    static APInt floatToBits(float V) { return APInt(sizeof(float) * CHAR_BIT, FloatToBits(V)); }
+    static APInt floatToBits(float V)
+    {
+        return APInt(sizeof(float) * CHAR_BIT, FloatToBits(V));
+    }
 
     /// @}
     /// \name Mathematics Operations
     /// @{
 
     /// \returns the floor log base 2 of this APInt.
-    unsigned logBase2() const { return getActiveBits() - 1; }
+    unsigned logBase2() const
+    {
+        return getActiveBits() - 1;
+    }
 
     /// \returns the ceil log base 2 of this APInt.
     unsigned ceilLogBase2() const
@@ -1984,10 +2098,16 @@ public:
     static int tcCompare(const WordType *, const WordType *, unsigned);
 
     /// Increment a bignum in-place.  Return the carry flag.
-    static WordType tcIncrement(WordType *dst, unsigned parts) { return tcAddPart(dst, 1, parts); }
+    static WordType tcIncrement(WordType *dst, unsigned parts)
+    {
+        return tcAddPart(dst, 1, parts);
+    }
 
     /// Decrement a bignum in-place.  Return the borrow flag.
-    static WordType tcDecrement(WordType *dst, unsigned parts) { return tcSubtractPart(dst, 1, parts); }
+    static WordType tcDecrement(WordType *dst, unsigned parts)
+    {
+        return tcSubtractPart(dst, 1, parts);
+    }
 
     /// Set the least significant BITS and clear the rest.
     static void tcSetLeastSignificantBits(WordType *, unsigned, unsigned bits);

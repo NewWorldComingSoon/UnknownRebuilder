@@ -13,7 +13,7 @@ TEST(test_uir, test_uir_inst_RetIMM_1)
 
     std::cout << std::format("RetIMMOpCodeName = {}", RetIMMComponent.mOpCodeName.data()) << std::endl;
 
-    auto ReturnImmInst = ReturnImmInstruction::get(ConstantInt::get(CTX, 1, 32));
+    auto ReturnImmInst = ReturnImmInstruction::get(ConstantInt::get(CTX, unknown::APInt(32, 1)));
     ReturnImmInst->setInstructionAddress(0x401000);
     ReturnImmInst->print(unknown::outs());
     unknown::outs() << *ReturnImmInst;
@@ -24,7 +24,7 @@ TEST(test_uir, test_uir_inst_RetIMM_1)
         std::cout << std::format("ImmCstInt->getZExtValue() = {}", ImmCstInt->getZExtValue()) << std::endl;
 
         // Update op1
-        ReturnImmInst->setImmConstantInt(ConstantInt::get(CTX, 2, 32));
+        ReturnImmInst->setImmConstantInt(ConstantInt::get(CTX, unknown::APInt(32, 1)));
         auto ImmCstInt2 = ReturnImmInst->getImmConstantInt();
         std::cout << std::format("ImmCstInt2->getZExtValue() = {}", ImmCstInt->getZExtValue()) << std::endl;
         ReturnImmInst->setInstructionAddress(0x401001);

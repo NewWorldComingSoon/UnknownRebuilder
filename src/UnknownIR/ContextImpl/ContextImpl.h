@@ -1,9 +1,12 @@
 #pragma once
 #include <cstdint>
 #include <string>
+#include <map>
 #include <unordered_map>
 
 #include <Type.h>
+
+#include <UnknownUtils/unknown/ADT/APInt.h>
 
 namespace uir {
 
@@ -44,7 +47,7 @@ public:
     std::unordered_map<Type *, PointerType *> mPointerTypes;
 
     // IntConstants map
-    std::unordered_map<uint64_t, ConstantInt *> mIntConstants;
+    std::map<unknown::APInt, ConstantInt *> mIntConstants;
 
 public:
     explicit ContextImpl(Context &C);

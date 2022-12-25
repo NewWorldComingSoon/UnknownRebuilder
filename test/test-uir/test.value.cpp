@@ -11,7 +11,7 @@ TEST(test_uir, test_uir_value_1)
     CTX.setArch(Context::ArchX86);
     CTX.setMode(Context::Mode64);
 
-    ConstantInt *Val2 = new ConstantInt(Type::getInt32Ty(CTX), 0x7b);
+    ConstantInt *Val2 = new ConstantInt(Type::getInt32Ty(CTX), unknown::APInt(32, 0x7b));
     std::cout << std::hex
               << std::format("Val1 ReadableName = {}, ZExtValue = {}", Val2->getReadableName(), Val2->getZExtValue())
               << std::endl;
@@ -32,7 +32,7 @@ TEST(test_uir, test_uir_value_2)
     CTX.setArch(Context::ArchX86);
     CTX.setMode(Context::Mode64);
 
-    Value *Ptr2 = new ConstantInt(Type::getInt32PtrTy(CTX), 123);
+    Value *Ptr2 = new ConstantInt(Type::getInt32PtrTy(CTX), unknown::APInt(32, 123));
     std::cout << std::format("Ptr2 ReadableName = {}", Ptr2->getReadableName()) << std::endl;
     unknown::outs() << "Ptr2 ReadableName = " << *Ptr2;
 
@@ -78,7 +78,7 @@ TEST(test_uir, test_uir_value_4)
     CTX.setArch(Context::ArchX86);
     CTX.setMode(Context::Mode64);
 
-    auto CSTInt = ConstantInt::get(CTX, 25474, 32);
+    auto CSTInt = ConstantInt::get(CTX, unknown::APInt(32, 25474));
     std::cout << std::format("CSTInt getZExtValue =  {}", CSTInt->getZExtValue()) << std::endl;
     std::cout << std::format("CSTInt ReadableName =  {}", CSTInt->getReadableName()) << std::endl;
     unknown::outs() << "CSTInt ReadableName = " << *CSTInt;
