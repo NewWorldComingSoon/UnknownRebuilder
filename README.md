@@ -8,15 +8,15 @@ X86 native code rebuilder using UnknownIR(UIR) and UnknownMC(UMC).
 ```mermaid
 graph TD
 
-A1[X86] -->|Lift| B(UIR)
-A2[ARM] -->|Lift| B(UIR)
+A1[Frontend-X86] -->|Lift| B(UIR)
+A2[Frontend-ARM] -->|Lift| B(UIR)
 
-B -->C(Pass)
+B -->C(UIR Pass)
 C -->D(UMC)
-D -->E(Pass)
+D -->E(UMC Pass)
 
-E -->|Build| F1[X86]
-E -->|Build| F2[ARM]
+E -->|Build| F1[Backend-X86]
+E -->|Build| F2[Backend-ARM]
 
 ```
 
