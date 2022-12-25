@@ -4,3 +4,6 @@
 [submodule "3rdparty/keystone-retdec"]
 	path = 3rdparty/keystone-retdec
 	url = https://github.com/NewWorldComingSoon/keystone-retdec
+[submodule "3rdparty/toml11"]
+	path = 3rdparty/toml11
+	url = https://github.com/NewWorldComingSoon/toml11
