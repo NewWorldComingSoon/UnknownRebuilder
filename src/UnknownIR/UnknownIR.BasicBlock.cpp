@@ -258,53 +258,67 @@ BasicBlock::eraseFromParent()
     }
 }
 
-// Insert an unlinked BasicBlock into a function immediately before the specified BasicBlock.
+// Insert an unlinked BasicBlock into a function immediately before/after the specified BasicBlock.
 void
-BasicBlock::insertBefore(BasicBlock *InsertPos)
+BasicBlock::insertBeforeOrAfter(BasicBlock *InsertPos, bool Before)
 {
     if (InsertPos->getParent() == nullptr)
     {
         return;
     }
 
+    bool CanInsert = true;
     auto InsertPosIt = InsertPos->getParent()->getBasicBlockList().begin();
     for (; InsertPosIt != InsertPos->getParent()->getBasicBlockList().end(); ++InsertPosIt)
     {
         if (*InsertPosIt == InsertPos)
         {
+            CanInsert = false;
+            break;
+        }
+
+        if (*InsertPosIt == InsertPos)
+        {
+            if (!Before)
+            {
+                ++InsertPosIt;
+            }
             break;
         }
     }
 
-    InsertPos->getParent()->getBasicBlockList().insert(InsertPosIt, this);
+    if (CanInsert)
+    {
+        InsertPos->getParent()->getBasicBlockList().insert(InsertPosIt, this);
+    }
+}
+
+// Insert an unlinked BasicBlock into a function immediately before the specified BasicBlock.
+void
+BasicBlock::insertBefore(BasicBlock *InsertPos)
+{
+    insertBeforeOrAfter(InsertPos, true);
 }
 
 // Insert an unlinked BasicBlock into a function immediately after the specified BasicBlock.
 void
 BasicBlock::insertAfter(BasicBlock *InsertPos)
 {
-    if (InsertPos->getParent() == nullptr)
-    {
-        return;
-    }
-
-    auto InsertPosIt = InsertPos->getParent()->getBasicBlockList().begin();
-    for (; InsertPosIt != InsertPos->getParent()->getBasicBlockList().end(); ++InsertPosIt)
-    {
-        if (*InsertPosIt == InsertPos)
-        {
-            ++InsertPosIt;
-            break;
-        }
-    }
-
-    InsertPos->getParent()->getBasicBlockList().insert(InsertPosIt, this);
+    insertBeforeOrAfter(InsertPos, false);
 }
 
 // Insert an unlinked instructions into a block
 void
 BasicBlock::insertInst(Instruction *I)
 {
+    for (Instruction *Inst : mInstList)
+    {
+        if (Inst == I)
+        {
+            return;
+        }
+    }
+
     push(I);
     I->setParent(this);
 }

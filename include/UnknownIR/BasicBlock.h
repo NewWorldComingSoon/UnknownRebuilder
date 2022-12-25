@@ -137,6 +137,9 @@ public:
     // Remove the block from the its parent and delete it.
     void eraseFromParent();
 
+    // Insert an unlinked BasicBlock into a function immediately before/after the specified BasicBlock.
+    void insertBeforeOrAfter(BasicBlock *InsertPos, bool Before);
+
     // Insert an unlinked BasicBlock into a function immediately before the specified BasicBlock.
     void insertBefore(BasicBlock *InsertPos);
 

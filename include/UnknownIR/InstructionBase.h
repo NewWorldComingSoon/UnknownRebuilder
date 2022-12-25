@@ -93,6 +93,9 @@ public:
     // Remove this instruction from its parent and delete it.
     void eraseFromParent();
 
+    // Insert an unlinked instructions into a basic block immediately before/after the specified instruction.
+    void insertBeforeOrAfter(Instruction *InsertPos, bool Before);
+
     // Insert an unlinked instructions into a basic block immediately before the specified instruction.
     void insertBefore(Instruction *InsertPos);
 

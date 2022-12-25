@@ -262,47 +262,54 @@ Instruction::eraseFromParent()
     }
 }
 
-// Insert an unlinked instructions into a basic block immediately before the specified instruction.
+// Insert an unlinked instructions into a basic block immediately before/after the specified instruction.
 void
-Instruction::insertBefore(Instruction *InsertPos)
+Instruction::insertBeforeOrAfter(Instruction *InsertPos, bool Before)
 {
     if (InsertPos->getParent() == nullptr)
     {
         return;
     }
 
+    bool CanInsert = true;
     auto InsertPosIt = InsertPos->getParent()->getInstList().begin();
     for (; InsertPosIt != InsertPos->getParent()->getInstList().end(); ++InsertPosIt)
     {
+        if (*InsertPosIt == this)
+        {
+            CanInsert = false;
+            break;
+        }
+
         if (*InsertPosIt == InsertPos)
         {
+            if (!Before)
+            {
+                ++InsertPosIt;
+            }
+
             break;
         }
     }
 
-    InsertPos->getParent()->getInstList().insert(InsertPosIt, this);
+    if (CanInsert)
+    {
+        InsertPos->getParent()->getInstList().insert(InsertPosIt, this);
+    }
+}
+
+// Insert an unlinked instructions into a basic block immediately before the specified instruction.
+void
+Instruction::insertBefore(Instruction *InsertPos)
+{
+    insertBeforeOrAfter(InsertPos, true);
 }
 
 // Insert an unlinked instructions into a basic block immediately after the specified instruction.
 void
 Instruction::insertAfter(Instruction *InsertPos)
 {
-    if (InsertPos->getParent() == nullptr)
-    {
-        return;
-    }
-
-    auto InsertPosIt = InsertPos->getParent()->getInstList().begin();
-    for (; InsertPosIt != InsertPos->getParent()->getInstList().end(); ++InsertPosIt)
-    {
-        if (*InsertPosIt == InsertPos)
-        {
-            ++InsertPosIt;
-            break;
-        }
-    }
-
-    InsertPos->getParent()->getInstList().insert(InsertPosIt, this);
+    insertBeforeOrAfter(InsertPos, false);
 }
 
 ////////////////////////////////////////////////////////////
