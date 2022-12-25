@@ -64,12 +64,18 @@ public:
     void setOperandAndUpdateUsers(size_t Index, Value *Val);
 
 public:
-    // Insert/Drop
+    // Insert/Erase/Drop
     // Insert the specified value.
     void insertOperand(Value *Val);
 
     // Insert the specified value and update the user list.
     void insertOperandAndUpdateUsers(Value *Val);
+
+    // Erase the specified value.
+    void eraseOperand(Value *Val);
+
+    // Erase the specified value and update the user list.
+    void eraseOperandAndUpdateUsers(Value *Val);
 
     // Drop all references to operands.
     void dropAllReferences();

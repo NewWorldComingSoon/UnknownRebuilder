@@ -223,6 +223,33 @@ User::insertOperandAndUpdateUsers(Value *Val)
     }
 }
 
+// Erase the specified value.
+void
+User::eraseOperand(Value *Val)
+{
+    op_erase(Val);
+}
+
+// Erase the specified value and update the user list.
+void
+User::eraseOperandAndUpdateUsers(Value *Val)
+{
+    // Erase the specified value.
+    eraseOperand(Val);
+    if (Val)
+    {
+        // Erase user
+        if (std::find(op_begin(), op_end(), Val) == op_end())
+        {
+            Val->user_erase(this);
+        }
+    }
+    else
+    {
+        uir_unreachable("Val == nullptr in User::eraseOperandAndUpdateUsers");
+    }
+}
+
 // Drop all references to operands.
 void
 User::dropAllReferences()

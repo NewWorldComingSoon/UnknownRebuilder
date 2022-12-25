@@ -129,11 +129,7 @@ Value::user_count(User *U) const
 void
 Value::user_insert(User *U)
 {
-    auto It = mUsers.find(U);
-    if (It == mUsers.end())
-    {
-        mUsers.insert(U);
-    }
+    mUsers.insert(U);
 }
 
 void
