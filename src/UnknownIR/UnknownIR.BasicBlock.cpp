@@ -330,14 +330,21 @@ BasicBlock::clearAllInstructions()
     for (auto InstIt = begin(); InstIt != end(); ++InstIt)
     {
         auto Inst = *InstIt;
-        Inst->clearAllOperands();
+        if (Inst)
+        {
+            Inst->clearAllOperands();
+        }
     }
 
     for (auto InstIt = begin(); InstIt != end(); ++InstIt)
     {
         auto Inst = *InstIt;
-        Inst->setParent(nullptr);
-        delete Inst;
+        if (Inst)
+        {
+            Inst->setParent(nullptr);
+            delete Inst;
+        }
+
         clear();
     }
 }
