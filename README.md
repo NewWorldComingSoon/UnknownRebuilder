@@ -11,10 +11,12 @@ graph LR
 A1[X86] -->|Lift| B(UIR)
 A2[ARM] -->|Lift| B(UIR)
 
-B -->C(UMC)
+B -->C(Pass)
+C -->D(UMC)
+D -->E(Pass)
 
-C -->|Build| D1[X86]
-C -->|Build| D2[ARM]
+E -->|Build| F1[X86]
+E -->|Build| F2[ARM]
 
 ```
 
