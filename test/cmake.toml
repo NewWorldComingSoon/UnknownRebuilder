@@ -24,6 +24,25 @@ link-libraries = [
 compile-features = ["cxx_std_20"]
 
 
+[target.test-ufrontend]
+type = "executable"
+msvc-runtime = "static"
+headers = ["test-ufrontend/**.h"]
+sources = ["test-ufrontend/**.cpp", "test-ufrontend/**.h"]
+include-directories = [
+"../include",
+"googletest/googletest/include"
+]
+
+link-libraries = [
+"UnknownUtils",
+"UnknownIR",
+"UnknownFrontend",
+"gtest"
+]
+compile-features = ["cxx_std_20"]
+
+
 
 
 

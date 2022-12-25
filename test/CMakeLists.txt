@@ -59,3 +59,41 @@ if(NOT CMKR_VS_STARTUP_PROJECT)
 	set_property(DIRECTORY ${PROJECT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT test-uir)
 endif()
 
+# Target: test-ufrontend
+set(test-ufrontend_SOURCES
+	"test-ufrontend/main.cpp"
+	"test-ufrontend/test.lift.cpp"
+	cmake.toml
+)
+
+add_executable(test-ufrontend)
+
+target_sources(test-ufrontend PRIVATE ${test-ufrontend_SOURCES})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${test-ufrontend_SOURCES})
+
+target_compile_features(test-ufrontend PRIVATE
+	cxx_std_20
+)
+
+target_include_directories(test-ufrontend PRIVATE
+	"../include"
+	"googletest/googletest/include"
+)
+
+target_link_libraries(test-ufrontend PRIVATE
+	UnknownUtils
+	UnknownIR
+	UnknownFrontend
+	gtest
+)
+
+set_target_properties(test-ufrontend PROPERTIES
+	MSVC_RUNTIME_LIBRARY
+		"MultiThreaded$<$<CONFIG:Debug>:Debug>"
+)
+
+get_directory_property(CMKR_VS_STARTUP_PROJECT DIRECTORY ${PROJECT_SOURCE_DIR} DEFINITION VS_STARTUP_PROJECT)
+if(NOT CMKR_VS_STARTUP_PROJECT)
+	set_property(DIRECTORY ${PROJECT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT test-ufrontend)
+endif()
+
