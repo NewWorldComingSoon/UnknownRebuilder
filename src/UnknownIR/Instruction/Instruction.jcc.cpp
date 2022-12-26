@@ -105,7 +105,6 @@ JccAddrInstruction::get(ConstantInt *JccDest, ConstantInt *JccNormal, FlagsVaria
 ////////////////////////////////////////////////////////////
 //     JccBBInstruction
 //
-
 JccBBInstruction::JccBBInstruction(BasicBlock *JccDestBB, BasicBlock *JccNormalBB, FlagsVariable *FlagsVar) :
     TerminatorInstruction(OpCodeID::JccBB)
 {
