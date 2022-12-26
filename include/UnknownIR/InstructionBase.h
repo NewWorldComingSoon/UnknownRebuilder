@@ -122,6 +122,9 @@ public:
     // Insert an unlinked instructions into a basic block immediately after the specified instruction.
     void insertAfter(Instruction *InsertPos);
 
+    // Drop all references to operands.
+    void dropAllReferences();
+
     // Clear all operands in this instruction.
     void clearAllOperands();
 

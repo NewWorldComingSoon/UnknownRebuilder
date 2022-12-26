@@ -351,12 +351,11 @@ Instruction::insertAfter(Instruction *InsertPos)
     insertBeforeOrAfter(InsertPos, false);
 }
 
-// Clear all operands in this instruction.
+// Drop all references to operands.
 void
-Instruction::clearAllOperands()
+Instruction::dropAllReferences()
 {
-    // Drop all references
-    dropAllReferences();
+    User::dropAllReferences();
 
     // Unlink flags variable from its user list
     if (mFlagsVariable)
@@ -371,6 +370,14 @@ Instruction::clearAllOperands()
         mStackVariable->user_erase(this);
         mStackVariable = nullptr;
     }
+}
+
+// Clear all operands in this instruction.
+void
+Instruction::clearAllOperands()
+{
+    // Drop all references to operands
+    dropAllReferences();
 
     // Clear OperandList
     op_clear();

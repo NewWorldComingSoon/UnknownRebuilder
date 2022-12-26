@@ -357,7 +357,7 @@ BasicBlock::clearAllInstructions()
         return;
     }
 
-    // Drop all instructions
+    // Drop all instructions in this block
     dropAllReferences();
 
     // Clear all operands
