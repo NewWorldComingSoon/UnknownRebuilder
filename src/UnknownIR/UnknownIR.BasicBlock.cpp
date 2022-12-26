@@ -247,6 +247,11 @@ BasicBlock::removeFromParent()
         return;
     }
 
+    if (mParent->getBasicBlockList().empty())
+    {
+        return;
+    }
+
     mParent->getBasicBlockList().remove(this);
 }
 
@@ -259,11 +264,17 @@ BasicBlock::eraseFromParent()
         return;
     }
 
+    if (mParent->getBasicBlockList().empty())
+    {
+        return;
+    }
+
     for (auto It = mParent->getBasicBlockList().begin(); It != mParent->getBasicBlockList().end(); ++It)
     {
         if (*It == this)
         {
             mParent->getBasicBlockList().erase(It);
+            this->setParent(nullptr);
             break;
         }
     }
@@ -275,6 +286,13 @@ BasicBlock::insertBeforeOrAfter(BasicBlock *InsertPos, bool Before)
 {
     if (InsertPos->getParent() == nullptr)
     {
+        return;
+    }
+
+    if (InsertPos->getParent()->getBasicBlockList().empty())
+    {
+        InsertPos->getParent()->getBasicBlockList().push_back(this);
+        this->setParent(InsertPos->getParent());
         return;
     }
 
@@ -302,6 +320,7 @@ BasicBlock::insertBeforeOrAfter(BasicBlock *InsertPos, bool Before)
     if (CanInsert)
     {
         InsertPos->getParent()->getBasicBlockList().insert(InsertPosIt, this);
+        this->setParent(InsertPos->getParent());
     }
 }
 

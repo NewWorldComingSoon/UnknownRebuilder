@@ -277,6 +277,11 @@ Instruction::removeFromParent()
         return;
     }
 
+    if (mParent->getInstList().empty())
+    {
+        return;
+    }
+
     mParent->getInstList().remove(this);
 }
 
@@ -289,11 +294,17 @@ Instruction::eraseFromParent()
         return;
     }
 
+    if (mParent->getInstList().empty())
+    {
+        return;
+    }
+
     for (auto It = mParent->getInstList().begin(); It != mParent->getInstList().end(); ++It)
     {
         if (*It == this)
         {
             mParent->getInstList().erase(It);
+            this->setParent(nullptr);
             break;
         }
     }
@@ -305,6 +316,13 @@ Instruction::insertBeforeOrAfter(Instruction *InsertPos, bool Before)
 {
     if (InsertPos->getParent() == nullptr)
     {
+        return;
+    }
+
+    if (InsertPos->getParent()->getInstList().empty())
+    {
+        InsertPos->getParent()->getInstList().push_back(this);
+        this->setParent(InsertPos->getParent());
         return;
     }
 
@@ -332,6 +350,7 @@ Instruction::insertBeforeOrAfter(Instruction *InsertPos, bool Before)
     if (CanInsert)
     {
         InsertPos->getParent()->getInstList().insert(InsertPosIt, this);
+        this->setParent(InsertPos->getParent());
     }
 }
 
