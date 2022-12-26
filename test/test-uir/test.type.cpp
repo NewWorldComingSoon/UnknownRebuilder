@@ -102,3 +102,45 @@ TEST(test_uir, test_uir_type_4)
     auto Int128Ty = Type::getInt128Ty(CTX);
     std::cout << std::format("Int128Ty TypeBits = {}", Int128Ty->getTypeBits()) << std::endl;
 }
+
+TEST(test_uir, test_uir_type_5)
+{
+    Context CTX;
+    CTX.setArch(Context::ArchX86);
+    CTX.setMode(Context::Mode32);
+
+    auto GV = GlobalVariable::get(Type::getInt8Ty(CTX));
+    std::vector<uint8_t> Vec;
+    Vec.push_back(0xcc);
+    Vec.push_back(0x90);
+    auto GA = GlobalArray<>::get(CTX, Type::getInt8Ty(CTX), Vec);
+
+    if (auto TestGV = dynamic_cast<GlobalVariable *>(GV))
+    {
+        std::cout << "TestGV!!!" << std::endl;
+    }
+
+    if (auto TestGV2 = dynamic_cast<GlobalVariable *>(GA))
+    {
+        std::cout << "TestGV2!!!" << std::endl;
+    }
+
+    if (auto TestGA = dynamic_cast<GlobalArray<> *>(GV))
+    {
+        std::cout << "TestGA!!!" << std::endl;
+    }
+
+    if (auto TestGA2 = dynamic_cast<GlobalArray<> *>(GA))
+    {
+        std::cout << "TestGV2!!!" << std::endl;
+    }
+
+    for (size_t i = 0; i < GA->getGlobalArray().size(); ++i)
+    {
+        std::cout << std::format(
+                         "GA->getGlobalArray({}) = {}",
+                         i,
+                         "0x" + unknown::APInt(8, GA->getGlobalArray()[i]).toString(16, false))
+                  << std::endl;
+    }
+}

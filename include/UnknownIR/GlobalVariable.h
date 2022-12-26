@@ -36,7 +36,7 @@ public:
     static GlobalVariable *get(Type *Ty);
 };
 
-template <typename T>
+template <typename T = uint8_t>
 class GlobalArray : public GlobalVariable
 {
 public:
@@ -49,11 +49,16 @@ public:
     GlobalArray(
         Context &C,
         Type *ElmtTy,
-        unknown::StringRef GlobalArrayName,
         const GlobalArrayType &GlobalArrayElements,
+        unknown::StringRef GlobalArrayName = generateOrderedGlobalVarName(C),
         uint64_t GlobalArrayAddress = 0) :
         GlobalVariable(PointerType::get(C, ElmtTy), GlobalArrayName, GlobalArrayAddress), mElements(GlobalArrayElements)
     {
+        if (ElmtTy->getTypeSize() != sizeof(T))
+        {
+            std::printf(std::format("ElmtTy->getTypeSize()[{}] != sizeof(T)[{}]\n", ElmtTy->getTypeSize(), sizeof(T)).c_str());
+            std::abort();
+        }
     }
     virtual ~GlobalArray() {}
 
@@ -62,6 +67,23 @@ public:
     GlobalArrayType &getGlobalArray() { return mElements; }
     const GlobalArrayType &getGlobalArray() const { return mElements; }
     void setGlobalArray(const GlobalArrayType &GlobalArrayElements) { mElements = GlobalArrayElements; }
+
+public:
+    // Static
+    static GlobalArray *
+    get(Context &C,
+        Type *ElmtTy,
+        const GlobalArrayType &GlobalArrayElements,
+        unknown::StringRef GlobalArrayName,
+        uint64_t GlobalArrayAddress)
+    {
+        return new GlobalArray(C, ElmtTy, GlobalArrayElements, GlobalArrayName, GlobalArrayAddress);
+    }
+
+    static GlobalArray *get(Context &C, Type *ElmtTy, const GlobalArrayType &GlobalArrayElements)
+    {
+        return get(C, ElmtTy, GlobalArrayElements, generateOrderedGlobalVarName(C), 0);
+    }
 };
 
 } // namespace uir
