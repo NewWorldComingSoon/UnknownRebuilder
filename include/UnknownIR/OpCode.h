@@ -93,7 +93,7 @@ const OpCodeComponent JmpAddrComponent    = {    OpCodeID::JmpAddr,     "uir.jmp
 // JmpBB targetBB
 const OpCodeComponent JmpBBComponent      = {    OpCodeID::JmpBB,       "uir.jmp.bb",       1,      false};
 
-// JccAddr targetAddr, nextAddr
+// JccAddr targetAddr, normalAddr
 const OpCodeComponent JccAddrComponent    = {    OpCodeID::JccAddr,     "uir.jcc.addr",     2,      true};
 
 // JccBB targetBB, normalBB
