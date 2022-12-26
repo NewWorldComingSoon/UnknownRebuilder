@@ -16,7 +16,10 @@ Context::Context(Arch arch, Mode mode) : mImpl(new ContextImpl(*this)), mArch(ar
 
 Context::~Context()
 {
-    delete mImpl;
+    if (mImpl)
+    {
+        delete mImpl;
+    }
 }
 
 /////////////////////////////////////////////////////////
