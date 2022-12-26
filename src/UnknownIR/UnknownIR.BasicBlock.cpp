@@ -333,6 +333,7 @@ BasicBlock::insertInst(Instruction *I)
 void
 BasicBlock::clearAllInstructions()
 {
+    // Clear all operands
     for (auto InstIt = begin(); InstIt != end(); ++InstIt)
     {
         auto Inst = *InstIt;
@@ -342,6 +343,7 @@ BasicBlock::clearAllInstructions()
         }
     }
 
+    // Free all instructions
     std::vector<Instruction *> FreeInstList;
     for (auto InstIt = begin(); InstIt != end(); ++InstIt)
     {
