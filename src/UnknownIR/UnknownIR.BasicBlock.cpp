@@ -357,6 +357,9 @@ BasicBlock::clearAllInstructions()
         return;
     }
 
+    // Drop all instructions
+    dropAllReferences();
+
     // Clear all operands
     for (auto InstIt = begin(); InstIt != end(); ++InstIt)
     {
