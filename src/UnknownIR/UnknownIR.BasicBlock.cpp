@@ -302,6 +302,7 @@ BasicBlock::insertBeforeOrAfter(BasicBlock *InsertPos, bool Before)
     {
         if (*InsertPosIt == this)
         {
+            // Cannot be repeatedly added to the container
             CanInsert = false;
             break;
         }
