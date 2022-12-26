@@ -170,18 +170,10 @@ Instruction::setFlagsVariableAndUpdateUsers(FlagsVariable *FV)
     {
         OldFlagsVariable->user_erase(this);
     }
-    else
-    {
-        uir_unreachable("OldFlagsVariable == nullptr in Instruction::setFlagsVariableAndUpdateUsers");
-    }
 
     if (FV)
     {
         FV->user_insert(this);
-    }
-    else
-    {
-        uir_unreachable("FV == nullptr in Instruction::setFlagsVariableAndUpdateUsers");
     }
 }
 
