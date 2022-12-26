@@ -10,8 +10,7 @@ Context::Context() : Context(ArchX86, Mode32) {}
 
 Context::Context(Arch arch, Mode mode) : mImpl(new ContextImpl(*this)), mArch(arch), mMode(mode)
 {
-    //
-    //
+    assert(mImpl != nullptr && "Context::Context mImpl == nullptr");
 }
 
 Context::~Context()
