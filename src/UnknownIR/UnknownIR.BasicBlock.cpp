@@ -342,13 +342,18 @@ BasicBlock::clearAllInstructions()
         }
     }
 
+    std::vector<Instruction *> FreeInstList;
     for (auto InstIt = begin(); InstIt != end(); ++InstIt)
     {
         auto Inst = *InstIt;
         if (Inst)
         {
-            Inst->setParent(nullptr);
-            delete Inst;
+            if (std::find(FreeInstList.begin(), FreeInstList.end(), Inst) == FreeInstList.end())
+            {
+                FreeInstList.push_back(Inst);
+                Inst->setParent(nullptr);
+                delete Inst;
+            }
         }
     }
 
