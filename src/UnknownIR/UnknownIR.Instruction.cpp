@@ -16,11 +16,14 @@ Instruction::Instruction() : Instruction(OpCodeID::Unknown)
 }
 
 Instruction::Instruction(OpCodeID OpCodeId) :
-    mOpCodeID(OpCodeId), mInstructionAddress(0), mParent(nullptr), mFlagsVariable(nullptr), mStackVariable(nullptr)
+    mOpCodeID(OpCodeId),
+    mInstructionAddress(0),
+    mParent(nullptr),
+    mFlagsVariable(nullptr),
+    mStackVariable(nullptr),
+    mExtraInfo(""),
+    mComment("")
 {
-    mExtraInfo = "";
-    mComment = "";
-
     if (mFlagsVariable)
     {
         mFlagsVariable->user_insert(this);
