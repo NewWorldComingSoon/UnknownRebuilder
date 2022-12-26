@@ -217,18 +217,10 @@ Instruction::setStackVariableAndUpdateUsers(LocalVariable *SV)
     {
         OldStackVariable->user_erase(this);
     }
-    else
-    {
-        uir_unreachable("OldStackVariable == nullptr in Instruction::setStackVariableAndUpdateUsers");
-    }
 
     if (SV)
     {
         SV->user_insert(this);
-    }
-    else
-    {
-        uir_unreachable("SV == nullptr in Instruction::setStackVariableAndUpdateUsers");
     }
 }
 
