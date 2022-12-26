@@ -58,9 +58,9 @@ JccAddrInstruction::print(unknown::raw_ostream &OS) const
     OS << "\t";
     OS << getOpcodeName();
     OS << " ";
-    OS << getJccDestConstantInt()->getReadableName();
+    OS << getJccDestConstantInt()->getName();
     OS << ", ";
-    OS << getJccNormalConstantInt()->getReadableName();
+    OS << getJccNormalConstantInt()->getName();
     OS << "\n";
 }
 
@@ -211,7 +211,7 @@ JccBBInstruction::setNormalBlockAndUpdatePredecessor(BasicBlock *NormalBB)
 ////////////////////////////////////////////////////////////
 // Static
 JccBBInstruction *
-get(BasicBlock *JccDestBB, BasicBlock *JccNormalBB, FlagsVariable *FlagsVar)
+JccBBInstruction::get(BasicBlock *JccDestBB, BasicBlock *JccNormalBB, FlagsVariable *FlagsVar)
 {
     return new JccBBInstruction(JccDestBB, JccNormalBB, FlagsVar);
 }

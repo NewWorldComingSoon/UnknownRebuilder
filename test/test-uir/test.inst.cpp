@@ -104,3 +104,45 @@ TEST(test_uir, test_uir_inst_JmpBB_1)
     JmpBBInst->print(unknown::outs());
     unknown::outs() << *JmpBBInst;
 }
+
+TEST(test_uir, test_uir_inst_JccAddr_1)
+{
+    Context CTX;
+    CTX.setArch(Context::ArchX86);
+    CTX.setMode(Context::Mode64);
+
+    std::cout << std::format("JccAddrComponent = {}", JccAddrComponent.mOpCodeName.data()) << std::endl;
+
+    auto Addr1 = ConstantInt::get(CTX, unknown::APInt(64, 0x406000));
+    auto Addr2 = ConstantInt::get(CTX, unknown::APInt(64, 0x407000));
+
+    auto FlagsVar = FlagsVariable::get(Type::getInt32Ty(CTX));
+    FlagsVar->setCarryFlag(true);
+    FlagsVar->setZeroFlag(true);
+
+    auto JccAddrInst = JccAddrInstruction::get(Addr1, Addr2, FlagsVar);
+    JccAddrInst->setInstructionAddress(0x401000);
+    JccAddrInst->print(unknown::outs());
+    unknown::outs() << *JccAddrInst;
+}
+
+TEST(test_uir, test_uir_inst_JccBB_1)
+{
+    Context CTX;
+    CTX.setArch(Context::ArchX86);
+    CTX.setMode(Context::Mode64);
+
+    std::cout << std::format("JccBBComponent = {}", JccBBComponent.mOpCodeName.data()) << std::endl;
+
+    auto BB1 = BasicBlock::get(CTX, "bb1", 0x406000, 0x406005);
+    auto BB2 = BasicBlock::get(CTX, "bb2", 0x407600, 0x407605);
+
+    auto FlagsVar = FlagsVariable::get(Type::getInt32Ty(CTX));
+    FlagsVar->setCarryFlag(true);
+    FlagsVar->setZeroFlag(true);
+
+    auto JccBBInst = JccBBInstruction::get(BB1, BB2, FlagsVar);
+    JccBBInst->setInstructionAddress(0x401000);
+    JccBBInst->print(unknown::outs());
+    unknown::outs() << *JccBBInst;
+}

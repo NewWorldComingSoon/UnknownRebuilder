@@ -50,7 +50,7 @@ JmpAddrInstruction::print(unknown::raw_ostream &OS) const
     OS << "\t";
     OS << getOpcodeName();
     OS << " ";
-    OS << getJmpDestConstantInt()->getReadableName();
+    OS << getJmpDestConstantInt()->getName();
     OS << "\n";
 }
 
