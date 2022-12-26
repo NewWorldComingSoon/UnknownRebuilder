@@ -54,38 +54,25 @@ ContextImpl ::~ContextImpl()
         PtrTy.second = nullptr;
     }
 
-    for (auto &CstIntTy : mIntConstants)
+    for (auto &CI : mIntConstants)
     {
-        if (CstIntTy.second)
+        if (CI.second)
         {
-            delete CstIntTy.second;
+            delete CI.second;
         }
 
-        CstIntTy.second = nullptr;
+        CI.second = nullptr;
     }
-}
 
-PointerType *
-ContextImpl::getPointerType(Type *ElmtTy)
-{
-    auto It = mPointerTypes.find(ElmtTy);
-    if (It != mPointerTypes.end())
+    for (auto &GV : mGlobalVariables)
     {
-        return It->second;
-    }
+        if (GV.second)
+        {
+            delete GV.second;
+        }
 
-    if (ElmtTy->getTypeBits() == 1 || ElmtTy->getTypeBits() == 128)
-    {
-        // Not support i1* and i128* currently
-        uir_unreachable("ElmtTy->getTypeBits() == 1 || ElmtTy->getTypeBits() == 128");
-        return nullptr;
+        GV.second = nullptr;
     }
-
-    // i8*/i16*/i32*/i64*
-    std::string PtrTyName = ElmtTy->getTypeName().str() + UIR_PTR_TYPE_NAME_SUFFIX;
-    PointerType *PtrTy = new PointerType(mContext, ElmtTy, PtrTyName.c_str());
-    mPointerTypes[ElmtTy] = PtrTy;
-    return PtrTy;
 }
 
 } // namespace uir

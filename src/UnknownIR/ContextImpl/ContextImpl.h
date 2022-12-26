@@ -12,6 +12,7 @@ namespace uir {
 
 class Context;
 class ConstantInt;
+class GlobalVariable;
 
 class ContextImpl
 {
@@ -49,12 +50,12 @@ public:
     // IntConstants map
     std::map<unknown::APInt, ConstantInt *> mIntConstants;
 
+    // GlobalVariables map
+    std::unordered_map<uint64_t, GlobalVariable *> mGlobalVariables;
+
 public:
     explicit ContextImpl(Context &C);
     ~ContextImpl();
-
-public:
-    PointerType *getPointerType(Type *ElmtTy);
 };
 
 } // namespace uir

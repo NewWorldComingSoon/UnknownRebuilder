@@ -3,8 +3,10 @@
 
 #include <cassert>
 
-#include "ContextImpl/ContextImpl.h"
-#include "Internal/InternalErrors/InternalErrors.h"
+#include <ContextImpl/ContextImpl.h>
+
+#include <Internal/InternalConfig/InternalConfig.h>
+#include <Internal/InternalErrors/InternalErrors.h>
 
 namespace uir {
 ////////////////////////////////////////////////////////////
@@ -346,7 +348,24 @@ PointerType::getElementTypeBits() const
 PointerType *
 PointerType::get(Context &C, Type *ElementType)
 {
-    return C.mImpl->getPointerType(ElementType);
+    auto It = C.mImpl->mPointerTypes.find(ElementType);
+    if (It != C.mImpl->mPointerTypes.end())
+    {
+        return It->second;
+    }
+
+    if (ElementType->getTypeBits() == 1 || ElementType->getTypeBits() == 128)
+    {
+        // Not support i1* and i128* currently
+        uir_unreachable("ElementType->getTypeBits() == 1 || ElementType->getTypeBits() == 128");
+        return nullptr;
+    }
+
+    // i8*/i16*/i32*/i64*
+    std::string PtrTyName = ElementType->getTypeName().str() + UIR_PTR_TYPE_NAME_SUFFIX;
+    PointerType *PtrTy = new PointerType(C, ElementType, PtrTyName.c_str());
+    C.mImpl->mPointerTypes[ElementType] = PtrTy;
+    return PtrTy;
 }
 
 } // namespace uir
