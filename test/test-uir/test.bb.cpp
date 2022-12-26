@@ -16,7 +16,11 @@ TEST(test_uir, test_uir_bb_1)
         auto RetInst = ReturnInstruction::get();
         RetInst->setInstructionAddress(0x401000);
         BB1.insertInst(RetInst);
-        BB1.insertInst(RetInst);
+
+        auto RetImm = ReturnImmInstruction::get(ConstantInt::get(CTX, unknown::APInt(32, 1)));
+        RetImm->setInstructionAddress(0x401005);
+        BB1.insertInst(RetImm);
+
         for (auto I : BB1)
         {
             unknown::outs() << *I;

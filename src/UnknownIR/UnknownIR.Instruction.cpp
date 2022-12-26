@@ -382,6 +382,34 @@ Instruction::clearAllOperands()
     // Drop all references to operands
     dropAllReferences();
 
+    // Free all operands
+    std::vector<Value *> FreeOperandsList;
+    for (auto OPIt = op_begin(); OPIt != op_end(); ++OPIt)
+    {
+        auto OP = *OPIt;
+        if (OP == nullptr)
+        {
+            continue;
+        }
+
+        if (!OP->user_empty())
+        {
+            continue;
+        }
+
+        if (auto CI = dynamic_cast<ConstantInt *>(OP))
+        {
+            // We do not free constant integer
+            continue;
+        }
+
+        if (std::find(FreeOperandsList.begin(), FreeOperandsList.end(), OP) == FreeOperandsList.end())
+        {
+            FreeOperandsList.push_back(OP);
+            delete OP;
+        }
+    }
+
     // Clear operand list
     op_clear();
 }
