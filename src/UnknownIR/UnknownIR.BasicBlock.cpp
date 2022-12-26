@@ -333,6 +333,11 @@ BasicBlock::insertInst(Instruction *I)
 void
 BasicBlock::dropAllReferences()
 {
+    if (empty())
+    {
+        return;
+    }
+
     for (auto InstIt = begin(); InstIt != end(); ++InstIt)
     {
         auto Inst = *InstIt;
@@ -347,6 +352,11 @@ BasicBlock::dropAllReferences()
 void
 BasicBlock::clearAllInstructions()
 {
+    if (empty())
+    {
+        return;
+    }
+
     // Clear all operands
     for (auto InstIt = begin(); InstIt != end(); ++InstIt)
     {
@@ -372,6 +382,7 @@ BasicBlock::clearAllInstructions()
         }
     }
 
+    // Clear InstList
     clear();
 }
 
