@@ -1,5 +1,6 @@
 #include <Instruction.h>
 #include <BasicBlock.h>
+#include <GlobalVariable.h>
 
 #include <Internal/InternalErrors/InternalErrors.h>
 
@@ -400,6 +401,18 @@ Instruction::clearAllOperands()
         if (auto CI = dynamic_cast<ConstantInt *>(OP))
         {
             // We do not free constant integer
+            continue;
+        }
+
+        if (auto GV = dynamic_cast<GlobalVariable *>(OP))
+        {
+            // We do not free global variable
+            continue;
+        }
+
+        if (auto BB = dynamic_cast<BasicBlock *>(OP))
+        {
+            // We do not free block
             continue;
         }
 
