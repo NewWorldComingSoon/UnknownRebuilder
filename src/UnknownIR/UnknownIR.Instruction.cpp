@@ -326,16 +326,9 @@ Instruction::insertBeforeOrAfter(Instruction *InsertPos, bool Before)
         return;
     }
 
-    bool CanInsert = true;
     auto InsertPosIt = InsertPos->getParent()->getInstList().begin();
     for (; InsertPosIt != InsertPos->getParent()->getInstList().end(); ++InsertPosIt)
     {
-        if (*InsertPosIt == this)
-        {
-            CanInsert = false;
-            break;
-        }
-
         if (*InsertPosIt == InsertPos)
         {
             if (!Before)
@@ -347,11 +340,8 @@ Instruction::insertBeforeOrAfter(Instruction *InsertPos, bool Before)
         }
     }
 
-    if (CanInsert)
-    {
-        InsertPos->getParent()->getInstList().insert(InsertPosIt, this);
-        this->setParent(InsertPos->getParent());
-    }
+    InsertPos->getParent()->getInstList().insert(InsertPosIt, this);
+    this->setParent(InsertPos->getParent());
 }
 
 // Insert an unlinked instructions into a basic block immediately before the specified instruction.
