@@ -1,8 +1,6 @@
 #include <Type.h>
 #include <Context.h>
 
-#include <cassert>
-
 #include <ContextImpl/ContextImpl.h>
 
 #include <Internal/InternalConfig/InternalConfig.h>

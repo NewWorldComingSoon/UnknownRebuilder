@@ -1,6 +1,4 @@
 #pragma once
-#include <iostream>
-
 #include <UnknownIR/Instruction.h>
 #include <UnknownIR/Module.h>
 #include <UnknownIR/BasicBlock.h>

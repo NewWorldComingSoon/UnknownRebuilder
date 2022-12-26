@@ -1,5 +1,4 @@
 #include <User.h>
-#include <assert.h>
 
 #include <Internal/InternalErrors/InternalErrors.h>
 

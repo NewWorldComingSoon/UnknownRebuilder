@@ -1,8 +1,4 @@
 #pragma once
-
-#include <cstdint>
-#include <unordered_set>
-
 #include <UnknownIR/Object.h>
 #include <UnknownIR/Type.h>
 

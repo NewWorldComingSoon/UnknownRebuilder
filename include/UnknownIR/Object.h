@@ -1,6 +1,13 @@
 #pragma once
 #include <string>
 #include <format>
+#include <iostream>
+#include <unordered_set>
+#include <vector>
+#include <list>
+#include <cstdint>
+#include <sstream>
+#include <cassert>
 
 #include <UnknownUtils/unknown/Support/raw_ostream.h>
 

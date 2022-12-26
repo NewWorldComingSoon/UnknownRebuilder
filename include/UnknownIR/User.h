@@ -1,9 +1,4 @@
 #pragma once
-
-#include <vector>
-#include <list>
-#include <cstdint>
-
 #include <UnknownIR/Value.h>
 
 namespace uir {
