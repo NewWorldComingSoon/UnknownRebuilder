@@ -49,8 +49,46 @@ public:
 class JccBBInstruction : public TerminatorInstruction
 {
 public:
-    JccBBInstruction();
+    explicit JccBBInstruction(BasicBlock *JccDestBB, BasicBlock *JccNormalBB, FlagsVariable *FlagsVar);
     virtual ~JccBBInstruction();
+
+public:
+    // Virtual
+    // Get the opcode name of this instruction
+    virtual unknown::StringRef getOpcodeName() const override;
+
+    // Get the default number of operands
+    virtual uint32_t getDefaultNumberOfOperands() const override;
+
+    // Is this instruction with flags?
+    virtual bool hasFlags() const override;
+
+    // Print the instruction
+    virtual void print(unknown::raw_ostream &OS) const override;
+
+public:
+    // Get/Set
+    // Get the destination basic block.
+    const BasicBlock *getDestinationBlock() const;
+
+    // Get the normal basic block.
+    const BasicBlock *getNormalBlock() const;
+
+    // Set the destination basic block.
+    void setDestinationBlock(BasicBlock *DestBB);
+
+    // Set the destination basic block and update its predecessor.
+    void setDestinationBlockAndUpdatePredecessor(BasicBlock *DestBB);
+
+    // Set the normal basic block.
+    void setNormalBlock(BasicBlock *NormalBB);
+
+    // Set the normal basic block and update its predecessor.
+    void setNormalBlockAndUpdatePredecessor(BasicBlock *NormalBB);
+
+public:
+    // Static
+    static JccBBInstruction *get(BasicBlock *JccDestBB, BasicBlock *JccNormalBB, FlagsVariable *FlagsVar);
 };
 
 } // namespace uir

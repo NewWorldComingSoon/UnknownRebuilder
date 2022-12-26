@@ -102,4 +102,118 @@ JccAddrInstruction::get(ConstantInt *JccDest, ConstantInt *JccNormal, FlagsVaria
     return new JccAddrInstruction(JccDest, JccNormal, FlagsVar);
 }
 
+////////////////////////////////////////////////////////////
+//     JccBBInstruction
+//
+
+JccBBInstruction::JccBBInstruction(BasicBlock *JccDestBB, BasicBlock *JccNormalBB, FlagsVariable *FlagsVar) :
+    TerminatorInstruction(OpCodeID::JccBB)
+{
+    // Insert successor1
+    insertSuccessor(JccDestBB);
+
+    // Insert successor2
+    insertSuccessor(JccNormalBB);
+
+    // Set flags variable
+    setFlagsVariableAndUpdateUsers(FlagsVar);
+}
+
+JccBBInstruction::~JccBBInstruction()
+{
+    //
+}
+
+////////////////////////////////////////////////////////////
+// Virtual
+// Get the opcode name of this instruction
+unknown::StringRef
+JccBBInstruction::getOpcodeName() const
+{
+    return JccBBComponent.mOpCodeName;
+}
+
+// Get the default number of operands
+uint32_t
+JccBBInstruction::getDefaultNumberOfOperands() const
+{
+    return JccBBComponent.mNumberOfOperands;
+}
+
+// Is this instruction with flags?
+bool
+JccBBInstruction::hasFlags() const
+{
+    return JccBBComponent.mHasFlags;
+}
+
+// Print the instruction
+void
+JccBBInstruction::print(unknown::raw_ostream &OS) const
+{
+    // address\tinst
+    OS << "0x" << unknown::APInt(64, getInstructionAddress()).toString(16, false);
+    OS << "\t";
+    OS << getOpcodeName();
+    OS << " ";
+    OS << getDestinationBlock()->getReadableName();
+    OS << ", ";
+    OS << getNormalBlock()->getReadableName();
+    OS << "\n";
+}
+
+////////////////////////////////////////////////////////////
+// Get/Set
+// Get the destination basic block.
+const BasicBlock *
+JccBBInstruction::JccBBInstruction::getDestinationBlock() const
+{
+    return *successor_begin();
+}
+
+// Get the normal basic block.
+const BasicBlock *
+JccBBInstruction::getNormalBlock() const
+{
+    auto It = successor_begin();
+    ++It;
+    return *It;
+}
+
+// Set the destination basic block.
+void
+JccBBInstruction::setDestinationBlock(BasicBlock *DestBB)
+{
+    setSuccessor(0, DestBB);
+}
+
+// Set the destination basic block and update its predecessor.
+void
+JccBBInstruction::setDestinationBlockAndUpdatePredecessor(BasicBlock *DestBB)
+{
+    setSuccessorAndUpdatePredecessor(0, DestBB);
+}
+
+// Set the normal basic block.
+void
+JccBBInstruction::setNormalBlock(BasicBlock *NormalBB)
+{
+    setSuccessor(1, NormalBB);
+}
+
+// Set the normal basic block and update its predecessor.
+void
+JccBBInstruction::setNormalBlockAndUpdatePredecessor(BasicBlock *NormalBB)
+{
+    setSuccessorAndUpdatePredecessor(1, NormalBB);
+}
+
+////////////////////////////////////////////////////////////
+// Static
+JccBBInstruction *
+get(BasicBlock *JccDestBB, BasicBlock *JccNormalBB, FlagsVariable *FlagsVar)
+{
+    return new JccBBInstruction(JccDestBB, JccNormalBB, FlagsVar);
+}
+
 } // namespace uir
