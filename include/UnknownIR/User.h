@@ -42,6 +42,7 @@ public:
     size_t op_count() const;
     void op_erase(Value *V);
     bool op_empty() const;
+    void op_clear();
 
 public:
     // Virtual functions

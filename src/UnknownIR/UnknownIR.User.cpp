@@ -107,6 +107,12 @@ User::op_empty() const
     return mOperandList.empty();
 }
 
+void
+User::op_clear()
+{
+    mOperandList.clear();
+}
+
 ////////////////////////////////////////////////////////////
 // Virtual functions
 // Replaces all references to the "From" definition with references to the "To"

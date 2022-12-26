@@ -355,7 +355,25 @@ Instruction::insertAfter(Instruction *InsertPos)
 void
 Instruction::clearAllOperands()
 {
-    // TODO
+    // Drop all references
+    dropAllReferences();
+
+    // Unlink flags variable from its user list
+    if (mFlagsVariable)
+    {
+        mFlagsVariable->user_erase(this);
+        mFlagsVariable = nullptr;
+    }
+
+    // Unlink stack variable from its user list
+    if (mStackVariable)
+    {
+        mStackVariable->user_erase(this);
+        mStackVariable = nullptr;
+    }
+
+    // Clear OperandList
+    op_clear();
 }
 
 ////////////////////////////////////////////////////////////
