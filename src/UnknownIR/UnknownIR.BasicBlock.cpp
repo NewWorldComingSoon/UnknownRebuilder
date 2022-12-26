@@ -385,7 +385,7 @@ BasicBlock::clearAllInstructions()
         }
     }
 
-    // Clear InstList
+    // Clear instruction list
     clear();
 }
 

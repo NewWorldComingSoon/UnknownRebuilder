@@ -379,7 +379,7 @@ Instruction::clearAllOperands()
     // Drop all references to operands
     dropAllReferences();
 
-    // Clear OperandList
+    // Clear operand list
     op_clear();
 }
 
