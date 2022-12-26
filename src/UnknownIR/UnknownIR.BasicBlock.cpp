@@ -289,24 +289,9 @@ BasicBlock::insertBeforeOrAfter(BasicBlock *InsertPos, bool Before)
         return;
     }
 
-    if (InsertPos->getParent()->getBasicBlockList().empty())
-    {
-        InsertPos->getParent()->getBasicBlockList().push_back(this);
-        this->setParent(InsertPos->getParent());
-        return;
-    }
-
-    bool CanInsert = true;
     auto InsertPosIt = InsertPos->getParent()->getBasicBlockList().begin();
     for (; InsertPosIt != InsertPos->getParent()->getBasicBlockList().end(); ++InsertPosIt)
     {
-        if (*InsertPosIt == this)
-        {
-            // Cannot be repeatedly added to the container
-            CanInsert = false;
-            break;
-        }
-
         if (*InsertPosIt == InsertPos)
         {
             if (!Before)
@@ -318,11 +303,8 @@ BasicBlock::insertBeforeOrAfter(BasicBlock *InsertPos, bool Before)
         }
     }
 
-    if (CanInsert)
-    {
-        InsertPos->getParent()->getBasicBlockList().insert(InsertPosIt, this);
-        this->setParent(InsertPos->getParent());
-    }
+    InsertPos->getParent()->getBasicBlockList().insert(InsertPosIt, this);
+    this->setParent(InsertPos->getParent());
 }
 
 // Insert an unlinked BasicBlock into a function immediately before the specified BasicBlock.

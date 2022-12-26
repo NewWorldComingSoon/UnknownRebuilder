@@ -319,13 +319,6 @@ Instruction::insertBeforeOrAfter(Instruction *InsertPos, bool Before)
         return;
     }
 
-    if (InsertPos->getParent()->getInstList().empty())
-    {
-        InsertPos->getParent()->getInstList().push_back(this);
-        this->setParent(InsertPos->getParent());
-        return;
-    }
-
     auto InsertPosIt = InsertPos->getParent()->getInstList().begin();
     for (; InsertPosIt != InsertPos->getParent()->getInstList().end(); ++InsertPosIt)
     {
