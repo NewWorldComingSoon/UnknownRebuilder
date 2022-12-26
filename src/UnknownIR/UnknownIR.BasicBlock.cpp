@@ -329,6 +329,20 @@ BasicBlock::insertInst(Instruction *I)
     I->setParent(this);
 }
 
+// Drop all instructions in this block.
+void
+BasicBlock::dropAllReferences()
+{
+    for (auto InstIt = begin(); InstIt != end(); ++InstIt)
+    {
+        auto Inst = *InstIt;
+        if (Inst)
+        {
+            Inst->dropAllReferences();
+        }
+    }
+}
+
 // Clear all instructions in this block.
 void
 BasicBlock::clearAllInstructions()

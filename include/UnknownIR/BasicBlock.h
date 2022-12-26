@@ -150,6 +150,9 @@ public:
     // Insert an unlinked instructions into a block
     void insertInst(Instruction *I);
 
+    // Drop all instructions in this block.
+    void dropAllReferences();
+
     // Clear all instructions in this block.
     void clearAllInstructions();
 
