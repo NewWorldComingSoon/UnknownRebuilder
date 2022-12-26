@@ -63,16 +63,6 @@ ContextImpl ::~ContextImpl()
 
         CI.second = nullptr;
     }
-
-    for (auto &GV : mGlobalVariables)
-    {
-        if (GV.second)
-        {
-            delete GV.second;
-        }
-
-        GV.second = nullptr;
-    }
 }
 
 } // namespace uir
