@@ -140,7 +140,12 @@ const Value *
 User::getOperand(size_t Index) const
 {
     assert(Index < mOperandList.size() && "getOperand() out of range!");
-    return mOperandList[Index];
+    if (!op_empty())
+    {
+        return mOperandList[Index];
+    }
+
+    return nullptr;
 }
 
 Value *
@@ -159,6 +164,11 @@ User::getOperand(size_t Index)
 void
 User::setOperand(size_t Index, Value *Val)
 {
+    if (op_empty())
+    {
+        return;
+    }
+
     assert(Index < mOperandList.size() && "setOperand() out of range!");
     mOperandList[Index] = Val;
 }
@@ -167,6 +177,11 @@ User::setOperand(size_t Index, Value *Val)
 void
 User::setOperandAndUpdateUsers(size_t Index, Value *Val)
 {
+    if (op_empty())
+    {
+        return;
+    }
+
     assert(Index < mOperandList.size() && "setOperandAndUpdateUsers() out of range!");
     auto OldVal = mOperandList[Index];
     if (OldVal == Val)
@@ -227,6 +242,11 @@ User::insertOperandAndUpdateUsers(Value *Val)
 void
 User::eraseOperand(Value *Val)
 {
+    if (op_empty())
+    {
+        return;
+    }
+
     op_erase(Val);
 }
 
@@ -234,6 +254,11 @@ User::eraseOperand(Value *Val)
 void
 User::eraseOperandAndUpdateUsers(Value *Val)
 {
+    if (op_empty())
+    {
+        return;
+    }
+
     // Erase the specified value.
     eraseOperand(Val);
     if (Val)
