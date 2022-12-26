@@ -36,19 +36,31 @@ ContextImpl ::~ContextImpl()
 
     for (auto &IntTy : mIntegerTypes)
     {
-        delete IntTy.second;
+        if (IntTy.second)
+        {
+            delete IntTy.second;
+        }
+
         IntTy.second = nullptr;
     }
 
     for (auto &PtrTy : mPointerTypes)
     {
-        delete PtrTy.second;
+        if (PtrTy.second)
+        {
+            delete PtrTy.second;
+        }
+
         PtrTy.second = nullptr;
     }
 
     for (auto &CstIntTy : mIntConstants)
     {
-        delete CstIntTy.second;
+        if (CstIntTy.second)
+        {
+            delete CstIntTy.second;
+        }
+
         CstIntTy.second = nullptr;
     }
 }
