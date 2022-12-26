@@ -367,7 +367,6 @@ BasicBlock::clearAllInstructions()
             if (std::find(FreeInstList.begin(), FreeInstList.end(), Inst) == FreeInstList.end())
             {
                 FreeInstList.push_back(Inst);
-                Inst->setParent(nullptr);
                 delete Inst;
             }
         }
