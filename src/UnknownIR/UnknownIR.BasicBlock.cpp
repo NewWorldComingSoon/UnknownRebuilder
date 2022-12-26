@@ -300,7 +300,7 @@ BasicBlock::insertBeforeOrAfter(BasicBlock *InsertPos, bool Before)
     auto InsertPosIt = InsertPos->getParent()->getBasicBlockList().begin();
     for (; InsertPosIt != InsertPos->getParent()->getBasicBlockList().end(); ++InsertPosIt)
     {
-        if (*InsertPosIt == InsertPos)
+        if (*InsertPosIt == this)
         {
             CanInsert = false;
             break;
@@ -342,14 +342,6 @@ BasicBlock::insertAfter(BasicBlock *InsertPos)
 void
 BasicBlock::insertInst(Instruction *I)
 {
-    for (Instruction *Inst : mInstList)
-    {
-        if (Inst == I)
-        {
-            return;
-        }
-    }
-
     push(I);
     I->setParent(this);
 }
