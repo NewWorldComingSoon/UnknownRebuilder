@@ -42,7 +42,7 @@ public:
 class JmpBBInstruction : public TerminatorInstruction
 {
 public:
-    JmpBBInstruction(BasicBlock *DestBB);
+    explicit JmpBBInstruction(BasicBlock *DestBB);
     virtual ~JmpBBInstruction();
 
 public:
