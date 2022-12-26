@@ -254,6 +254,11 @@ User::eraseOperandAndUpdateUsers(Value *Val)
 void
 User::dropAllReferences()
 {
+    if (op_empty())
+    {
+        return;
+    }
+
     for (Value *Op : mOperandList)
     {
         if (Op)
