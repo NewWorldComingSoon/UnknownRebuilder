@@ -8,17 +8,17 @@ class FlagsVariable : public LocalVariable
 public:
     union Flags
     {
-        uint32_t FlagsValue;
+        uint64_t FlagsValue;
 
         struct
         {
-            uint32_t CarryFlag : 1;     // CF
-            uint32_t ParityFlag : 1;    // PF
-            uint32_t AuxParityFlag : 1; // AF
-            uint32_t ZeroFlag : 1;      // ZF
-            uint32_t SignFlag : 1;      // SF
-            uint32_t DirectionFlag : 1; // DF
-            uint32_t OverflowFlag : 1;  // OF
+            uint64_t CarryFlag : 1;     // CF
+            uint64_t ParityFlag : 1;    // PF
+            uint64_t AuxParityFlag : 1; // AF
+            uint64_t ZeroFlag : 1;      // ZF
+            uint64_t SignFlag : 1;      // SF
+            uint64_t DirectionFlag : 1; // DF
+            uint64_t OverflowFlag : 1;  // OF
         };
     };
 
@@ -33,11 +33,11 @@ public:
     // Get/Set
     // Get the flags value
     const Flags getFlags() const;
-    const uint32_t getFlagsValue() const;
+    const uint64_t getFlagsValue() const;
 
     // Set the flags value
     void setFlags(Flags Flag);
-    void setFlagsValue(uint32_t FlagsVal);
+    void setFlagsValue(uint64_t FlagsVal);
 
     // Set the CarryFlag
     void setCarryFlag(bool Set = true);

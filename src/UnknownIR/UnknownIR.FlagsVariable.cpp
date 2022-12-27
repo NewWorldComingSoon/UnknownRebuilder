@@ -29,7 +29,7 @@ FlagsVariable::getFlags() const
     return mFlags;
 }
 
-const uint32_t
+const uint64_t
 FlagsVariable::getFlagsValue() const
 {
     return mFlags.FlagsValue;
@@ -42,7 +42,7 @@ FlagsVariable::setFlags(Flags Flag)
 }
 
 void
-FlagsVariable::setFlagsValue(uint32_t FlagsVal)
+FlagsVariable::setFlagsValue(uint64_t FlagsVal)
 {
     mFlags.FlagsValue = FlagsVal;
 }

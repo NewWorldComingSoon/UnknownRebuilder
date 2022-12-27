@@ -8,6 +8,8 @@ namespace uir {
 StoreInstruction::StoreInstruction(Value *Val, Value *Ptr, bool IsVolatile) :
     Instruction(OpCodeID::Store), mIsVolatile(IsVolatile)
 {
+    assert(Ptr->getType()->isPointerTy() && "Ptr is not a pointer type!");
+
     // Insert value   -> op1
     insertOperandAndUpdateUsers(Val);
 
