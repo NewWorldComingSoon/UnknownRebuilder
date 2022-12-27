@@ -13,4 +13,4 @@
 #define UIR_FUNCTION_VARIABLE_NAME_PREFIX "function."
 
 // Prefix name of block
-#define UIR_BLOCK_VARIABLE_NAME_PREFIX "block."
+#define UIR_BLOCK_VARIABLE_NAME_PREFIX "block-"

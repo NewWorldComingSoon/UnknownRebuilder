@@ -395,7 +395,7 @@ BasicBlock::clearAllInstructions()
 std::string
 BasicBlock::getReadableName() const
 {
-    // block.bbname
+    // block-bbname
     std::string ReadableName = UIR_BLOCK_VARIABLE_NAME_PREFIX;
     ReadableName += mBasicBlockName;
 
