@@ -618,6 +618,7 @@ target_include_directories(UnknownFrontend PUBLIC
 
 target_link_libraries(UnknownFrontend PUBLIC
 	capstone-static
+	raw_pdb
 	UnknownIR
 )
 
