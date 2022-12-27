@@ -62,7 +62,7 @@ public:
         }
     }
 
-    virtual ~GlobalArray() {}
+    virtual ~GlobalArray() = default;
 
 public:
     // Get/Set
