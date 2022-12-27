@@ -14,3 +14,6 @@
 
 // Prefix name of block
 #define UIR_BLOCK_VARIABLE_NAME_PREFIX "block."
+
+// Prefix name of extra info of function
+#define UIR_INST_EXTRA_INFO_NAME_PREFIX ";"
