@@ -62,10 +62,10 @@ public:
     void setFunctionEndAddress(uint64_t FunctionEndAddress);
 
     // Get the entry block of this function
-    const BasicBlock &getEntryBlock() const { return front(); }
+    const BasicBlock &getEntryBlock() const;
 
     // Get the entry block of this function
-    BasicBlock &getEntryBlock() { return front(); }
+    BasicBlock &getEntryBlock();
 
 public:
     // Static

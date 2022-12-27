@@ -61,6 +61,20 @@ Function::setFunctionEndAddress(uint64_t FunctionEndAddress)
     mFunctionAddressEnd = FunctionEndAddress;
 }
 
+// Get the entry block of this function
+const BasicBlock &
+Function::getEntryBlock() const
+{
+    return front();
+}
+
+// Get the entry block of this function
+BasicBlock &
+Function::getEntryBlock()
+{
+    return front();
+}
+
 ////////////////////////////////////////////////////////////
 // Static
 // Generate a new function name by order
