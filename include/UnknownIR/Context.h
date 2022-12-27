@@ -13,6 +13,7 @@ public:
         Mode32,
         Mode64
     };
+
     enum class Arch : uint32_t
     {
         ArchX86,
