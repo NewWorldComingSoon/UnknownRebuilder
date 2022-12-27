@@ -309,7 +309,7 @@ Instruction::eraseFromParent()
         {
             mParent->getInstList().erase(It);
             this->setParent(nullptr);
-            break;
+            --It;
         }
     }
 }
@@ -512,7 +512,7 @@ TerminatorInstruction::successor_erase(BasicBlock *BB)
         if (*It == BB)
         {
             mSuccessorsList.erase(It);
-            break;
+            --It;
         }
     }
 }

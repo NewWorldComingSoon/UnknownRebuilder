@@ -95,7 +95,7 @@ User::op_erase(Value *V)
         if (*It == V)
         {
             mOperandList.erase(It);
-            break;
+            --It;
         }
     }
 }

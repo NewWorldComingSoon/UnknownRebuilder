@@ -103,7 +103,7 @@ BasicBlock::predecessor_erase(BasicBlock *BB)
         if (*It == BB)
         {
             mPredecessorsList.erase(It);
-            break;
+            --It;
         }
     }
 }
@@ -275,7 +275,7 @@ BasicBlock::eraseFromParent()
         {
             mParent->getBasicBlockList().erase(It);
             this->setParent(nullptr);
-            break;
+            --It;
         }
     }
 }
