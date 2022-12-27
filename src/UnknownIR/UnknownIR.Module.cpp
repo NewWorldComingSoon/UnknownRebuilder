@@ -15,8 +15,8 @@ namespace uir {
 // Ctor/Dtor
 Module::Module(Context &C, unknown::StringRef ModuleName) : mContext(C), mModuleName(ModuleName)
 {
-    //
-    //
+    // Clear all the name index
+    C.mImpl->clearOrderedNameIndex();
 }
 
 Module::~Module()

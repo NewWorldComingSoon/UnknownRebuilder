@@ -27,12 +27,9 @@ ContextImpl::ContextImpl(Context &C) :
 {
 }
 
-ContextImpl ::~ContextImpl()
+ContextImpl::~ContextImpl()
 {
-    mOrderedLocalVarNameIndex = 0;
-    mOrderedGlobalVarNameIndex = 0;
-    mOrderedFunctionNameIndex = 0;
-    mOrderedBlockNameIndex = 0;
+    clearOrderedNameIndex();
 
     for (auto &IntTy : mIntegerTypes)
     {
@@ -63,6 +60,16 @@ ContextImpl ::~ContextImpl()
 
         CI.second = nullptr;
     }
+}
+
+// Clear all the name index.
+void
+ContextImpl::clearOrderedNameIndex()
+{
+    mOrderedLocalVarNameIndex = 0;
+    mOrderedGlobalVarNameIndex = 0;
+    mOrderedFunctionNameIndex = 0;
+    mOrderedBlockNameIndex = 0;
 }
 
 } // namespace uir

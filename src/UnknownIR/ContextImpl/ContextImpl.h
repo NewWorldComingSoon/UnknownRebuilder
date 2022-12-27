@@ -52,6 +52,10 @@ public:
 public:
     explicit ContextImpl(Context &C);
     ~ContextImpl();
+
+public:
+    // Clear all the name index.
+    void clearOrderedNameIndex();
 };
 
 } // namespace uir

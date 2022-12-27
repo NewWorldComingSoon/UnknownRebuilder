@@ -21,8 +21,11 @@ Function::Function(
     mFunctionAddressBegin(FunctionAddressBegin),
     mFunctionAddressEnd(FunctionAddressEnd)
 {
-    //
-    //
+    // Clear ordered block name index.
+    C.mImpl->mOrderedBlockNameIndex = 0;
+
+    // Clear ordered local variable name index.
+    C.mImpl->mOrderedLocalVarNameIndex = 0;
 }
 
 Function::~Function()
