@@ -8,8 +8,8 @@ using namespace uir;
 TEST(test_uir, test_uir_inst_RetIMM_1)
 {
     Context CTX;
-    CTX.setArch(Context::ArchX86);
-    CTX.setMode(Context::Mode64);
+    CTX.setArch(Context::Arch::ArchX86);
+    CTX.setMode(Context::Mode::Mode64);
 
     std::cout << std::format("RetIMMOpCodeName = {}", RetIMMComponent.mOpCodeName.data()) << std::endl;
 
@@ -42,8 +42,8 @@ TEST(test_uir, test_uir_inst_RetIMM_1)
 TEST(test_uir, test_uir_inst_Store_1)
 {
     Context CTX;
-    CTX.setArch(Context::ArchX86);
-    CTX.setMode(Context::Mode64);
+    CTX.setArch(Context::Arch::ArchX86);
+    CTX.setMode(Context::Mode::Mode64);
 
     std::cout << std::format("StoreComponent = {}", StoreComponent.mOpCodeName.data()) << std::endl;
 
@@ -65,8 +65,8 @@ TEST(test_uir, test_uir_inst_Store_1)
 TEST(test_uir, test_uir_inst_Ret_1)
 {
     Context CTX;
-    CTX.setArch(Context::ArchX86);
-    CTX.setMode(Context::Mode64);
+    CTX.setArch(Context::Arch::ArchX86);
+    CTX.setMode(Context::Mode::Mode64);
 
     std::cout << std::format("RetComponent = {}", RetComponent.mOpCodeName.data()) << std::endl;
 
@@ -79,8 +79,8 @@ TEST(test_uir, test_uir_inst_Ret_1)
 TEST(test_uir, test_uir_inst_JmpAddr_1)
 {
     Context CTX;
-    CTX.setArch(Context::ArchX86);
-    CTX.setMode(Context::Mode64);
+    CTX.setArch(Context::Arch::ArchX86);
+    CTX.setMode(Context::Mode::Mode64);
 
     std::cout << std::format("JmpAddrComponent = {}", JmpAddrComponent.mOpCodeName.data()) << std::endl;
 
@@ -93,8 +93,8 @@ TEST(test_uir, test_uir_inst_JmpAddr_1)
 TEST(test_uir, test_uir_inst_JmpBB_1)
 {
     Context CTX;
-    CTX.setArch(Context::ArchX86);
-    CTX.setMode(Context::Mode64);
+    CTX.setArch(Context::Arch::ArchX86);
+    CTX.setMode(Context::Mode::Mode64);
 
     std::cout << std::format("JmpBBComponent = {}", JmpBBComponent.mOpCodeName.data()) << std::endl;
 
@@ -108,8 +108,8 @@ TEST(test_uir, test_uir_inst_JmpBB_1)
 TEST(test_uir, test_uir_inst_JccAddr_1)
 {
     Context CTX;
-    CTX.setArch(Context::ArchX86);
-    CTX.setMode(Context::Mode64);
+    CTX.setArch(Context::Arch::ArchX86);
+    CTX.setMode(Context::Mode::Mode64);
 
     std::cout << std::format("JccAddrComponent = {}", JccAddrComponent.mOpCodeName.data()) << std::endl;
 
@@ -129,8 +129,8 @@ TEST(test_uir, test_uir_inst_JccAddr_1)
 TEST(test_uir, test_uir_inst_JccBB_1)
 {
     Context CTX;
-    CTX.setArch(Context::ArchX86);
-    CTX.setMode(Context::Mode64);
+    CTX.setArch(Context::Arch::ArchX86);
+    CTX.setMode(Context::Mode::Mode64);
 
     std::cout << std::format("JccBBComponent = {}", JccBBComponent.mOpCodeName.data()) << std::endl;
 

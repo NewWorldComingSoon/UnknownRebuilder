@@ -8,8 +8,8 @@ using namespace uir;
 TEST(test_uir, test_uir_type_1)
 {
     Context CTX;
-    CTX.setArch(Context::ArchX86);
-    CTX.setMode(Context::Mode64);
+    CTX.setArch(Context::Arch::ArchX86);
+    CTX.setMode(Context::Mode::Mode64);
 
     auto Ptr8Ty = Type::getInt8PtrTy(CTX);
     std::cout << std::format("Ptr8Ty ElementTypeBits = {}", Ptr8Ty->getElementTypeBits()) << std::endl;
@@ -35,8 +35,8 @@ TEST(test_uir, test_uir_type_1)
 TEST(test_uir, test_uir_type_2)
 {
     Context CTX;
-    CTX.setArch(Context::ArchX86);
-    CTX.setMode(Context::Mode32);
+    CTX.setArch(Context::Arch::ArchX86);
+    CTX.setMode(Context::Mode::Mode32);
 
     auto Ptr8Ty = Type::getInt8PtrTy(CTX);
     std::cout << std::format("Ptr8Ty ElementTypeBits = {}", Ptr8Ty->getElementTypeBits()) << std::endl;
@@ -62,8 +62,8 @@ TEST(test_uir, test_uir_type_2)
 TEST(test_uir, test_uir_type_3)
 {
     Context CTX;
-    CTX.setArch(Context::ArchX86);
-    CTX.setMode(Context::Mode64);
+    CTX.setArch(Context::Arch::ArchX86);
+    CTX.setMode(Context::Mode::Mode64);
 
     auto Int8Ty = Type::getInt8Ty(CTX);
     std::cout << std::format("Int8Ty TypeBits = {}", Int8Ty->getTypeBits()) << std::endl;
@@ -84,8 +84,8 @@ TEST(test_uir, test_uir_type_3)
 TEST(test_uir, test_uir_type_4)
 {
     Context CTX;
-    CTX.setArch(Context::ArchX86);
-    CTX.setMode(Context::Mode32);
+    CTX.setArch(Context::Arch::ArchX86);
+    CTX.setMode(Context::Mode::Mode32);
 
     auto Int8Ty = Type::getInt8Ty(CTX);
     std::cout << std::format("Int8Ty TypeBits = {}", Int8Ty->getTypeBits()) << std::endl;
@@ -106,8 +106,8 @@ TEST(test_uir, test_uir_type_4)
 TEST(test_uir, test_uir_type_5)
 {
     Context CTX;
-    CTX.setArch(Context::ArchX86);
-    CTX.setMode(Context::Mode32);
+    CTX.setArch(Context::Arch::ArchX86);
+    CTX.setMode(Context::Mode::Mode32);
 
     auto GV = GlobalVariable::get(Type::getInt8Ty(CTX));
     std::vector<uint8_t> Vec;

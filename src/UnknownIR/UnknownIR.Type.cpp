@@ -220,7 +220,7 @@ Type::getInt32PtrTy(Context &C)
 PointerType *
 Type::getInt64PtrTy(Context &C)
 {
-    if (C.getMode() == Context::Mode32)
+    if (C.getMode() == Context::Mode::Mode32)
     {
         uir_unreachable("Mode32 has not Int64PtrTy");
         return nullptr;

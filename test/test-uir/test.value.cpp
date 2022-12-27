@@ -8,8 +8,8 @@ using namespace uir;
 TEST(test_uir, test_uir_value_1)
 {
     Context CTX;
-    CTX.setArch(Context::ArchX86);
-    CTX.setMode(Context::Mode64);
+    CTX.setArch(Context::Arch::ArchX86);
+    CTX.setMode(Context::Mode::Mode64);
 
     ConstantInt *Val2 = new ConstantInt(Type::getInt32Ty(CTX), unknown::APInt(32, 0x7b));
     std::cout << std::hex
@@ -29,8 +29,8 @@ TEST(test_uir, test_uir_value_1)
 TEST(test_uir, test_uir_value_2)
 {
     Context CTX;
-    CTX.setArch(Context::ArchX86);
-    CTX.setMode(Context::Mode64);
+    CTX.setArch(Context::Arch::ArchX86);
+    CTX.setMode(Context::Mode::Mode64);
 
     Value *Ptr2 = new ConstantInt(Type::getInt32PtrTy(CTX), unknown::APInt(32, 123));
     std::cout << std::format("Ptr2 ReadableName = {}", Ptr2->getReadableName()) << std::endl;
@@ -48,8 +48,8 @@ TEST(test_uir, test_uir_value_2)
 TEST(test_uir, test_uir_value_3)
 {
     Context CTX;
-    CTX.setArch(Context::ArchX86);
-    CTX.setMode(Context::Mode64);
+    CTX.setArch(Context::Arch::ArchX86);
+    CTX.setMode(Context::Mode::Mode64);
 
     Value *Val11 =
         new GlobalVariable(Type::getInt32Ty(CTX), GlobalVariable::generateOrderedGlobalVarName(CTX).c_str(), 0x401000);
@@ -75,8 +75,8 @@ TEST(test_uir, test_uir_value_3)
 TEST(test_uir, test_uir_value_4)
 {
     Context CTX;
-    CTX.setArch(Context::ArchX86);
-    CTX.setMode(Context::Mode64);
+    CTX.setArch(Context::Arch::ArchX86);
+    CTX.setMode(Context::Mode::Mode64);
 
     auto CSTInt = ConstantInt::get(CTX, unknown::APInt(32, 0x25474));
     std::cout << std::format("CSTInt getZExtValue =  {}", CSTInt->getZExtValue()) << std::endl;

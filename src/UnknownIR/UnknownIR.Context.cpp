@@ -6,7 +6,7 @@
 namespace uir {
 /////////////////////////////////////////////////////////
 // Ctor/Dtor
-Context::Context() : Context(ArchX86, Mode32) {}
+Context::Context() : Context(Arch::ArchX86, Mode::Mode32) {}
 
 Context::Context(Arch arch, Mode mode) : mImpl(new ContextImpl(*this)), mArch(arch), mMode(mode)
 {
@@ -24,7 +24,7 @@ Context::~Context()
 /////////////////////////////////////////////////////////
 // Get/Set
 // Get/Set Arch
-uint32_t
+Context::Arch
 Context::getArch()
 {
     return mArch;
@@ -37,7 +37,7 @@ Context::setArch(Arch arch)
 }
 
 // Get/Set Mode
-uint32_t
+Context::Mode
 Context::getMode()
 {
     return mMode;
@@ -52,11 +52,11 @@ Context::setMode(Mode mode)
 uint32_t
 Context::getModeBits()
 {
-    if (mMode == Mode32)
+    if (mMode == Mode::Mode32)
     {
         return 32;
     }
-    else if (mMode == Mode64)
+    else if (mMode == Mode::Mode64)
     {
         return 64;
     }
