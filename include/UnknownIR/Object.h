@@ -11,6 +11,7 @@
 #include <ranges>
 #include <algorithm>
 #include <chrono>
+#include <optional>
 
 #include <UnknownUtils/unknown/Support/raw_ostream.h>
 
