@@ -36,3 +36,10 @@ endif()
 add_subdirectory(raw_pdb)
 set(CMAKE_FOLDER ${CMKR_CMAKE_FOLDER})
 
+# Target: argparse
+add_library(argparse INTERFACE)
+
+target_include_directories(argparse INTERFACE
+	"argparse/include"
+)
+

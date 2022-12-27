@@ -41,6 +41,8 @@ target_compile_features(test-uir PRIVATE
 )
 
 target_include_directories(test-uir PRIVATE
+	"../3rdparty"
+	"../3rdparty/argparse/include"
 	"../include"
 	"googletest/googletest/include"
 )
@@ -78,6 +80,8 @@ target_compile_features(test-ufrontend PRIVATE
 )
 
 target_include_directories(test-ufrontend PRIVATE
+	"../3rdparty"
+	"../3rdparty/argparse/include"
 	"../include"
 	"googletest/googletest/include"
 )

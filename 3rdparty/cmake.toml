@@ -2,3 +2,7 @@
 [subdir.capstone-retdec]
 [subdir.keystone-retdec]
 [subdir.raw_pdb]
+
+[target.argparse]
+type = "interface"
+include-directories = ["argparse/include"]

@@ -12,6 +12,8 @@ msvc-runtime = "static"
 headers = ["test-uir/**.h"]
 sources = ["test-uir/**.cpp", "test-uir/**.h"]
 include-directories = [
+"../3rdparty",
+"../3rdparty/argparse/include",
 "../include",
 "googletest/googletest/include"
 ]
@@ -30,6 +32,8 @@ msvc-runtime = "static"
 headers = ["test-ufrontend/**.h"]
 sources = ["test-ufrontend/**.cpp", "test-ufrontend/**.h"]
 include-directories = [
+"../3rdparty",
+"../3rdparty/argparse/include",
 "../include",
 "googletest/googletest/include"
 ]

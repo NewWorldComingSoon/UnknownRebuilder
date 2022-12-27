@@ -2,7 +2,11 @@
 
 [target.UnknownFrontend-cli]
 type = "executable"
-include-directories = ["../include"]
+include-directories = [
+"../3rdparty",
+"../3rdparty/argparse/include",
+"../include"
+]
 headers = ["UnknownFrontend-cli/**.h"]
 sources = ["UnknownFrontend-cli/**.cpp", "UnknownFrontend-cli/**.hpp", "UnknownFrontend-cli/**.h"]
 compile-features = ["cxx_std_20"]
@@ -10,7 +14,11 @@ compile-features = ["cxx_std_20"]
 
 [target.UnknownBackend-cli]
 type = "executable"
-include-directories = ["../include"]
+include-directories = [
+"../3rdparty",
+"../3rdparty/argparse/include",
+"../include"
+]
 headers = ["UnknownBackend-cli/**.h"]
 sources = ["UnknownBackend-cli/**.cpp", "UnknownBackend-cli/**.hpp", "UnknownBackend-cli/**.h"]
 compile-features = ["cxx_std_20"]

@@ -22,6 +22,8 @@ target_compile_features(UnknownFrontend-cli PRIVATE
 )
 
 target_include_directories(UnknownFrontend-cli PRIVATE
+	"../3rdparty"
+	"../3rdparty/argparse/include"
 	"../include"
 )
 
@@ -46,6 +48,8 @@ target_compile_features(UnknownBackend-cli PRIVATE
 )
 
 target_include_directories(UnknownBackend-cli PRIVATE
+	"../3rdparty"
+	"../3rdparty/argparse/include"
 	"../include"
 )
 
