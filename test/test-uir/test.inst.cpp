@@ -116,7 +116,7 @@ TEST(test_uir, test_uir_inst_JccAddr_1)
     auto Addr1 = ConstantInt::get(CTX, unknown::APInt(64, 0x406000));
     auto Addr2 = ConstantInt::get(CTX, unknown::APInt(64, 0x407000));
 
-    auto FlagsVar = FlagsVariable::get(Type::getInt64Ty(CTX));
+    auto FlagsVar = FlagsVariable::get(CTX);
     FlagsVar->setCarryFlag(true);
     FlagsVar->setZeroFlag(true);
 
@@ -137,7 +137,7 @@ TEST(test_uir, test_uir_inst_JccBB_1)
     auto BB1 = BasicBlock::get(CTX, "bb1", 0x406000, 0x406005);
     auto BB2 = BasicBlock::get(CTX, "bb2", 0x407600, 0x407605);
 
-    auto FlagsVar = FlagsVariable::get(Type::getInt64Ty(CTX));
+    auto FlagsVar = FlagsVariable::get(CTX);
     FlagsVar->setCarryFlag(true);
     FlagsVar->setZeroFlag(true);
 

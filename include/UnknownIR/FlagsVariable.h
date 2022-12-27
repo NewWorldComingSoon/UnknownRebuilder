@@ -27,6 +27,7 @@ private:
 
 public:
     explicit FlagsVariable(Type *Ty);
+    explicit FlagsVariable(Context &C);
     virtual ~FlagsVariable();
 
 public:
@@ -63,6 +64,7 @@ public:
 public:
     // Static
     static FlagsVariable *get(Type *Ty);
+    static FlagsVariable *get(Context &C);
 };
 
 } // namespace uir

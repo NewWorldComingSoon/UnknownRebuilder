@@ -15,9 +15,13 @@ FlagsVariable::FlagsVariable(Type *Ty) : LocalVariable(Ty, "flags", 0)
     mFlags.FlagsValue = 0;
 }
 
-FlagsVariable::~FlagsVariable()
+FlagsVariable::FlagsVariable(Context &C) : FlagsVariable(Type::getInt64Ty(C))
 {
     //
+}
+
+FlagsVariable::~FlagsVariable()
+{
     //
 }
 
@@ -95,6 +99,12 @@ FlagsVariable *
 FlagsVariable::get(Type *Ty)
 {
     return new FlagsVariable(Ty);
+}
+
+FlagsVariable *
+FlagsVariable::get(Context &C)
+{
+    return new FlagsVariable(C);
 }
 
 } // namespace uir
