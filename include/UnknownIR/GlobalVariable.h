@@ -56,10 +56,12 @@ public:
     {
         if (ElmtTy->getTypeSize() != sizeof(T))
         {
-            std::printf(std::format("ElmtTy->getTypeSize()[{}] != sizeof(T)[{}]\n", ElmtTy->getTypeSize(), sizeof(T)).c_str());
+            std::printf(
+                std::format("ElmtTy->getTypeSize()[{}] != sizeof(T)[{}]\n", ElmtTy->getTypeSize(), sizeof(T)).c_str());
             std::abort();
         }
     }
+
     virtual ~GlobalArray() {}
 
 public:
