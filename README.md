@@ -48,3 +48,4 @@ cmake -Bbuild -DCAPSTONE_BUILD_TESTS=OFF -DCAPSTONE_BUILD_SHARED=OFF -DCAPSTONE_
 
 ## Note
 This is currently an unfinished project.
+I expect to spend 1 year to complete this project :)
