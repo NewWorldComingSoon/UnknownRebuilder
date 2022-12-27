@@ -40,6 +40,9 @@ public:
     // Print the instruction
     virtual void print(unknown::raw_ostream &OS, bool NewLine = true) const;
 
+    // Print the extra info of this instruction
+    virtual void printExtraInfo(unknown::raw_ostream &OS) const;
+
 public:
     // Get/Set
     // Get the address of this instruction

@@ -61,6 +61,10 @@ JccAddrInstruction::print(unknown::raw_ostream &OS, bool NewLine) const
     OS << getJccDestConstantInt()->getName();
     OS << ", ";
     OS << getJccNormalConstantInt()->getName();
+
+    // Print the extra info of this instruction
+    printExtraInfo(OS);
+
     if (NewLine)
     {
         OS << "\n";
@@ -161,6 +165,10 @@ JccBBInstruction::print(unknown::raw_ostream &OS, bool NewLine) const
     OS << getDestinationBlock()->getReadableName();
     OS << ", ";
     OS << getNormalBlock()->getReadableName();
+
+    // Print the extra info of this instruction
+    printExtraInfo(OS);
+
     if (NewLine)
     {
         OS << "\n";

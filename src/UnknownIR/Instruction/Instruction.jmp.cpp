@@ -51,6 +51,10 @@ JmpAddrInstruction::print(unknown::raw_ostream &OS, bool NewLine) const
     OS << getOpcodeName();
     OS << " ";
     OS << getJmpDestConstantInt()->getName();
+
+    // Print the extra info of this instruction
+    printExtraInfo(OS);
+
     if (NewLine)
     {
         OS << "\n";
@@ -128,6 +132,10 @@ JmpBBInstruction::print(unknown::raw_ostream &OS, bool NewLine) const
     OS << getOpcodeName();
     OS << " ";
     OS << getDestinationBlock()->getReadableName();
+
+    // Print the extra info of this instruction
+    printExtraInfo(OS);
+
     if (NewLine)
     {
         OS << "\n";

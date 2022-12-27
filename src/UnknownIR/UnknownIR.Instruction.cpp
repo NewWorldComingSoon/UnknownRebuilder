@@ -3,6 +3,7 @@
 #include <GlobalVariable.h>
 
 #include <Internal/InternalErrors/InternalErrors.h>
+#include <Internal/InternalConfig/InternalConfig.h>
 
 #include <unknown/ADT/StringExtras.h>
 
@@ -80,9 +81,25 @@ Instruction::print(unknown::raw_ostream &OS, bool NewLine) const
     OS << std::format("0x{:X}", getInstructionAddress());
     OS << "\t";
     OS << getOpcodeName();
+
+    // Print the extra info of this instruction
+    printExtraInfo(OS);
+
     if (NewLine)
     {
         OS << "\n";
+    }
+}
+
+// Print the extra info of this instruction
+void
+Instruction::printExtraInfo(unknown::raw_ostream &OS) const
+{
+    OS << UIR_INST_EXTRA_INFO_NAME_PREFIX;
+
+    if (!getExtraInfo().empty())
+    {
+        OS << getExtraInfo();
     }
 }
 
