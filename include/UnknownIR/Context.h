@@ -17,6 +17,7 @@ public:
     enum class Arch : uint32_t
     {
         ArchX86,
+        ArchARM,
     };
 
 private:
