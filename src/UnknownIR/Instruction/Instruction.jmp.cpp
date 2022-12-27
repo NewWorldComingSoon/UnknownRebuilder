@@ -43,7 +43,7 @@ JmpAddrInstruction::hasFlags() const
 
 // Print the instruction
 void
-JmpAddrInstruction::print(unknown::raw_ostream &OS) const
+JmpAddrInstruction::print(unknown::raw_ostream &OS, bool NewLine) const
 {
     // address\tinst
     OS << "0x" << unknown::APInt(64, getInstructionAddress()).toString(16, false);
@@ -51,7 +51,10 @@ JmpAddrInstruction::print(unknown::raw_ostream &OS) const
     OS << getOpcodeName();
     OS << " ";
     OS << getJmpDestConstantInt()->getName();
-    OS << "\n";
+    if (NewLine)
+    {
+        OS << "\n";
+    }
 }
 
 ////////////////////////////////////////////////////////////
@@ -117,7 +120,7 @@ JmpBBInstruction::hasFlags() const
 
 // Print the instruction
 void
-JmpBBInstruction::print(unknown::raw_ostream &OS) const
+JmpBBInstruction::print(unknown::raw_ostream &OS, bool NewLine) const
 {
     // address\tinst
     OS << "0x" << unknown::APInt(64, getInstructionAddress()).toString(16, false);
@@ -125,7 +128,10 @@ JmpBBInstruction::print(unknown::raw_ostream &OS) const
     OS << getOpcodeName();
     OS << " ";
     OS << getDestinationBlock()->getReadableName();
-    OS << "\n";
+    if (NewLine)
+    {
+        OS << "\n";
+    }
 }
 
 ////////////////////////////////////////////////////////////

@@ -404,9 +404,31 @@ BasicBlock::getReadableName() const
 
 // Print the BasicBlock
 void
-BasicBlock::print(unknown::raw_ostream &OS) const
+BasicBlock::print(unknown::raw_ostream &OS, bool NewLine) const
 {
-    // TODO
+    OS << getReadableName();
+    OS << " = [\n";
+
+    for (auto Inst : *this)
+    {
+        OS << R"(")";
+        Inst->print(OS, false);
+        OS << R"(")";
+
+        if (Inst != &back())
+        {
+            OS << ",";
+        }
+
+        OS << "\n";
+    }
+
+    OS << "]";
+
+    if (NewLine)
+    {
+        OS << "\n";
+    }
 }
 
 ////////////////////////////////////////////////////////////

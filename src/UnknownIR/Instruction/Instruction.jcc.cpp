@@ -51,7 +51,7 @@ JccAddrInstruction::hasFlags() const
 
 // Print the instruction
 void
-JccAddrInstruction::print(unknown::raw_ostream &OS) const
+JccAddrInstruction::print(unknown::raw_ostream &OS, bool NewLine) const
 {
     // address\tinst
     OS << "0x" << unknown::APInt(64, getInstructionAddress()).toString(16, false);
@@ -61,7 +61,10 @@ JccAddrInstruction::print(unknown::raw_ostream &OS) const
     OS << getJccDestConstantInt()->getName();
     OS << ", ";
     OS << getJccNormalConstantInt()->getName();
-    OS << "\n";
+    if (NewLine)
+    {
+        OS << "\n";
+    }
 }
 
 ////////////////////////////////////////////////////////////
@@ -148,7 +151,7 @@ JccBBInstruction::hasFlags() const
 
 // Print the instruction
 void
-JccBBInstruction::print(unknown::raw_ostream &OS) const
+JccBBInstruction::print(unknown::raw_ostream &OS, bool NewLine) const
 {
     // address\tinst
     OS << "0x" << unknown::APInt(64, getInstructionAddress()).toString(16, false);
@@ -158,7 +161,10 @@ JccBBInstruction::print(unknown::raw_ostream &OS) const
     OS << getDestinationBlock()->getReadableName();
     OS << ", ";
     OS << getNormalBlock()->getReadableName();
-    OS << "\n";
+    if (NewLine)
+    {
+        OS << "\n";
+    }
 }
 
 ////////////////////////////////////////////////////////////

@@ -48,7 +48,7 @@ StoreInstruction::hasFlags() const
 
 // Print the instruction
 void
-StoreInstruction::print(unknown::raw_ostream &OS) const
+StoreInstruction::print(unknown::raw_ostream &OS, bool NewLine) const
 {
     // address\tinst
     OS << "0x" << unknown::APInt(64, getInstructionAddress()).toString(16, false);
@@ -58,7 +58,10 @@ StoreInstruction::print(unknown::raw_ostream &OS) const
     OS << getValueOperand()->getReadableName();
     OS << ", ";
     OS << getPointerOperand()->getReadableName();
-    OS << "\n";
+    if (NewLine)
+    {
+        OS << "\n";
+    }
 }
 
 ////////////////////////////////////////////////////////////

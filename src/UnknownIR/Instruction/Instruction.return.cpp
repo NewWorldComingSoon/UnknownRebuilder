@@ -41,13 +41,16 @@ ReturnInstruction::hasFlags() const
 
 // Print the instruction
 void
-ReturnInstruction::print(unknown::raw_ostream &OS) const
+ReturnInstruction::print(unknown::raw_ostream &OS, bool NewLine) const
 {
     // address\tinst
     OS << "0x" << unknown::APInt(64, getInstructionAddress()).toString(16, false);
     OS << "\t";
     OS << getOpcodeName();
-    OS << "\n";
+    if (NewLine)
+    {
+        OS << "\n";
+    }
 }
 
 ////////////////////////////////////////////////////////////
@@ -97,7 +100,7 @@ ReturnImmInstruction::hasFlags() const
 
 // Print the instruction
 void
-ReturnImmInstruction::print(unknown::raw_ostream &OS) const
+ReturnImmInstruction::print(unknown::raw_ostream &OS, bool NewLine) const
 {
     // address\tinst
     OS << "0x" << unknown::APInt(64, getInstructionAddress()).toString(16, false);
@@ -105,7 +108,10 @@ ReturnImmInstruction::print(unknown::raw_ostream &OS) const
     OS << getOpcodeName();
     OS << " ";
     OS << getImmConstantInt()->getReadableName();
-    OS << "\n";
+    if (NewLine)
+    {
+        OS << "\n";
+    }
 }
 
 ////////////////////////////////////////////////////////////

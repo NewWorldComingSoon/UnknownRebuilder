@@ -103,7 +103,7 @@ Function::getReadableName() const
 
 // Print the function
 void
-Function::print(unknown::raw_ostream &OS) const
+Function::print(unknown::raw_ostream &OS, bool NewLine) const
 {
     // TODO
 }

@@ -24,7 +24,7 @@ public:
     virtual bool hasFlags() const override;
 
     // Print the instruction
-    virtual void print(unknown::raw_ostream &OS) const override;
+    virtual void print(unknown::raw_ostream &OS, bool NewLine = true) const override;
 
 public:
     // Get/Set

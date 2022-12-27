@@ -25,6 +25,8 @@ TEST(test_uir, test_uir_bb_1)
         {
             unknown::outs() << *I;
         }
+
+        unknown::outs() << BB1;
     }
 
     std::cout << "--------------------bp-----------------------\n";

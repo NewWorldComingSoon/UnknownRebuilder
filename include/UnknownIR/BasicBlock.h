@@ -162,7 +162,7 @@ public:
     virtual std::string getReadableName() const override;
 
     // Print the BasicBlock
-    virtual void print(unknown::raw_ostream &OS) const override;
+    virtual void print(unknown::raw_ostream &OS, bool NewLine = true) const override;
 
 public:
     // Static

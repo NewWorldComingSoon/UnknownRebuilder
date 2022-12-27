@@ -71,7 +71,7 @@ public:
     virtual std::string getReadableName() const override;
 
     // Print the object name
-    virtual void print(unknown::raw_ostream &OS) const override;
+    virtual void print(unknown::raw_ostream &OS, bool NewLine = true) const override;
 
     // Replaces all references to the "From" definition with references to the "To"
     virtual void replaceUsesOfWith(Value *From, Value *To) = 0;
