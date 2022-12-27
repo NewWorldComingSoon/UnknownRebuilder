@@ -78,7 +78,7 @@ Module::setModuleName(unknown::StringRef ModuleName)
 }
 
 // Get the specified function in the module
-Function *
+std::optional<Function *>
 Module::getFunction(unknown::StringRef FunctionName) const
 {
     for (Function *Func : mFunctionList)
@@ -89,11 +89,11 @@ Module::getFunction(unknown::StringRef FunctionName) const
         }
     }
 
-    return nullptr;
+    return {};
 }
 
 // Get the specified function by address in the module
-Function *
+std::optional<Function *>
 Module::getFunction(uint64_t Address) const
 {
     for (Function *Func : mFunctionList)
@@ -103,11 +103,12 @@ Module::getFunction(uint64_t Address) const
             return Func;
         }
     }
-    return nullptr;
+
+    return {};
 }
 
 // Get the specified global variable by name in the module
-GlobalVariable *
+std::optional<GlobalVariable *>
 Module::getGlobalVariable(unknown::StringRef GlobalVariableName) const
 {
     for (GlobalVariable *GV : mGlobalVariableList)
@@ -118,11 +119,11 @@ Module::getGlobalVariable(unknown::StringRef GlobalVariableName) const
         }
     }
 
-    return nullptr;
+    return {};
 }
 
 // Get the specified global variable by address in the module
-GlobalVariable *
+std::optional<GlobalVariable *>
 Module::getGlobalVariable(uint64_t Address) const
 {
     for (GlobalVariable *GV : mGlobalVariableList)
@@ -133,7 +134,7 @@ Module::getGlobalVariable(uint64_t Address) const
         }
     }
 
-    return nullptr;
+    return {};
 }
 
 ////////////////////////////////////////////////////////////

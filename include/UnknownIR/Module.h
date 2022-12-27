@@ -65,14 +65,14 @@ public:
     void setModuleName(unknown::StringRef ModuleName);
 
     // Get the specified function by name in the module
-    Function *getFunction(unknown::StringRef FunctionName) const;
+    std::optional<Function *> getFunction(unknown::StringRef FunctionName) const;
     // Get the specified function by address in the module
-    Function *getFunction(uint64_t Address) const;
+    std::optional<Function *> getFunction(uint64_t Address) const;
 
     // Get the specified global variable by name in the module
-    GlobalVariable *getGlobalVariable(unknown::StringRef GlobalVariableName) const;
+    std::optional<GlobalVariable *> getGlobalVariable(unknown::StringRef GlobalVariableName) const;
     // Get the specified global variable by address in the module
-    GlobalVariable *getGlobalVariable(uint64_t Address) const;
+    std::optional<GlobalVariable *> getGlobalVariable(uint64_t Address) const;
 
 public:
     // Insert
