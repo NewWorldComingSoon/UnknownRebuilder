@@ -8,6 +8,8 @@
 #include <cstdint>
 #include <sstream>
 #include <cassert>
+#include <ranges>
+#include <algorithm>
 
 #include <UnknownUtils/unknown/Support/raw_ostream.h>
 
