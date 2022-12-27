@@ -137,10 +137,6 @@ TEST(test_uir, test_uir_type_5)
 
     for (size_t i = 0; i < GA->getGlobalArray().size(); ++i)
     {
-        std::cout << std::format(
-                         "GA->getGlobalArray({}) = {}",
-                         i,
-                         "0x" + unknown::APInt(8, GA->getGlobalArray()[i]).toString(16, false))
-                  << std::endl;
+        std::cout << std::format("GA->getGlobalArray({}) = 0x{:X}", i, GA->getGlobalArray()[i]) << std::endl;
     }
 }

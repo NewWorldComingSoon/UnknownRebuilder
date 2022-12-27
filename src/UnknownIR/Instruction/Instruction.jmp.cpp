@@ -46,7 +46,7 @@ void
 JmpAddrInstruction::print(unknown::raw_ostream &OS, bool NewLine) const
 {
     // address\tinst
-    OS << "0x" << unknown::APInt(64, getInstructionAddress()).toString(16, false);
+    OS << std::format("0x{:X}", getInstructionAddress());
     OS << "\t";
     OS << getOpcodeName();
     OS << " ";
@@ -123,7 +123,7 @@ void
 JmpBBInstruction::print(unknown::raw_ostream &OS, bool NewLine) const
 {
     // address\tinst
-    OS << "0x" << unknown::APInt(64, getInstructionAddress()).toString(16, false);
+    OS << std::format("0x{:X}", getInstructionAddress());
     OS << "\t";
     OS << getOpcodeName();
     OS << " ";
