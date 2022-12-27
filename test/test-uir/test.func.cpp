@@ -13,5 +13,5 @@ TEST(test_uir, test_uir_func_1)
         CTX.setMode(Context::Mode64);
     }
 
-    std::cout << "--------------------bp-----------------------\n";
+    std::cout << "--------------------bp-----------------------" << std::endl;
 }
