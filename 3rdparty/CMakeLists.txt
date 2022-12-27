@@ -26,3 +26,13 @@ endif()
 add_subdirectory(keystone-retdec)
 set(CMAKE_FOLDER ${CMKR_CMAKE_FOLDER})
 
+# Subdirectory: raw_pdb
+set(CMKR_CMAKE_FOLDER ${CMAKE_FOLDER})
+if(CMAKE_FOLDER)
+	set(CMAKE_FOLDER "${CMAKE_FOLDER}/raw_pdb")
+else()
+	set(CMAKE_FOLDER raw_pdb)
+endif()
+add_subdirectory(raw_pdb)
+set(CMAKE_FOLDER ${CMKR_CMAKE_FOLDER})
+

@@ -7,3 +7,6 @@
 [submodule "3rdparty/toml11"]
 	path = 3rdparty/toml11
 	url = https://github.com/NewWorldComingSoon/toml11
+[submodule "3rdparty/raw_pdb"]
+	path = 3rdparty/raw_pdb
+	url = https://github.com/NewWorldComingSoon/raw_pdb
