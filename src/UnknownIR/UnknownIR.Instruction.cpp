@@ -1,6 +1,8 @@
 #include <Instruction.h>
 #include <BasicBlock.h>
 #include <GlobalVariable.h>
+#include <Function.h>
+#include <Argument.h>
 
 #include <Internal/InternalErrors/InternalErrors.h>
 #include <Internal/InternalConfig/InternalConfig.h>
@@ -447,6 +449,12 @@ Instruction::clearAllOperands()
         if (auto BB = dynamic_cast<BasicBlock *>(OP))
         {
             // We do not free block
+            continue;
+        }
+
+        if (auto Arg = dynamic_cast<Argument *>(OP))
+        {
+            // We do not free argument
             continue;
         }
 
