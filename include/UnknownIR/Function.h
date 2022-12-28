@@ -1,12 +1,12 @@
 #pragma once
 #include <UnknownIR/Constant.h>
-#include <UnknownIR/Argument.h>
 
 #include <UnknownUtils/unknown/Support/raw_ostream.h>
 
 namespace uir {
 
 class BasicBlock;
+class Argument;
 
 class Function : public Constant
 {
@@ -33,6 +33,10 @@ public:
     // BasicBlocksList
     const BasicBlockListType &getBasicBlockList() const { return mBasicBlocksList; }
     BasicBlockListType &getBasicBlockList() { return mBasicBlocksList; }
+
+    // ArgumentsList
+    const ArgumentListType &getArgumentList() const { return mArgumentsList; }
+    ArgumentListType &getArgumentList() { return mArgumentsList; }
 
 public:
     // BasicBlock iterators
