@@ -129,6 +129,11 @@ public:
     void setFunctionAttributes(const std::string &FunctionAttributes);
 
 public:
+    // Add
+    // Add function attribute to this function.
+    void addFnAttr(const std::string &FunctionAttribute);
+
+public:
     // Static
     // Generate a new function name by order
     static std::string generateOrderedFunctionName(Context &C);

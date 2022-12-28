@@ -110,6 +110,16 @@ Function::setFunctionAttributes(const std::string &FunctionAttributes)
 }
 
 ////////////////////////////////////////////////////////////
+// Add
+// Add function attribute to this function.
+void
+Function::addFnAttr(const std::string &FunctionAttribute)
+{
+    mFunctionAttributes += ", ";
+    mFunctionAttributes += FunctionAttribute;
+}
+
+////////////////////////////////////////////////////////////
 // Static
 // Generate a new function name by order
 std::string
