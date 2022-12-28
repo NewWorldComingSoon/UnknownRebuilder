@@ -17,3 +17,6 @@
 
 // Prefix name of extra info of function
 #define UIR_INST_EXTRA_INFO_NAME_PREFIX ";"
+
+// Separator of attrubutes of function
+#define UIR_FUNCTION_ATTRIBUTES_SEPARATOR "|"
