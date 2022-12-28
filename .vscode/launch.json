@@ -18,7 +18,6 @@
             "environment": [],
             "console": "externalTerminal"
         },
-
         {
             "name": "debug test-ufrontend",
             "type": "cppvsdbg",
@@ -26,13 +25,12 @@
             "program": "${workspaceFolder}/Output/Debug/test-ufrontend.exe",
             "args": [
                 "--cfg",
-                "test-ufrontend.toml"
+                "test-ufrontend.cfg.toml"
             ],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
             "console": "externalTerminal"
         },
-
     ]
 }
