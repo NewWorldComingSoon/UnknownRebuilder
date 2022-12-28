@@ -12,17 +12,13 @@ msvc-runtime = "static"
 headers = ["test-uir/**.h"]
 sources = ["test-uir/**.cpp", "test-uir/**.h"]
 include-directories = [
-"../3rdparty",
-"../3rdparty/argparse/include",
-"../include",
-"googletest/googletest/include"
+    "../3rdparty",
+    "../3rdparty/argparse/include",
+    "../include",
+    "googletest/googletest/include",
 ]
 
-link-libraries = [
-"UnknownUtils",
-"UnknownIR",
-"gtest"
-]
+link-libraries = ["UnknownUtils", "UnknownIR", "gtest"]
 compile-features = ["cxx_std_20"]
 
 
@@ -32,27 +28,18 @@ msvc-runtime = "static"
 headers = ["test-ufrontend/**.h"]
 sources = ["test-ufrontend/**.cpp", "test-ufrontend/**.h"]
 include-directories = [
-"../3rdparty",
-"../3rdparty/argparse/include",
-"../include",
-"googletest/googletest/include"
+    "../3rdparty",
+    "../3rdparty/argparse/include",
+    "../include",
+    "googletest/googletest/include",
 ]
 
 link-libraries = [
-"UnknownUtils",
-"UnknownIR",
-"UnknownFrontend",
-"gtest",
-"raw_pdb",
-"capstone-static"
+    "UnknownUtils",
+    "UnknownIR",
+    "UnknownFrontend",
+    "gtest",
+    "raw_pdb",
+    "capstone-static",
 ]
 compile-features = ["cxx_std_20"]
-
-
-
-
-
-
-
-
-

@@ -24,7 +24,12 @@ condition = "test_mode"
 type = "library"
 include-directories = ["src/UnknownUtils", "include", "include/UnknownUtils"]
 headers = ["include/UnknownUtils/**.h"]
-sources = ["src/UnknownUtils/**.cpp", "src/UnknownUtils/**.hpp", "src/UnknownUtils/**.h", "src/UnknownUtils/**.inc"]
+sources = [
+    "src/UnknownUtils/**.cpp",
+    "src/UnknownUtils/**.hpp",
+    "src/UnknownUtils/**.h",
+    "src/UnknownUtils/**.inc",
+]
 compile-features = ["cxx_std_20"]
 
 
@@ -34,9 +39,7 @@ include-directories = ["src/UnknownIR", "include", "include/UnknownIR"]
 headers = ["include/UnknownIR/**.h"]
 sources = ["src/UnknownIR/**.cpp", "src/UnknownIR/**.hpp", "src/UnknownIR/**.h"]
 compile-features = ["cxx_std_20"]
-link-libraries = [
-"UnknownUtils"
-]
+link-libraries = ["UnknownUtils"]
 
 
 [target.UnknownMC]
@@ -45,42 +48,39 @@ include-directories = ["src/UnknownMC", "include", "include/UnknownMC"]
 headers = ["include/UnknownMC/**.h"]
 sources = ["src/UnknownMC/**.cpp", "src/UnknownMC/**.hpp", "src/UnknownMC/**.h"]
 compile-features = ["cxx_std_20"]
-link-libraries = [
-"UnknownIR"
-]
+link-libraries = ["UnknownIR"]
 
 
 [target.UnknownFrontend]
 type = "library"
 include-directories = [
-"3rdparty/capstone-retdec/include",
-"src/UnknownFrontend", 
-"include", 
-"include/UnknownFrontend"
+    "3rdparty/capstone-retdec/include",
+    "src/UnknownFrontend",
+    "include",
+    "include/UnknownFrontend",
 ]
 headers = ["include/UnknownFrontend/**.h"]
-sources = ["src/UnknownFrontend/**.cpp", "src/UnknownFrontend/**.hpp", "src/UnknownFrontend/**.h"]
-compile-features = ["cxx_std_20"]
-link-libraries = [
-"capstone-static",
-"raw_pdb",
-"UnknownIR"
+sources = [
+    "src/UnknownFrontend/**.cpp",
+    "src/UnknownFrontend/**.hpp",
+    "src/UnknownFrontend/**.h",
 ]
+compile-features = ["cxx_std_20"]
+link-libraries = ["capstone-static", "raw_pdb", "UnknownIR"]
 
 
 [target.UnknownBackend]
 type = "library"
 include-directories = [
-"src/UnknownBackend", 
-"include", 
-"include/UnknownBackend"
+    "src/UnknownBackend",
+    "include",
+    "include/UnknownBackend",
 ]
 headers = ["include/UnknownBackend/**.h"]
-sources = ["src/UnknownBackend/**.cpp", "src/UnknownBackend/**.hpp", "src/UnknownBackend/**.h"]
-compile-features = ["cxx_std_20"]
-link-libraries = [
-"UnknownMC"
+sources = [
+    "src/UnknownBackend/**.cpp",
+    "src/UnknownBackend/**.hpp",
+    "src/UnknownBackend/**.h",
 ]
-
-
-
+compile-features = ["cxx_std_20"]
+link-libraries = ["UnknownMC"]

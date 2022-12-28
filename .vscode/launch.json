@@ -1,0 +1,38 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "debug test-uir",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/Output/Debug/test-uir.exe",
+            "args": [
+                "--cfg",
+                "test-uir.cfg.toml"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "console": "externalTerminal"
+        },
+
+        {
+            "name": "debug test-ufrontend",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/Output/Debug/test-ufrontend.exe",
+            "args": [
+                "--cfg",
+                "test-ufrontend.toml"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "console": "externalTerminal"
+        },
+
+    ]
+}
