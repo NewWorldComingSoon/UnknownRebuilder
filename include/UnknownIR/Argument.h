@@ -34,6 +34,14 @@ public:
     void setArgNo(uint32_t ArgNo);
 
 public:
+    // Remove/Erase
+    // Remove this argument from its parent, but does not delete it.
+    void removeFromParent();
+
+    // Remove this argument from its parent and delete it.
+    void eraseFromParent();
+
+public:
     // Static
     static Argument *get(Type *Ty, const unknown::StringRef &ArgName = "", Function *F = nullptr, uint32_t ArgNo = 0);
 };

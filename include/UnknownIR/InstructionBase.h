@@ -115,7 +115,7 @@ public:
     void appendComment(const unknown::StringRef &Comment);
 
 public:
-    // Remove/Erase/Insert/Clear
+    // Remove/Erase/Insert/Drop/Clear
     // Remove this instruction from its parent, but does not delete it.
     void removeFromParent();
 
