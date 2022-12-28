@@ -18,6 +18,7 @@ public:
 
 private:
     std::string mFunctionName;
+    std::string mFunctionAttributes;
     uint64_t mFunctionAddressBegin;
     uint64_t mFunctionAddressEnd;
     BasicBlockListType mBasicBlocksList;
@@ -114,6 +115,18 @@ public:
 
     // Get the entry block of this function
     BasicBlock &getEntryBlock();
+
+    // Get the name of this function
+    const std::string getFunctionName() const;
+
+    // Set the name of this function
+    void setFunctionName(const std::string &FunctionName);
+
+    // Get the attributes of this function
+    const std::string getFunctionAttributes() const;
+
+    // Set the attributes of this function
+    void setFunctionAttributes(const std::string &FunctionAttributes);
 
 public:
     // Static

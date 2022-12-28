@@ -20,6 +20,7 @@ Function::Function(
     uint64_t FunctionAddressEnd) :
     Constant(Type::getFunctionTy(C), FunctionName),
     mFunctionName(FunctionName),
+    mFunctionAttributes(""),
     mFunctionAddressBegin(FunctionAddressBegin),
     mFunctionAddressEnd(FunctionAddressEnd)
 {
@@ -78,6 +79,34 @@ BasicBlock &
 Function::getEntryBlock()
 {
     return front();
+}
+
+// Get the name of this function
+const std::string
+Function::getFunctionName() const
+{
+    return mFunctionName;
+}
+
+// Set the name of this function
+void
+Function::setFunctionName(const std::string &FunctionName)
+{
+    mFunctionName = FunctionName;
+}
+
+// Get the attributes of this function
+const std::string
+Function::getFunctionAttributes() const
+{
+    return mFunctionAttributes;
+}
+
+// Set the attributes of this function
+void
+Function::setFunctionAttributes(const std::string &FunctionAttributes)
+{
+    mFunctionAttributes = FunctionAttributes;
 }
 
 ////////////////////////////////////////////////////////////
