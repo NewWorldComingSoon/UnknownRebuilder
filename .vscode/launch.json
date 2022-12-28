@@ -13,7 +13,7 @@
                 "--cfg",
                 "test-uir.cfg.toml"
             ],
-            "stopAtEntry": false,
+            "stopAtEntry": true,
             "cwd": "${fileDirname}",
             "environment": [],
             "console": "externalTerminal"
@@ -27,7 +27,7 @@
                 "--cfg",
                 "test-ufrontend.cfg.toml"
             ],
-            "stopAtEntry": false,
+            "stopAtEntry": true,
             "cwd": "${fileDirname}",
             "environment": [],
             "console": "externalTerminal"
