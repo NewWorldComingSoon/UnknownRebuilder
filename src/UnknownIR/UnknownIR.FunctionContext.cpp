@@ -1,4 +1,5 @@
 #include <FunctionContext.h>
+#include <Function.h>
 
 #include <Context.h>
 #include <ContextImpl/ContextImpl.h>
@@ -58,6 +59,50 @@ void
 FunctionContext::setCtxNo(uint32_t CtxNo)
 {
     mCtxNo = CtxNo;
+}
+
+////////////////////////////////////////////////////////////
+// Remove/Erase
+// Remove this context from its parent, but does not delete it.
+void
+FunctionContext::removeFromParent()
+{
+    if (mParent == nullptr)
+    {
+        return;
+    }
+
+    if (mParent->getFunctionContextList().empty())
+    {
+        return;
+    }
+
+    mParent->getFunctionContextList().remove(this);
+}
+
+// Remove this context from its parent and delete it.
+void
+FunctionContext::eraseFromParent()
+{
+    if (mParent == nullptr)
+    {
+        return;
+    }
+
+    if (mParent->getFunctionContextList().empty())
+    {
+        return;
+    }
+
+    for (auto It = mParent->getFunctionContextList().begin(); It != mParent->getFunctionContextList().end(); ++It)
+    {
+        if (*It == this)
+        {
+            mParent->getFunctionContextList().erase(It);
+            this->setParent(nullptr);
+            --It;
+        }
+    }
 }
 
 } // namespace uir

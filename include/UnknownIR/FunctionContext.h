@@ -38,6 +38,14 @@ public:
     void setCtxNo(uint32_t CtxNo);
 
 public:
+    // Remove/Erase
+    // Remove this context from its parent, but does not delete it.
+    void removeFromParent();
+
+    // Remove this context from its parent and delete it.
+    void eraseFromParent();
+
+public:
     // Static
     static FunctionContext *
     get(Type *Ty, const unknown::StringRef &CtxName = "", Function *F = nullptr, uint32_t CtxNo = 0);
