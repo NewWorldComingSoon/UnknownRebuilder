@@ -7,12 +7,14 @@ namespace uir {
 
 class BasicBlock;
 class Argument;
+class FunctionContext;
 
 class Function : public Constant
 {
 public:
     using BasicBlockListType = std::list<BasicBlock *>;
     using ArgumentListType = std::list<Argument *>;
+    using FunctionContextListType = std::list<FunctionContext *>;
 
 private:
     std::string mFunctionName;
@@ -20,6 +22,7 @@ private:
     uint64_t mFunctionAddressEnd;
     BasicBlockListType mBasicBlocksList;
     ArgumentListType mArgumentsList;
+    FunctionContextListType mFunctionContextList;
 
 public:
     explicit Function(
@@ -34,9 +37,15 @@ public:
     const BasicBlockListType &getBasicBlockList() const { return mBasicBlocksList; }
     BasicBlockListType &getBasicBlockList() { return mBasicBlocksList; }
 
+public:
     // ArgumentsList
     const ArgumentListType &getArgumentList() const { return mArgumentsList; }
     ArgumentListType &getArgumentList() { return mArgumentsList; }
+
+public:
+    // FunctionContextList
+    const FunctionContextListType &getFunctionContextList() const { return mFunctionContextList; }
+    FunctionContextListType &getFunctionContextList() { return mFunctionContextList; }
 
 public:
     // BasicBlock iterators
@@ -69,6 +78,22 @@ public:
     Argument &arg_front() { return *mArgumentsList.front(); }
     const Argument &arg_back() const { return *mArgumentsList.back(); }
     Argument &arg_back() { return *mArgumentsList.back(); }
+
+public:
+    // FunctionContext iterators
+    using fc_iterator = FunctionContextListType::iterator;
+    using const_fc_iterator = FunctionContextListType::const_iterator;
+    fc_iterator fc_begin() { return mFunctionContextList.begin(); }
+    const_fc_iterator fc_begin() const { return mFunctionContextList.cbegin(); }
+    fc_iterator fc_end() { return mFunctionContextList.end(); }
+    const_fc_iterator fc_end() const { return mFunctionContextList.cend(); }
+
+    size_t fc_size() const { return mFunctionContextList.size(); }
+    bool fc_empty() const { return mFunctionContextList.empty(); }
+    const FunctionContext &fc_front() const { return *mFunctionContextList.front(); }
+    FunctionContext &fc_front() { return *mFunctionContextList.front(); }
+    const FunctionContext &fc_back() const { return *mFunctionContextList.back(); }
+    FunctionContext &fc_back() { return *mFunctionContextList.back(); }
 
 public:
     // Get/Set

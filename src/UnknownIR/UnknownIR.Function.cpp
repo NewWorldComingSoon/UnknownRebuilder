@@ -1,6 +1,7 @@
 #include <Function.h>
 #include <BasicBlock.h>
 #include <Argument.h>
+#include <FunctionContext.h>
 
 #include <Context.h>
 #include <ContextImpl/ContextImpl.h>
