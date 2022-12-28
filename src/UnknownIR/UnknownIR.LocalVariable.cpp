@@ -16,7 +16,7 @@ LocalVariable::LocalVariable(Type *Ty) : LocalVariable(Ty, generateOrderedLocalV
     //
 }
 
-LocalVariable::LocalVariable(Type *Ty, unknown::StringRef LocalVariableName, uint64_t LocalVariableAddress) :
+LocalVariable::LocalVariable(Type *Ty, const unknown::StringRef &LocalVariableName, uint64_t LocalVariableAddress) :
     Constant(Ty, LocalVariableName), mLocalVariableAddress(LocalVariableAddress)
 {
     //
@@ -57,7 +57,7 @@ LocalVariable::generateOrderedLocalVarName(Context &C)
 
 // Allocate a LocalVariable
 LocalVariable *
-LocalVariable::get(Type *Ty, unknown::StringRef LocalVariableName, uint64_t LocalVariableAddress)
+LocalVariable::get(Type *Ty, const unknown::StringRef &LocalVariableName, uint64_t LocalVariableAddress)
 {
     return new LocalVariable(Ty, LocalVariableName, LocalVariableAddress);
 }

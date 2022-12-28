@@ -20,7 +20,7 @@ BasicBlock::BasicBlock(Context &C) : BasicBlock(C, BasicBlock::generateOrderedBa
 
 BasicBlock::BasicBlock(
     Context &C,
-    unknown::StringRef BasicBlockName,
+    const unknown::StringRef &BasicBlockName,
     uint64_t BasicBlockAddressBegin,
     uint64_t BasicBlockAddressEnd,
     Function *Parent /*= nullptr*/) :
@@ -125,7 +125,7 @@ BasicBlock::getBasicBlockName() const
 
 // Set the name of block
 void
-BasicBlock::setBasicBlockName(unknown::StringRef BlockName)
+BasicBlock::setBasicBlockName(const unknown::StringRef &BlockName)
 {
     mBasicBlockName = BlockName;
 }
@@ -459,7 +459,7 @@ BasicBlock::create(Context &C)
 BasicBlock *
 BasicBlock::get(
     Context &C,
-    unknown::StringRef BasicBlockName,
+    const unknown::StringRef &BasicBlockName,
     uint64_t BasicBlockAddressBegin,
     uint64_t BasicBlockAddressEnd,
     Function *Parent)
@@ -471,7 +471,7 @@ BasicBlock::get(
 BasicBlock *
 BasicBlock::create(
     Context &C,
-    unknown::StringRef BasicBlockName,
+    const unknown::StringRef &BasicBlockName,
     uint64_t BasicBlockAddressBegin,
     uint64_t BasicBlockAddressEnd,
     Function *Parent)

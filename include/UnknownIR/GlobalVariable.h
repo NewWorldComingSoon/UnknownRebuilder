@@ -10,7 +10,7 @@ protected:
 
 public:
     explicit GlobalVariable(Type *Ty);
-    explicit GlobalVariable(Type *Ty, unknown::StringRef GlobalVariableName, uint64_t GlobalVariableAddress);
+    explicit GlobalVariable(Type *Ty, const unknown::StringRef &GlobalVariableName, uint64_t GlobalVariableAddress);
     virtual ~GlobalVariable();
 
 public:
@@ -32,12 +32,12 @@ public:
     static std::string generateOrderedGlobalVarName(Context &C);
 
     // Allocate a GlobalVariable
-    static GlobalVariable *get(Type *Ty, unknown::StringRef GlobalVariableName, uint64_t GlobalVariableAddress);
+    static GlobalVariable *get(Type *Ty, const unknown::StringRef &GlobalVariableName, uint64_t GlobalVariableAddress);
     static GlobalVariable *get(Type *Ty);
 };
 
 template <typename T = uint8_t>
-requires std::is_integral_v<T> || std::is_pointer_v<T>
+    requires std::is_integral_v<T> || std::is_pointer_v<T>
 class GlobalArray : public GlobalVariable
 {
 public:
@@ -51,7 +51,7 @@ public:
         Context &C,
         Type *ElmtTy,
         const GlobalArrayType &GlobalArrayElements,
-        unknown::StringRef GlobalArrayName = generateOrderedGlobalVarName(C),
+        const unknown::StringRef &GlobalArrayName = generateOrderedGlobalVarName(C),
         uint64_t GlobalArrayAddress = 0) :
         GlobalVariable(PointerType::get(C, ElmtTy), GlobalArrayName, GlobalArrayAddress), mElements(GlobalArrayElements)
     {
@@ -77,7 +77,7 @@ public:
     get(Context &C,
         Type *ElmtTy,
         const GlobalArrayType &GlobalArrayElements,
-        unknown::StringRef GlobalArrayName,
+        const unknown::StringRef &GlobalArrayName,
         uint64_t GlobalArrayAddress)
     {
         return new GlobalArray(C, ElmtTy, GlobalArrayElements, GlobalArrayName, GlobalArrayAddress);

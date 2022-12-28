@@ -271,14 +271,14 @@ Instruction::getExtraInfo() const
 
 // Set the extra info of this instruction
 void
-Instruction::setExtraInfo(unknown::StringRef ExtraInfo)
+Instruction::setExtraInfo(const unknown::StringRef &ExtraInfo)
 {
     mExtraInfo = ExtraInfo;
 }
 
 // Append the extra info of this instruction
 void
-Instruction::appendExtraInfo(unknown::StringRef ExtraInfo)
+Instruction::appendExtraInfo(const unknown::StringRef &ExtraInfo)
 {
     mExtraInfo += ExtraInfo;
 }
@@ -292,14 +292,14 @@ Instruction::getComment() const
 
 // Set the comment of this instruction
 void
-Instruction::setComment(unknown::StringRef Comment)
+Instruction::setComment(const unknown::StringRef &Comment)
 {
     mComment = Comment;
 }
 
 // Append the comment of this instruction
 void
-Instruction::appendComment(unknown::StringRef Comment)
+Instruction::appendComment(const unknown::StringRef &Comment)
 {
     mComment += Comment;
 }

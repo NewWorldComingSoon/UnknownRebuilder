@@ -13,7 +13,7 @@ private:
 
 public:
     User();
-    explicit User(Type *Ty, unknown::StringRef UserName);
+    explicit User(Type *Ty, const unknown::StringRef &UserName);
     virtual ~User();
 
 public:

@@ -34,7 +34,7 @@ protected:
     uint32_t mTypeSizeInBits;
 
 public:
-    explicit Type(Context &C, unknown::StringRef TypeName, TypeID TypeID, uint32_t TypeSizeInBits);
+    explicit Type(Context &C, const unknown::StringRef &TypeName, TypeID TypeID, uint32_t TypeSizeInBits);
     virtual ~Type();
 
 public:
@@ -44,7 +44,7 @@ public:
 public:
     // Get/Set the name of the type
     unknown::StringRef getTypeName() const;
-    void setTypeName(unknown::StringRef TypeName);
+    void setTypeName(const unknown::StringRef &TypeName);
 
     // Get/Set the id of the type
     TypeID getTypeID() const;

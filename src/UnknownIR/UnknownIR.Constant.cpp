@@ -12,7 +12,7 @@ namespace uir {
 ////////////////////////////////////////////////////////////
 //     Constant
 //
-Constant::Constant(Type *Ty, unknown::StringRef ConstantName) : User(Ty, ConstantName)
+Constant::Constant(Type *Ty, const unknown::StringRef &ConstantName) : User(Ty, ConstantName)
 {
     //
     //
@@ -28,7 +28,7 @@ Constant::~Constant()
 // Static
 // Get a Constant object
 Constant *
-Constant::get(Type *Ty, unknown::StringRef ConstantName)
+Constant::get(Type *Ty, const unknown::StringRef &ConstantName)
 {
     return new Constant(Ty, ConstantName);
 }

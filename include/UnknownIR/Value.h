@@ -21,7 +21,7 @@ protected:
 
 public:
     Value();
-    explicit Value(Type *Ty, unknown::StringRef ValueName);
+    explicit Value(Type *Ty, const unknown::StringRef &ValueName);
     virtual ~Value();
 
 public:

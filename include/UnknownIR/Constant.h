@@ -9,13 +9,13 @@ class Context;
 class Constant : public User
 {
 public:
-    explicit Constant(Type *Ty, unknown::StringRef ConstantName);
+    explicit Constant(Type *Ty, const unknown::StringRef &ConstantName);
     virtual ~Constant();
 
 public:
     // Static
     // Get a Constant object
-    static Constant *get(Type *Ty, unknown::StringRef ConstantName);
+    static Constant *get(Type *Ty, const unknown::StringRef &ConstantName);
 };
 
 class ConstantInt : public Constant

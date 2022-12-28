@@ -9,7 +9,7 @@ namespace uir {
 // Ctor/Dtor
 Value::Value() : mType(nullptr), mValueName("") {}
 
-Value::Value(Type *Ty, unknown::StringRef ValueName) : mType(Ty), mValueName(ValueName) {}
+Value::Value(Type *Ty, const unknown::StringRef &ValueName) : mType(Ty), mValueName(ValueName) {}
 
 Value::~Value() {}
 

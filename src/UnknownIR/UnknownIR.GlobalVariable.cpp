@@ -16,7 +16,7 @@ GlobalVariable::GlobalVariable(Type *Ty) : GlobalVariable(Ty, generateOrderedGlo
     //
 }
 
-GlobalVariable::GlobalVariable(Type *Ty, unknown::StringRef GlobalVariableName, uint64_t GlobalVariableAddress) :
+GlobalVariable::GlobalVariable(Type *Ty, const unknown::StringRef &GlobalVariableName, uint64_t GlobalVariableAddress) :
     Constant(Ty, GlobalVariableName), mGlobalVariableAddress(GlobalVariableAddress)
 {
     //
@@ -72,7 +72,7 @@ GlobalVariable::generateOrderedGlobalVarName(Context &C)
 
 // Allocate a GlobalVariable
 GlobalVariable *
-GlobalVariable::get(Type *Ty, unknown::StringRef GlobalVariableName, uint64_t GlobalVariableAddress)
+GlobalVariable::get(Type *Ty, const unknown::StringRef &GlobalVariableName, uint64_t GlobalVariableAddress)
 {
     return new GlobalVariable(Ty, GlobalVariableName, GlobalVariableAddress);
 }

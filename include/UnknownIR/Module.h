@@ -19,7 +19,7 @@ protected:
     GlobalVariableSetType mGlobalVariableList;
 
 public:
-    explicit Module(Context &C, unknown::StringRef ModuleName);
+    explicit Module(Context &C, const unknown::StringRef &ModuleName);
     virtual ~Module();
 
 public:
@@ -62,15 +62,15 @@ public:
     // Get/Set
     // Get/Set the name of module
     std::string getModuleName() const;
-    void setModuleName(unknown::StringRef ModuleName);
+    void setModuleName(const unknown::StringRef &ModuleName);
 
     // Get the specified function by name in the module
-    std::optional<Function *> getFunction(unknown::StringRef FunctionName) const;
+    std::optional<Function *> getFunction(const unknown::StringRef &FunctionName) const;
     // Get the specified function by address in the module
     std::optional<Function *> getFunction(uint64_t Address) const;
 
     // Get the specified global variable by name in the module
-    std::optional<GlobalVariable *> getGlobalVariable(unknown::StringRef GlobalVariableName) const;
+    std::optional<GlobalVariable *> getGlobalVariable(const unknown::StringRef &GlobalVariableName) const;
     // Get the specified global variable by address in the module
     std::optional<GlobalVariable *> getGlobalVariable(uint64_t Address) const;
 

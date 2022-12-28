@@ -13,7 +13,7 @@ namespace uir {
 
 ////////////////////////////////////////////////////////////
 // Ctor/Dtor
-Type::Type(Context &C, unknown::StringRef TypeName, TypeID TypeID, uint32_t TypeSizeInBits) :
+Type::Type(Context &C, const unknown::StringRef &TypeName, TypeID TypeID, uint32_t TypeSizeInBits) :
     mContext(C), mTypeName(TypeName), mTypeID(TypeID), mTypeSizeInBits(TypeSizeInBits)
 {
 }
@@ -30,7 +30,7 @@ Type::getTypeName() const
 }
 
 void
-Type::setTypeName(unknown::StringRef TypeName)
+Type::setTypeName(const unknown::StringRef &TypeName)
 {
     mTypeName = TypeName;
 }

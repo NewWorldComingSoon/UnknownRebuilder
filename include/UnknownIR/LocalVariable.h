@@ -12,7 +12,7 @@ private:
 
 public:
     explicit LocalVariable(Type *Ty);
-    explicit LocalVariable(Type *Ty, unknown::StringRef LocalVariableName, uint64_t LocalVariableAddress);
+    explicit LocalVariable(Type *Ty, const unknown::StringRef &LocalVariableName, uint64_t LocalVariableAddress);
     virtual ~LocalVariable();
 
 public:
@@ -29,7 +29,7 @@ public:
     static std::string generateOrderedLocalVarName(Context &C);
 
     // Allocate a LocalVariable
-    static LocalVariable *get(Type *Ty, unknown::StringRef LocalVariableName, uint64_t LocalVariableAddress);
+    static LocalVariable *get(Type *Ty, const unknown::StringRef &LocalVariableName, uint64_t LocalVariableAddress);
     static LocalVariable *get(Type *Ty);
 };
 

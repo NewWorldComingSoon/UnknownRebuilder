@@ -8,7 +8,7 @@ namespace uir {
 // Ctor/Dtor
 User::User() : Value() {}
 
-User::User(Type *Ty, unknown::StringRef UserName) : Value(Ty, UserName) {}
+User::User(Type *Ty, const unknown::StringRef &UserName) : Value(Ty, UserName) {}
 
 User::~User()
 {

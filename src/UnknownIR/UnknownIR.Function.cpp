@@ -13,7 +13,7 @@ namespace uir {
 //
 Function::Function(
     Context &C,
-    unknown::StringRef FunctionName,
+    const unknown::StringRef &FunctionName,
     uint64_t FunctionAddressBegin,
     uint64_t FunctionAddressEnd) :
     Constant(Type::getFunctionTy(C), FunctionName),
