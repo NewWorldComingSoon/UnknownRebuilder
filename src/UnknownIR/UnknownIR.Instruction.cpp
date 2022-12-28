@@ -3,6 +3,7 @@
 #include <GlobalVariable.h>
 #include <Function.h>
 #include <Argument.h>
+#include <FunctionContext.h>
 
 #include <Internal/InternalErrors/InternalErrors.h>
 #include <Internal/InternalConfig/InternalConfig.h>
@@ -455,6 +456,12 @@ Instruction::clearAllOperands()
         if (auto Arg = dynamic_cast<Argument *>(OP))
         {
             // We do not free argument
+            continue;
+        }
+
+        if (auto FC = dynamic_cast<FunctionContext *>(OP))
+        {
+            // We do not free function context
             continue;
         }
 
