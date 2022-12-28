@@ -12,12 +12,14 @@ class Function : public Constant
 {
 public:
     using BasicBlockListType = std::list<BasicBlock *>;
+    using ArgumentListType = std::list<Argument *>;
 
 private:
     std::string mFunctionName;
     uint64_t mFunctionAddressBegin;
     uint64_t mFunctionAddressEnd;
     BasicBlockListType mBasicBlocksList;
+    ArgumentListType mArgumentsList;
 
 public:
     explicit Function(
@@ -47,6 +49,22 @@ public:
     BasicBlock &front() { return *mBasicBlocksList.front(); }
     const BasicBlock &back() const { return *mBasicBlocksList.back(); }
     BasicBlock &back() { return *mBasicBlocksList.back(); }
+
+public:
+    // Argument iterators
+    using arg_iterator = ArgumentListType::iterator;
+    using const_arg_iterator = ArgumentListType::const_iterator;
+    arg_iterator arg_begin() { return mArgumentsList.begin(); }
+    const_arg_iterator arg_begin() const { return mArgumentsList.cbegin(); }
+    arg_iterator arg_end() { return mArgumentsList.end(); }
+    const_arg_iterator arg_end() const { return mArgumentsList.cend(); }
+
+    size_t arg_size() const { return mArgumentsList.size(); }
+    bool arg_empty() const { return mArgumentsList.empty(); }
+    const Argument &arg_front() const { return *mArgumentsList.front(); }
+    Argument &arg_front() { return *mArgumentsList.front(); }
+    const Argument &arg_back() const { return *mArgumentsList.back(); }
+    Argument &arg_back() { return *mArgumentsList.back(); }
 
 public:
     // Get/Set
