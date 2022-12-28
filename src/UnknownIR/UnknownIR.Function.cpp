@@ -115,7 +115,7 @@ Function::setFunctionAttributes(const std::string &FunctionAttributes)
 void
 Function::addFnAttr(const std::string &FunctionAttribute)
 {
-    mFunctionAttributes += ", ";
+    mFunctionAttributes += "|";
     mFunctionAttributes += FunctionAttribute;
 }
 
