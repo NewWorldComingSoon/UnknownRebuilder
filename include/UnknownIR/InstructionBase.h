@@ -16,8 +16,8 @@ protected:
     OpCodeID mOpCodeID;
     uint64_t mInstructionAddress;
     BasicBlock *mParent;
-    FlagsVariable *mFlagsVariable;
-    LocalVariable *mStackVariable;
+    std::unique_ptr<FlagsVariable> mFlagsVariable;
+    std::unique_ptr<LocalVariable> mStackVariable;
     std::string mExtraInfo;
     std::string mComment;
 
@@ -73,6 +73,9 @@ public:
     FlagsVariable *getFlagsVariable();
 
     // Set the flags variable of this instruction
+    void setFlagsVariable(std::unique_ptr<FlagsVariable> &&FV);
+
+    // Set the flags variable of this instruction
     void setFlagsVariable(FlagsVariable *FV);
 
     // Set the flags variable of this instruction and update its users
@@ -83,6 +86,9 @@ public:
 
     // Get the stack variable of this instruction
     LocalVariable *getStackVariable();
+
+    // Set the stack variable of this instruction
+    void setStackVariable(std::unique_ptr<LocalVariable> &&SV);
 
     // Set the stack variable of this instruction
     void setStackVariable(LocalVariable *SV);

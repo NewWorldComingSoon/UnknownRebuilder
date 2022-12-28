@@ -12,6 +12,7 @@
 #include <algorithm>
 #include <chrono>
 #include <optional>
+#include <memory>
 
 #include <UnknownUtils/unknown/Support/raw_ostream.h>
 

@@ -1,5 +1,6 @@
 #pragma once
 #include <UnknownIR/Constant.h>
+#include <UnknownIR/Argument.h>
 
 #include <UnknownUtils/unknown/Support/raw_ostream.h>
 

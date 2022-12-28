@@ -158,33 +158,40 @@ Instruction::setOpCodeID(OpCodeID OpCodeId)
 const FlagsVariable *
 Instruction::getFlagsVariable() const
 {
-    return mFlagsVariable;
+    return mFlagsVariable.get();
 }
 
 // Get the flags variable of this instruction
 FlagsVariable *
 Instruction::getFlagsVariable()
 {
-    return mFlagsVariable;
+    return mFlagsVariable.get();
+}
+
+// Set the flags variable of this instruction
+void
+Instruction::setFlagsVariable(std::unique_ptr<FlagsVariable> &&FV)
+{
+    mFlagsVariable = std::move(FV);
 }
 
 // Set the flags variable of this instruction
 void
 Instruction::setFlagsVariable(FlagsVariable *FV)
 {
-    mFlagsVariable = FV;
+    setFlagsVariable(std::unique_ptr<FlagsVariable>(FV));
 }
 
 // Set the flags variable of this instruction and update its users
 void
 Instruction::setFlagsVariableAndUpdateUsers(FlagsVariable *FV)
 {
-    if (mFlagsVariable == FV)
+    if (mFlagsVariable.get() == FV)
     {
         return;
     }
 
-    auto OldFlagsVariable = mFlagsVariable;
+    auto OldFlagsVariable = mFlagsVariable.get();
 
     // Set the new flags variable
     setFlagsVariable(FV);
@@ -205,33 +212,40 @@ Instruction::setFlagsVariableAndUpdateUsers(FlagsVariable *FV)
 const LocalVariable *
 Instruction::getStackVariable() const
 {
-    return mStackVariable;
+    return mStackVariable.get();
 }
 
 // Get the stack variable of this instruction
 LocalVariable *
 Instruction::getStackVariable()
 {
-    return mStackVariable;
+    return mStackVariable.get();
+}
+
+// Set the stack variable of this instruction
+void
+Instruction::setStackVariable(std::unique_ptr<LocalVariable> &&SV)
+{
+    mStackVariable = std::move(SV);
 }
 
 // Set the stack variable of this instruction
 void
 Instruction::setStackVariable(LocalVariable *SV)
 {
-    mStackVariable = SV;
+    setStackVariable(std::unique_ptr<LocalVariable>(SV));
 }
 
 // Set the stack variable of this instruction and update its users
 void
 Instruction::setStackVariableAndUpdateUsers(LocalVariable *SV)
 {
-    if (mStackVariable == SV)
+    if (mStackVariable.get() == SV)
     {
         return;
     }
 
-    auto OldStackVariable = mStackVariable;
+    auto OldStackVariable = mStackVariable.get();
 
     // Set the new variable
     setStackVariable(SV);
