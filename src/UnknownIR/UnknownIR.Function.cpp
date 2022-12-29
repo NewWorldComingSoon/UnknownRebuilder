@@ -16,10 +16,12 @@ namespace uir {
 Function::Function(
     Context &C,
     const unknown::StringRef &FunctionName,
+    Module *Parent,
     uint64_t FunctionAddressBegin,
     uint64_t FunctionAddressEnd) :
     Constant(Type::getFunctionTy(C), FunctionName),
     mFunctionName(FunctionName),
+    mParent(Parent),
     mFunctionAddressBegin(FunctionAddressBegin),
     mFunctionAddressEnd(FunctionAddressEnd)
 {
@@ -38,6 +40,25 @@ Function::~Function()
 
 ////////////////////////////////////////////////////////////
 // Get/Set
+// Get parent module
+const Module *
+Function::getParent() const
+{
+    return mParent;
+}
+Module *
+Function::getParent()
+{
+    return mParent;
+}
+
+// Set parent module
+void
+Function::setParent(Module *Parent)
+{
+    mParent = Parent;
+}
+
 // Get the begin/end address of this function
 uint64_t
 Function::getFunctionBeginAddress() const
@@ -133,7 +154,20 @@ Function::removeFnAttr(const unknown::StringRef &FunctionAttribute)
 }
 
 ////////////////////////////////////////////////////////////
-// Add
+// Remove/Erase/Insert/Clear
+
+// Remove the function from the its parent, but does not delete it.
+void
+Function::removeFromParent()
+{
+}
+
+// Remove the function from the its parent and delete it.
+void
+Function::eraseFromParent()
+{
+}
+
 // Insert a new basic block to this function
 void
 Function::insertBasicBlock(BasicBlock *BB)

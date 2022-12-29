@@ -47,6 +47,13 @@ public:
     const_iterator end() const { return mFunctionList.cend(); }
     size_t size() const { return mFunctionList.size(); }
     bool empty() const { return mFunctionList.empty(); }
+    void push_back(Function *F) { mFunctionList.insert(F); }
+    void push_front(Function *F) { mFunctionList.insert(F); }
+    void pop_back() { mFunctionList.erase(mFunctionList.end()); }
+    void pop_front() { mFunctionList.erase(mFunctionList.begin()); }
+    void erase(iterator I) { mFunctionList.erase(I); }
+    void erase(iterator S, iterator E) { mFunctionList.erase(S, E); }
+    void clear() { mFunctionList.clear(); }
 
     // Function Iterators
     using global_iterator = GlobalVariableSetType::iterator;
@@ -57,6 +64,13 @@ public:
     const_global_iterator global_end() const { return mGlobalVariableList.cend(); }
     size_t global_size() const { return mGlobalVariableList.size(); }
     bool global_empty() const { return mGlobalVariableList.empty(); }
+    void global_push_back(GlobalVariable *GV) { mGlobalVariableList.insert(GV); }
+    void global_push_front(GlobalVariable *GV) { mGlobalVariableList.insert(GV); }
+    void global_pop_back() { mGlobalVariableList.erase(mGlobalVariableList.end()); }
+    void global_pop_front() { mGlobalVariableList.erase(mGlobalVariableList.begin()); }
+    void global_erase(global_iterator I) { mGlobalVariableList.erase(I); }
+    void global_erase(global_iterator S, global_iterator E) { mGlobalVariableList.erase(S, E); }
+    void global_clear() { mGlobalVariableList.clear(); }
 
 public:
     // Get/Set

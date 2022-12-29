@@ -143,22 +143,16 @@ Module::getGlobalVariable(uint64_t Address) const
 void
 Module::insertFunction(Function *Function)
 {
-    auto It = mFunctionList.find(Function);
-    if (It == mFunctionList.end())
-    {
-        mFunctionList.insert(Function);
-    }
+    push_back(Function);
+    Function->setParent(this);
 }
 
 // Insert a global variable into the module
 void
 Module::insertGlobalVariable(GlobalVariable *GV)
 {
-    auto It = mGlobalVariableList.find(GV);
-    if (It == mGlobalVariableList.end())
-    {
-        mGlobalVariableList.insert(GV);
-    }
+    global_push_back(GV);
+    GV->setParent(this);
 }
 
 ////////////////////////////////////////////////////////////

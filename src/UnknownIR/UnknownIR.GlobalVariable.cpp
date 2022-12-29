@@ -16,8 +16,12 @@ GlobalVariable::GlobalVariable(Type *Ty) : GlobalVariable(Ty, generateOrderedGlo
     //
 }
 
-GlobalVariable::GlobalVariable(Type *Ty, const unknown::StringRef &GlobalVariableName, uint64_t GlobalVariableAddress) :
-    Constant(Ty, GlobalVariableName), mGlobalVariableAddress(GlobalVariableAddress)
+GlobalVariable::GlobalVariable(
+    Type *Ty,
+    const unknown::StringRef &GlobalVariableName,
+    uint64_t GlobalVariableAddress,
+    Module *Parent) :
+    Constant(Ty, GlobalVariableName), mGlobalVariableAddress(GlobalVariableAddress), mParent(Parent)
 {
     //
     //
@@ -43,6 +47,20 @@ void
 GlobalVariable::setGlobalVariableAddress(uint64_t GlobalVariableAddress)
 {
     mGlobalVariableAddress = GlobalVariableAddress;
+}
+
+// Get parent module
+const Module *
+GlobalVariable::getParent() const
+{
+    return mParent;
+}
+
+// Set parent module
+void
+GlobalVariable::setParent(Module *Parent)
+{
+    mParent = Parent;
 }
 
 ////////////////////////////////////////////////////////////

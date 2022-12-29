@@ -3,14 +3,21 @@
 
 namespace uir {
 
+class Module;
+
 class GlobalVariable : public Constant
 {
 protected:
+    Module *mParent;
     uint64_t mGlobalVariableAddress;
 
 public:
     explicit GlobalVariable(Type *Ty);
-    explicit GlobalVariable(Type *Ty, const unknown::StringRef &GlobalVariableName, uint64_t GlobalVariableAddress);
+    explicit GlobalVariable(
+        Type *Ty,
+        const unknown::StringRef &GlobalVariableName,
+        uint64_t GlobalVariableAddress,
+        Module *Parent = nullptr);
     virtual ~GlobalVariable();
 
 public:
@@ -20,6 +27,12 @@ public:
 
     // Set the address of this global variable
     void setGlobalVariableAddress(uint64_t GlobalVariableAddress);
+
+    // Get parent module
+    const Module *getParent() const;
+
+    // Set parent module
+    void setParent(Module *Parent);
 
 public:
     // Virtual functions

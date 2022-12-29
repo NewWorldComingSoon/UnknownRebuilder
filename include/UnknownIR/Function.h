@@ -5,6 +5,7 @@
 
 namespace uir {
 
+class Module;
 class BasicBlock;
 class Argument;
 class FunctionContext;
@@ -18,6 +19,7 @@ public:
     using FunctionAttributesListType = std::vector<std::string>;
 
 private:
+    Module *mParent;
     std::string mFunctionName;
     uint64_t mFunctionAddressBegin;
     uint64_t mFunctionAddressEnd;
@@ -30,6 +32,7 @@ public:
     explicit Function(
         Context &C,
         const unknown::StringRef &FunctionName,
+        Module *Parent = nullptr,
         uint64_t FunctionAddressBegin = 0,
         uint64_t FunctionAddressEnd = 0);
     virtual ~Function();
@@ -107,6 +110,13 @@ public:
 
 public:
     // Get/Set
+    // Get parent module
+    const Module *getParent() const;
+    Module *getParent();
+
+    // Set parent module
+    void setParent(Module *Parent);
+
     // Get the begin/end address of this function
     uint64_t getFunctionBeginAddress() const;
 
@@ -146,7 +156,13 @@ public:
     void removeFnAttr(const unknown::StringRef &FunctionAttribute);
 
 public:
-    // Insert
+    // Remove/Erase/Insert/Clear
+    // Remove the function from the its parent, but does not delete it.
+    void removeFromParent();
+
+    // Remove the function from the its parent and delete it.
+    void eraseFromParent();
+
     // Insert a new basic block to this function
     void insertBasicBlock(BasicBlock *BB);
 
