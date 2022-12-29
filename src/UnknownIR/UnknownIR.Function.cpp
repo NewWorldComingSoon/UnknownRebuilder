@@ -154,6 +154,19 @@ Function::removeFnAttr(const unknown::StringRef &FunctionAttribute)
     }
 }
 
+// Check if this function has a specific attribute
+bool
+Function::hasFnAttr(const unknown::StringRef &FunctionAttribute) const
+{
+    auto Iter = std::find(mFunctionAttributesList.begin(), mFunctionAttributesList.end(), FunctionAttribute);
+    if (Iter != mFunctionAttributesList.end())
+    {
+        return true;
+    }
+
+    return false;
+}
+
 ////////////////////////////////////////////////////////////
 // Remove/Erase/Insert/Clear
 // Remove the function from the its parent, but does not delete it.

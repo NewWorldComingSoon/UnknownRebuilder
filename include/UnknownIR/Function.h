@@ -148,12 +148,15 @@ public:
     void setFunctionAttributes(const FunctionAttributesListType &FunctionAttributes);
 
 public:
-    // Add/Remove
+    // Add/Remove/Has
     // Add function attribute to this function.
     void addFnAttr(const unknown::StringRef &FunctionAttribute);
 
     // Remove function attribute from this function.
     void removeFnAttr(const unknown::StringRef &FunctionAttribute);
+
+    // Check if this function has a specific attribute
+    bool hasFnAttr(const unknown::StringRef &FunctionAttribute) const;
 
 public:
     // Remove/Erase/Insert/Clear
