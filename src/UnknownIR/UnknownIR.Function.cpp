@@ -20,7 +20,6 @@ Function::Function(
     uint64_t FunctionAddressEnd) :
     Constant(Type::getFunctionTy(C), FunctionName),
     mFunctionName(FunctionName),
-    mFunctionAttributes(""),
     mFunctionAddressBegin(FunctionAddressBegin),
     mFunctionAddressEnd(FunctionAddressEnd)
 {
@@ -90,33 +89,47 @@ Function::getFunctionName() const
 
 // Set the name of this function
 void
-Function::setFunctionName(const std::string &FunctionName)
+Function::setFunctionName(const unknown::StringRef &FunctionName)
 {
     mFunctionName = FunctionName;
 }
 
 // Get the attributes of this function
-const std::string
+const Function::FunctionAttributesListType &
 Function::getFunctionAttributes() const
 {
-    return mFunctionAttributes;
+    return mFunctionAttributesList;
 }
 
 // Set the attributes of this function
 void
-Function::setFunctionAttributes(const std::string &FunctionAttributes)
+Function::setFunctionAttributes(const Function::FunctionAttributesListType &FunctionAttributes)
 {
-    mFunctionAttributes = FunctionAttributes;
+    mFunctionAttributesList = FunctionAttributes;
 }
 
 ////////////////////////////////////////////////////////////
 // Add
 // Add function attribute to this function.
 void
-Function::addFnAttr(const std::string &FunctionAttribute)
+Function::addFnAttr(const unknown::StringRef &FunctionAttribute)
 {
-    mFunctionAttributes += UIR_FUNCTION_ATTRIBUTES_SEPARATOR;
-    mFunctionAttributes += FunctionAttribute;
+    auto Iter = std::find(mFunctionAttributesList.begin(), mFunctionAttributesList.end(), FunctionAttribute);
+    if (Iter == mFunctionAttributesList.end())
+    {
+        mFunctionAttributesList.push_back(FunctionAttribute);
+    }
+}
+
+// Remove function attribute from this function.
+void
+Function::removeFnAttr(const unknown::StringRef &FunctionAttribute)
+{
+    auto Iter = std::find(mFunctionAttributesList.begin(), mFunctionAttributesList.end(), FunctionAttribute);
+    if (Iter != mFunctionAttributesList.end())
+    {
+        mFunctionAttributesList.erase(Iter);
+    }
 }
 
 ////////////////////////////////////////////////////////////

@@ -15,15 +15,16 @@ public:
     using BasicBlockListType = std::list<BasicBlock *>;
     using ArgumentListType = std::list<Argument *>;
     using FunctionContextListType = std::list<FunctionContext *>;
+    using FunctionAttributesListType = std::vector<std::string>;
 
 private:
     std::string mFunctionName;
-    std::string mFunctionAttributes;
     uint64_t mFunctionAddressBegin;
     uint64_t mFunctionAddressEnd;
     BasicBlockListType mBasicBlocksList;
     ArgumentListType mArgumentsList;
     FunctionContextListType mFunctionContextList;
+    FunctionAttributesListType mFunctionAttributesList;
 
 public:
     explicit Function(
@@ -120,18 +121,21 @@ public:
     const std::string getFunctionName() const;
 
     // Set the name of this function
-    void setFunctionName(const std::string &FunctionName);
+    void setFunctionName(const unknown::StringRef &FunctionName);
 
     // Get the attributes of this function
-    const std::string getFunctionAttributes() const;
+    const FunctionAttributesListType &getFunctionAttributes() const;
 
     // Set the attributes of this function
-    void setFunctionAttributes(const std::string &FunctionAttributes);
+    void setFunctionAttributes(const FunctionAttributesListType &FunctionAttributes);
 
 public:
-    // Add
+    // Add/Remove
     // Add function attribute to this function.
-    void addFnAttr(const std::string &FunctionAttribute);
+    void addFnAttr(const unknown::StringRef &FunctionAttribute);
+
+    // Remove function attribute from this function.
+    void removeFnAttr(const unknown::StringRef &FunctionAttribute);
 
 public:
     // Static
