@@ -12,13 +12,16 @@ class BasicBlock;
 
 class Instruction : public User
 {
+public:
+    using ExtraInfoListType = std::vector<std::string>;
+
 protected:
     OpCodeID mOpCodeID;
     uint64_t mInstructionAddress;
     BasicBlock *mParent;
     std::unique_ptr<FlagsVariable> mFlagsVariable;
     std::unique_ptr<LocalVariable> mStackVariable;
-    std::string mExtraInfo;
+    ExtraInfoListType mExtraInfoList;
     std::string mComment;
 
 public:
@@ -97,13 +100,10 @@ public:
     void setStackVariableAndUpdateUsers(LocalVariable *SV);
 
     // Get the extra info of this instruction
-    const std::string getExtraInfo() const;
+    const ExtraInfoListType &getExtraInfoList() const;
 
     // Set the extra info of this instruction
-    void setExtraInfo(const unknown::StringRef &ExtraInfo);
-
-    // Append the extra info of this instruction
-    void appendExtraInfo(const unknown::StringRef &ExtraInfo);
+    void setExtraInfoList(const ExtraInfoListType &ExtraInfo);
 
     // Get the comment of this instruction
     const std::string getComment() const;
@@ -111,11 +111,8 @@ public:
     // Set the comment of this instruction
     void setComment(const unknown::StringRef &Comment);
 
-    // Append the comment of this instruction
-    void appendComment(const unknown::StringRef &Comment);
-
 public:
-    // Remove/Erase/Insert/Drop/Clear
+    // Remove/Erase/Insert/Add/Drop/Clear
     // Remove this instruction from its parent, but does not delete it.
     void removeFromParent();
 
@@ -130,6 +127,15 @@ public:
 
     // Insert an unlinked instructions into a basic block immediately after the specified instruction.
     void insertAfter(Instruction *InsertPos);
+
+    // Add extra info to this instruction
+    void addExtraInfo(const unknown::StringRef &ExtraInfo);
+
+    // Remove extra info from this instruction
+    void removeExtraInfo(const unknown::StringRef &ExtraInfo);
+
+    // Add the comment of this instruction
+    void addComment(const unknown::StringRef &Comment);
 
     // Drop all references to operands.
     void dropAllReferences();

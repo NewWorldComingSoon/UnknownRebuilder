@@ -26,7 +26,6 @@ Instruction::Instruction(OpCodeID OpCodeId) :
     mParent(nullptr),
     mFlagsVariable(nullptr),
     mStackVariable(nullptr),
-    mExtraInfo(""),
     mComment("")
 {
     if (mFlagsVariable)
@@ -100,9 +99,20 @@ Instruction::printExtraInfo(unknown::raw_ostream &OS) const
 {
     OS << UIR_INST_EXTRA_INFO_NAME_PREFIX;
 
-    if (!getExtraInfo().empty())
+    if (!getExtraInfoList().empty())
     {
-        OS << getExtraInfo();
+        OS << getExtraInfoList().front();
+
+        if (getExtraInfoList().size() > 1)
+        {
+            auto It = getExtraInfoList().begin();
+            ++It;
+            for (; It != getExtraInfoList().end(); ++It)
+            {
+                OS << UIR_INST_EXTRA_INFO_NAME_SEPARATOR;
+                OS << *It;
+            }
+        }
     }
 }
 
@@ -266,24 +276,17 @@ Instruction::setStackVariableAndUpdateUsers(LocalVariable *SV)
 }
 
 // Get the extra info of this instruction
-const std::string
-Instruction::getExtraInfo() const
+const Instruction::ExtraInfoListType &
+Instruction::getExtraInfoList() const
 {
-    return mExtraInfo;
+    return mExtraInfoList;
 }
 
 // Set the extra info of this instruction
 void
-Instruction::setExtraInfo(const unknown::StringRef &ExtraInfo)
+Instruction::setExtraInfoList(const Instruction::ExtraInfoListType &ExtraInfo)
 {
-    mExtraInfo = ExtraInfo;
-}
-
-// Append the extra info of this instruction
-void
-Instruction::appendExtraInfo(const unknown::StringRef &ExtraInfo)
-{
-    mExtraInfo += ExtraInfo;
+    mExtraInfoList = ExtraInfo;
 }
 
 // Get the comment of this instruction
@@ -298,13 +301,6 @@ void
 Instruction::setComment(const unknown::StringRef &Comment)
 {
     mComment = Comment;
-}
-
-// Append the comment of this instruction
-void
-Instruction::appendComment(const unknown::StringRef &Comment)
-{
-    mComment += Comment;
 }
 
 ////////////////////////////////////////////////////////////
@@ -390,6 +386,35 @@ void
 Instruction::insertAfter(Instruction *InsertPos)
 {
     insertBeforeOrAfter(InsertPos, false);
+}
+
+// Add extra info to this instruction
+void
+Instruction::addExtraInfo(const unknown::StringRef &ExtraInfo)
+{
+    auto It = std::find(mExtraInfoList.begin(), mExtraInfoList.end(), ExtraInfo);
+    if (It == mExtraInfoList.end())
+    {
+        mExtraInfoList.push_back(ExtraInfo);
+    }
+}
+
+// Remove extra info from this instruction
+void
+Instruction::removeExtraInfo(const unknown::StringRef &ExtraInfo)
+{
+    auto It = std::find(mExtraInfoList.begin(), mExtraInfoList.end(), ExtraInfo);
+    if (It != mExtraInfoList.end())
+    {
+        mExtraInfoList.erase(It);
+    }
+}
+
+// Add the comment of this instruction
+void
+Instruction::addComment(const unknown::StringRef &Comment)
+{
+    mComment += Comment;
 }
 
 // Drop all references to operands.
