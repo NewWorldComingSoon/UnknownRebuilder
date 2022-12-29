@@ -64,6 +64,10 @@ public:
     BasicBlock &front() { return *mBasicBlocksList.front(); }
     const BasicBlock &back() const { return *mBasicBlocksList.back(); }
     BasicBlock &back() { return *mBasicBlocksList.back(); }
+    void push_back(BasicBlock *BB) { mBasicBlocksList.push_back(BB); }
+    void push_front(BasicBlock *BB) { mBasicBlocksList.push_front(BB); }
+    void pop_back() { mBasicBlocksList.pop_back(); }
+    void pop_front() { mBasicBlocksList.pop_front(); }
 
 public:
     // Argument iterators
@@ -80,6 +84,10 @@ public:
     Argument &arg_front() { return *mArgumentsList.front(); }
     const Argument &arg_back() const { return *mArgumentsList.back(); }
     Argument &arg_back() { return *mArgumentsList.back(); }
+    void arg_push_back(Argument *Arg) { mArgumentsList.push_back(Arg); }
+    void arg_push_front(Argument *Arg) { mArgumentsList.push_front(Arg); }
+    void arg_pop_back() { mArgumentsList.pop_back(); }
+    void arg_pop_front() { mArgumentsList.pop_front(); }
 
 public:
     // FunctionContext iterators
@@ -136,6 +144,11 @@ public:
 
     // Remove function attribute from this function.
     void removeFnAttr(const unknown::StringRef &FunctionAttribute);
+
+public:
+    // Insert
+    // Insert a new basic block to this function
+    void insertBasicBlock(BasicBlock *BB);
 
 public:
     // Static

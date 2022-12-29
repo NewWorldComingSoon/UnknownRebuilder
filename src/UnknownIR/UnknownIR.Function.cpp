@@ -133,6 +133,16 @@ Function::removeFnAttr(const unknown::StringRef &FunctionAttribute)
 }
 
 ////////////////////////////////////////////////////////////
+// Add
+// Insert a new basic block to this function
+void
+Function::insertBasicBlock(BasicBlock *BB)
+{
+    push_back(BB);
+    BB->setParent(this);
+}
+
+////////////////////////////////////////////////////////////
 // Static
 // Generate a new function name by order
 std::string

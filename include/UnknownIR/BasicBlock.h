@@ -62,6 +62,15 @@ public:
     Instruction &back() { return *mInstList.back(); }
     void push(Instruction *I) { mInstList.push_back(I); }
     void pop() { mInstList.pop_back(); }
+    void push_back(Instruction *I) { mInstList.push_back(I); }
+    void pop_back() { mInstList.pop_back(); }
+    void push_front(Instruction *I) { mInstList.push_front(I); }
+    void pop_front() { mInstList.pop_front(); }
+    void insert(iterator I, Instruction *Inst) { mInstList.insert(I, Inst); }
+    void insert(iterator I, size_t N, Instruction *Inst) { mInstList.insert(I, N, Inst); }
+    void insert(iterator I, iterator First, iterator Last) { mInstList.insert(I, First, Last); }
+    void erase(iterator I) { mInstList.erase(I); }
+    void erase(iterator First, iterator Last) { mInstList.erase(First, Last); }
     void clear() { mInstList.clear(); }
 
 public:
