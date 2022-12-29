@@ -2,6 +2,7 @@
 #include <BasicBlock.h>
 #include <Argument.h>
 #include <FunctionContext.h>
+#include <Module.h>
 
 #include <Context.h>
 #include <ContextImpl/ContextImpl.h>
@@ -155,17 +156,46 @@ Function::removeFnAttr(const unknown::StringRef &FunctionAttribute)
 
 ////////////////////////////////////////////////////////////
 // Remove/Erase/Insert/Clear
-
 // Remove the function from the its parent, but does not delete it.
 void
 Function::removeFromParent()
 {
+    if (mParent == nullptr)
+    {
+        return;
+    }
+
+    if (mParent->getFunctionList().empty())
+    {
+        return;
+    }
+
+    mParent->getFunctionList().remove(this);
 }
 
 // Remove the function from the its parent and delete it.
 void
 Function::eraseFromParent()
 {
+    if (mParent == nullptr)
+    {
+        return;
+    }
+
+    if (mParent->getFunctionList().empty())
+    {
+        return;
+    }
+
+    for (auto It = mParent->getFunctionList().begin(); It != mParent->getFunctionList().end(); ++It)
+    {
+        if (*It == this)
+        {
+            mParent->getFunctionList().erase(It);
+            this->setParent(nullptr);
+            --It;
+        }
+    }
 }
 
 // Insert a new basic block to this function
