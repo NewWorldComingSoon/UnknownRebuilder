@@ -155,7 +155,7 @@ public:
     // Remove function attribute from this function.
     void removeFnAttr(const unknown::StringRef &FunctionAttribute);
 
-    // Check if this function has a specific attribute
+    // Check if this function has a specific attribute.
     bool hasFnAttr(const unknown::StringRef &FunctionAttribute) const;
 
 public:

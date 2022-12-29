@@ -154,7 +154,7 @@ Function::removeFnAttr(const unknown::StringRef &FunctionAttribute)
     }
 }
 
-// Check if this function has a specific attribute
+// Check if this function has a specific attribute.
 bool
 Function::hasFnAttr(const unknown::StringRef &FunctionAttribute) const
 {
