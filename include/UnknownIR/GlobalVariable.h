@@ -35,6 +35,14 @@ public:
     void setParent(Module *Parent);
 
 public:
+    // Remove/Erase
+    // Remove this global variable from its parent module
+    void removeFromParent();
+
+    // Erase this global variable from its parent module
+    void eraseFromParent();
+
+public:
     // Virtual functions
     // Get the readable name of this object
     virtual std::string getReadableName() const override;

@@ -1,4 +1,5 @@
 #include <GlobalVariable.h>
+#include <Module.h>
 
 #include <Context.h>
 #include <ContextImpl/ContextImpl.h>
@@ -61,6 +62,49 @@ void
 GlobalVariable::setParent(Module *Parent)
 {
     mParent = Parent;
+}
+
+// Remove/Erase
+// Remove this global variable from its parent module
+void
+GlobalVariable::removeFromParent()
+{
+    if (mParent == nullptr)
+    {
+        return;
+    }
+
+    if (mParent->getGlobalVariableList().empty())
+    {
+        return;
+    }
+
+    mParent->getGlobalVariableList().remove(this);
+}
+
+// Erase this global variable from its parent module
+void
+GlobalVariable::eraseFromParent()
+{
+    if (mParent == nullptr)
+    {
+        return;
+    }
+
+    if (mParent->getGlobalVariableList().empty())
+    {
+        return;
+    }
+
+    for (auto It = mParent->getGlobalVariableList().begin(); It != mParent->getGlobalVariableList().end(); ++It)
+    {
+        if (*It == this)
+        {
+            mParent->getGlobalVariableList().erase(It);
+            this->setParent(nullptr);
+            --It;
+        }
+    }
 }
 
 ////////////////////////////////////////////////////////////
