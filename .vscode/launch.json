@@ -32,5 +32,16 @@
             "environment": [],
             "console": "externalTerminal"
         },
+        {
+            "name": "debug test-lief",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/Output/Debug/test-lief.exe",
+            "args": [],
+            "stopAtEntry": true,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "console": "externalTerminal"
+        },
     ]
 }
