@@ -39,6 +39,7 @@ Just for learning and fun. Maybe it can help others too.
 - [RawPDB](https://github.com/NewWorldComingSoon/raw_pdb)
 - [toml11](https://github.com/NewWorldComingSoon/toml11)
 - [argparse](https://github.com/NewWorldComingSoon/argparse)
+- [LIEF](https://github.com/NewWorldComingSoon/LIEF)
 
 ## Build
 Only tested on Windows, other systems have not been tested.
