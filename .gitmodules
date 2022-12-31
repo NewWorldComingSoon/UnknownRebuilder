@@ -13,3 +13,6 @@
 [submodule "3rdparty/argparse"]
 	path = 3rdparty/argparse
 	url = https://github.com/NewWorldComingSoon/argparse
+[submodule "3rdparty/LIEF"]
+	path = 3rdparty/LIEF
+	url = https://github.com/NewWorldComingSoon/LIEF
