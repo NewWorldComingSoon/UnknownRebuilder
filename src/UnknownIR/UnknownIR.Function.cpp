@@ -131,7 +131,7 @@ Function::setFunctionAttributes(const Function::FunctionAttributesListType &Func
 }
 
 ////////////////////////////////////////////////////////////
-// Add
+// Function Attribute
 // Add function attribute to this function.
 void
 Function::addFnAttr(const unknown::StringRef &FunctionAttribute)
