@@ -43,3 +43,18 @@ link-libraries = [
     "capstone-static",
 ]
 compile-features = ["cxx_std_20"]
+
+[target.test-lief]
+type = "executable"
+msvc-runtime = "static"
+headers = ["test-lief/**.h"]
+sources = ["test-lief/**.cpp", "test-lief/**.h"]
+include-directories = [
+    "../3rdparty",
+    "../3rdparty/LIEF/include",
+    "../include",
+    "googletest/googletest/include",
+]
+
+link-libraries = ["gtest", "LIB_LIEF"]
+compile-features = ["cxx_std_20"]

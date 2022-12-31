@@ -36,6 +36,16 @@ endif()
 add_subdirectory(raw_pdb)
 set(CMAKE_FOLDER ${CMKR_CMAKE_FOLDER})
 
+# Subdirectory: LIEF
+set(CMKR_CMAKE_FOLDER ${CMAKE_FOLDER})
+if(CMAKE_FOLDER)
+	set(CMAKE_FOLDER "${CMAKE_FOLDER}/LIEF")
+else()
+	set(CMAKE_FOLDER LIEF)
+endif()
+add_subdirectory(LIEF)
+set(CMAKE_FOLDER ${CMKR_CMAKE_FOLDER})
+
 # Target: argparse
 add_library(argparse INTERFACE)
 

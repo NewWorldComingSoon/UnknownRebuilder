@@ -2,6 +2,7 @@
 [subdir.capstone-retdec]
 [subdir.keystone-retdec]
 [subdir.raw_pdb]
+[subdir.LIEF]
 
 [target.argparse]
 type = "interface"
