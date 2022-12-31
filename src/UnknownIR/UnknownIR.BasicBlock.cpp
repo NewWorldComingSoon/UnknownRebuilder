@@ -375,7 +375,7 @@ BasicBlock::clearAllInstructions()
     for (auto InstIt = begin(); InstIt != end(); ++InstIt)
     {
         auto Inst = *InstIt;
-        if (Inst)
+        if (Inst && Inst->user_empty())
         {
             if (std::find(FreeInstList.begin(), FreeInstList.end(), Inst) == FreeInstList.end())
             {

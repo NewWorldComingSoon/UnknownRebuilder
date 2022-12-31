@@ -35,8 +35,8 @@ Function::Function(
 
 Function::~Function()
 {
-    //
-    //
+    // Clear all basic blocks.
+    clearAllBasicBlock();
 }
 
 ////////////////////////////////////////////////////////////
@@ -217,6 +217,115 @@ Function::insertBasicBlock(BasicBlock *BB)
 {
     push_back(BB);
     BB->setParent(this);
+}
+
+// Insert a new arg to this function
+void
+Function::insertArgument(Argument *Arg)
+{
+    arg_push_back(Arg);
+    Arg->setParent(this);
+}
+
+// Insert a new function context to this function
+void
+Function::insertFunctionContext(FunctionContext *FC)
+{
+    fc_push_back(FC);
+    FC->setParent(this);
+}
+
+// Drop all blocks in this function.
+void
+Function::dropAllReferences()
+{
+    if (empty())
+    {
+        return;
+    }
+
+    for (auto BB : *this)
+    {
+        BB->dropAllReferences();
+    }
+
+    for (auto ArgIt = arg_begin(); ArgIt != arg_end(); ++ArgIt)
+    {
+        (*ArgIt)->dropAllReferences();
+    }
+
+    for (auto FCIt = fc_begin(); FCIt != fc_end(); ++FCIt)
+    {
+        (*FCIt)->dropAllReferences();
+    }
+}
+
+// Clear all basic blocks.
+void
+Function::clearAllBasicBlock()
+{
+    if (empty())
+    {
+        return;
+    }
+
+    // Drop all blocks in this function
+    dropAllReferences();
+
+    // Clear all basic blocks
+    for (auto BB : *this)
+    {
+        BB->clearAllInstructions();
+    }
+
+    // Free all basic blocks
+    std::vector<BasicBlock *> FreeBBList;
+    for (auto BB : *this)
+    {
+        if (BB && BB->user_empty())
+        {
+            if (std::find(FreeBBList.begin(), FreeBBList.end(), BB) == FreeBBList.end())
+            {
+                FreeBBList.push_back(BB);
+                delete BB;
+            }
+        }
+    }
+
+    // Free all args
+    std::vector<Argument *> FreeArgsList;
+    for (auto ArgIt = arg_begin(); ArgIt != arg_end(); ++ArgIt)
+    {
+        auto Arg = *ArgIt;
+        if (Arg && Arg->user_empty())
+        {
+            if (std::find(FreeArgsList.begin(), FreeArgsList.end(), Arg) == FreeArgsList.end())
+            {
+                FreeArgsList.push_back(Arg);
+                delete Arg;
+            }
+        }
+    }
+
+    // Free all FCs
+    std::vector<FunctionContext *> FreeFCsList;
+    for (auto FCIt = fc_begin(); FCIt != fc_end(); ++FCIt)
+    {
+        auto FC = *FCIt;
+        if (FC && FC->user_empty())
+        {
+            if (std::find(FreeFCsList.begin(), FreeFCsList.end(), FC) == FreeFCsList.end())
+            {
+                FreeFCsList.push_back(FC);
+                delete FC;
+            }
+        }
+    }
+
+    // Clear list
+    clear();
+    arg_clear();
+    fc_clear();
 }
 
 ////////////////////////////////////////////////////////////

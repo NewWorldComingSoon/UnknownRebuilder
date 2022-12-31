@@ -71,6 +71,7 @@ public:
     void push_front(BasicBlock *BB) { mBasicBlocksList.push_front(BB); }
     void pop_back() { mBasicBlocksList.pop_back(); }
     void pop_front() { mBasicBlocksList.pop_front(); }
+    void clear() { mBasicBlocksList.clear(); }
 
 public:
     // Argument iterators
@@ -91,6 +92,7 @@ public:
     void arg_push_front(Argument *Arg) { mArgumentsList.push_front(Arg); }
     void arg_pop_back() { mArgumentsList.pop_back(); }
     void arg_pop_front() { mArgumentsList.pop_front(); }
+    void arg_clear() { mArgumentsList.clear(); }
 
 public:
     // FunctionContext iterators
@@ -107,6 +109,11 @@ public:
     FunctionContext &fc_front() { return *mFunctionContextList.front(); }
     const FunctionContext &fc_back() const { return *mFunctionContextList.back(); }
     FunctionContext &fc_back() { return *mFunctionContextList.back(); }
+    void fc_push_back(FunctionContext *FC) { mFunctionContextList.push_back(FC); }
+    void fc_push_front(FunctionContext *FC) { mFunctionContextList.push_front(FC); }
+    void fc_pop_back() { mFunctionContextList.pop_back(); }
+    void fc_pop_front() { mFunctionContextList.pop_front(); }
+    void fc_clear() { mFunctionContextList.clear(); }
 
 public:
     // Get/Set
@@ -168,6 +175,18 @@ public:
 
     // Insert a new basic block to this function
     void insertBasicBlock(BasicBlock *BB);
+
+    // Insert a new arg to this function
+    void insertArgument(Argument *Arg);
+
+    // Insert a new function context to this function
+    void insertFunctionContext(FunctionContext *FC);
+
+    // Drop all blocks in this function.
+    void dropAllReferences();
+
+    // Clear all basic blocks.
+    void clearAllBasicBlock();
 
 public:
     // Static
