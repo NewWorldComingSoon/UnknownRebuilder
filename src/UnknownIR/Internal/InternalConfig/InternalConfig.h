@@ -15,11 +15,11 @@
 // Prefix name of block
 #define UIR_BLOCK_VARIABLE_NAME_PREFIX "block."
 
+// Suffix name of block range
+#define UIR_BLOCK_RANGE_NAME_SUFFIX ".range"
+
 // Prefix name of extra info of instruction
 #define UIR_INST_EXTRA_INFO_NAME_PREFIX ";"
 
 // Separator of extra info of instruction
 #define UIR_INST_EXTRA_INFO_NAME_SEPARATOR "|"
-
-// Separator of attrubutes of function
-#define UIR_FUNCTION_ATTRIBUTES_SEPARATOR "|"

@@ -408,7 +408,8 @@ BasicBlock::print(unknown::raw_ostream &OS, bool NewLine) const
 {
     // block.bb.range = ["0x401000", "0x402000"]
     OS << getReadableName();
-    OS << ".range = [";
+    OS << UIR_BLOCK_RANGE_NAME_SUFFIX;
+    OS << " = [";
     OS << R"(")";
     OS << std::format("0x{:X}", getBasicBlockAddressBegin());
     OS << R"(")";
