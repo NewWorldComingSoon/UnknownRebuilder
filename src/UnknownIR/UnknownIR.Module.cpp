@@ -81,7 +81,7 @@ Module::setModuleName(const unknown::StringRef &ModuleName)
 std::optional<Function *>
 Module::getFunction(const unknown::StringRef &FunctionName) const
 {
-    for (Function *Func : mFunctionList)
+    for (auto Func : mFunctionList)
     {
         if (Func->getName().compare(FunctionName) == 0)
         {
@@ -96,7 +96,7 @@ Module::getFunction(const unknown::StringRef &FunctionName) const
 std::optional<Function *>
 Module::getFunction(uint64_t Address) const
 {
-    for (Function *Func : mFunctionList)
+    for (auto Func : mFunctionList)
     {
         if (Func->getFunctionBeginAddress() == Address)
         {
@@ -111,7 +111,7 @@ Module::getFunction(uint64_t Address) const
 std::optional<GlobalVariable *>
 Module::getGlobalVariable(const unknown::StringRef &GlobalVariableName) const
 {
-    for (GlobalVariable *GV : mGlobalVariableList)
+    for (auto GV : mGlobalVariableList)
     {
         if (GV->getName().compare(GlobalVariableName) == 0)
         {
@@ -126,7 +126,7 @@ Module::getGlobalVariable(const unknown::StringRef &GlobalVariableName) const
 std::optional<GlobalVariable *>
 Module::getGlobalVariable(uint64_t Address) const
 {
-    for (GlobalVariable *GV : mGlobalVariableList)
+    for (auto GV : mGlobalVariableList)
     {
         if (GV->getGlobalVariableAddress() == Address)
         {
