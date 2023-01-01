@@ -105,4 +105,12 @@ FunctionContext::eraseFromParent()
     }
 }
 
+////////////////////////////////////////////////////////////
+// Static
+FunctionContext *
+FunctionContext::get(Type *Ty, const unknown::StringRef &CtxName, Function *F, uint32_t CtxNo)
+{
+    return new FunctionContext(Ty, CtxName, F, CtxNo);
+}
+
 } // namespace uir

@@ -13,4 +13,6 @@
 #include <UnknownIR/Module.h>
 #include <UnknownIR/BasicBlock.h>
 #include <UnknownIR/Function.h>
+#include <UnknownIR/Argument.h>
+#include <UnknownIR/FunctionContext.h>
 #include <UnknownIR/OverloadStream.h>

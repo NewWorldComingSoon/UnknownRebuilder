@@ -423,12 +423,13 @@ Function::print(unknown::raw_ostream &OS, bool NewLine) const
 
         OS << "\n";
     }
-    OS << "]\n";
+    OS << "]\n\n";
 
     // Print BB
     for (auto BB : *this)
     {
         BB->print(OS);
+        OS << "\n";
     }
 
     if (NewLine)

@@ -105,4 +105,12 @@ Argument::eraseFromParent()
     }
 }
 
+////////////////////////////////////////////////////////////
+// Static
+Argument *
+Argument::get(Type *Ty, const unknown::StringRef &ArgName, Function *F, uint32_t ArgNo)
+{
+    return new Argument(Ty, ArgName, F, ArgNo);
+}
+
 } // namespace uir
