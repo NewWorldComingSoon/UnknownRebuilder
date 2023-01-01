@@ -359,7 +359,8 @@ Function::print(unknown::raw_ostream &OS, bool NewLine) const
     OS << "[" << getReadableName() << "]\n";
 
     // attributes = ["attr1", "attr2", "attr3"]
-    OS << "attributes = [";
+    OS << UIR_FUNCTION_ATTRIBUTES_NAME_PREFIX;
+    OS << " = [";
     for (auto It = attr_begin(); It != attr_end(); ++It)
     {
         OS << R"(")" << *It << R"(")";
@@ -375,7 +376,8 @@ Function::print(unknown::raw_ostream &OS, bool NewLine) const
     // "arg2",
     // "arg3"
     //]
-    OS << "arguments = [\n";
+    OS << UIR_FUNCTION_ARGUMENTS_NAME_PREFIX;
+    OS << " = [\n";
     for (auto It = arg_begin(); It != arg_end(); ++It)
     {
         OS << R"(")";
@@ -395,7 +397,8 @@ Function::print(unknown::raw_ostream &OS, bool NewLine) const
     // "ctx2",
     // "ctx3"
     //]
-    OS << "context = [\n";
+    OS << UIR_FUNCTION_CONTEXT_NAME_PREFIX;
+    OS << " = [\n";
     for (auto It = fc_begin(); It != fc_end(); ++It)
     {
         OS << R"(")";

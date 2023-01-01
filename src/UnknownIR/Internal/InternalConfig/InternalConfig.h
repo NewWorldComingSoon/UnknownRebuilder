@@ -12,6 +12,15 @@
 // Prefix name of function
 #define UIR_FUNCTION_VARIABLE_NAME_PREFIX "function."
 
+// Prefix name of function attributes
+#define UIR_FUNCTION_ATTRIBUTES_NAME_PREFIX "attributes"
+
+// Prefix name of function arguments
+#define UIR_FUNCTION_ARGUMENTS_NAME_PREFIX "arguments"
+
+// Prefix name of function context
+#define UIR_FUNCTION_CONTEXT_NAME_PREFIX "context"
+
 // Prefix name of block
 #define UIR_BLOCK_VARIABLE_NAME_PREFIX "block."
 
