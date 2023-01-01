@@ -358,6 +358,18 @@ Function::print(unknown::raw_ostream &OS, bool NewLine) const
     // [function.func]
     OS << "[" << getReadableName() << "]\n";
 
+    // range = ["0x401000", "0x402000"]
+    OS << UIR_FUNCTION_RANGE_NAME_PREFIX;
+    OS << " = [";
+    OS << R"(")";
+    OS << std::format("0x{:X}", getFunctionBeginAddress());
+    OS << R"(")";
+    OS << ", ";
+    OS << R"(")";
+    OS << std::format("0x{:X}", getFunctionEndAddress());
+    OS << R"(")";
+    OS << "]\n";
+
     // attributes = ["attr1", "attr2", "attr3"]
     OS << UIR_FUNCTION_ATTRIBUTES_NAME_PREFIX;
     OS << " = [";

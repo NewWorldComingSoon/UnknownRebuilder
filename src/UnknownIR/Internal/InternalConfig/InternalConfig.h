@@ -12,6 +12,9 @@
 // Prefix name of function
 #define UIR_FUNCTION_VARIABLE_NAME_PREFIX "function."
 
+// Prefix name of block range
+#define UIR_FUNCTION_RANGE_NAME_PREFIX "range"
+
 // Prefix name of function attributes
 #define UIR_FUNCTION_ATTRIBUTES_NAME_PREFIX "attributes"
 
