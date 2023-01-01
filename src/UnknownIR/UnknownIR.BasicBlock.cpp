@@ -409,6 +409,10 @@ BasicBlock::print(unknown::raw_ostream &OS, bool NewLine) const
     OS << getReadableName();
     OS << " = [\n";
 
+    // block.bb = [
+    //  "inst1",
+    //  "inst2"
+    //]
     for (auto Inst : *this)
     {
         OS << R"(")";

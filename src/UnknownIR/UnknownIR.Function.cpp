@@ -136,10 +136,10 @@ Function::setFunctionAttributes(const Function::FunctionAttributesListType &Func
 void
 Function::addFnAttr(const unknown::StringRef &FunctionAttribute)
 {
-    auto Iter = std::find(mFunctionAttributesList.begin(), mFunctionAttributesList.end(), FunctionAttribute);
-    if (Iter == mFunctionAttributesList.end())
+    auto Iter = std::find(attr_begin(), attr_end(), FunctionAttribute);
+    if (Iter == attr_end())
     {
-        mFunctionAttributesList.push_back(FunctionAttribute);
+        attr_push_back(FunctionAttribute);
     }
 }
 
@@ -147,10 +147,10 @@ Function::addFnAttr(const unknown::StringRef &FunctionAttribute)
 void
 Function::removeFnAttr(const unknown::StringRef &FunctionAttribute)
 {
-    auto Iter = std::find(mFunctionAttributesList.begin(), mFunctionAttributesList.end(), FunctionAttribute);
-    if (Iter != mFunctionAttributesList.end())
+    auto Iter = std::find(attr_begin(), attr_end(), FunctionAttribute);
+    if (Iter != attr_end())
     {
-        mFunctionAttributesList.erase(Iter);
+        attr_erase(Iter);
     }
 }
 
@@ -158,8 +158,8 @@ Function::removeFnAttr(const unknown::StringRef &FunctionAttribute)
 bool
 Function::hasFnAttr(const unknown::StringRef &FunctionAttribute) const
 {
-    auto Iter = std::find(mFunctionAttributesList.begin(), mFunctionAttributesList.end(), FunctionAttribute);
-    if (Iter != mFunctionAttributesList.end())
+    auto Iter = std::find(attr_begin(), attr_end(), FunctionAttribute);
+    if (Iter != attr_end())
     {
         return true;
     }
@@ -355,7 +355,71 @@ Function::getReadableName() const
 void
 Function::print(unknown::raw_ostream &OS, bool NewLine) const
 {
-    // TODO
+    // [function.func]
+    OS << "[" << getReadableName() << "]\n";
+
+    // attributes = ["attr1", "attr2", "attr3"]
+    OS << "attributes = [";
+    for (auto It = attr_begin(); It != attr_end(); ++It)
+    {
+        OS << R"(")" << *It << R"(")";
+        if (*It != attr_back())
+        {
+            OS << ", ";
+        }
+    }
+    OS << "]\n";
+
+    // arguments = [
+    // "arg1",
+    // "arg2",
+    // "arg3"
+    //]
+    OS << "arguments = [\n";
+    for (auto It = arg_begin(); It != arg_end(); ++It)
+    {
+        OS << R"(")";
+        (*It)->print(OS, false);
+        OS << R"(")";
+        if (*It != &arg_back())
+        {
+            OS << ",";
+        }
+
+        OS << "\n";
+    }
+    OS << "]\n";
+
+    // context = [
+    // "ctx1",
+    // "ctx2",
+    // "ctx3"
+    //]
+    OS << "context = [\n";
+    for (auto It = fc_begin(); It != fc_end(); ++It)
+    {
+        OS << R"(")";
+        (*It)->print(OS, false);
+        OS << R"(")";
+        if (*It != &fc_back())
+        {
+            OS << ",";
+        }
+
+        OS << "\n";
+    }
+    OS << "]\n";
+
+    // Print BB
+    for (auto BB : *this)
+    {
+        BB->print(OS);
+    }
+
+    if (NewLine)
+    {
+        OS << "\n";
+    }
 }
 
 } // namespace uir
