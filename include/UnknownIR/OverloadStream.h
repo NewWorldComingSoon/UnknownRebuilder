@@ -15,4 +15,13 @@ operator<<(unknown::raw_ostream &OS, const Value &V)
     return OS;
 }
 
+/////////////////////////////////////////////////////////////////////
+// Overload module stream
+inline unknown::raw_ostream &
+operator<<(unknown::raw_ostream &OS, const Module &M)
+{
+    M.print(OS);
+    return OS;
+}
+
 } // namespace uir
