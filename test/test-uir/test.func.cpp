@@ -43,7 +43,9 @@ TEST(test_uir, test_uir_func_1)
         F.insertBasicBlock(BB1);
         F.insertBasicBlock(BB2);
 
-        F.print(unknown::outs());
+        // F.print(unknown::outs());
+
+        unknown::outs() << F;
     }
 
     std::cout << "--------------------bp-----------------------" << std::endl;
