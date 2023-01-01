@@ -53,6 +53,11 @@ public:
     FunctionContextListType &getFunctionContextList() { return mFunctionContextList; }
 
 public:
+    // AttributesList
+    const FunctionAttributesListType &getFunctionAttributesList() const { return mFunctionAttributesList; }
+    FunctionAttributesListType &getFunctionAttributesList() { return mFunctionAttributesList; }
+
+public:
     // BasicBlock iterators
     using iterator = BasicBlockListType::iterator;
     using const_iterator = BasicBlockListType::const_iterator;
@@ -114,6 +119,26 @@ public:
     void fc_pop_back() { mFunctionContextList.pop_back(); }
     void fc_pop_front() { mFunctionContextList.pop_front(); }
     void fc_clear() { mFunctionContextList.clear(); }
+
+public:
+    // Attributes iterators
+    using attr_iterator = FunctionAttributesListType::iterator;
+    using const_attr__iterator = FunctionAttributesListType::const_iterator;
+    attr_iterator attr_begin() { return mFunctionAttributesList.begin(); }
+    const_attr__iterator attr_begin() const { return mFunctionAttributesList.cbegin(); }
+    attr_iterator attr_end() { return mFunctionAttributesList.end(); }
+    const_attr__iterator attr_end() const { return mFunctionAttributesList.cend(); }
+
+    size_t attr_size() const { return mFunctionAttributesList.size(); }
+    bool attr_empty() const { return mFunctionAttributesList.empty(); }
+    const std::string &attr_front() const { return mFunctionAttributesList.front(); }
+    std::string &attr_front() { return mFunctionAttributesList.front(); }
+    const std::string &attr_back() const { return mFunctionAttributesList.back(); }
+    std::string &attr_back() { return mFunctionAttributesList.back(); }
+    void attr_push_back(const std::string &Attr) { mFunctionAttributesList.push_back(Attr); }
+    void attr_pop_back() { mFunctionAttributesList.pop_back(); }
+    void attr_erase(attr_iterator It) { mFunctionAttributesList.erase(It); }
+    void attr_clear() { mFunctionAttributesList.clear(); }
 
 public:
     // Get/Set
