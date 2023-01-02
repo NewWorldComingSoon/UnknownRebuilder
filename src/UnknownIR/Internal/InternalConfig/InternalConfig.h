@@ -9,7 +9,13 @@
 // Prefix name of global variable
 #define UIR_GLOBAL_VARIABLE_NAME_PREFIX "@"
 
-// Prefix name of function
+// Prefix name of global variable list
+#define UIR_GLOBAL_VARIABLE_LIST_NAME_PREFIX "gvlist"
+
+// Prefix name of the module
+#define UIR_MODULE_VARIABLE_NAME_PREFIX "module."
+
+// Prefix name of the function
 #define UIR_FUNCTION_VARIABLE_NAME_PREFIX "function."
 
 // Prefix name of block range

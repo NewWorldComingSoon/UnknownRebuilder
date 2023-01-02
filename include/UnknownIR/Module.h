@@ -45,6 +45,10 @@ public:
     const_iterator begin() const { return mFunctionList.cbegin(); }
     iterator end() { return mFunctionList.end(); }
     const_iterator end() const { return mFunctionList.cend(); }
+    const Function &front() const { return *mFunctionList.front(); }
+    Function &front() { return *mFunctionList.front(); }
+    const Function &back() const { return *mFunctionList.back(); }
+    Function &back() { return *mFunctionList.back(); }
     size_t size() const { return mFunctionList.size(); }
     bool empty() const { return mFunctionList.empty(); }
     void push_back(Function *F) { mFunctionList.push_back(F); }
@@ -62,6 +66,10 @@ public:
     const_global_iterator global_begin() const { return mGlobalVariableList.cbegin(); }
     global_iterator global_end() { return mGlobalVariableList.end(); }
     const_global_iterator global_end() const { return mGlobalVariableList.cend(); }
+    const GlobalVariable &global_front() const { return *mGlobalVariableList.front(); }
+    GlobalVariable &global_front() { return *mGlobalVariableList.front(); }
+    const GlobalVariable &global_back() const { return *mGlobalVariableList.back(); }
+    GlobalVariable &global_back() { return *mGlobalVariableList.back(); }
     size_t global_size() const { return mGlobalVariableList.size(); }
     bool global_empty() const { return mGlobalVariableList.empty(); }
     void global_push_back(GlobalVariable *GV) { mGlobalVariableList.push_back(GV); }
@@ -77,6 +85,9 @@ public:
     // Get/Set the name of module
     std::string getModuleName() const;
     void setModuleName(const unknown::StringRef &ModuleName);
+
+    // Get the readable name of this object
+    std::string getReadableName() const;
 
     // Get the specified function by name in the module
     std::optional<Function *> getFunction(const unknown::StringRef &FunctionName) const;
@@ -108,7 +119,7 @@ public:
 public:
     // Print
     // Print the module
-    void print(unknown::raw_ostream &OS) const;
+    void print(unknown::raw_ostream &OS, bool NewLine = true) const;
 };
 
 } // namespace uir

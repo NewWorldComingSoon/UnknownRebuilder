@@ -77,6 +77,17 @@ Module::setModuleName(const unknown::StringRef &ModuleName)
     mModuleName = ModuleName;
 }
 
+// Get the readable name of this object
+std::string
+Module::getReadableName() const
+{
+    // module.mod1
+    std::string ReadableName = UIR_MODULE_VARIABLE_NAME_PREFIX;
+    ReadableName += mModuleName;
+
+    return ReadableName;
+}
+
 // Get the specified function in the module
 std::optional<Function *>
 Module::getFunction(const unknown::StringRef &FunctionName) const
@@ -252,11 +263,53 @@ Module::clearAllGlobalVariables()
 // Print
 // Print the module
 void
-Module::print(unknown::raw_ostream &OS) const
+Module::print(unknown::raw_ostream &OS, bool NewLine) const
 {
-    OS << "Module:\n";
+    // [module.mod1]
+    OS << "[" << getReadableName() << "]\n";
 
-    // TODO
+    // gvlist = [
+    //"GV1",
+    //"GV2",
+    //]
+    OS << UIR_GLOBAL_VARIABLE_LIST_NAME_PREFIX;
+    OS << " = [\n";
+    for (auto It = global_begin(); It != global_end(); ++It)
+    {
+        auto GV = *It;
+        if (GV == nullptr)
+        {
+            continue;
+        }
+
+        OS << R"(")";
+        GV->print(OS, false);
+        OS << R"(")";
+        if (GV != &global_back())
+        {
+            OS << ",";
+        }
+
+        OS << "\n";
+    }
+    OS << "]\n\n";
+
+    // Print function
+    for (auto F : *this)
+    {
+        if (F == nullptr)
+        {
+            continue;
+        }
+
+        F->print(OS);
+        OS << "\n";
+    }
+
+    if (NewLine)
+    {
+        OS << "\n";
+    }
 }
 
 } // namespace uir
