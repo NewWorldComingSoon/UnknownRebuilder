@@ -144,3 +144,40 @@ if(NOT CMKR_VS_STARTUP_PROJECT)
 	set_property(DIRECTORY ${PROJECT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT test-lief)
 endif()
 
+# Target: test-xml
+set(test-xml_SOURCES
+	"test-xml/main.cpp"
+	"test-xml/test-xml.cpp"
+	cmake.toml
+)
+
+add_executable(test-xml)
+
+target_sources(test-xml PRIVATE ${test-xml_SOURCES})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${test-xml_SOURCES})
+
+target_compile_features(test-xml PRIVATE
+	cxx_std_20
+)
+
+target_include_directories(test-xml PRIVATE
+	"../3rdparty"
+	"../include"
+	"googletest/googletest/include"
+)
+
+target_link_libraries(test-xml PRIVATE
+	UnknownUtils
+	gtest
+)
+
+set_target_properties(test-xml PROPERTIES
+	MSVC_RUNTIME_LIBRARY
+		"MultiThreaded$<$<CONFIG:Debug>:Debug>"
+)
+
+get_directory_property(CMKR_VS_STARTUP_PROJECT DIRECTORY ${PROJECT_SOURCE_DIR} DEFINITION VS_STARTUP_PROJECT)
+if(NOT CMKR_VS_STARTUP_PROJECT)
+	set_property(DIRECTORY ${PROJECT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT test-xml)
+endif()
+

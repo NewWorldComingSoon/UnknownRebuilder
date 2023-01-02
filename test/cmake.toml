@@ -44,6 +44,7 @@ link-libraries = [
 ]
 compile-features = ["cxx_std_20"]
 
+
 [target.test-lief]
 type = "executable"
 msvc-runtime = "static"
@@ -57,4 +58,19 @@ include-directories = [
 ]
 
 link-libraries = ["gtest", "LIB_LIEF"]
+compile-features = ["cxx_std_20"]
+
+
+[target.test-xml]
+type = "executable"
+msvc-runtime = "static"
+headers = ["test-xml/**.h"]
+sources = ["test-xml/**.cpp", "test-xml/**.h"]
+include-directories = [
+    "../3rdparty",
+    "../include",
+    "googletest/googletest/include",
+]
+
+link-libraries = ["UnknownUtils", "gtest"]
 compile-features = ["cxx_std_20"]

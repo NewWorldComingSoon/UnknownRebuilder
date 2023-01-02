@@ -160,6 +160,7 @@ set(UnknownUtils_SOURCES
 	"src/UnknownUtils/UnknownUtils.circular_raw_ostream.cpp"
 	"src/UnknownUtils/UnknownUtils.raw_os_ostream.cpp"
 	"src/UnknownUtils/UnknownUtils.raw_ostream.cpp"
+	"src/UnknownUtils/UnknownUtils.tinyxml2.cpp"
 	"src/UnknownUtils/Unix/Unix.h"
 	"src/UnknownUtils/Windows/WindowsSupport.h"
 	"src/UnknownUtils/Unix/COM.inc"
@@ -469,6 +470,7 @@ set(UnknownUtils_SOURCES
 	"include/UnknownUtils/unknown/Support/thread.h"
 	"include/UnknownUtils/unknown/Support/type_traits.h"
 	"include/UnknownUtils/unknown/Support/xxhash.h"
+	"include/UnknownUtils/unknown/tinyxml2/tinyxml2.h"
 	cmake.toml
 )
 
