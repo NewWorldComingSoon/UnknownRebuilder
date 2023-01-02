@@ -395,7 +395,7 @@ BasicBlock::clearAllInstructions()
 std::string
 BasicBlock::getReadableName() const
 {
-    // block.bbname
+    // block-bbname
     std::string ReadableName = UIR_BLOCK_VARIABLE_NAME_PREFIX;
     ReadableName += mBasicBlockName;
 
@@ -406,7 +406,7 @@ BasicBlock::getReadableName() const
 void
 BasicBlock::print(unknown::raw_ostream &OS, bool NewLine) const
 {
-    // block.bb.range = ["0x401000", "0x402000"]
+    // block-bb-range = ["0x401000", "0x402000"]
     OS << getReadableName();
     OS << UIR_BLOCK_RANGE_NAME_SUFFIX;
     OS << " = [";
@@ -421,7 +421,7 @@ BasicBlock::print(unknown::raw_ostream &OS, bool NewLine) const
 
     OS << getReadableName();
     OS << " = [\n";
-    // block.bb = [
+    // block-bb = [
     //  "inst1",
     //  "inst2"
     //]
