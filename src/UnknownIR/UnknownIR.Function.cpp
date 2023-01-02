@@ -246,17 +246,28 @@ Function::dropAllReferences()
 
     for (auto BB : *this)
     {
-        BB->dropAllReferences();
+        if (BB)
+        {
+            BB->dropAllReferences();
+        }
     }
 
     for (auto ArgIt = arg_begin(); ArgIt != arg_end(); ++ArgIt)
     {
-        (*ArgIt)->dropAllReferences();
+        auto Arg = *ArgIt;
+        if (Arg)
+        {
+            Arg->dropAllReferences();
+        }
     }
 
     for (auto FCIt = fc_begin(); FCIt != fc_end(); ++FCIt)
     {
-        (*FCIt)->dropAllReferences();
+        auto FC = *FCIt;
+        if (FC)
+        {
+            FC->dropAllReferences();
+        }
     }
 }
 
