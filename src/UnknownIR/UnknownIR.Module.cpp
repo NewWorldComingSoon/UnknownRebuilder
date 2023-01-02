@@ -21,8 +21,8 @@ Module::Module(Context &C, const unknown::StringRef &ModuleName) : mContext(C), 
 
 Module::~Module()
 {
-    //
-    //
+    clearAllFunctions();
+    clearAllGlobalVariables();
 }
 
 ////////////////////////////////////////////////////////////
@@ -153,6 +153,82 @@ Module::insertGlobalVariable(GlobalVariable *GV)
 {
     global_push_back(GV);
     GV->setParent(this);
+}
+
+// Drop all functions/global variables in this module.
+void
+Module::dropAllReferences()
+{
+    for (auto F : *this)
+    {
+        F->dropAllReferences();
+    }
+
+    for (auto It = global_begin(); It != global_end(); ++It)
+    {
+        (*It)->dropAllReferences();
+    }
+}
+
+// Clear all functions in this module.
+void
+Module::clearAllFunctions()
+{
+    for (auto F : *this)
+    {
+        F->dropAllReferences();
+    }
+
+    // Clear all functions
+    for (auto F : *this)
+    {
+        F->clearAllBasicBlock();
+    }
+
+    // Free all functions
+    std::vector<Function *> FreeFunctionList;
+    for (auto F : *this)
+    {
+        if (F)
+        {
+            if (std::find(FreeFunctionList.begin(), FreeFunctionList.end(), F) == FreeFunctionList.end())
+            {
+                FreeFunctionList.push_back(F);
+                delete F;
+            }
+        }
+    }
+
+    // Clear list
+    clear();
+}
+
+// Clear all global variables in this module.
+void
+Module::clearAllGlobalVariables()
+{
+    for (auto It = global_begin(); It != global_end(); ++It)
+    {
+        (*It)->dropAllReferences();
+    }
+
+    // Free all global variables
+    std::vector<GlobalVariable *> FreeGVList;
+    for (auto It = global_begin(); It != global_end(); ++It)
+    {
+        auto GV = *It;
+        if (GV)
+        {
+            if (std::find(FreeGVList.begin(), FreeGVList.end(), GV) == FreeGVList.end())
+            {
+                FreeGVList.push_back(GV);
+                delete GV;
+            }
+        }
+    }
+
+    // Clear list
+    global_clear();
 }
 
 ////////////////////////////////////////////////////////////

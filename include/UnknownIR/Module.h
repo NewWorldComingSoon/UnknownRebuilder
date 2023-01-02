@@ -89,12 +89,21 @@ public:
     std::optional<GlobalVariable *> getGlobalVariable(uint64_t Address) const;
 
 public:
-    // Insert
+    // Insert/Drop/Clear
     // Insert a function into the module
     void insertFunction(Function *Function);
 
     // Insert a global variable into the module
     void insertGlobalVariable(GlobalVariable *GV);
+
+    // Drop all functions/global variables in this module.
+    void dropAllReferences();
+
+    // Clear all functions in this module.
+    void clearAllFunctions();
+
+    // Clear all global variables in this module.
+    void clearAllGlobalVariables();
 
 public:
     // Print
