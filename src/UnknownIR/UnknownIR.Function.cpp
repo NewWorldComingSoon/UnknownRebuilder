@@ -286,7 +286,10 @@ Function::clearAllBasicBlock()
     // Clear all basic blocks
     for (auto BB : *this)
     {
-        BB->clearAllInstructions();
+        if (BB)
+        {
+            BB->clearAllInstructions();
+        }
     }
 
     // Free all basic blocks
@@ -386,8 +389,14 @@ Function::print(unknown::raw_ostream &OS, bool NewLine) const
     OS << " = [";
     for (auto It = attr_begin(); It != attr_end(); ++It)
     {
-        OS << R"(")" << *It << R"(")";
-        if (*It != attr_back())
+        auto Attr = *It;
+        if (Attr.empty())
+        {
+            continue;
+        }
+
+        OS << R"(")" << Attr << R"(")";
+        if (Attr != attr_back())
         {
             OS << ", ";
         }
@@ -403,10 +412,16 @@ Function::print(unknown::raw_ostream &OS, bool NewLine) const
     OS << " = [\n";
     for (auto It = arg_begin(); It != arg_end(); ++It)
     {
+        auto Arg = *It;
+        if (Arg == nullptr)
+        {
+            continue;
+        }
+
         OS << R"(")";
-        (*It)->print(OS, false);
+        Arg->print(OS, false);
         OS << R"(")";
-        if (*It != &arg_back())
+        if (Arg != &arg_back())
         {
             OS << ",";
         }
@@ -424,10 +439,16 @@ Function::print(unknown::raw_ostream &OS, bool NewLine) const
     OS << " = [\n";
     for (auto It = fc_begin(); It != fc_end(); ++It)
     {
+        auto FC = *It;
+        if (FC == nullptr)
+        {
+            continue;
+        }
+
         OS << R"(")";
-        (*It)->print(OS, false);
+        FC->print(OS, false);
         OS << R"(")";
-        if (*It != &fc_back())
+        if (FC != &fc_back())
         {
             OS << ",";
         }
@@ -439,6 +460,11 @@ Function::print(unknown::raw_ostream &OS, bool NewLine) const
     // Print BB
     for (auto BB : *this)
     {
+        if (BB == nullptr)
+        {
+            continue;
+        }
+
         BB->print(OS);
         OS << "\n";
     }
