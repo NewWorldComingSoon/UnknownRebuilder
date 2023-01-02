@@ -427,6 +427,11 @@ BasicBlock::print(unknown::raw_ostream &OS, bool NewLine) const
     //]
     for (auto Inst : *this)
     {
+        if (Inst == nullptr)
+        {
+            continue;
+        }
+
         OS << R"(")";
         Inst->print(OS, false);
         OS << R"(")";
