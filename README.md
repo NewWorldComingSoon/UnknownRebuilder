@@ -40,6 +40,7 @@ Just for learning and fun. Maybe it can help others too.
 - [toml11](https://github.com/NewWorldComingSoon/toml11)
 - [argparse](https://github.com/NewWorldComingSoon/argparse)
 - [LIEF](https://github.com/NewWorldComingSoon/LIEF)
+- [TinyXML2](https://github.com/leethomason/tinyxml2)
 
 ## Build
 Only tested on Windows, other systems have not been tested.
