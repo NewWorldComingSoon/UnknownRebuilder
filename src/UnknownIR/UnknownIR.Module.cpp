@@ -161,12 +161,19 @@ Module::dropAllReferences()
 {
     for (auto F : *this)
     {
-        F->dropAllReferences();
+        if (F)
+        {
+            F->dropAllReferences();
+        }
     }
 
     for (auto It = global_begin(); It != global_end(); ++It)
     {
-        (*It)->dropAllReferences();
+        auto GV = *It;
+        if (GV)
+        {
+            GV->dropAllReferences();
+        }
     }
 }
 
@@ -176,13 +183,19 @@ Module::clearAllFunctions()
 {
     for (auto F : *this)
     {
-        F->dropAllReferences();
+        if (F)
+        {
+            F->dropAllReferences();
+        }
     }
 
     // Clear all functions
     for (auto F : *this)
     {
-        F->clearAllBasicBlock();
+        if (F)
+        {
+            F->clearAllBasicBlock();
+        }
     }
 
     // Free all functions
@@ -209,7 +222,11 @@ Module::clearAllGlobalVariables()
 {
     for (auto It = global_begin(); It != global_end(); ++It)
     {
-        (*It)->dropAllReferences();
+        auto GV = *It;
+        if (GV)
+        {
+            GV->dropAllReferences();
+        }
     }
 
     // Free all global variables
