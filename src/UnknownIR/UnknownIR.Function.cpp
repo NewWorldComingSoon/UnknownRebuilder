@@ -442,52 +442,27 @@ Function::print(unknown::XMLPrinter &Printer) const
     }
 
     // arguments
+    for (auto It = arg_begin(); It != arg_end(); ++It)
     {
-        std::stringstream SS;
-        for (auto It = arg_begin(); It != arg_end(); ++It)
+        auto Arg = *It;
+        if (Arg == nullptr)
         {
-            auto Arg = *It;
-            if (Arg == nullptr)
-            {
-                continue;
-            }
-
-            std::string ArgStr("");
-            unknown::raw_string_ostream OSArgStr(ArgStr);
-            Arg->print(OSArgStr, false);
-            SS << OSArgStr.str();
-            if (Arg != &arg_back())
-            {
-                SS << UIR_SEPARATOR;
-            }
+            continue;
         }
 
-        Printer.PushAttribute(getPropertyArguments().str().c_str(), SS.str().c_str());
+        Arg->print(Printer);
     }
 
     // context
+    for (auto It = fc_begin(); It != fc_end(); ++It)
     {
-        std::stringstream SS;
-        for (auto It = fc_begin(); It != fc_end(); ++It)
+        auto FC = *It;
+        if (FC == nullptr)
         {
-            auto FC = *It;
-            if (FC == nullptr)
-            {
-                continue;
-            }
-
-            std::string FCStr("");
-            unknown::raw_string_ostream OSFCStr(FCStr);
-            FC->print(OSFCStr, false);
-            SS << OSFCStr.str();
-
-            if (FC != &fc_back())
-            {
-                SS << UIR_SEPARATOR;
-            }
+            continue;
         }
 
-        Printer.PushAttribute(getPropertyContext().str().c_str(), SS.str().c_str());
+        FC->print(Printer);
     }
 
     // extra

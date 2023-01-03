@@ -106,6 +106,72 @@ Argument::eraseFromParent()
 }
 
 ////////////////////////////////////////////////////////////
+// Virtual functions
+// Get the property 'arg' of the value
+unknown::StringRef
+Argument::getPropertyArg() const
+{
+    return "arg";
+}
+
+// Get the property 'argno' of the value
+unknown::StringRef
+Argument::getPropertyArgNo() const
+{
+    return "argno";
+}
+
+// Print the arg
+void
+Argument::print(unknown::raw_ostream &OS, bool NewLine) const
+{
+    unknown::XMLPrinter Printer;
+    print(Printer);
+    OS << Printer.CStr();
+}
+
+// Print the arg
+void
+Argument::print(unknown::XMLPrinter &Printer) const
+{
+    Printer.OpenElement(getPropertyArg().str().c_str());
+
+    // name
+    {
+        Printer.PushAttribute(getPropertyName().str().c_str(), getReadableName().c_str());
+    }
+
+    // argno
+    {
+        Printer.PushAttribute(getPropertyArgNo().str().c_str(), std::format("{}", getArgNo()).c_str());
+    }
+
+    // extra
+    {
+        std::string Extra("");
+        unknown::raw_string_ostream OSExtra(Extra);
+        printExtraInfo(OSExtra);
+        if (!OSExtra.str().empty())
+        {
+            Printer.PushAttribute(getPropertyExtra().str().c_str(), OSExtra.str().c_str());
+        }
+    }
+
+    // comment
+    {
+        std::string Comment("");
+        unknown::raw_string_ostream OSComment(Comment);
+        printCommentInfo(OSComment);
+        if (!OSComment.str().empty())
+        {
+            Printer.PushAttribute(getPropertyComment().str().c_str(), OSComment.str().c_str());
+        }
+    }
+
+    Printer.CloseElement();
+}
+
+////////////////////////////////////////////////////////////
 // Static
 Argument *
 Argument::get(Type *Ty, const unknown::StringRef &ArgName, Function *F, uint32_t ArgNo)

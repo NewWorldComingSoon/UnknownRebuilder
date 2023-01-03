@@ -42,6 +42,20 @@ public:
     void eraseFromParent();
 
 public:
+    // Virtual functions
+    // Get the property 'arg' of the value
+    virtual unknown::StringRef getPropertyArg() const;
+
+    // Get the property 'argno' of the value
+    virtual unknown::StringRef getPropertyArgNo() const;
+
+    // Print the arg
+    virtual void print(unknown::raw_ostream &OS, bool NewLine = true) const override;
+
+    // Print the arg
+    virtual void print(unknown::XMLPrinter &Printer) const;
+
+public:
     // Static
     static Argument *get(Type *Ty, const unknown::StringRef &ArgName = "", Function *F = nullptr, uint32_t ArgNo = 0);
 };

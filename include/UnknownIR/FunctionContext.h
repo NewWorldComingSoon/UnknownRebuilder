@@ -46,6 +46,20 @@ public:
     void eraseFromParent();
 
 public:
+    // Virtual functions
+    // Get the property 'ctx' of the value
+    virtual unknown::StringRef getPropertyFC() const;
+
+    // Get the property 'ctxno' of the value
+    virtual unknown::StringRef getPropertyFCNo() const;
+
+    // Print the fc
+    virtual void print(unknown::raw_ostream &OS, bool NewLine = true) const override;
+
+    // Print the fc
+    virtual void print(unknown::XMLPrinter &Printer) const;
+
+public:
     // Static
     static FunctionContext *
     get(Type *Ty, const unknown::StringRef &CtxName = "", Function *F = nullptr, uint32_t CtxNo = 0);
