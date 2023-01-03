@@ -281,14 +281,14 @@ Module::getPropertyName() const
 void
 Module::print(unknown::raw_ostream &OS, bool NewLine) const
 {
-    tinyxml2::XMLPrinter Printer;
+    unknown::XMLPrinter Printer;
     print(Printer);
     OS << Printer.CStr();
 }
 
 // Print the module
 void
-Module::print(tinyxml2::XMLPrinter &Printer) const
+Module::print(unknown::XMLPrinter &Printer) const
 {
     Printer.OpenElement(getPropertyModule().str().c_str());
 

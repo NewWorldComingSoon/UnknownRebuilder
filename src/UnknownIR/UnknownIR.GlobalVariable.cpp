@@ -133,14 +133,14 @@ GlobalVariable::getPropertyGV() const
 void
 GlobalVariable::print(unknown::raw_ostream &OS, bool NewLine) const
 {
-    tinyxml2::XMLPrinter Printer;
+    unknown::XMLPrinter Printer;
     print(Printer);
     OS << Printer.CStr();
 }
 
 // Print the gv
 void
-GlobalVariable::print(tinyxml2::XMLPrinter &Printer) const
+GlobalVariable::print(unknown::XMLPrinter &Printer) const
 {
     Printer.OpenElement(getPropertyGV().str().c_str());
 

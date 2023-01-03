@@ -81,14 +81,14 @@ Instruction::getPropertyInst() const
 void
 Instruction::print(unknown::raw_ostream &OS, bool NewLine) const
 {
-    tinyxml2::XMLPrinter Printer;
+    unknown::XMLPrinter Printer;
     print(Printer);
     OS << Printer.CStr();
 }
 
 // Print the full instruction
 void
-Instruction::print(tinyxml2::XMLPrinter &Printer) const
+Instruction::print(unknown::XMLPrinter &Printer) const
 {
     Printer.OpenElement(getPropertyInst().str().c_str());
 

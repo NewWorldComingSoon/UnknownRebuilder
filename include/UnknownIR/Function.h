@@ -239,7 +239,7 @@ public:
     virtual void print(unknown::raw_ostream &OS, bool NewLine = true) const override;
 
     // Print the function
-    virtual void print(tinyxml2::XMLPrinter &Printer) const;
+    virtual void print(unknown::XMLPrinter &Printer) const;
 };
 
 } // namespace uir

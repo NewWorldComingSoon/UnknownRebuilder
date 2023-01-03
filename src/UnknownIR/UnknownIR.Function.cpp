@@ -397,14 +397,14 @@ Function::getPropertyContext() const
 void
 Function::print(unknown::raw_ostream &OS, bool NewLine) const
 {
-    tinyxml2::XMLPrinter Printer;
+    unknown::XMLPrinter Printer;
     print(Printer);
     OS << Printer.CStr();
 }
 
 // Print the function
 void
-Function::print(tinyxml2::XMLPrinter &Printer) const
+Function::print(unknown::XMLPrinter &Printer) const
 {
     Printer.OpenElement(getPropertyFunction().str().c_str());
 

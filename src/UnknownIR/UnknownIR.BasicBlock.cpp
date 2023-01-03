@@ -413,14 +413,14 @@ BasicBlock::getPropertyBB() const
 void
 BasicBlock::print(unknown::raw_ostream &OS, bool NewLine) const
 {
-    tinyxml2::XMLPrinter Printer;
+    unknown::XMLPrinter Printer;
     print(Printer);
     OS << Printer.CStr();
 }
 
 // Print the BasicBlock
 void
-BasicBlock::print(tinyxml2::XMLPrinter &Printer) const
+BasicBlock::print(unknown::XMLPrinter &Printer) const
 {
     Printer.OpenElement(getPropertyBB().str().c_str());
 

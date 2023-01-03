@@ -130,7 +130,7 @@ public:
     void print(unknown::raw_ostream &OS, bool NewLine = true) const;
 
     // Print the module
-    void print(tinyxml2::XMLPrinter &Printer) const;
+    void print(unknown::XMLPrinter &Printer) const;
 };
 
 } // namespace uir
