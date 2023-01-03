@@ -441,6 +441,28 @@ Function::print(unknown::XMLPrinter &Printer) const
         Printer.PushAttribute(getPropertyAttributes().str().c_str(), SS.str().c_str());
     }
 
+    // extra
+    {
+        std::string Extra("");
+        unknown::raw_string_ostream OSExtra(Extra);
+        printExtraInfo(OSExtra);
+        if (!OSExtra.str().empty())
+        {
+            Printer.PushAttribute(getPropertyExtra().str().c_str(), OSExtra.str().c_str());
+        }
+    }
+
+    // comment
+    {
+        std::string Comment("");
+        unknown::raw_string_ostream OSComment(Comment);
+        printCommentInfo(OSComment);
+        if (!OSComment.str().empty())
+        {
+            Printer.PushAttribute(getPropertyComment().str().c_str(), OSComment.str().c_str());
+        }
+    }
+
     // arguments
     for (auto It = arg_begin(); It != arg_end(); ++It)
     {
@@ -463,28 +485,6 @@ Function::print(unknown::XMLPrinter &Printer) const
         }
 
         FC->print(Printer);
-    }
-
-    // extra
-    {
-        std::string Extra("");
-        unknown::raw_string_ostream OSExtra(Extra);
-        printExtraInfo(OSExtra);
-        if (!OSExtra.str().empty())
-        {
-            Printer.PushAttribute(getPropertyExtra().str().c_str(), OSExtra.str().c_str());
-        }
-    }
-
-    // comment
-    {
-        std::string Comment("");
-        unknown::raw_string_ostream OSComment(Comment);
-        printCommentInfo(OSComment);
-        if (!OSComment.str().empty())
-        {
-            Printer.PushAttribute(getPropertyComment().str().c_str(), OSComment.str().c_str());
-        }
     }
 
     // BB
