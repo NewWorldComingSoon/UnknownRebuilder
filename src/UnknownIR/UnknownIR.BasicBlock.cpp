@@ -402,29 +402,63 @@ BasicBlock::getReadableName() const
     return ReadableName;
 }
 
+// Get the property 'bb' of the value
+unknown::StringRef
+BasicBlock::getPropertyBB() const
+{
+    return "bb";
+}
+
 // Print the BasicBlock
 void
 BasicBlock::print(unknown::raw_ostream &OS, bool NewLine) const
 {
-    // block-bb-range = ["0x401000", "0x402000"]
-    OS << getReadableName();
-    OS << UIR_BLOCK_RANGE_NAME_SUFFIX;
-    OS << " = [";
-    OS << R"(")";
-    OS << std::format("0x{:X}", getBasicBlockAddressBegin());
-    OS << R"(")";
-    OS << ", ";
-    OS << R"(")";
-    OS << std::format("0x{:X}", getBasicBlockAddressEnd());
-    OS << R"(")";
-    OS << "]\n";
+    tinyxml2::XMLPrinter Printer;
+    print(Printer);
+    OS << Printer.CStr();
+}
 
-    OS << getReadableName();
-    OS << " = [\n";
-    // block-bb = [
-    //  "inst1",
-    //  "inst2"
-    //]
+// Print the BasicBlock
+void
+BasicBlock::print(tinyxml2::XMLPrinter &Printer) const
+{
+    Printer.OpenElement(getPropertyBB().str().c_str());
+
+    // name
+    {
+        Printer.PushAttribute(getPropertyName().str().c_str(), getReadableName().c_str());
+    }
+
+    // range
+    {
+        auto Range =
+            std::format("0x{:X}", getBasicBlockAddressBegin()) + "-" + std::format("0x{:X}", getBasicBlockAddressEnd());
+        Printer.PushAttribute(getPropertyRange().str().c_str(), Range.c_str());
+    }
+
+    // extra
+    {
+        std::string Extra("");
+        unknown::raw_string_ostream OSExtra(Extra);
+        printExtraInfo(OSExtra);
+        if (!OSExtra.str().empty())
+        {
+            Printer.PushAttribute(getPropertyExtra().str().c_str(), OSExtra.str().c_str());
+        }
+    }
+
+    // comment
+    {
+        std::string Comment("");
+        unknown::raw_string_ostream OSComment(Comment);
+        printCommentInfo(OSComment);
+        if (!OSComment.str().empty())
+        {
+            Printer.PushAttribute(getPropertyComment().str().c_str(), OSComment.str().c_str());
+        }
+    }
+
+    // inst
     for (auto Inst : *this)
     {
         if (Inst == nullptr)
@@ -432,24 +466,10 @@ BasicBlock::print(unknown::raw_ostream &OS, bool NewLine) const
             continue;
         }
 
-        OS << R"(")";
-        Inst->print(OS, false);
-        OS << R"(")";
-
-        if (Inst != &back())
-        {
-            OS << ",";
-        }
-
-        OS << "\n";
+        Inst->print(Printer);
     }
 
-    OS << "]";
-
-    if (NewLine)
-    {
-        OS << "\n";
-    }
+    Printer.CloseElement();
 }
 
 ////////////////////////////////////////////////////////////

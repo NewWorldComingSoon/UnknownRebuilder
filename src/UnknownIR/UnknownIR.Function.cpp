@@ -365,99 +365,154 @@ Function::getReadableName() const
     return ReadableName;
 }
 
+// Get the property 'f' of the value
+unknown::StringRef
+Function::getPropertyFunction() const
+{
+    return "f";
+}
+
+// Get the property 'attributes' of the value
+unknown::StringRef
+Function::getPropertyAttributes() const
+{
+    return "attributes";
+}
+
+// Get the property 'arguments' of the value
+unknown::StringRef
+Function::getPropertyArguments() const
+{
+    return "arguments";
+}
+
+// Get the property 'context' of the value
+unknown::StringRef
+Function::getPropertyContext() const
+{
+    return "context";
+}
+
 // Print the function
 void
 Function::print(unknown::raw_ostream &OS, bool NewLine) const
 {
-    // [function.func]
-    OS << "[" << getReadableName() << "]\n";
+    tinyxml2::XMLPrinter Printer;
+    print(Printer);
+    OS << Printer.CStr();
+}
 
-    // range = ["0x401000", "0x402000"]
-    OS << UIR_FUNCTION_RANGE_NAME_PREFIX;
-    OS << " = [";
-    OS << R"(")";
-    OS << std::format("0x{:X}", getFunctionBeginAddress());
-    OS << R"(")";
-    OS << ", ";
-    OS << R"(")";
-    OS << std::format("0x{:X}", getFunctionEndAddress());
-    OS << R"(")";
-    OS << "]\n";
+// Print the function
+void
+Function::print(tinyxml2::XMLPrinter &Printer) const
+{
+    Printer.OpenElement(getPropertyFunction().str().c_str());
 
-    // attributes = ["attr1", "attr2", "attr3"]
-    OS << UIR_FUNCTION_ATTRIBUTES_NAME_PREFIX;
-    OS << " = [";
-    for (auto It = attr_begin(); It != attr_end(); ++It)
+    // name
     {
-        auto Attr = *It;
-        if (Attr.empty())
+        Printer.PushAttribute(getPropertyName().str().c_str(), getReadableName().c_str());
+    }
+
+    // range
+    {
+        auto Range =
+            std::format("0x{:X}", getFunctionBeginAddress()) + "-" + std::format("0x{:X}", getFunctionEndAddress());
+        Printer.PushAttribute(getPropertyRange().str().c_str(), Range.c_str());
+    }
+
+    // attributes
+    {
+        std::stringstream SS;
+        for (auto It = attr_begin(); It != attr_end(); ++It)
         {
-            continue;
+            auto Attr = *It;
+            if (Attr.empty())
+            {
+                continue;
+            }
+
+            SS << Attr;
+            if (Attr != attr_back())
+            {
+                SS << UIR_SEPARATOR;
+            }
         }
 
-        OS << R"(")" << Attr << R"(")";
-        if (Attr != attr_back())
+        Printer.PushAttribute(getPropertyAttributes().str().c_str(), SS.str().c_str());
+    }
+
+    // arguments
+    {
+        std::stringstream SS;
+        for (auto It = arg_begin(); It != arg_end(); ++It)
         {
-            OS << ", ";
+            auto Arg = *It;
+            if (Arg == nullptr)
+            {
+                continue;
+            }
+
+            std::string ArgStr("");
+            unknown::raw_string_ostream OSArgStr(ArgStr);
+            Arg->print(OSArgStr, false);
+            SS << OSArgStr.str();
+            if (Arg != &arg_back())
+            {
+                SS << UIR_SEPARATOR;
+            }
+        }
+
+        Printer.PushAttribute(getPropertyArguments().str().c_str(), SS.str().c_str());
+    }
+
+    // context
+    {
+        std::stringstream SS;
+        for (auto It = fc_begin(); It != fc_end(); ++It)
+        {
+            auto FC = *It;
+            if (FC == nullptr)
+            {
+                continue;
+            }
+
+            std::string FCStr("");
+            unknown::raw_string_ostream OSFCStr(FCStr);
+            FC->print(OSFCStr, false);
+            SS << OSFCStr.str();
+
+            if (FC != &fc_back())
+            {
+                SS << UIR_SEPARATOR;
+            }
+        }
+
+        Printer.PushAttribute(getPropertyContext().str().c_str(), SS.str().c_str());
+    }
+
+    // extra
+    {
+        std::string Extra("");
+        unknown::raw_string_ostream OSExtra(Extra);
+        printExtraInfo(OSExtra);
+        if (!OSExtra.str().empty())
+        {
+            Printer.PushAttribute(getPropertyExtra().str().c_str(), OSExtra.str().c_str());
         }
     }
-    OS << "]\n";
 
-    // arguments = [
-    // "arg1",
-    // "arg2",
-    // "arg3"
-    //]
-    OS << UIR_FUNCTION_ARGUMENTS_NAME_PREFIX;
-    OS << " = [\n";
-    for (auto It = arg_begin(); It != arg_end(); ++It)
+    // comment
     {
-        auto Arg = *It;
-        if (Arg == nullptr)
+        std::string Comment("");
+        unknown::raw_string_ostream OSComment(Comment);
+        printCommentInfo(OSComment);
+        if (!OSComment.str().empty())
         {
-            continue;
+            Printer.PushAttribute(getPropertyComment().str().c_str(), OSComment.str().c_str());
         }
-
-        OS << R"(")";
-        Arg->print(OS, false);
-        OS << R"(")";
-        if (Arg != &arg_back())
-        {
-            OS << ",";
-        }
-
-        OS << "\n";
     }
-    OS << "]\n";
 
-    // context = [
-    // "ctx1",
-    // "ctx2",
-    // "ctx3"
-    //]
-    OS << UIR_FUNCTION_CONTEXT_NAME_PREFIX;
-    OS << " = [\n";
-    for (auto It = fc_begin(); It != fc_end(); ++It)
-    {
-        auto FC = *It;
-        if (FC == nullptr)
-        {
-            continue;
-        }
-
-        OS << R"(")";
-        FC->print(OS, false);
-        OS << R"(")";
-        if (FC != &fc_back())
-        {
-            OS << ",";
-        }
-
-        OS << "\n";
-    }
-    OS << "]\n\n";
-
-    // Print BB
+    // BB
     for (auto BB : *this)
     {
         if (BB == nullptr)
@@ -465,14 +520,10 @@ Function::print(unknown::raw_ostream &OS, bool NewLine) const
             continue;
         }
 
-        BB->print(OS);
-        OS << "\n";
+        BB->print(Printer);
     }
 
-    if (NewLine)
-    {
-        OS << "\n";
-    }
+    Printer.CloseElement();
 }
 
 } // namespace uir

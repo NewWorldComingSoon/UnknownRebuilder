@@ -21,12 +21,7 @@ Instruction::Instruction() : Instruction(OpCodeID::Unknown)
 }
 
 Instruction::Instruction(OpCodeID OpCodeId) :
-    mOpCodeID(OpCodeId),
-    mInstructionAddress(0),
-    mParent(nullptr),
-    mFlagsVariable(nullptr),
-    mStackVariable(nullptr),
-    mComment("")
+    mOpCodeID(OpCodeId), mInstructionAddress(0), mParent(nullptr), mFlagsVariable(nullptr), mStackVariable(nullptr)
 {
     if (mFlagsVariable)
     {
@@ -75,45 +70,71 @@ Instruction::hasFlags() const
     return UnknownComponent.mHasFlags;
 }
 
-// Print the instruction
+// Get the property 'inst' of the value
+unknown::StringRef
+Instruction::getPropertyInst() const
+{
+    return "i";
+}
+
+// Print the full instruction
 void
 Instruction::print(unknown::raw_ostream &OS, bool NewLine) const
 {
-    // address\tinst
-    OS << std::format("0x{:X}", getInstructionAddress());
-    OS << "\t";
-    OS << getOpcodeName();
-
-    // Print the extra info of this instruction
-    printExtraInfo(OS);
-
-    if (NewLine)
-    {
-        OS << "\n";
-    }
+    tinyxml2::XMLPrinter Printer;
+    print(Printer);
+    OS << Printer.CStr();
 }
 
-// Print the extra info of this instruction
+// Print the full instruction
 void
-Instruction::printExtraInfo(unknown::raw_ostream &OS) const
+Instruction::print(tinyxml2::XMLPrinter &Printer) const
 {
-    OS << UIR_INST_EXTRA_INFO_NAME_PREFIX;
+    Printer.OpenElement(getPropertyInst().str().c_str());
 
-    if (!getExtraInfoList().empty())
+    // addr
     {
-        OS << getExtraInfoList().front();
+        Printer.PushAttribute(getPropertyAddr().str().c_str(), std::format("0x{:X}", getInstructionAddress()).c_str());
+    }
 
-        if (getExtraInfoList().size() > 1)
+    // name
+    {
+        std::string Name("");
+        unknown::raw_string_ostream OSName(Name);
+        printInst(OSName);
+        Printer.PushAttribute(getPropertyName().str().c_str(), OSName.str().c_str());
+    }
+
+    // extra
+    {
+        std::string Extra("");
+        unknown::raw_string_ostream OSExtra(Extra);
+        printExtraInfo(OSExtra);
+        if (!OSExtra.str().empty())
         {
-            auto It = getExtraInfoList().begin();
-            ++It;
-            for (; It != getExtraInfoList().end(); ++It)
-            {
-                OS << UIR_INST_EXTRA_INFO_NAME_SEPARATOR;
-                OS << *It;
-            }
+            Printer.PushAttribute(getPropertyExtra().str().c_str(), OSExtra.str().c_str());
         }
     }
+
+    // comment
+    {
+        std::string Comment("");
+        unknown::raw_string_ostream OSComment(Comment);
+        printCommentInfo(OSComment);
+        if (!OSComment.str().empty())
+        {
+            Printer.PushAttribute(getPropertyComment().str().c_str(), OSComment.str().c_str());
+        }
+    }
+
+    Printer.CloseElement();
+}
+
+// Print the instruction
+void
+Instruction::printInst(unknown::raw_ostream &OS) const
+{
+    OS << getOpcodeName();
 }
 
 ////////////////////////////////////////////////////////////
@@ -275,34 +296,6 @@ Instruction::setStackVariableAndUpdateUsers(LocalVariable *SV)
     }
 }
 
-// Get the extra info of this instruction
-const Instruction::ExtraInfoListType &
-Instruction::getExtraInfoList() const
-{
-    return mExtraInfoList;
-}
-
-// Set the extra info of this instruction
-void
-Instruction::setExtraInfoList(const Instruction::ExtraInfoListType &ExtraInfo)
-{
-    mExtraInfoList = ExtraInfo;
-}
-
-// Get the comment of this instruction
-const std::string
-Instruction::getComment() const
-{
-    return mComment;
-}
-
-// Set the comment of this instruction
-void
-Instruction::setComment(const unknown::StringRef &Comment)
-{
-    mComment = Comment;
-}
-
 ////////////////////////////////////////////////////////////
 // Remove/Erase/Insert
 // Remove this instruction from its parent, but does not delete it.
@@ -386,35 +379,6 @@ void
 Instruction::insertAfter(Instruction *InsertPos)
 {
     insertBeforeOrAfter(InsertPos, false);
-}
-
-// Add extra info to this instruction
-void
-Instruction::addExtraInfo(const unknown::StringRef &ExtraInfo)
-{
-    auto It = std::find(mExtraInfoList.begin(), mExtraInfoList.end(), ExtraInfo);
-    if (It == mExtraInfoList.end())
-    {
-        mExtraInfoList.push_back(ExtraInfo);
-    }
-}
-
-// Remove extra info from this instruction
-void
-Instruction::removeExtraInfo(const unknown::StringRef &ExtraInfo)
-{
-    auto It = std::find(mExtraInfoList.begin(), mExtraInfoList.end(), ExtraInfo);
-    if (It != mExtraInfoList.end())
-    {
-        mExtraInfoList.erase(It);
-    }
-}
-
-// Add the comment of this instruction
-void
-Instruction::addComment(const unknown::StringRef &Comment)
-{
-    mComment += Comment;
 }
 
 // Drop all references to operands.

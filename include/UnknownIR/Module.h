@@ -117,9 +117,20 @@ public:
     void clearAllGlobalVariables();
 
 public:
+    // Virtual functions
+    // Get the property 'module' of the value
+    virtual unknown::StringRef getPropertyModule() const;
+
+    // Get the property 'name' of the value
+    virtual unknown::StringRef getPropertyName() const;
+
+public:
     // Print
     // Print the module
     void print(unknown::raw_ostream &OS, bool NewLine = true) const;
+
+    // Print the module
+    void print(tinyxml2::XMLPrinter &Printer) const;
 };
 
 } // namespace uir

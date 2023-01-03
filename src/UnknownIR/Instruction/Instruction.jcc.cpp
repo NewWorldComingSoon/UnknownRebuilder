@@ -51,24 +51,13 @@ JccAddrInstruction::hasFlags() const
 
 // Print the instruction
 void
-JccAddrInstruction::print(unknown::raw_ostream &OS, bool NewLine) const
+JccAddrInstruction::printInst(unknown::raw_ostream &OS) const
 {
-    // address\tinst
-    OS << std::format("0x{:X}", getInstructionAddress());
-    OS << "\t";
     OS << getOpcodeName();
     OS << " ";
     OS << getJccDestConstantInt()->getName();
     OS << ", ";
     OS << getJccNormalConstantInt()->getName();
-
-    // Print the extra info of this instruction
-    printExtraInfo(OS);
-
-    if (NewLine)
-    {
-        OS << "\n";
-    }
 }
 
 ////////////////////////////////////////////////////////////
@@ -155,24 +144,13 @@ JccBBInstruction::hasFlags() const
 
 // Print the instruction
 void
-JccBBInstruction::print(unknown::raw_ostream &OS, bool NewLine) const
+JccBBInstruction::printInst(unknown::raw_ostream &OS) const
 {
-    // address\tinst
-    OS << std::format("0x{:X}", getInstructionAddress());
-    OS << "\t";
     OS << getOpcodeName();
     OS << " ";
     OS << getDestinationBlock()->getReadableName();
     OS << ", ";
     OS << getNormalBlock()->getReadableName();
-
-    // Print the extra info of this instruction
-    printExtraInfo(OS);
-
-    if (NewLine)
-    {
-        OS << "\n";
-    }
 }
 
 ////////////////////////////////////////////////////////////

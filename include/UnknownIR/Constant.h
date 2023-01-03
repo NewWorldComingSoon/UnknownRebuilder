@@ -2,6 +2,7 @@
 #include <UnknownIR/User.h>
 
 #include <UnknownUtils/unknown/ADT/APInt.h>
+#include <unknown/tinyxml2/tinyxml2.h>
 
 namespace uir {
 class Context;

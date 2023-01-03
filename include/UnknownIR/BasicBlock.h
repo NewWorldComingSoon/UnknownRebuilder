@@ -170,8 +170,14 @@ public:
     // Get the readable name of this object
     virtual std::string getReadableName() const override;
 
+    // Get the property 'bb' of the value
+    virtual unknown::StringRef getPropertyBB() const;
+
     // Print the BasicBlock
     virtual void print(unknown::raw_ostream &OS, bool NewLine = true) const override;
+
+    // Print the BasicBlock
+    virtual void print(tinyxml2::XMLPrinter &Printer) const;
 
 public:
     // Static

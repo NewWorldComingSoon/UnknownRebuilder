@@ -48,24 +48,13 @@ StoreInstruction::hasFlags() const
 
 // Print the instruction
 void
-StoreInstruction::print(unknown::raw_ostream &OS, bool NewLine) const
+StoreInstruction::printInst(unknown::raw_ostream &OS) const
 {
-    // address\tinst
-    OS << std::format("0x{:X}", getInstructionAddress());
-    OS << "\t";
     OS << getOpcodeName();
     OS << " ";
     OS << getValueOperand()->getReadableName();
     OS << ", ";
     OS << getPointerOperand()->getReadableName();
-
-    // Print the extra info of this instruction
-    printExtraInfo(OS);
-
-    if (NewLine)
-    {
-        OS << "\n";
-    }
 }
 
 ////////////////////////////////////////////////////////////

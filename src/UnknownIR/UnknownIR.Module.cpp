@@ -260,20 +260,44 @@ Module::clearAllGlobalVariables()
 }
 
 ////////////////////////////////////////////////////////////
+// Virtual functions
+// Get the property 'module' of the value
+unknown::StringRef
+Module::getPropertyModule() const
+{
+    return "module";
+}
+
+// Get the property 'name' of the value
+unknown::StringRef
+Module::getPropertyName() const
+{
+    return "name";
+}
+
+////////////////////////////////////////////////////////////
 // Print
 // Print the module
 void
 Module::print(unknown::raw_ostream &OS, bool NewLine) const
 {
-    // [module.mod1]
-    OS << "[" << getReadableName() << "]\n";
+    tinyxml2::XMLPrinter Printer;
+    print(Printer);
+    OS << Printer.CStr();
+}
 
-    // gvlist = [
-    //"GV1",
-    //"GV2",
-    //]
-    OS << UIR_GLOBAL_VARIABLE_LIST_NAME_PREFIX;
-    OS << " = [\n";
+// Print the module
+void
+Module::print(tinyxml2::XMLPrinter &Printer) const
+{
+    Printer.OpenElement(getPropertyModule().str().c_str());
+
+    // name
+    {
+        Printer.PushAttribute(getPropertyName().str().c_str(), getReadableName().c_str());
+    }
+
+    // gv
     for (auto It = global_begin(); It != global_end(); ++It)
     {
         auto GV = *It;
@@ -282,19 +306,10 @@ Module::print(unknown::raw_ostream &OS, bool NewLine) const
             continue;
         }
 
-        OS << R"(")";
-        GV->print(OS, false);
-        OS << R"(")";
-        if (GV != &global_back())
-        {
-            OS << ",";
-        }
-
-        OS << "\n";
+        GV->print(Printer);
     }
-    OS << "]\n\n";
 
-    // Print function
+    // function
     for (auto F : *this)
     {
         if (F == nullptr)
@@ -302,14 +317,10 @@ Module::print(unknown::raw_ostream &OS, bool NewLine) const
             continue;
         }
 
-        F->print(OS);
-        OS << "\n";
+        F->print(Printer);
     }
 
-    if (NewLine)
-    {
-        OS << "\n";
-    }
+    Printer.CloseElement();
 }
 
 } // namespace uir

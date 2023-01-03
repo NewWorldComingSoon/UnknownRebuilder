@@ -2,6 +2,9 @@
 #include <UnknownIR/Object.h>
 #include <UnknownIR/Type.h>
 
+#include <UnknownUtils/unknown/Support/raw_ostream.h>
+#include <UnknownUtils/unknown/ADT/StringRef.h>
+
 namespace uir {
 
 class Context;
@@ -11,6 +14,7 @@ class Value : public Object
 {
 public:
     using UsersListType = std::unordered_set<User *>;
+    using ExtraInfoListType = std::vector<std::string>;
 
 protected:
     Type *mType;
@@ -18,6 +22,10 @@ protected:
 
 protected:
     UsersListType mUsers;
+
+protected:
+    ExtraInfoListType mExtraInfoList;
+    std::string mComment;
 
 public:
     Value();
@@ -46,6 +54,29 @@ public:
     uint32_t getValueBits() const;
     uint32_t getValueSize() const;
 
+    // Get the extra info of this object
+    const ExtraInfoListType &getExtraInfoList() const;
+
+    // Set the extra info of this object
+    void setExtraInfoList(const ExtraInfoListType &ExtraInfo);
+
+    // Get the comment of this object
+    const std::string getComment() const;
+
+    // Set the comment of this object
+    void setComment(const unknown::StringRef &Comment);
+
+public:
+    // Add/Remove
+    // Add extra info to this object
+    void addExtraInfo(const unknown::StringRef &ExtraInfo);
+
+    // Remove extra info from this object
+    void removeExtraInfo(const unknown::StringRef &ExtraInfo);
+
+    // Add the comment of this object
+    void addComment(const unknown::StringRef &Comment);
+
 public:
     // Iterator
     using user_iterator = UsersListType::iterator;
@@ -70,8 +101,29 @@ public:
     // Get the readable name of the value
     virtual std::string getReadableName() const override;
 
+    // Get the property 'name' of the value
+    virtual unknown::StringRef getPropertyName() const;
+
+    // Get the property 'addr' of the value
+    virtual unknown::StringRef getPropertyAddr() const;
+
+    // Get the property 'range' of the value
+    virtual unknown::StringRef getPropertyRange() const;
+
+    // Get the property 'extra' of the value
+    virtual unknown::StringRef getPropertyExtra() const;
+
+    // Get the property 'comment' of the value
+    virtual unknown::StringRef getPropertyComment() const;
+
     // Print the object name
     virtual void print(unknown::raw_ostream &OS, bool NewLine = true) const override;
+
+    // Print the extra info of this object
+    virtual void printExtraInfo(unknown::raw_ostream &OS) const;
+
+    // Print the comment info of this object
+    virtual void printCommentInfo(unknown::raw_ostream &OS) const;
 
     // Replaces all references to the "From" definition with references to the "To"
     virtual void replaceUsesOfWith(Value *From, Value *To) = 0;

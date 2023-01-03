@@ -7,9 +7,9 @@
 namespace uir {
 ////////////////////////////////////////////////////////////
 // Ctor/Dtor
-Value::Value() : mType(nullptr), mValueName("") {}
+Value::Value() : Value(nullptr, "") {}
 
-Value::Value(Type *Ty, const unknown::StringRef &ValueName) : mType(Ty), mValueName(ValueName) {}
+Value::Value(Type *Ty, const unknown::StringRef &ValueName) : mType(Ty), mValueName(ValueName), mComment("") {}
 
 Value::~Value() {}
 
@@ -74,6 +74,65 @@ uint32_t
 Value::getValueSize() const
 {
     return mType->getTypeBits() / 8;
+}
+
+// Get the extra info of this object
+const Value::ExtraInfoListType &
+Value::getExtraInfoList() const
+{
+    return mExtraInfoList;
+}
+
+// Set the extra info of this object
+void
+Value::setExtraInfoList(const Value::ExtraInfoListType &ExtraInfo)
+{
+    mExtraInfoList = ExtraInfo;
+}
+
+// Get the comment of this object
+const std::string
+Value::getComment() const
+{
+    return mComment;
+}
+
+// Set the comment of this object
+void
+Value::setComment(const unknown::StringRef &Comment)
+{
+    mComment = Comment;
+}
+
+////////////////////////////////////////////////////////////
+// Add/Remove
+// Add extra info to this object
+void
+Value::addExtraInfo(const unknown::StringRef &ExtraInfo)
+{
+    auto It = std::find(mExtraInfoList.begin(), mExtraInfoList.end(), ExtraInfo);
+    if (It == mExtraInfoList.end())
+    {
+        mExtraInfoList.push_back(ExtraInfo);
+    }
+}
+
+// Remove extra info from this object
+void
+Value::removeExtraInfo(const unknown::StringRef &ExtraInfo)
+{
+    auto It = std::find(mExtraInfoList.begin(), mExtraInfoList.end(), ExtraInfo);
+    if (It != mExtraInfoList.end())
+    {
+        mExtraInfoList.erase(It);
+    }
+}
+
+// Add the comment of this object
+void
+Value::addComment(const unknown::StringRef &Comment)
+{
+    mComment += Comment;
 }
 
 ////////////////////////////////////////////////////////////
@@ -174,6 +233,41 @@ Value::getReadableName() const
     return ReadableName;
 }
 
+// Get the property 'name' of the value
+unknown::StringRef
+Value::getPropertyName() const
+{
+    return "name";
+}
+
+// Get the property 'addr' of the value
+unknown::StringRef
+Value::getPropertyAddr() const
+{
+    return "addr";
+}
+
+// Get the property 'range' of the value
+unknown::StringRef
+Value::getPropertyRange() const
+{
+    return "range";
+}
+
+// Get the property 'extra' of the value
+unknown::StringRef
+Value::getPropertyExtra() const
+{
+    return "extra";
+}
+
+// Get the property 'comment' of the value
+unknown::StringRef
+Value::getPropertyComment() const
+{
+    return "comment";
+}
+
 // Print the object name
 void
 Value::print(unknown::raw_ostream &OS, bool NewLine) const
@@ -183,6 +277,34 @@ Value::print(unknown::raw_ostream &OS, bool NewLine) const
     {
         OS << "\n";
     }
+}
+
+// Print the extra info of this object
+void
+Value::printExtraInfo(unknown::raw_ostream &OS) const
+{
+    if (!getExtraInfoList().empty())
+    {
+        OS << getExtraInfoList().front();
+
+        if (getExtraInfoList().size() > 1)
+        {
+            auto It = getExtraInfoList().begin();
+            ++It;
+            for (; It != getExtraInfoList().end(); ++It)
+            {
+                OS << UIR_SEPARATOR;
+                OS << *It;
+            }
+        }
+    }
+}
+
+// Print the comment info of this object
+void
+Value::printCommentInfo(unknown::raw_ostream &OS) const
+{
+    OS << mComment;
 }
 
 } // namespace uir

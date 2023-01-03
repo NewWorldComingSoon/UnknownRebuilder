@@ -41,20 +41,9 @@ ReturnInstruction::hasFlags() const
 
 // Print the instruction
 void
-ReturnInstruction::print(unknown::raw_ostream &OS, bool NewLine) const
+ReturnInstruction::printInst(unknown::raw_ostream &OS) const
 {
-    // address\tinst
-    OS << std::format("0x{:X}", getInstructionAddress());
-    OS << "\t";
     OS << getOpcodeName();
-
-    // Print the extra info of this instruction
-    printExtraInfo(OS);
-
-    if (NewLine)
-    {
-        OS << "\n";
-    }
 }
 
 ////////////////////////////////////////////////////////////
@@ -104,22 +93,11 @@ ReturnImmInstruction::hasFlags() const
 
 // Print the instruction
 void
-ReturnImmInstruction::print(unknown::raw_ostream &OS, bool NewLine) const
+ReturnImmInstruction::printInst(unknown::raw_ostream &OS) const
 {
-    // address\tinst
-    OS << std::format("0x{:X}", getInstructionAddress());
-    OS << "\t";
     OS << getOpcodeName();
     OS << " ";
     OS << getImmConstantInt()->getReadableName();
-
-    // Print the extra info of this instruction
-    printExtraInfo(OS);
-
-    if (NewLine)
-    {
-        OS << "\n";
-    }
 }
 
 ////////////////////////////////////////////////////////////

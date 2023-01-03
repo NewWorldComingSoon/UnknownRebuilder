@@ -122,6 +122,64 @@ GlobalVariable::getReadableName() const
     return ReadableName;
 }
 
+// Get the property 'gv' of the value
+unknown::StringRef
+GlobalVariable::getPropertyGV() const
+{
+    return "gv";
+}
+
+// Print the gv
+void
+GlobalVariable::print(unknown::raw_ostream &OS, bool NewLine) const
+{
+    tinyxml2::XMLPrinter Printer;
+    print(Printer);
+    OS << Printer.CStr();
+}
+
+// Print the gv
+void
+GlobalVariable::print(tinyxml2::XMLPrinter &Printer) const
+{
+    Printer.OpenElement(getPropertyGV().str().c_str());
+
+    // name
+    {
+        Printer.PushAttribute(getPropertyName().str().c_str(), getReadableName().c_str());
+    }
+
+    // addr
+    {
+        Printer.PushAttribute(
+            getPropertyAddr().str().c_str(), std::format("0x{:X}", getGlobalVariableAddress()).c_str());
+    }
+
+    // extra
+    {
+        std::string Extra("");
+        unknown::raw_string_ostream OSExtra(Extra);
+        printExtraInfo(OSExtra);
+        if (!OSExtra.str().empty())
+        {
+            Printer.PushAttribute(getPropertyExtra().str().c_str(), OSExtra.str().c_str());
+        }
+    }
+
+    // comment
+    {
+        std::string Comment("");
+        unknown::raw_string_ostream OSComment(Comment);
+        printCommentInfo(OSComment);
+        if (!OSComment.str().empty())
+        {
+            Printer.PushAttribute(getPropertyComment().str().c_str(), OSComment.str().c_str());
+        }
+    }
+
+    Printer.CloseElement();
+}
+
 ////////////////////////////////////////////////////////////
 // Static
 // Generate a new value name by order

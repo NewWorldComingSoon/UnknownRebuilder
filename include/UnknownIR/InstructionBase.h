@@ -5,6 +5,7 @@
 
 #include <UnknownUtils/unknown/Support/raw_ostream.h>
 #include <UnknownUtils/unknown/ADT/StringRef.h>
+#include <unknown/tinyxml2/tinyxml2.h>
 
 namespace uir {
 
@@ -12,17 +13,12 @@ class BasicBlock;
 
 class Instruction : public User
 {
-public:
-    using ExtraInfoListType = std::vector<std::string>;
-
 protected:
     OpCodeID mOpCodeID;
     uint64_t mInstructionAddress;
     BasicBlock *mParent;
     std::unique_ptr<FlagsVariable> mFlagsVariable;
     std::unique_ptr<LocalVariable> mStackVariable;
-    ExtraInfoListType mExtraInfoList;
-    std::string mComment;
 
 public:
     Instruction();
@@ -40,11 +36,17 @@ public:
     // Is this instruction with flags?
     virtual bool hasFlags() const;
 
-    // Print the instruction
-    virtual void print(unknown::raw_ostream &OS, bool NewLine = true) const;
+    // Get the property 'inst' of the value
+    virtual unknown::StringRef getPropertyInst() const;
 
-    // Print the extra info of this instruction
-    virtual void printExtraInfo(unknown::raw_ostream &OS) const;
+    // Print the full instruction
+    virtual void print(unknown::raw_ostream &OS, bool NewLine = true) const override;
+
+    // Print the full instruction
+    virtual void print(tinyxml2::XMLPrinter &Printer) const;
+
+    // Print the instruction
+    virtual void printInst(unknown::raw_ostream &OS) const;
 
 public:
     // Get/Set
@@ -99,18 +101,6 @@ public:
     // Set the stack variable of this instruction and update its users
     void setStackVariableAndUpdateUsers(LocalVariable *SV);
 
-    // Get the extra info of this instruction
-    const ExtraInfoListType &getExtraInfoList() const;
-
-    // Set the extra info of this instruction
-    void setExtraInfoList(const ExtraInfoListType &ExtraInfo);
-
-    // Get the comment of this instruction
-    const std::string getComment() const;
-
-    // Set the comment of this instruction
-    void setComment(const unknown::StringRef &Comment);
-
 public:
     // Remove/Erase/Insert/Add/Drop/Clear
     // Remove this instruction from its parent, but does not delete it.
@@ -127,15 +117,6 @@ public:
 
     // Insert an unlinked instructions into a basic block immediately after the specified instruction.
     void insertAfter(Instruction *InsertPos);
-
-    // Add extra info to this instruction
-    void addExtraInfo(const unknown::StringRef &ExtraInfo);
-
-    // Remove extra info from this instruction
-    void removeExtraInfo(const unknown::StringRef &ExtraInfo);
-
-    // Add the comment of this instruction
-    void addComment(const unknown::StringRef &Comment);
 
     // Drop all references to operands.
     void dropAllReferences();

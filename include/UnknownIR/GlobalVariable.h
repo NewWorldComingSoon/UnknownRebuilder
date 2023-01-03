@@ -47,6 +47,15 @@ public:
     // Get the readable name of this object
     virtual std::string getReadableName() const override;
 
+    // Get the property 'gv' of the value
+    virtual unknown::StringRef getPropertyGV() const;
+
+    // Print the gv
+    virtual void print(unknown::raw_ostream &OS, bool NewLine = true) const override;
+
+    // Print the gv
+    virtual void print(tinyxml2::XMLPrinter &Printer) const;
+
 public:
     // Static
     // Generate a new value name by order

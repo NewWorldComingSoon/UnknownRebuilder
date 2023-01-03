@@ -223,8 +223,23 @@ public:
     // Get the readable name of this object
     virtual std::string getReadableName() const override;
 
+    // Get the property 'f' of the value
+    virtual unknown::StringRef getPropertyFunction() const;
+
+    // Get the property 'attributes' of the value
+    virtual unknown::StringRef getPropertyAttributes() const;
+
+    // Get the property 'arguments' of the value
+    virtual unknown::StringRef getPropertyArguments() const;
+
+    // Get the property 'context' of the value
+    virtual unknown::StringRef getPropertyContext() const;
+
     // Print the function
     virtual void print(unknown::raw_ostream &OS, bool NewLine = true) const override;
+
+    // Print the function
+    virtual void print(tinyxml2::XMLPrinter &Printer) const;
 };
 
 } // namespace uir
