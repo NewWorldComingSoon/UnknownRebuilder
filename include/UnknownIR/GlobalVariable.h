@@ -58,7 +58,7 @@ public:
 };
 
 template <typename T = uint8_t>
-    requires std::is_integral_v<T> || std::is_pointer_v<T>
+requires std::is_integral_v<T> || std::is_pointer_v<T>
 class GlobalArray : public GlobalVariable
 {
 public:
