@@ -48,10 +48,6 @@ TEST(test_uir, test_uir_module_1)
         module.insertFunction(F);
 
         module.print(unknown::outs());
-
-        // F->print(unknown::outs());
-
-        // unknown::outs() << F;
     }
 
     std::cout << "--------------------bp-----------------------" << std::endl;
