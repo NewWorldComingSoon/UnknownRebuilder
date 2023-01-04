@@ -240,6 +240,14 @@ public:
 
     // Print the function
     virtual void print(unknown::XMLPrinter &Printer) const;
+
+public:
+    static Function *
+    get(Context &C,
+        const unknown::StringRef &FunctionName,
+        Module *Parent = nullptr,
+        uint64_t FunctionAddressBegin = 0,
+        uint64_t FunctionAddressEnd = 0);
 };
 
 } // namespace uir

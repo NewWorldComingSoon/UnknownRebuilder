@@ -501,4 +501,15 @@ Function::print(unknown::XMLPrinter &Printer) const
     Printer.CloseElement();
 }
 
+Function *
+Function::get(
+    Context &C,
+    const unknown::StringRef &FunctionName,
+    Module *Parent,
+    uint64_t FunctionAddressBegin,
+    uint64_t FunctionAddressEnd)
+{
+    return new Function(C, FunctionName, Parent, FunctionAddressBegin, FunctionAddressEnd);
+}
+
 } // namespace uir

@@ -3010,10 +3010,14 @@ void
 XMLPrinter::OpenElement(const char *name, bool compactMode)
 {
     PrepareForNewNode(compactMode);
-    _stack.Push(name);
+
+    auto newName = new char[strlen(name) + 1]{0};
+    memcpy(newName, name, strlen(name));
+
+    _stack.Push(newName);
 
     Write("<");
-    Write(name);
+    Write(newName);
 
     _elementJustOpened = true;
     ++_depth;
@@ -3109,6 +3113,8 @@ XMLPrinter::CloseElement(bool compactMode)
         Putc('\n');
     }
     _elementJustOpened = false;
+
+    delete[] name;
 }
 
 void
@@ -3290,4 +3296,4 @@ XMLPrinter::Visit(const XMLUnknown &unknown)
     return true;
 }
 
-} // namespace tinyxml2
+} // namespace unknown
