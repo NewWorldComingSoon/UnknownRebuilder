@@ -33,11 +33,17 @@ public:
     // Get the default number of operands
     virtual uint32_t getDefaultNumberOfOperands() const;
 
+    // Is this instruction with result?
+    virtual bool hasResult() const;
+
     // Is this instruction with flags?
     virtual bool hasFlags() const;
 
     // Get the property 'inst' of the value
     virtual unknown::StringRef getPropertyInst() const;
+
+    // Get the property 'op' of the value
+    virtual unknown::StringRef getPropertyOp() const;
 
     // Print the full instruction
     virtual void print(unknown::raw_ostream &OS, bool NewLine = true) const override;

@@ -42,6 +42,13 @@ JccAddrInstruction::getDefaultNumberOfOperands() const
     return JccAddrComponent.mNumberOfOperands;
 }
 
+// Is this instruction with result?
+bool
+JccAddrInstruction::hasResult() const
+{
+    return JccAddrComponent.mHasResult;
+}
+
 // Is this instruction with flags?
 bool
 JccAddrInstruction::hasFlags() const
@@ -133,6 +140,13 @@ uint32_t
 JccBBInstruction::getDefaultNumberOfOperands() const
 {
     return JccBBComponent.mNumberOfOperands;
+}
+
+// Is this instruction with result?
+bool
+JccBBInstruction::hasResult() const
+{
+    return JccBBComponent.mHasResult;
 }
 
 // Is this instruction with flags?

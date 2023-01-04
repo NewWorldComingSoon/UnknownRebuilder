@@ -32,6 +32,13 @@ ReturnInstruction::getDefaultNumberOfOperands() const
     return RetComponent.mNumberOfOperands;
 }
 
+// Is this instruction with result?
+bool
+ReturnInstruction::hasResult() const
+{
+    return RetComponent.mHasResult;
+}
+
 // Is this instruction with flags?
 bool
 ReturnInstruction::hasFlags() const
@@ -82,6 +89,13 @@ uint32_t
 ReturnImmInstruction::getDefaultNumberOfOperands() const
 {
     return RetIMMComponent.mNumberOfOperands;
+}
+
+// Is this instruction with result?
+bool
+ReturnImmInstruction::hasResult() const
+{
+    return RetIMMComponent.mHasResult;
 }
 
 // Is this instruction with flags?

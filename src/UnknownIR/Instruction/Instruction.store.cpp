@@ -39,6 +39,13 @@ StoreInstruction::getDefaultNumberOfOperands() const
     return StoreComponent.mNumberOfOperands;
 }
 
+// Is this instruction with result?
+bool
+StoreInstruction::hasResult() const
+{
+    return StoreComponent.mHasResult;
+}
+
 // Is this instruction with flags?
 bool
 StoreInstruction::hasFlags() const

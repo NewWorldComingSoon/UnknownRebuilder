@@ -20,6 +20,9 @@ public:
     // Get the default number of operands
     virtual uint32_t getDefaultNumberOfOperands() const override;
 
+    // Is this instruction with result?
+    virtual bool hasResult() const override;
+
     // Is this instruction with flags?
     virtual bool hasFlags() const override;
 

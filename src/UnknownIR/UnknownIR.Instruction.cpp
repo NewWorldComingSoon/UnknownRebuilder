@@ -63,6 +63,13 @@ Instruction::getDefaultNumberOfOperands() const
     return UnknownComponent.mNumberOfOperands;
 }
 
+// Is this instruction with result?
+bool
+Instruction::hasResult() const
+{
+    return UnknownComponent.mHasResult;
+}
+
 // Is this instruction with flags?
 bool
 Instruction::hasFlags() const
@@ -75,6 +82,13 @@ unknown::StringRef
 Instruction::getPropertyInst() const
 {
     return "i";
+}
+
+// Get the property 'op' of the value
+unknown::StringRef
+Instruction::getPropertyOp() const
+{
+    return "op";
 }
 
 // Print the full instruction

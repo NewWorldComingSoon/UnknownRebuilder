@@ -34,6 +34,13 @@ JmpAddrInstruction::getDefaultNumberOfOperands() const
     return JmpAddrComponent.mNumberOfOperands;
 }
 
+// Is this instruction with result?
+bool
+JmpAddrInstruction::hasResult() const
+{
+    return JmpAddrComponent.mHasResult;
+}
+
 // Is this instruction with flags?
 bool
 JmpAddrInstruction::hasFlags() const
@@ -102,6 +109,13 @@ uint32_t
 JmpBBInstruction::getDefaultNumberOfOperands() const
 {
     return JmpBBComponent.mNumberOfOperands;
+}
+
+// Is this instruction with result?
+bool
+JmpBBInstruction::hasResult() const
+{
+    return JmpBBComponent.mHasResult;
 }
 
 // Is this instruction with flags?
