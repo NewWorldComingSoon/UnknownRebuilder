@@ -45,6 +45,12 @@ public:
     // Get the property 'op' of the value
     virtual unknown::StringRef getPropertyOp() const;
 
+    // Get the property 'res' of the value
+    virtual unknown::StringRef getPropertyOpRes() const;
+
+    // Get the property 'opcode' of the value
+    virtual unknown::StringRef getPropertyOpCode() const;
+
     // Print the full instruction
     virtual void print(unknown::raw_ostream &OS, bool NewLine = true) const override;
 
@@ -53,6 +59,9 @@ public:
 
     // Print the instruction
     virtual void printInst(unknown::raw_ostream &OS) const;
+
+    // Print the operand
+    virtual void printOp(unknown::XMLPrinter &Printer) const;
 
 public:
     // Get/Set

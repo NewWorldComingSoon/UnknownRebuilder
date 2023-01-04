@@ -134,6 +134,19 @@ JmpBBInstruction::printInst(unknown::raw_ostream &OS) const
     OS << getDestinationBlock()->getReadableName();
 }
 
+// Print the operand
+void
+JmpBBInstruction::printOp(unknown::XMLPrinter &Printer) const
+{
+    Printer.OpenElement(getPropertyOpCode().str().c_str());
+    Printer.PushAttribute(getPropertyName().str().c_str(), getOpcodeName().str().c_str());
+    Printer.CloseElement();
+
+    Printer.OpenElement(getPropertyOp().str().c_str());
+    Printer.PushAttribute(getPropertyName().str().c_str(), getDestinationBlock()->getReadableName().c_str());
+    Printer.CloseElement();
+}
+
 ////////////////////////////////////////////////////////////
 // Get/Set
 // Get the destination basic block

@@ -91,6 +91,20 @@ Instruction::getPropertyOp() const
     return "op";
 }
 
+// Get the property 'res' of the value
+unknown::StringRef
+Instruction::getPropertyOpRes() const
+{
+    return "res";
+}
+
+// Get the property 'opcode' of the value
+unknown::StringRef
+Instruction::getPropertyOpCode() const
+{
+    return "opcode";
+}
+
 // Print the full instruction
 void
 Instruction::print(unknown::raw_ostream &OS, bool NewLine) const
@@ -141,6 +155,11 @@ Instruction::print(unknown::XMLPrinter &Printer) const
         }
     }
 
+    // op
+    {
+        printOp(Printer);
+    }
+
     Printer.CloseElement();
 }
 
@@ -149,6 +168,29 @@ void
 Instruction::printInst(unknown::raw_ostream &OS) const
 {
     OS << getOpcodeName();
+}
+
+// Print the operand
+void
+Instruction::printOp(unknown::XMLPrinter &Printer) const
+{
+    Printer.OpenElement(getPropertyOpCode().str().c_str());
+    Printer.PushAttribute(getPropertyName().str().c_str(), getOpcodeName().str().c_str());
+    Printer.CloseElement();
+
+    for (uint32_t i = 0; i < getDefaultNumberOfOperands(); ++i)
+    {
+        Printer.OpenElement(getPropertyOp().str().c_str());
+        Printer.PushAttribute(getPropertyName().str().c_str(), getOperand(i)->getReadableName().c_str());
+        Printer.CloseElement();
+    }
+
+    if (hasResult())
+    {
+        Printer.OpenElement(getPropertyOpRes().str().c_str());
+        Printer.PushAttribute(getPropertyName().str().c_str(), getReadableName().c_str());
+        Printer.CloseElement();
+    }
 }
 
 ////////////////////////////////////////////////////////////

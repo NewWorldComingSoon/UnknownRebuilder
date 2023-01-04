@@ -65,6 +65,9 @@ public:
     // Print the instruction
     virtual void printInst(unknown::raw_ostream &OS) const override;
 
+    // Print the operand
+    virtual void printOp(unknown::XMLPrinter &Printer) const override;
+
 public:
     // Get/Set
     // Get the destination basic block.

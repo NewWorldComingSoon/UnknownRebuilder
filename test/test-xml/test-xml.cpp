@@ -9,7 +9,7 @@
 #include <UnknownUtils/unknown/tinyxml2/tinyxml2.h>
 #include <UnknownUtils/unknown/Support/raw_ostream.h>
 
-using namespace tinyxml2;
+using namespace unknown;
 
 TEST(test_xml, test_xml_1)
 {
