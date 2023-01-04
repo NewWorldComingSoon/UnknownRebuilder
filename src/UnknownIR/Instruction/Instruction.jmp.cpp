@@ -3,6 +3,8 @@
 
 #include <unknown/ADT/StringExtras.h>
 
+#include <Internal/InternalConfig/InternalConfig.h>
+
 namespace uir {
 ////////////////////////////////////////////////////////////
 //     JmpAddrInstruction
@@ -53,7 +55,7 @@ void
 JmpAddrInstruction::printInst(unknown::raw_ostream &OS) const
 {
     OS << getOpcodeName();
-    OS << " ";
+    OS << UIR_SEPARATOR;
     OS << getJmpDestConstantInt()->getName();
 }
 
@@ -130,7 +132,7 @@ void
 JmpBBInstruction::printInst(unknown::raw_ostream &OS) const
 {
     OS << getOpcodeName();
-    OS << " ";
+    OS << UIR_SEPARATOR;
     OS << getDestinationBlock()->getReadableName();
 }
 

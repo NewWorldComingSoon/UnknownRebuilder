@@ -2,6 +2,8 @@
 
 #include <unknown/ADT/StringExtras.h>
 
+#include <Internal/InternalConfig/InternalConfig.h>
+
 namespace uir {
 ////////////////////////////////////////////////////////////
 //     ReturnInstruction
@@ -110,7 +112,7 @@ void
 ReturnImmInstruction::printInst(unknown::raw_ostream &OS) const
 {
     OS << getOpcodeName();
-    OS << " ";
+    OS << UIR_SEPARATOR;
     OS << getImmConstantInt()->getReadableName();
 }
 

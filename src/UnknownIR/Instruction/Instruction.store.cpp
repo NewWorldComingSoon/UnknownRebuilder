@@ -2,6 +2,8 @@
 
 #include <unknown/ADT/StringExtras.h>
 
+#include <Internal/InternalConfig/InternalConfig.h>
+
 namespace uir {
 ////////////////////////////////////////////////////////////
 // Ctor/Dtor
@@ -58,9 +60,9 @@ void
 StoreInstruction::printInst(unknown::raw_ostream &OS) const
 {
     OS << getOpcodeName();
-    OS << " ";
+    OS << UIR_SEPARATOR;
     OS << getValueOperand()->getReadableName();
-    OS << ", ";
+    OS << UIR_SEPARATOR;
     OS << getPointerOperand()->getReadableName();
 }
 

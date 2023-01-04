@@ -4,6 +4,8 @@
 
 #include <unknown/ADT/StringExtras.h>
 
+#include <Internal/InternalConfig/InternalConfig.h>
+
 namespace uir {
 ////////////////////////////////////////////////////////////
 //     JccAddrInstruction
@@ -61,9 +63,9 @@ void
 JccAddrInstruction::printInst(unknown::raw_ostream &OS) const
 {
     OS << getOpcodeName();
-    OS << " ";
+    OS << UIR_SEPARATOR;
     OS << getJccDestConstantInt()->getName();
-    OS << ", ";
+    OS << UIR_SEPARATOR;
     OS << getJccNormalConstantInt()->getName();
 }
 
@@ -161,9 +163,9 @@ void
 JccBBInstruction::printInst(unknown::raw_ostream &OS) const
 {
     OS << getOpcodeName();
-    OS << " ";
+    OS << UIR_SEPARATOR;
     OS << getDestinationBlock()->getReadableName();
-    OS << ", ";
+    OS << UIR_SEPARATOR;
     OS << getNormalBlock()->getReadableName();
 }
 
