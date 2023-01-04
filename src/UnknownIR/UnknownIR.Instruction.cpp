@@ -161,7 +161,7 @@ Instruction::print(unknown::XMLPrinter &Printer) const
     }
 
     // op
-    if (mEnablePrintOp)
+    if (hasPrintOp())
     {
         printOp(Printer);
     }
