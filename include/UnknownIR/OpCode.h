@@ -39,6 +39,7 @@ struct OpCodeComponent
     OpCodeID mOpCodeID;
     unknown::StringRef mOpCodeName;
     uint32_t mNumberOfOperands;
+    bool mHasResult;
     bool mHasFlags;
 };
 
@@ -46,64 +47,64 @@ struct OpCodeComponent
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Data/Memory instructions
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// op2 = load op1
-const OpCodeComponent LoadComponent       = {    OpCodeID::Load,        "uir.load",         2,     false};
+// res = load op1
+const OpCodeComponent LoadComponent       = {    OpCodeID::Load,        "uir.load",         1,     true,      false};
 
 // store op1, op2
-const OpCodeComponent StoreComponent      = {    OpCodeID::Store,       "uir.store",        2,     false};
+const OpCodeComponent StoreComponent      = {    OpCodeID::Store,       "uir.store",        2,     false,     false};
 
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Binary operators instructions
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// op3 = op1 + op2
-const OpCodeComponent AddComponent        = {    OpCodeID::Add,         "uir.add",          3,      true};
+// res = op1 + op2
+const OpCodeComponent AddComponent        = {    OpCodeID::Add,         "uir.add",          2,      true,     true};
 
-// op3 = op1 - op2
-const OpCodeComponent SubComponent        = {    OpCodeID::Sub,         "uir.sub",          3,      true};
+// res = op1 - op2
+const OpCodeComponent SubComponent        = {    OpCodeID::Sub,         "uir.sub",          2,      true,     true};
 
 
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Bitwise instructions
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// op3 = op1 ^ op2
-const OpCodeComponent XorComponent        = {    OpCodeID::Xor,         "uir.xor",          3,      true};
+// res = op1 ^ op2
+const OpCodeComponent XorComponent        = {    OpCodeID::Xor,         "uir.xor",          2,      true,     true};
 
-// op3 = op1 | op2
-const OpCodeComponent OrComponent         = {    OpCodeID::Or,          "uir.or",           3,      true};
+// res = op1 | op2
+const OpCodeComponent OrComponent         = {    OpCodeID::Or,          "uir.or",           2,      true,     true};
 
-// op3 = op1 & op2
-const OpCodeComponent AndComponent        = {    OpCodeID::And,         "uir.and",          3,      true};
+// res = op1 & op2
+const OpCodeComponent AndComponent        = {    OpCodeID::And,         "uir.and",          2,      true,     true};
 
-// op2 = ~op1
-const OpCodeComponent NotComponent        = {    OpCodeID::Not,         "uir.not",          2,      false};
+// res = ~op1
+const OpCodeComponent NotComponent        = {    OpCodeID::Not,         "uir.not",          1,      true,     false};
 
 
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Terminator instructions
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Ret
-const OpCodeComponent RetComponent        = {    OpCodeID::Ret,         "uir.ret",          0,      false};
+const OpCodeComponent RetComponent        = {    OpCodeID::Ret,         "uir.ret",          0,      false,    false};
 
 // Ret imm
-const OpCodeComponent RetIMMComponent     = {    OpCodeID::RetIMM,      "uir.ret.imm",      1,      false};
+const OpCodeComponent RetIMMComponent     = {    OpCodeID::RetIMM,      "uir.ret.imm",      1,      false,    false};
 
 // JmpAddr address
-const OpCodeComponent JmpAddrComponent    = {    OpCodeID::JmpAddr,     "uir.jmp.addr",     1,      false};
+const OpCodeComponent JmpAddrComponent    = {    OpCodeID::JmpAddr,     "uir.jmp.addr",     1,      false,    false};
 
 // JmpBB targetBB
-const OpCodeComponent JmpBBComponent      = {    OpCodeID::JmpBB,       "uir.jmp.bb",       1,      false};
+const OpCodeComponent JmpBBComponent      = {    OpCodeID::JmpBB,       "uir.jmp.bb",       1,      false,    false};
 
 // JccAddr targetAddr, normalAddr
-const OpCodeComponent JccAddrComponent    = {    OpCodeID::JccAddr,     "uir.jcc.addr",     2,      true};
+const OpCodeComponent JccAddrComponent    = {    OpCodeID::JccAddr,     "uir.jcc.addr",     2,      false,    true};
 
 // JccBB targetBB, normalBB
-const OpCodeComponent JccBBComponent      = {    OpCodeID::JccBB,       "uir.jcc.bb",       2,      true};
+const OpCodeComponent JccBBComponent      = {    OpCodeID::JccBB,       "uir.jcc.bb",       2,      false,    true};
 
 
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Unknown
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const OpCodeComponent UnknownComponent    = {    OpCodeID::Unknown,     "uir.unknown",      0,      false};
+const OpCodeComponent UnknownComponent    = {    OpCodeID::Unknown,     "uir.unknown",      0,      false,    false};
 // clang-format on
 
 } // namespace uir
