@@ -21,7 +21,12 @@ Instruction::Instruction() : Instruction(OpCodeID::Unknown)
 }
 
 Instruction::Instruction(OpCodeID OpCodeId) :
-    mOpCodeID(OpCodeId), mInstructionAddress(0), mParent(nullptr), mFlagsVariable(nullptr), mStackVariable(nullptr)
+    mOpCodeID(OpCodeId),
+    mInstructionAddress(0),
+    mParent(nullptr),
+    mFlagsVariable(nullptr),
+    mStackVariable(nullptr),
+    mEnablePrintOp(false)
 {
     if (mFlagsVariable)
     {
@@ -156,6 +161,7 @@ Instruction::print(unknown::XMLPrinter &Printer) const
     }
 
     // op
+    if (mEnablePrintOp)
     {
         printOp(Printer);
     }
@@ -519,6 +525,21 @@ Instruction::clearAllOperands()
 
     // Clear operand list
     op_clear();
+}
+
+// Enabled
+// Enable 'print detailed op'
+void
+Instruction::enablePrintOp(bool Enable)
+{
+    mEnablePrintOp = Enable;
+}
+
+// Is this instruction Enable 'print detailed op'?
+bool
+Instruction::hasPrintOp() const
+{
+    return mEnablePrintOp;
 }
 
 ////////////////////////////////////////////////////////////

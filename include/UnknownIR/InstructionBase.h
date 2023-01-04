@@ -19,6 +19,7 @@ protected:
     BasicBlock *mParent;
     std::unique_ptr<FlagsVariable> mFlagsVariable;
     std::unique_ptr<LocalVariable> mStackVariable;
+    bool mEnablePrintOp;
 
 public:
     Instruction();
@@ -138,6 +139,14 @@ public:
 
     // Clear all operands in this instruction.
     void clearAllOperands();
+
+public:
+    // Enabled
+    // Enable 'print detailed op'
+    void enablePrintOp(bool Enable = true);
+
+    // Is this instruction Enable 'print detailed op'?
+    bool hasPrintOp() const;
 
 public:
     // Static
