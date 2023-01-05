@@ -42,15 +42,6 @@ compile-features = ["cxx_std_20"]
 link-libraries = ["UnknownUtils"]
 
 
-[target.UnknownMC]
-type = "library"
-include-directories = ["src/UnknownMC", "include", "include/UnknownMC"]
-headers = ["include/UnknownMC/**.h"]
-sources = ["src/UnknownMC/**.cpp", "src/UnknownMC/**.hpp", "src/UnknownMC/**.h"]
-compile-features = ["cxx_std_20"]
-link-libraries = ["UnknownIR"]
-
-
 [target.UnknownFrontend]
 type = "library"
 include-directories = [
