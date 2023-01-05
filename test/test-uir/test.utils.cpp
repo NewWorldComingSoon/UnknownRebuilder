@@ -34,7 +34,7 @@ TEST(test_uir, test_uir_utils_2)
             {
                 if (Sym.hasGuardCF)
                 {
-                    std::cout << std::format("rva:0x{:X} name:{} size:0x{:X}", Sym.rva, Sym.name, Sym.size) << "\n";
+                    // std::cout << std::format("rva:0x{:X} name:{} size:0x{:X}", Sym.rva, Sym.name, Sym.size) << "\n";
                 }
             }
         }
