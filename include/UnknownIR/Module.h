@@ -124,6 +124,12 @@ public:
     // Get the property 'name' of the value
     virtual unknown::StringRef getPropertyName() const;
 
+    // Get the property 'arch' of the value
+    virtual unknown::StringRef getPropertyArch() const;
+
+    // Get the property 'mode' of the value
+    virtual unknown::StringRef getPropertyMode() const;
+
 public:
     // Print
     // Print the module

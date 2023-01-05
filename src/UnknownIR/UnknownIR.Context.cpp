@@ -30,6 +30,20 @@ Context::getArch()
     return mArch;
 }
 
+unknown::StringRef
+Context::getArchString()
+{
+    switch (mArch)
+    {
+    case Arch::ArchX86:
+        return "x86";
+    case Arch::ArchARM:
+        return "arm";
+    default:
+        return "unknown";
+    }
+}
+
 void
 Context::setArch(Arch arch)
 {
@@ -41,6 +55,20 @@ Context::Mode
 Context::getMode()
 {
     return mMode;
+}
+
+unknown::StringRef
+Context::getModeString()
+{
+    switch (mMode)
+    {
+    case Mode::Mode32:
+        return "32";
+    case Mode::Mode64:
+        return "64";
+    default:
+        return "unknown";
+    }
 }
 
 void

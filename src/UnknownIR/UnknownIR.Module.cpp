@@ -275,6 +275,20 @@ Module::getPropertyName() const
     return "name";
 }
 
+// Get the property 'arch' of the value
+unknown::StringRef
+Module::getPropertyArch() const
+{
+    return "arch";
+}
+
+// Get the property 'mode' of the value
+unknown::StringRef
+Module::getPropertyMode() const
+{
+    return "mode";
+}
+
 ////////////////////////////////////////////////////////////
 // Print
 // Print the module
@@ -295,6 +309,16 @@ Module::print(unknown::XMLPrinter &Printer) const
     // name
     {
         Printer.PushAttribute(getPropertyName().str().c_str(), getReadableName().c_str());
+    }
+
+    // arch
+    {
+        Printer.PushAttribute(getPropertyArch().str().c_str(), mContext.getArchString().str().c_str());
+    }
+
+    // mode
+    {
+        Printer.PushAttribute(getPropertyMode().str().c_str(), mContext.getModeString().str().c_str());
     }
 
     // gv

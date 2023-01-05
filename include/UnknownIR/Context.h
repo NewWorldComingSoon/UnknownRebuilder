@@ -2,6 +2,8 @@
 #include <cstdint>
 #include <string>
 
+#include <UnknownUtils/unknown/ADT/StringRef.h>
+
 namespace uir {
 class ContextImpl;
 
@@ -35,10 +37,12 @@ public:
 public:
     // Get/Set Arch
     Arch getArch();
+    unknown::StringRef getArchString();
     void setArch(Arch arch);
 
     // Get/Set Mode
     Mode getMode();
+    unknown::StringRef getModeString();
     void setMode(Mode mode);
     uint32_t getModeBits();
 };
