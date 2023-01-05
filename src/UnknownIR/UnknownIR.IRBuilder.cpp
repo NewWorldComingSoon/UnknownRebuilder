@@ -137,4 +137,24 @@ IRBuilder::createRetImm(ConstantInt *ImmConstantInt, uint64_t InstAddress)
     return insert(ReturnImmInstruction::get(ImmConstantInt), InstAddress);
 }
 
+// Jmp
+JmpAddrInstruction *
+IRBuilder::createJmpAddr(ConstantInt *JmpDest, uint64_t InstAddress)
+{
+    return insert(JmpAddrInstruction::get(JmpDest), InstAddress);
+}
+
+JmpBBInstruction *
+IRBuilder::createJmpBB(BasicBlock *DestBB, uint64_t InstAddress)
+{
+    return insert(JmpBBInstruction::get(DestBB), InstAddress);
+}
+
+// Store
+StoreInstruction *
+IRBuilder::createStore(Value *Val, Value *Ptr, bool IsVolatile, uint64_t InstAddress)
+{
+    return insert(StoreInstruction::get(Val, Ptr, IsVolatile), InstAddress);
+}
+
 } // namespace uir

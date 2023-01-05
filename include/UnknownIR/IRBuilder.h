@@ -61,6 +61,13 @@ public:
     // Return
     ReturnInstruction *createRetVoid(uint64_t InstAddress = 0);
     ReturnImmInstruction *createRetImm(ConstantInt *ImmConstantInt, uint64_t InstAddress = 0);
+
+    // Jmp
+    JmpAddrInstruction *createJmpAddr(ConstantInt *JmpDest, uint64_t InstAddress = 0);
+    JmpBBInstruction *createJmpBB(BasicBlock *DestBB, uint64_t InstAddress = 0);
+
+    // Store
+    StoreInstruction *createStore(Value *Val, Value *Ptr, bool IsVolatile = false, uint64_t InstAddress = 0);
 };
 
 } // namespace uir
