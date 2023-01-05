@@ -466,7 +466,7 @@ public:
                 {
                     if (Line.find(" f ") != std::string::npos)
                     {
-                        FunctionSymbol Sym = {0};
+                        FunctionSymbol Sym;
 
                         Sym.rva = std::strtoull(Match[4].str().c_str(), nullptr, 16) - mImageBase;
 
