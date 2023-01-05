@@ -313,12 +313,12 @@ Module::print(unknown::XMLPrinter &Printer) const
 
     // arch
     {
-        Printer.PushAttribute(getPropertyArch().str().c_str(), mContext.getArchString().str().c_str());
+        Printer.PushAttribute(getPropertyArch().str().c_str(), getContext().getArchString().str().c_str());
     }
 
     // mode
     {
-        Printer.PushAttribute(getPropertyMode().str().c_str(), mContext.getModeString().str().c_str());
+        Printer.PushAttribute(getPropertyMode().str().c_str(), getContext().getModeString().str().c_str());
     }
 
     // gv
