@@ -27,12 +27,12 @@ TEST(test_uir, test_uir_utils_2)
     auto SymParserPdb = unknown::CreateSymbolParser(true);
     if (SymParserPdb)
     {
-        auto succ = SymParserPdb->ParseFunctionSymbols(UNKNOWN_REBUILDER_SRC_DIR "\\sample\\pe-x64\\Project12.pdb");
+        auto succ = SymParserPdb->ParseFunctionSymbols(UNKNOWN_REBUILDER_SRC_DIR R"(\sample\pe-x64\Project12.pdb)");
         if (succ)
         {
             for (auto &Sym : SymParserPdb->getFunctionSymbols())
             {
-                std::cout << std::format("rva:{:X} name:{} size:{:X}", Sym.rva, Sym.name, Sym.size) << "\n";
+                // std::cout << std::format("rva:{:X} name:{} size:{:X}", Sym.rva, Sym.name, Sym.size) << "\n";
             }
         }
     }
@@ -43,12 +43,12 @@ TEST(test_uir, test_uir_utils_3)
     auto SymParserMap = unknown::CreateSymbolParser(false);
     if (SymParserMap)
     {
-        auto succ = SymParserMap->ParseFunctionSymbols(UNKNOWN_REBUILDER_SRC_DIR "\\sample\\pe-x64\\Project12.map");
+        auto succ = SymParserMap->ParseFunctionSymbols(UNKNOWN_REBUILDER_SRC_DIR R"(\sample\pe-x64\Project12.map)");
         if (succ)
         {
             for (auto &Sym : SymParserMap->getFunctionSymbols())
             {
-                std::cout << std::format("rva:{:X} name:{} size:{:X}", Sym.rva, Sym.name, Sym.size) << "\n";
+                // std::cout << std::format("rva:{:X} name:{} size:{:X}", Sym.rva, Sym.name, Sym.size) << "\n";
             }
         }
     }
