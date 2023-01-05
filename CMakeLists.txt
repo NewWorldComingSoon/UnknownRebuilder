@@ -146,6 +146,7 @@ set(UnknownUtils_SOURCES
 	"src/UnknownUtils/UnknownUtils.StringPool.cpp"
 	"src/UnknownUtils/UnknownUtils.StringRef.cpp"
 	"src/UnknownUtils/UnknownUtils.StringSaver.cpp"
+	"src/UnknownUtils/UnknownUtils.SymbolParser.cpp"
 	"src/UnknownUtils/UnknownUtils.SymbolRemappingReader.cpp"
 	"src/UnknownUtils/UnknownUtils.SystemUtils.cpp"
 	"src/UnknownUtils/UnknownUtils.TarWriter.cpp"
@@ -470,6 +471,7 @@ set(UnknownUtils_SOURCES
 	"include/UnknownUtils/unknown/Support/thread.h"
 	"include/UnknownUtils/unknown/Support/type_traits.h"
 	"include/UnknownUtils/unknown/Support/xxhash.h"
+	"include/UnknownUtils/unknown/Symbol/SymbolParser.h"
 	"include/UnknownUtils/unknown/tinyxml2/tinyxml2.h"
 	cmake.toml
 )
