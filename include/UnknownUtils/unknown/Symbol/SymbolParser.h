@@ -11,23 +11,23 @@ namespace unknown {
 class SymbolParser
 {
 public:
-    struct AllSymbol
+    struct CommonSymbol
     {
         std::string name = "";
         uint32_t rva = 0;
     };
 
-    struct FunctionSymbol : AllSymbol
+    struct FunctionSymbol : CommonSymbol
     {
-        uint32_t size = 0;
+        uint32_t size = 0; // function size
 
-        uint32_t cbFrame;    // count of bytes of total frame of procedure
-        uint32_t cbPad;      // count of bytes of padding in the frame
-        uint32_t offPad;     // offset (relative to frame poniter) to where
-                             //  padding starts
-        uint32_t cbSaveRegs; // count of bytes of callee save registers
-        uint32_t offExHdlr;  // offset of exception handler
-        uint16_t sectExHdlr; // section id of exception handler
+        uint32_t cbFrame = 0;    // count of bytes of total frame of procedure
+        uint32_t cbPad = 0;      // count of bytes of padding in the frame
+        uint32_t offPad = 0;     // offset (relative to frame poniter) to where
+                                 //  padding starts
+        uint32_t cbSaveRegs = 0; // count of bytes of callee save registers
+        uint32_t offExHdlr = 0;  // offset of exception handler
+        uint16_t sectExHdlr = 0; // section id of exception handler
 
         bool hasAlloca = false;         // function uses _alloca()
         bool hasSetJmp = false;         // function uses setjmp()
@@ -46,7 +46,7 @@ public:
     };
 
 protected:
-    std::vector<AllSymbol> mAllSymbols;
+    std::vector<CommonSymbol> mCommonSymbols;
     std::vector<FunctionSymbol> mFunctionSymbols;
     uint64_t mImageBase;
 
@@ -56,7 +56,7 @@ public:
 
 public:
     // Parser
-    virtual bool ParseAllSymbols(StringRef SymFilePath) = 0;
+    virtual bool ParseCommonSymbols(StringRef SymFilePath) = 0;
     virtual bool ParseFunctionSymbols(StringRef SymFilePath) = 0;
 
 public:
@@ -64,10 +64,12 @@ public:
     uint64_t getImageBase() const { return mImageBase; }
     void setImageBase(uint64_t imageBase) { mImageBase = imageBase; }
     std::vector<FunctionSymbol> &getFunctionSymbols() { return mFunctionSymbols; }
-    std::vector<AllSymbol> &getAllSymbols() { return mAllSymbols; }
+    std::vector<CommonSymbol> &getAllSymbols() { return mCommonSymbols; }
 };
 
+////////////////////////////////////////////////////////////////////////////////////////
+//// Function
 std::unique_ptr<SymbolParser>
-CreateSymbolParser(bool UsePdb = true);
+CreateSymbolParser(bool UsePDB = true);
 
 } // namespace unknown

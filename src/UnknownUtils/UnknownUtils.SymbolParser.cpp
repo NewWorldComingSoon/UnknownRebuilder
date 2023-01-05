@@ -363,7 +363,7 @@ private:
 
 public:
     // Parser
-    virtual bool ParseAllSymbols(StringRef SymFilePath) override
+    virtual bool ParseCommonSymbols(StringRef SymFilePath) override
     {
         // Not implemented
         return false;
@@ -433,7 +433,7 @@ public:
 
 public:
     // Parser
-    virtual bool ParseAllSymbols(StringRef SymFilePath) override
+    virtual bool ParseCommonSymbols(StringRef SymFilePath) override
     {
         // Not implemented
         return false;
@@ -522,10 +522,12 @@ public:
     }
 };
 
+////////////////////////////////////////////////////////////////////////////////////////
+//// Function
 std::unique_ptr<SymbolParser>
-CreateSymbolParser(bool UsePdb)
+CreateSymbolParser(bool UsePDB)
 {
-    if (UsePdb)
+    if (UsePDB)
     {
         return std::make_unique<SymbolParserByPDB>();
     }
