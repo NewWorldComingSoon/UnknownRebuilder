@@ -35,6 +35,26 @@ IRBuilderBase::IRBuilderBase(Context &C) : mContext(C)
 }
 
 ////////////////////////////////////////////////////////////
+// Get/Set
+Context &
+IRBuilderBase::getContext() const
+{
+    return mContext;
+}
+
+BasicBlock *
+IRBuilderBase::getInsertBlock() const
+{
+    return mBB;
+}
+
+BasicBlock::iterator
+IRBuilderBase::getInsertPoint() const
+{
+    return mInsertPt;
+}
+
+////////////////////////////////////////////////////////////
 // Insertion Point
 // Clear the insertion point
 void
@@ -75,12 +95,17 @@ IRBuilderBase::setInsertPoint(Instruction *I)
 }
 
 void
-IRBuilderBase::setInsertPoint(BasicBlock *BB, BasicBlock::iterator IP)
+IRBuilderBase::setInsertPoint(BasicBlock *BB, BasicBlock::iterator IT)
 {
     assert(BB != nullptr && "BB != nullptr");
 
     mBB = BB;
-    mInsertPt = IP;
+    mInsertPt = IT;
 }
+
+////////////////////////////////////////////////////////////
+//     IRBuilder
+//
+IRBuilder::IRBuilder(Context &C) : IRBuilderBase(C) {}
 
 } // namespace uir

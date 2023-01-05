@@ -22,9 +22,9 @@ public:
 
 public:
     // Get/Set
-    Context &getContext() const { return mContext; }
-    BasicBlock *getInsertBlock() const { return mBB; }
-    BasicBlock::iterator getInsertPoint() const { return mInsertPt; }
+    Context &getContext() const;
+    BasicBlock *getInsertBlock() const;
+    BasicBlock::iterator getInsertPoint() const;
 
 public:
     // Insertion Point
@@ -34,7 +34,13 @@ public:
     // Set the insertion point
     void setInsertPoint(BasicBlock *BB);
     void setInsertPoint(Instruction *I);
-    void setInsertPoint(BasicBlock *BB, BasicBlock::iterator IP);
+    void setInsertPoint(BasicBlock *BB, BasicBlock::iterator IT);
+};
+
+class IRBuilder : public IRBuilderBase, public IRBuilderDefaultInserter
+{
+public:
+    IRBuilder(Context &C);
 };
 
 } // namespace uir
