@@ -108,4 +108,34 @@ IRBuilderBase::setInsertPoint(BasicBlock *BB, BasicBlock::iterator IT)
 //
 IRBuilder::IRBuilder(Context &C) : IRBuilderBase(C) {}
 
+IRBuilder::IRBuilder(BasicBlock *BB) : IRBuilder(BB->getContext())
+{
+    setInsertPoint(BB);
+}
+
+IRBuilder::IRBuilder(Instruction *I) : IRBuilder(I->getContext())
+{
+    setInsertPoint(I);
+}
+
+IRBuilder::IRBuilder(BasicBlock *BB, BasicBlock::iterator IT) : IRBuilder(BB->getContext())
+{
+    setInsertPoint(BB, IT);
+}
+
+////////////////////////////////////////////////////////////
+// Create
+// Return
+ReturnInstruction *
+IRBuilder::createRetVoid(uint64_t InstAddress)
+{
+    return insert(ReturnInstruction::get(), InstAddress);
+}
+
+ReturnImmInstruction *
+IRBuilder::createRetImm(ConstantInt *ImmConstantInt, uint64_t InstAddress)
+{
+    return insert(ReturnImmInstruction::get(ImmConstantInt), InstAddress);
+}
+
 } // namespace uir

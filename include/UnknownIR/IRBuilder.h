@@ -18,7 +18,7 @@ protected:
     Context &mContext;
 
 public:
-    IRBuilderBase(Context &C);
+    explicit IRBuilderBase(Context &C);
 
 public:
     // Get/Set
@@ -40,7 +40,27 @@ public:
 class IRBuilder : public IRBuilderBase, public IRBuilderDefaultInserter
 {
 public:
-    IRBuilder(Context &C);
+    explicit IRBuilder(Context &C);
+    explicit IRBuilder(BasicBlock *BB);
+    explicit IRBuilder(Instruction *I);
+    explicit IRBuilder(BasicBlock *BB, BasicBlock::iterator IT);
+
+public:
+    // Insert
+    template <typename InstTy>
+    InstTy *insert(InstTy *I, uint64_t InstAddress = 0) const
+    {
+        this->InsertHelper(I, InstAddress, mBB, mInsertPt);
+        return I;
+    }
+
+    Constant *insert(Constant *C) const { return C; }
+
+public:
+    // Create
+    // Return
+    ReturnInstruction *createRetVoid(uint64_t InstAddress = 0);
+    ReturnImmInstruction *createRetImm(ConstantInt *ImmConstantInt, uint64_t InstAddress = 0);
 };
 
 } // namespace uir
