@@ -74,6 +74,8 @@ set(CMAKE_FOLDER ${CMKR_CMAKE_FOLDER})
 
 # Target: UnknownUtils
 set(UnknownUtils_SOURCES
+	"src/UnknownUtils/Symbol/UnknownUtils.ExampleMemoryMappedFile.cpp"
+	"src/UnknownUtils/Symbol/UnknownUtils.Examples_PCH.cpp"
 	"src/UnknownUtils/Symbol/UnknownUtils.PDB.cpp"
 	"src/UnknownUtils/Symbol/UnknownUtils.PDB_CoalescedMSFStream.cpp"
 	"src/UnknownUtils/Symbol/UnknownUtils.PDB_DBIStream.cpp"
@@ -182,6 +184,8 @@ set(UnknownUtils_SOURCES
 	"src/UnknownUtils/UnknownUtils.raw_os_ostream.cpp"
 	"src/UnknownUtils/UnknownUtils.raw_ostream.cpp"
 	"src/UnknownUtils/UnknownUtils.tinyxml2.cpp"
+	"src/UnknownUtils/Symbol/ExampleMemoryMappedFile.h"
+	"src/UnknownUtils/Symbol/Examples_PCH.h"
 	"src/UnknownUtils/Symbol/Foundation/PDB_ArrayView.h"
 	"src/UnknownUtils/Symbol/Foundation/PDB_Assert.h"
 	"src/UnknownUtils/Symbol/Foundation/PDB_BitOperators.h"

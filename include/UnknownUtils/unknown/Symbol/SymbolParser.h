@@ -4,19 +4,49 @@
 #include <string>
 #include <memory>
 
+#include "unknown/ADT/StringRef.h"
+
 namespace unknown {
 
 class SymbolParser
 {
 public:
-    struct FunctionSymbol
+    struct AllSymbol
     {
-        std::string name;
-        uint32_t rva;
-        uint32_t size;
+        std::string name = "";
+        uint32_t rva = 0;
+    };
+
+    struct FunctionSymbol : AllSymbol
+    {
+        uint32_t size = 0;
+
+        uint32_t cbFrame;    // count of bytes of total frame of procedure
+        uint32_t cbPad;      // count of bytes of padding in the frame
+        uint32_t offPad;     // offset (relative to frame poniter) to where
+                             //  padding starts
+        uint32_t cbSaveRegs; // count of bytes of callee save registers
+        uint32_t offExHdlr;  // offset of exception handler
+        uint16_t sectExHdlr; // section id of exception handler
+
+        bool hasAlloca = false;         // function uses _alloca()
+        bool hasSetJmp = false;         // function uses setjmp()
+        bool hasLongJmp = false;        // function uses longjmp()
+        bool hasInlAsm = false;         // function uses inline asm
+        bool hasEH = false;             // function has EH states
+        bool hasSEH = false;            // function has SEH
+        bool hasNaked = false;          // function is __declspec(naked)
+        bool hasSecurityChecks = false; // function has buffer security check introduced by /GS.
+        bool hasAsyncEH = false;        // function compiled with /EHa
+        bool hasWasInlined = false;     // function was inlined within another function
+        bool hasGSCheck = false;        // function is __declspec(strict_gs_check)
+        bool hasSafeBuffers = false;    // function is __declspec(safebuffers)
+        bool hasOptSpeed = false;       // Did we optimize for speed?
+        bool hasGuardCF = false;        // function contains CFG checks (and no write checks)
     };
 
 protected:
+    std::vector<AllSymbol> mAllSymbols;
     std::vector<FunctionSymbol> mFunctionSymbols;
     uint64_t mImageBase;
 
@@ -25,27 +55,16 @@ public:
     ~SymbolParser() = default;
 
 public:
+    // Parser
+    virtual bool ParseAllSymbols(StringRef SymFilePath) = 0;
+    virtual bool ParseFunctionSymbols(StringRef SymFilePath) = 0;
+
+public:
     // Get/Set
     uint64_t getImageBase() const { return mImageBase; }
     void setImageBase(uint64_t imageBase) { mImageBase = imageBase; }
     std::vector<FunctionSymbol> &getFunctionSymbols() { return mFunctionSymbols; }
-
-public:
-    // Itereter
-    using iterator = std::vector<FunctionSymbol>::iterator;
-    using const_iterator = std::vector<FunctionSymbol>::const_iterator;
-    using reverse_iterator = std::vector<FunctionSymbol>::reverse_iterator;
-    using const_reverse_iterator = std::vector<FunctionSymbol>::const_reverse_iterator;
-
-    iterator begin() { return mFunctionSymbols.begin(); }
-    const_iterator begin() const { return mFunctionSymbols.cbegin(); }
-    iterator end() { return mFunctionSymbols.end(); }
-    const_iterator end() const { return mFunctionSymbols.cend(); }
-
-    reverse_iterator rbegin() { return mFunctionSymbols.rbegin(); }
-    const_reverse_iterator rbegin() const { return mFunctionSymbols.crbegin(); }
-    reverse_iterator rend() { return mFunctionSymbols.rend(); }
-    const_reverse_iterator rend() const { return mFunctionSymbols.crend(); }
+    std::vector<AllSymbol> &getAllSymbols() { return mAllSymbols; }
 };
 
 } // namespace unknown
