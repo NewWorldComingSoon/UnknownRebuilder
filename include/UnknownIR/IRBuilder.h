@@ -34,6 +34,7 @@ public:
     // Set the insertion point
     void setInsertPoint(BasicBlock *BB);
     void setInsertPoint(Instruction *I);
+    void setInsertPoint(BasicBlock *BB, BasicBlock::iterator IP);
 };
 
 } // namespace uir

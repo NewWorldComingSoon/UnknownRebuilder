@@ -74,4 +74,13 @@ IRBuilderBase::setInsertPoint(Instruction *I)
     }
 }
 
+void
+IRBuilderBase::setInsertPoint(BasicBlock *BB, BasicBlock::iterator IP)
+{
+    assert(BB != nullptr && "BB != nullptr");
+
+    mBB = BB;
+    mInsertPt = IP;
+}
+
 } // namespace uir
