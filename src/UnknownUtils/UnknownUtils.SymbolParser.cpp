@@ -9,6 +9,12 @@
 #include "Symbol/ExampleMemoryMappedFile.h"
 
 #include <unordered_set>
+#include <regex>
+#include <cstdio>
+#include <io.h>
+#include <iostream>
+#include <fstream>
+#include <ostream>
 
 namespace unknown {
 
@@ -365,6 +371,8 @@ public:
 
     virtual bool ParseFunctionSymbols(StringRef SymFilePath) override
     {
+        mFunctionSymbols.clear();
+
         // try to open the PDB file and check whether all the data we need is available
         MemoryMappedFile::Handle pdbFile = MemoryMappedFile::Open(SymFilePath.data());
         if (!pdbFile.baseAddress)
@@ -416,5 +424,115 @@ public:
         return true;
     }
 };
+
+class SymbolParserByMap : public SymbolParser
+{
+public:
+    SymbolParserByMap() : SymbolParser() {}
+    ~SymbolParserByMap() = default;
+
+public:
+    // Parser
+    virtual bool ParseAllSymbols(StringRef SymFilePath) override
+    {
+        // Not implemented
+        return false;
+    }
+
+    virtual bool ParseFunctionSymbols(StringRef SymFilePath) override
+    {
+        mFunctionSymbols.clear();
+
+        std::vector<FunctionSymbol> FunctionSymbols;
+
+        auto ParseImageBase = [&](std::string &Line) {
+            auto Idx = Line.find("Preferred load address is ");
+            if (Idx != std::string::npos)
+            {
+                auto StartIdx = Idx + strlen("Preferred load address is ");
+                auto ImageBaseStr = Line.substr(StartIdx);
+                mImageBase = std::strtoull(ImageBaseStr.c_str(), nullptr, 16);
+            }
+        };
+
+        auto ParseSymbol = [&](std::string &Line) {
+            // https://github.com/mike1k/perses/blob/master/src/mapfileparser.cpp#LL25
+            std::regex Reg(
+                R"#(\s(\d+):([a-fA-F0-9]+)\s+(\S+)\s+([a-fA-F0-9]+)\s+(.+))#", std::regex_constants::ECMAScript);
+            if (std::regex_match(Line, Reg))
+            {
+                std::smatch Match;
+                for (; std::regex_search(Line, Match, Reg); Line = Match.suffix())
+                {
+                    if (Line.find(" f ") != std::string::npos)
+                    {
+                        FunctionSymbol Sym = {0};
+
+                        Sym.rva = std::strtoull(Match[4].str().c_str(), nullptr, 16) - mImageBase;
+
+                        if (Sym.rva == 0)
+                        {
+                            continue;
+                        }
+
+                        if (Sym.rva < 0x1000)
+                        {
+                            continue;
+                        }
+
+                        Sym.name = Match[3].str();
+                        Sym.size = 0;
+
+                        FunctionSymbols.push_back(Sym);
+                    }
+                }
+            }
+        };
+
+        if ((access(SymFilePath.data(), 0) != 0))
+        {
+            // file does not exist
+            return false;
+        }
+
+        std::ifstream IfStream(SymFilePath.data());
+        std::string Line = "";
+
+        while (std::getline(IfStream, Line))
+        {
+            // read line
+
+            if (mImageBase == 0)
+            {
+                ParseImageBase(Line);
+                continue;
+            }
+
+            ParseSymbol(Line);
+        }
+
+        if (FunctionSymbols.empty())
+        {
+            return false;
+        }
+
+        std::swap(mFunctionSymbols, FunctionSymbols);
+
+        return true;
+    }
+};
+
+std::unique_ptr<SymbolParser>
+CreateSymbolParser(bool UsePdb)
+{
+    if (UsePdb)
+    {
+        return std::make_unique<SymbolParserByPDB>();
+    }
+    else
+    {
+        return std::make_unique<SymbolParserByMap>();
+    }
+}
 
 } // namespace unknown

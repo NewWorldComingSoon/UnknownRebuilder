@@ -67,4 +67,7 @@ public:
     std::vector<AllSymbol> &getAllSymbols() { return mAllSymbols; }
 };
 
+std::unique_ptr<SymbolParser>
+CreateSymbolParser(bool UsePdb = true);
+
 } // namespace unknown
