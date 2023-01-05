@@ -112,7 +112,7 @@ void
 ReturnImmInstruction::printInst(unknown::raw_ostream &OS) const
 {
     OS << getOpcodeName();
-    OS << UIR_SEPARATOR;
+    OS << UIR_OPCODE_SEPARATOR;
     OS << getImmConstantInt()->getReadableName();
 }
 

@@ -63,9 +63,9 @@ void
 JccAddrInstruction::printInst(unknown::raw_ostream &OS) const
 {
     OS << getOpcodeName();
-    OS << UIR_SEPARATOR;
+    OS << UIR_OPCODE_SEPARATOR;
     OS << getJccDestConstantInt()->getName();
-    OS << UIR_SEPARATOR;
+    OS << UIR_OP_SEPARATOR;
     OS << getJccNormalConstantInt()->getName();
 }
 
@@ -163,9 +163,9 @@ void
 JccBBInstruction::printInst(unknown::raw_ostream &OS) const
 {
     OS << getOpcodeName();
-    OS << UIR_SEPARATOR;
+    OS << UIR_OPCODE_SEPARATOR;
     OS << getDestinationBlock()->getReadableName();
-    OS << UIR_SEPARATOR;
+    OS << UIR_OP_SEPARATOR;
     OS << getNormalBlock()->getReadableName();
 }
 

@@ -20,3 +20,12 @@
 
 // Separator
 #define UIR_SEPARATOR "|"
+
+// Separator for operand
+#define UIR_OP_SEPARATOR ","
+
+// Separator for opcode
+#define UIR_OPCODE_SEPARATOR " "
+
+// Separator for operand result
+#define UIR_OP_RESULT_SEPARATOR "="

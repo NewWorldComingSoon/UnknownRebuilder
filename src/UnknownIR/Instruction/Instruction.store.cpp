@@ -60,9 +60,9 @@ void
 StoreInstruction::printInst(unknown::raw_ostream &OS) const
 {
     OS << getOpcodeName();
-    OS << UIR_SEPARATOR;
+    OS << UIR_OPCODE_SEPARATOR;
     OS << getValueOperand()->getReadableName();
-    OS << UIR_SEPARATOR;
+    OS << UIR_OP_SEPARATOR;
     OS << getPointerOperand()->getReadableName();
 }
 
