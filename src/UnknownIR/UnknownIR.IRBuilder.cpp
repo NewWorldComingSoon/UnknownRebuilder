@@ -61,7 +61,6 @@ void
 IRBuilderBase::clearInsertionPoint()
 {
     mBB = nullptr;
-    (*mInsertPt) = nullptr;
 }
 
 // Set the insertion point
