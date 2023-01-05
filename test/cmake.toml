@@ -39,7 +39,6 @@ link-libraries = [
     "UnknownIR",
     "UnknownFrontend",
     "gtest",
-    "raw_pdb",
     "capstone-static",
 ]
 compile-features = ["cxx_std_20"]

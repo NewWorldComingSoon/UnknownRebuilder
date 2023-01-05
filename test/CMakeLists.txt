@@ -93,7 +93,6 @@ target_link_libraries(test-ufrontend PRIVATE
 	UnknownIR
 	UnknownFrontend
 	gtest
-	raw_pdb
 	capstone-static
 )
 

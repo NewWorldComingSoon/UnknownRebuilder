@@ -4,9 +4,6 @@
 [submodule "3rdparty/keystone-retdec"]
 	path = 3rdparty/keystone-retdec
 	url = https://github.com/NewWorldComingSoon/keystone-retdec
-[submodule "3rdparty/raw_pdb"]
-	path = 3rdparty/raw_pdb
-	url = https://github.com/NewWorldComingSoon/raw_pdb
 [submodule "3rdparty/argparse"]
 	path = 3rdparty/argparse
 	url = https://github.com/NewWorldComingSoon/argparse

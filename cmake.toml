@@ -57,7 +57,7 @@ sources = [
     "src/UnknownFrontend/**.h",
 ]
 compile-features = ["cxx_std_20"]
-link-libraries = ["capstone-static", "raw_pdb", "UnknownIR"]
+link-libraries = ["capstone-static", "UnknownIR"]
 
 
 [target.UnknownBackend]
