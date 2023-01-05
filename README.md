@@ -37,7 +37,6 @@ Just for learning and fun. Maybe it can help others too.
 - [Capstone](https://github.com/NewWorldComingSoon/capstone-retdec) 
 - [Keystone](https://github.com/NewWorldComingSoon/keystone-retdec)
 - [RawPDB](https://github.com/NewWorldComingSoon/raw_pdb)
-- [toml11](https://github.com/NewWorldComingSoon/toml11)
 - [argparse](https://github.com/NewWorldComingSoon/argparse)
 - [LIEF](https://github.com/NewWorldComingSoon/LIEF)
 - [TinyXML2](https://github.com/leethomason/tinyxml2)
