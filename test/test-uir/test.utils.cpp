@@ -32,7 +32,10 @@ TEST(test_uir, test_uir_utils_2)
         {
             for (auto &Sym : SymParserPdb->getFunctionSymbols())
             {
-                // std::cout << std::format("rva:{:X} name:{} size:{:X}", Sym.rva, Sym.name, Sym.size) << "\n";
+                if (Sym.hasGuardCF)
+                {
+                    std::cout << std::format("rva:0x{:X} name:{} size:0x{:X}", Sym.rva, Sym.name, Sym.size) << "\n";
+                }
             }
         }
     }
@@ -48,7 +51,7 @@ TEST(test_uir, test_uir_utils_3)
         {
             for (auto &Sym : SymParserMap->getFunctionSymbols())
             {
-                // std::cout << std::format("rva:{:X} name:{} size:{:X}", Sym.rva, Sym.name, Sym.size) << "\n";
+                // std::cout << std::format("rva:0x{:X} name:{} size:0x{:X}", Sym.rva, Sym.name, Sym.size) << "\n";
             }
         }
     }
