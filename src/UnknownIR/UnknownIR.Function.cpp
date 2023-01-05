@@ -406,18 +406,18 @@ Function::print(unknown::raw_ostream &OS, bool NewLine) const
 void
 Function::print(unknown::XMLPrinter &Printer) const
 {
-    Printer.OpenElement(getPropertyFunction().str().c_str());
+    Printer.OpenElement(getPropertyFunction().data());
 
     // name
     {
-        Printer.PushAttribute(getPropertyName().str().c_str(), getReadableName().c_str());
+        Printer.PushAttribute(getPropertyName().data(), getReadableName().c_str());
     }
 
     // range
     {
         auto Range =
             std::format("0x{:X}", getFunctionBeginAddress()) + "-" + std::format("0x{:X}", getFunctionEndAddress());
-        Printer.PushAttribute(getPropertyRange().str().c_str(), Range.c_str());
+        Printer.PushAttribute(getPropertyRange().data(), Range.c_str());
     }
 
     // attributes
@@ -438,7 +438,7 @@ Function::print(unknown::XMLPrinter &Printer) const
             }
         }
 
-        Printer.PushAttribute(getPropertyAttributes().str().c_str(), SS.str().c_str());
+        Printer.PushAttribute(getPropertyAttributes().data(), SS.str().c_str());
     }
 
     // extra
@@ -448,7 +448,7 @@ Function::print(unknown::XMLPrinter &Printer) const
         printExtraInfo(OSExtra);
         if (!OSExtra.str().empty())
         {
-            Printer.PushAttribute(getPropertyExtra().str().c_str(), OSExtra.str().c_str());
+            Printer.PushAttribute(getPropertyExtra().data(), OSExtra.str().c_str());
         }
     }
 
@@ -459,7 +459,7 @@ Function::print(unknown::XMLPrinter &Printer) const
         printCommentInfo(OSComment);
         if (!OSComment.str().empty())
         {
-            Printer.PushAttribute(getPropertyComment().str().c_str(), OSComment.str().c_str());
+            Printer.PushAttribute(getPropertyComment().data(), OSComment.str().c_str());
         }
     }
 

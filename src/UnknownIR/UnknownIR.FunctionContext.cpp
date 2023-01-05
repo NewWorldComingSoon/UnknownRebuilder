@@ -133,16 +133,16 @@ FunctionContext::print(unknown::raw_ostream &OS, bool NewLine) const
 void
 FunctionContext::print(unknown::XMLPrinter &Printer) const
 {
-    Printer.OpenElement(getPropertyFC().str().c_str());
+    Printer.OpenElement(getPropertyFC().data());
 
     // name
     {
-        Printer.PushAttribute(getPropertyName().str().c_str(), getReadableName().c_str());
+        Printer.PushAttribute(getPropertyName().data(), getReadableName().c_str());
     }
 
     // ctxno
     {
-        Printer.PushAttribute(getPropertyFCNo().str().c_str(), std::format("{}", mCtxNo).c_str());
+        Printer.PushAttribute(getPropertyFCNo().data(), std::format("{}", mCtxNo).c_str());
     }
 
     // extra
@@ -152,7 +152,7 @@ FunctionContext::print(unknown::XMLPrinter &Printer) const
         printExtraInfo(OSExtra);
         if (!OSExtra.str().empty())
         {
-            Printer.PushAttribute(getPropertyExtra().str().c_str(), OSExtra.str().c_str());
+            Printer.PushAttribute(getPropertyExtra().data(), OSExtra.str().c_str());
         }
     }
 
@@ -163,7 +163,7 @@ FunctionContext::print(unknown::XMLPrinter &Printer) const
         printCommentInfo(OSComment);
         if (!OSComment.str().empty())
         {
-            Printer.PushAttribute(getPropertyComment().str().c_str(), OSComment.str().c_str());
+            Printer.PushAttribute(getPropertyComment().data(), OSComment.str().c_str());
         }
     }
 

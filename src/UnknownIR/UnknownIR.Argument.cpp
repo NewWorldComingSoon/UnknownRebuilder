@@ -134,16 +134,16 @@ Argument::print(unknown::raw_ostream &OS, bool NewLine) const
 void
 Argument::print(unknown::XMLPrinter &Printer) const
 {
-    Printer.OpenElement(getPropertyArg().str().c_str());
+    Printer.OpenElement(getPropertyArg().data());
 
     // name
     {
-        Printer.PushAttribute(getPropertyName().str().c_str(), getReadableName().c_str());
+        Printer.PushAttribute(getPropertyName().data(), getReadableName().c_str());
     }
 
     // argno
     {
-        Printer.PushAttribute(getPropertyArgNo().str().c_str(), std::format("{}", getArgNo()).c_str());
+        Printer.PushAttribute(getPropertyArgNo().data(), std::format("{}", getArgNo()).c_str());
     }
 
     // extra
@@ -153,7 +153,7 @@ Argument::print(unknown::XMLPrinter &Printer) const
         printExtraInfo(OSExtra);
         if (!OSExtra.str().empty())
         {
-            Printer.PushAttribute(getPropertyExtra().str().c_str(), OSExtra.str().c_str());
+            Printer.PushAttribute(getPropertyExtra().data(), OSExtra.str().c_str());
         }
     }
 
@@ -164,7 +164,7 @@ Argument::print(unknown::XMLPrinter &Printer) const
         printCommentInfo(OSComment);
         if (!OSComment.str().empty())
         {
-            Printer.PushAttribute(getPropertyComment().str().c_str(), OSComment.str().c_str());
+            Printer.PushAttribute(getPropertyComment().data(), OSComment.str().c_str());
         }
     }
 

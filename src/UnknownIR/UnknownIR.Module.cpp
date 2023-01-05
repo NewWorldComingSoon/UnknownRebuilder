@@ -304,21 +304,21 @@ Module::print(unknown::raw_ostream &OS, bool NewLine) const
 void
 Module::print(unknown::XMLPrinter &Printer) const
 {
-    Printer.OpenElement(getPropertyModule().str().c_str());
+    Printer.OpenElement(getPropertyModule().data());
 
     // name
     {
-        Printer.PushAttribute(getPropertyName().str().c_str(), getReadableName().c_str());
+        Printer.PushAttribute(getPropertyName().data(), getReadableName().c_str());
     }
 
     // arch
     {
-        Printer.PushAttribute(getPropertyArch().str().c_str(), getContext().getArchString().str().c_str());
+        Printer.PushAttribute(getPropertyArch().data(), getContext().getArchString().data());
     }
 
     // mode
     {
-        Printer.PushAttribute(getPropertyMode().str().c_str(), getContext().getModeString().str().c_str());
+        Printer.PushAttribute(getPropertyMode().data(), getContext().getModeString().data());
     }
 
     // gv

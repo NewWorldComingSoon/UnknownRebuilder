@@ -123,11 +123,11 @@ Instruction::print(unknown::raw_ostream &OS, bool NewLine) const
 void
 Instruction::print(unknown::XMLPrinter &Printer) const
 {
-    Printer.OpenElement(getPropertyInst().str().c_str());
+    Printer.OpenElement(getPropertyInst().data());
 
     // addr
     {
-        Printer.PushAttribute(getPropertyAddr().str().c_str(), std::format("0x{:X}", getInstructionAddress()).c_str());
+        Printer.PushAttribute(getPropertyAddr().data(), std::format("0x{:X}", getInstructionAddress()).c_str());
     }
 
     // name
@@ -135,7 +135,7 @@ Instruction::print(unknown::XMLPrinter &Printer) const
         std::string Name("");
         unknown::raw_string_ostream OSName(Name);
         printInst(OSName);
-        Printer.PushAttribute(getPropertyName().str().c_str(), OSName.str().c_str());
+        Printer.PushAttribute(getPropertyName().data(), OSName.str().c_str());
     }
 
     // extra
@@ -145,7 +145,7 @@ Instruction::print(unknown::XMLPrinter &Printer) const
         printExtraInfo(OSExtra);
         if (!OSExtra.str().empty())
         {
-            Printer.PushAttribute(getPropertyExtra().str().c_str(), OSExtra.str().c_str());
+            Printer.PushAttribute(getPropertyExtra().data(), OSExtra.str().c_str());
         }
     }
 
@@ -156,7 +156,7 @@ Instruction::print(unknown::XMLPrinter &Printer) const
         printCommentInfo(OSComment);
         if (!OSComment.str().empty())
         {
-            Printer.PushAttribute(getPropertyComment().str().c_str(), OSComment.str().c_str());
+            Printer.PushAttribute(getPropertyComment().data(), OSComment.str().c_str());
         }
     }
 
@@ -180,21 +180,21 @@ Instruction::printInst(unknown::raw_ostream &OS) const
 void
 Instruction::printOp(unknown::XMLPrinter &Printer) const
 {
-    Printer.OpenElement(getPropertyOpCode().str().c_str());
-    Printer.PushAttribute(getPropertyName().str().c_str(), getOpcodeName().str().c_str());
+    Printer.OpenElement(getPropertyOpCode().data());
+    Printer.PushAttribute(getPropertyName().data(), getOpcodeName().data());
     Printer.CloseElement();
 
     for (uint32_t i = 0; i < getDefaultNumberOfOperands(); ++i)
     {
-        Printer.OpenElement(getPropertyOp().str().c_str());
-        Printer.PushAttribute(getPropertyName().str().c_str(), getOperand(i)->getReadableName().c_str());
+        Printer.OpenElement(getPropertyOp().data());
+        Printer.PushAttribute(getPropertyName().data(), getOperand(i)->getReadableName().c_str());
         Printer.CloseElement();
     }
 
     if (hasResult())
     {
-        Printer.OpenElement(getPropertyOpRes().str().c_str());
-        Printer.PushAttribute(getPropertyName().str().c_str(), getReadableName().c_str());
+        Printer.OpenElement(getPropertyOpRes().data());
+        Printer.PushAttribute(getPropertyName().data(), getReadableName().c_str());
         Printer.CloseElement();
     }
 }

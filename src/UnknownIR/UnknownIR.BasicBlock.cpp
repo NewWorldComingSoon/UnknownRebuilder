@@ -422,18 +422,18 @@ BasicBlock::print(unknown::raw_ostream &OS, bool NewLine) const
 void
 BasicBlock::print(unknown::XMLPrinter &Printer) const
 {
-    Printer.OpenElement(getPropertyBB().str().c_str());
+    Printer.OpenElement(getPropertyBB().data());
 
     // name
     {
-        Printer.PushAttribute(getPropertyName().str().c_str(), getReadableName().c_str());
+        Printer.PushAttribute(getPropertyName().data(), getReadableName().c_str());
     }
 
     // range
     {
         auto Range =
             std::format("0x{:X}", getBasicBlockAddressBegin()) + "-" + std::format("0x{:X}", getBasicBlockAddressEnd());
-        Printer.PushAttribute(getPropertyRange().str().c_str(), Range.c_str());
+        Printer.PushAttribute(getPropertyRange().data(), Range.c_str());
     }
 
     // extra
@@ -443,7 +443,7 @@ BasicBlock::print(unknown::XMLPrinter &Printer) const
         printExtraInfo(OSExtra);
         if (!OSExtra.str().empty())
         {
-            Printer.PushAttribute(getPropertyExtra().str().c_str(), OSExtra.str().c_str());
+            Printer.PushAttribute(getPropertyExtra().data(), OSExtra.str().c_str());
         }
     }
 
@@ -454,7 +454,7 @@ BasicBlock::print(unknown::XMLPrinter &Printer) const
         printCommentInfo(OSComment);
         if (!OSComment.str().empty())
         {
-            Printer.PushAttribute(getPropertyComment().str().c_str(), OSComment.str().c_str());
+            Printer.PushAttribute(getPropertyComment().data(), OSComment.str().c_str());
         }
     }
 
