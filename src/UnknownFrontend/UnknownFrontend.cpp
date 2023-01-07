@@ -13,7 +13,7 @@ UnknownFrontendTranslator::createArch(uir::Context &C, const std::string &Binary
     {
         return std::make_unique<UnknownFrontendTranslatorImplX86>(C, BinaryFile, SymbolFile);
     }
-    else
+    else if (C.getArch() == uir::Context::Arch::ArchARM)
     {
         // TODO
     }
