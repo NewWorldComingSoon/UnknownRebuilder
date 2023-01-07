@@ -1,6 +1,7 @@
 #include <UnknownFrontend/UnknownFrontend.h>
 
 #include <x86/TranslatorImpl.x86.h>
+#include <arm/TranslatorImpl.arm.h>
 
 namespace ufrontend {
 
@@ -15,7 +16,7 @@ UnknownFrontendTranslator::createArch(uir::Context &C, const std::string &Binary
     }
     else if (C.getArch() == uir::Context::Arch::ArchARM)
     {
-        // TODO
+        return std::make_unique<UnknownFrontendTranslatorImplARM>(C, BinaryFile, SymbolFile);
     }
 
     return {};

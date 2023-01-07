@@ -639,8 +639,10 @@ target_link_libraries(UnknownIR PUBLIC
 set(UnknownFrontend_SOURCES
 	"src/UnknownFrontend/TranslatorImpl.cpp"
 	"src/UnknownFrontend/UnknownFrontend.cpp"
+	"src/UnknownFrontend/arm/TranslatorImpl.arm.cpp"
 	"src/UnknownFrontend/x86/TranslatorImpl.x86.cpp"
 	"src/UnknownFrontend/TranslatorImpl.h"
+	"src/UnknownFrontend/arm/TranslatorImpl.arm.h"
 	"src/UnknownFrontend/x86/TranslatorImpl.x86.h"
 	"include/UnknownFrontend/UnknownFrontend.h"
 	cmake.toml
