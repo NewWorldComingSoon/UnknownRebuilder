@@ -1,7 +1,7 @@
 #pragma once
-#include <UnknownFrontend/UnknownFrontend.h>
-
 #include <capstone/capstone.h>
+
+#include <UnknownFrontend/UnknownFrontend.h>
 
 namespace ufrontend {
 
@@ -18,6 +18,11 @@ protected:
 public:
     UnknownFrontendTranslatorImpl(uir::Context &C, const std::string &BinaryFile, const std::string &SymbolFile);
     virtual ~UnknownFrontendTranslatorImpl();
+
+protected:
+    // Virtual functions
+    virtual void openCapstoneHandle() = 0;
+    virtual void closeCapstoneHandle() = 0;
 
 public:
     // Get/Set

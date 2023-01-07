@@ -3,6 +3,7 @@
 #include <cstdint>
 #include <memory>
 #include <string>
+#include <iostream>
 
 #include <UnknownIR/Context.h>
 
