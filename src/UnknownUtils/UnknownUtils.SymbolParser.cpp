@@ -525,7 +525,7 @@ public:
 ////////////////////////////////////////////////////////////////////////////////////////
 //// Function
 std::unique_ptr<SymbolParser>
-CreateSymbolParser(bool UsePDB)
+CreateSymbolParserForPE(bool UsePDB)
 {
     if (UsePDB)
     {

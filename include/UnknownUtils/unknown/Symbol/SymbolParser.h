@@ -70,6 +70,6 @@ public:
 ////////////////////////////////////////////////////////////////////////////////////////
 //// Function
 std::unique_ptr<SymbolParser>
-CreateSymbolParser(bool UsePDB = true);
+CreateSymbolParserForPE(bool UsePDB = true);
 
 } // namespace unknown

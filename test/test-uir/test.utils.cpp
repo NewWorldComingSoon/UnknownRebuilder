@@ -24,7 +24,7 @@ TEST(test_uir, test_uir_utils_1)
 
 TEST(test_uir, test_uir_utils_2)
 {
-    auto SymParserPdb = unknown::CreateSymbolParser(true);
+    auto SymParserPdb = unknown::CreateSymbolParserForPE(true);
     if (SymParserPdb)
     {
         auto succ = SymParserPdb->ParseFunctionSymbols(UNKNOWN_REBUILDER_SRC_DIR R"(\sample\pe-x64\Project12.pdb)");
@@ -43,7 +43,7 @@ TEST(test_uir, test_uir_utils_2)
 
 TEST(test_uir, test_uir_utils_3)
 {
-    auto SymParserMap = unknown::CreateSymbolParser(false);
+    auto SymParserMap = unknown::CreateSymbolParserForPE(false);
     if (SymParserMap)
     {
         auto succ = SymParserMap->ParseFunctionSymbols(UNKNOWN_REBUILDER_SRC_DIR R"(\sample\pe-x64\Project12.map)");
