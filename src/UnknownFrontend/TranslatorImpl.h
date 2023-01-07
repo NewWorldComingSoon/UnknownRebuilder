@@ -26,6 +26,7 @@ protected:
 
 public:
     // Translate
+    // Translate the given binary into UnknownIR
     virtual std::unique_ptr<uir::Module> translateBinary() = 0;
 
 public:

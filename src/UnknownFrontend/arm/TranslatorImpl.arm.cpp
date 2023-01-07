@@ -32,6 +32,7 @@ UnknownFrontendTranslatorImplARM::closeCapstoneHandle()
 
 ////////////////////////////////////////////////////////////
 // Translate
+// Translate the given binary into UnknownIR
 std::unique_ptr<uir::Module>
 UnknownFrontendTranslatorImplARM::translateBinary()
 {

@@ -15,7 +15,7 @@ protected:
     virtual void closeCapstoneHandle() override;
 
 public:
-    // Translate
+    // Translate the given binary into UnknownIR
     virtual std::unique_ptr<uir::Module> translateBinary() override;
 };
 
