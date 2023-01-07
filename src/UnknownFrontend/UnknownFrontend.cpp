@@ -10,11 +10,13 @@ namespace ufrontend {
 std::unique_ptr<UnknownFrontendTranslator>
 UnknownFrontendTranslator::createArch(uir::Context &C, const std::string &BinaryFile, const std::string &SymbolFile)
 {
-    if (C.getArch() == uir::Context::Arch::ArchX86)
+    auto Arch = C.getArch();
+
+    if (Arch == uir::Context::Arch::ArchX86)
     {
         return std::make_unique<UnknownFrontendTranslatorImplX86>(C, BinaryFile, SymbolFile);
     }
-    else if (C.getArch() == uir::Context::Arch::ArchARM)
+    else if (Arch == uir::Context::Arch::ArchARM)
     {
         return std::make_unique<UnknownFrontendTranslatorImplARM>(C, BinaryFile, SymbolFile);
     }
