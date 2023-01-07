@@ -13,6 +13,9 @@ protected:
     // Virtual functions
     virtual void openCapstoneHandle() override;
     virtual void closeCapstoneHandle() override;
+
+public:
+    // Virtual functions
     virtual std::unique_ptr<uir::Module> translateBinary() override;
 };
 
