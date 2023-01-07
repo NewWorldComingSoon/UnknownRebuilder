@@ -11,6 +11,7 @@ namespace ufrontend {
 class UnknownFrontendTranslator
 {
 public:
+    UnknownFrontendTranslator() = default;
     virtual ~UnknownFrontendTranslator() = default;
 
 public:
