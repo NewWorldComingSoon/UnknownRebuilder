@@ -17,7 +17,7 @@ UnknownFrontendTranslatorImplX86::~UnknownFrontendTranslatorImplX86()
 }
 
 ////////////////////////////////////////////////////////////
-// Virtual functions
+// Capstone
 void
 UnknownFrontendTranslatorImplX86::openCapstoneHandle()
 {
@@ -53,6 +53,8 @@ UnknownFrontendTranslatorImplX86::closeCapstoneHandle()
     }
 }
 
+////////////////////////////////////////////////////////////
+// Translate
 std::unique_ptr<uir::Module>
 UnknownFrontendTranslatorImplX86::translateBinary()
 {

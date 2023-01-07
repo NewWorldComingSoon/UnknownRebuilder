@@ -10,12 +10,12 @@ public:
     virtual ~UnknownFrontendTranslatorImplARM();
 
 protected:
-    // Virtual functions
+    // Capstone
     virtual void openCapstoneHandle() override;
     virtual void closeCapstoneHandle() override;
 
 public:
-    // Virtual functions
+    // Translate
     virtual std::unique_ptr<uir::Module> translateBinary() override;
 };
 
