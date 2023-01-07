@@ -5,7 +5,7 @@
 #include <string>
 #include <iostream>
 
-#include <UnknownIR/Context.h>
+#include <UnknownIR/UnknownIR.h>
 
 namespace ufrontend {
 

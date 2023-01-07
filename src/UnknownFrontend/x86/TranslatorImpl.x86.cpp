@@ -53,4 +53,11 @@ UnknownFrontendTranslatorImplX86::closeCapstoneHandle()
     }
 }
 
+std::unique_ptr<uir::Module>
+UnknownFrontendTranslatorImplX86::translateBinary()
+{
+    // TODO
+    return {};
+}
+
 } // namespace ufrontend

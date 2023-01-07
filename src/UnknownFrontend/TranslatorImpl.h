@@ -23,6 +23,7 @@ protected:
     // Virtual functions
     virtual void openCapstoneHandle() = 0;
     virtual void closeCapstoneHandle() = 0;
+    virtual std::unique_ptr<uir::Module> translateBinary() = 0;
 
 public:
     // Get/Set

@@ -30,4 +30,11 @@ UnknownFrontendTranslatorImplARM::closeCapstoneHandle()
     // TODO
 }
 
+std::unique_ptr<uir::Module>
+UnknownFrontendTranslatorImplARM::translateBinary()
+{
+    // TODO
+    return {};
+}
+
 } // namespace ufrontend

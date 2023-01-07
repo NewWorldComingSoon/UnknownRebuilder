@@ -13,6 +13,7 @@ protected:
     // Virtual functions
     virtual void openCapstoneHandle() override;
     virtual void closeCapstoneHandle() override;
+    virtual std::unique_ptr<uir::Module> translateBinary() override;
 };
 
 } // namespace ufrontend
