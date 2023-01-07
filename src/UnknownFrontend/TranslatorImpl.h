@@ -6,7 +6,7 @@ namespace ufrontend {
 class UnknownFrontendTranslatorImpl : public UnknownFrontendTranslator
 {
 public:
-    UnknownFrontendTranslatorImpl(uir::Context &C);
+    UnknownFrontendTranslatorImpl(uir::Context &C, const std::string &BinaryFile, const std::string &SymbolFile);
     virtual ~UnknownFrontendTranslatorImpl();
 };
 

@@ -2,6 +2,7 @@
 #include <cassert>
 #include <cstdint>
 #include <memory>
+#include <string>
 
 #include <UnknownIR/Context.h>
 
@@ -14,7 +15,8 @@ public:
 
 public:
     // Static
-    static std::unique_ptr<UnknownFrontendTranslator> createArch(uir::Context &C);
+    static std::unique_ptr<UnknownFrontendTranslator>
+    createArch(uir::Context &C, const std::string &BinaryFile, const std::string &SymbolFile);
 };
 
 } // namespace ufrontend

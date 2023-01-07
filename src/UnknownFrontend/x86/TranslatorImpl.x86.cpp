@@ -2,7 +2,11 @@
 
 namespace ufrontend {
 
-UnknownFrontendTranslatorImplX86::UnknownFrontendTranslatorImplX86(uir::Context &C) : UnknownFrontendTranslatorImpl(C)
+UnknownFrontendTranslatorImplX86::UnknownFrontendTranslatorImplX86(
+    uir::Context &C,
+    const std::string &BinaryFile,
+    const std::string &SymbolFile) :
+    UnknownFrontendTranslatorImpl(C, BinaryFile, SymbolFile)
 {
     //
 }
