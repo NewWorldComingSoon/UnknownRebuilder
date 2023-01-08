@@ -58,10 +58,7 @@ UnknownFrontendTranslatorImplX86::closeCapstoneHandle()
 void
 UnknownFrontendTranslatorImplX86::initSymbolParser()
 {
-    if (mSymbolFile.empty())
-    {
-        return;
-    }
+    assert(!mSymbolFile.empty());
 
     bool UsePDB = false;
     if (mSymbolFile.rfind(".pdb") != std::string::npos)
@@ -93,10 +90,7 @@ UnknownFrontendTranslatorImplX86::initSymbolParser()
 void
 UnknownFrontendTranslatorImplX86::initBinary()
 {
-    if (mBinaryFile.empty())
-    {
-        return;
-    }
+    assert(!mBinaryFile.empty());
 
     mBinary = LIEF::PE::Parser::parse(mBinaryFile);
     assert(mBinary);
