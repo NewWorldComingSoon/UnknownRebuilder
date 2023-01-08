@@ -118,4 +118,11 @@ UnknownFrontendTranslatorImplX86::translateOneInst(
     return true;
 }
 
+bool
+UnknownFrontendTranslatorImplX86::translateOneInst(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB)
+{
+    // TODO
+    return true;
+}
+
 } // namespace ufrontend
