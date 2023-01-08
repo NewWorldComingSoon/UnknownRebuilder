@@ -37,6 +37,9 @@ public:
     // Translate the given binary into UnknownIR
     virtual std::unique_ptr<uir::Module> translateBinary() = 0;
 
+    // Translate one instruction into UnknownIR
+    virtual bool translateOneInst(const uint8_t *Bytes, size_t Size, uint64_t Address, uir::BasicBlock *BB) = 0;
+
 public:
     // Get/Set
     // Get the context of this translator

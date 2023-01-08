@@ -34,6 +34,9 @@ protected:
 public:
     // Translate the given binary into UnknownIR
     virtual std::unique_ptr<uir::Module> translateBinary() override;
+
+    // Translate one instruction into UnknownIR
+    virtual bool translateOneInst(const uint8_t *Bytes, size_t Size, uint64_t Address, uir::BasicBlock *BB) override;
 };
 
 } // namespace ufrontend

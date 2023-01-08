@@ -106,4 +106,16 @@ UnknownFrontendTranslatorImplX86::translateBinary()
     return {};
 }
 
+// Translate one instruction into UnknownIR
+bool
+UnknownFrontendTranslatorImplX86::translateOneInst(
+    const uint8_t *Bytes,
+    size_t Size,
+    uint64_t Address,
+    uir::BasicBlock *BB)
+{
+    // TODO
+    return true;
+}
+
 } // namespace ufrontend
