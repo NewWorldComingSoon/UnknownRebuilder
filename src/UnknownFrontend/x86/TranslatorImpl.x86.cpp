@@ -127,7 +127,7 @@ UnknownFrontendTranslatorImplX86::translateOneInstruction(const cs_insn *Insn, u
 
 // Translate one BasicBlock into UnknownIR
 uir::BasicBlock *
-UnknownFrontendTranslatorImplX86::translateOneBasicBlock()
+UnknownFrontendTranslatorImplX86::translateOneBasicBlock(const std::string &BlockName, uint64_t Address)
 {
     // TODO
     return nullptr;
@@ -135,7 +135,7 @@ UnknownFrontendTranslatorImplX86::translateOneBasicBlock()
 
 // Translate one Function into UnknownIR
 uir::Function *
-UnknownFrontendTranslatorImplX86::translateOneFunction()
+UnknownFrontendTranslatorImplX86::translateOneFunction(const std::string &FunctionName, uint64_t Address)
 {
     // TODO
     return nullptr;

@@ -41,10 +41,10 @@ public:
     virtual bool translateOneInstruction(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB) override;
 
     // Translate one BasicBlock into UnknownIR
-    virtual uir::BasicBlock *translateOneBasicBlock() override;
+    virtual uir::BasicBlock *translateOneBasicBlock(const std::string &BlockName, uint64_t Address) override;
 
     // Translate one Function into UnknownIR
-    virtual uir::Function *translateOneFunction() override;
+    virtual uir::Function *translateOneFunction(const std::string &FunctionName, uint64_t Address) override;
 };
 
 } // namespace ufrontend

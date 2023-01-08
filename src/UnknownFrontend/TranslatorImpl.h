@@ -42,10 +42,10 @@ public:
     virtual bool translateOneInstruction(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB) = 0;
 
     // Translate one BasicBlock into UnknownIR
-    virtual uir::BasicBlock *translateOneBasicBlock() = 0;
+    virtual uir::BasicBlock *translateOneBasicBlock(const std::string &BlockName, uint64_t Address) = 0;
 
     // Translate one Function into UnknownIR
-    virtual uir::Function *translateOneFunction() = 0;
+    virtual uir::Function *translateOneFunction(const std::string &FunctionName, uint64_t Address) = 0;
 
 public:
     // Get/Set
