@@ -8,12 +8,12 @@ UnknownFrontendTranslatorImplARM::UnknownFrontendTranslatorImplARM(
     const std::string &SymbolFile) :
     UnknownFrontendTranslatorImpl(C, BinaryFile, SymbolFile)
 {
-    openCapstoneHandle();
+    //
 }
 
 UnknownFrontendTranslatorImplARM::~UnknownFrontendTranslatorImplARM()
 {
-    closeCapstoneHandle();
+    //
 }
 
 ////////////////////////////////////////////////////////////
@@ -26,6 +26,22 @@ UnknownFrontendTranslatorImplARM::openCapstoneHandle()
 
 void
 UnknownFrontendTranslatorImplARM::closeCapstoneHandle()
+{
+    // TODO
+}
+
+////////////////////////////////////////////////////////////
+// Symbol Parser
+void
+UnknownFrontendTranslatorImplARM::initSymbolParser()
+{
+    // TODO
+}
+
+////////////////////////////////////////////////////////////
+// Binary
+void
+UnknownFrontendTranslatorImplARM::initBinary()
 {
     // TODO
 }

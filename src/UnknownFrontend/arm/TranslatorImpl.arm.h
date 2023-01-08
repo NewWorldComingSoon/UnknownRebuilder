@@ -14,6 +14,14 @@ protected:
     virtual void openCapstoneHandle() override;
     virtual void closeCapstoneHandle() override;
 
+protected:
+    // Symbol Parser
+    virtual void initSymbolParser() override;
+
+protected:
+    // Binary
+    virtual void initBinary() override;
+
 public:
     // Translate the given binary into UnknownIR
     virtual std::unique_ptr<uir::Module> translateBinary() override;

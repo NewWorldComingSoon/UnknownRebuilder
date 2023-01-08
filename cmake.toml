@@ -46,6 +46,7 @@ link-libraries = ["UnknownUtils"]
 type = "library"
 include-directories = [
     "3rdparty/capstone-retdec/include",
+    "3rdparty/LIEF/include",
     "src/UnknownFrontend",
     "include",
     "include/UnknownFrontend",
@@ -57,7 +58,7 @@ sources = [
     "src/UnknownFrontend/**.h",
 ]
 compile-features = ["cxx_std_20"]
-link-libraries = ["capstone-static", "UnknownIR"]
+link-libraries = ["capstone-static", "UnknownIR", "LIB_LIEF"]
 
 
 [target.UnknownBackend]

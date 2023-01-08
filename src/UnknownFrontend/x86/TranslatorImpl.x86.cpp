@@ -8,12 +8,12 @@ UnknownFrontendTranslatorImplX86::UnknownFrontendTranslatorImplX86(
     const std::string &SymbolFile) :
     UnknownFrontendTranslatorImpl(C, BinaryFile, SymbolFile)
 {
-    openCapstoneHandle();
+    //
 }
 
 UnknownFrontendTranslatorImplX86::~UnknownFrontendTranslatorImplX86()
 {
-    closeCapstoneHandle();
+    //
 }
 
 ////////////////////////////////////////////////////////////
@@ -51,6 +51,45 @@ UnknownFrontendTranslatorImplX86::closeCapstoneHandle()
 
         mCapstoneHandle = 0;
     }
+}
+
+////////////////////////////////////////////////////////////
+// Symbol Parser
+void
+UnknownFrontendTranslatorImplX86::initSymbolParser()
+{
+    if (mSymbolFile.empty())
+    {
+        return;
+    }
+
+    bool UsePDB = false;
+    if (mSymbolFile.rfind(".pdb") != std::string::npos)
+    {
+        UsePDB = true;
+    }
+
+    if (!UsePDB)
+    {
+        if (mSymbolFile.rfind(".map") == std::string::npos)
+        {
+            std::cerr << "UnknownFrontend: Warning: Symbol file is not a .map/.pdb file" << std::endl;
+            std::abort();
+        }
+    }
+}
+
+////////////////////////////////////////////////////////////
+// Binary
+void
+UnknownFrontendTranslatorImplX86::initBinary()
+{
+    if (mBinaryFile.empty())
+    {
+        return;
+    }
+
+    mBinary = LIEF::PE::Parser::parse(mBinaryFile);
 }
 
 ////////////////////////////////////////////////////////////

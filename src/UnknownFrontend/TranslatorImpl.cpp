@@ -8,12 +8,14 @@ UnknownFrontendTranslatorImpl::UnknownFrontendTranslatorImpl(
     const std::string &SymbolFile) :
     mContext(C), mBinaryFile(BinaryFile), mSymbolFile(SymbolFile), mCapstoneHandle(0)
 {
-    //
+    openCapstoneHandle();
+    initSymbolParser();
+    initBinary();
 }
 
 UnknownFrontendTranslatorImpl::~UnknownFrontendTranslatorImpl()
 {
-    //
+    closeCapstoneHandle();
 }
 
 ////////////////////////////////////////////////////////////

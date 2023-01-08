@@ -24,6 +24,14 @@ protected:
     virtual void openCapstoneHandle() = 0;
     virtual void closeCapstoneHandle() = 0;
 
+protected:
+    // Symbol Parser
+    virtual void initSymbolParser() = 0;
+
+protected:
+    // Binary
+    virtual void initBinary() = 0;
+
 public:
     // Translate
     // Translate the given binary into UnknownIR

@@ -659,6 +659,7 @@ target_compile_features(UnknownFrontend PUBLIC
 
 target_include_directories(UnknownFrontend PUBLIC
 	"3rdparty/capstone-retdec/include"
+	"3rdparty/LIEF/include"
 	"src/UnknownFrontend"
 	include
 	"include/UnknownFrontend"
@@ -667,6 +668,7 @@ target_include_directories(UnknownFrontend PUBLIC
 target_link_libraries(UnknownFrontend PUBLIC
 	capstone-static
 	UnknownIR
+	LIB_LIEF
 )
 
 # Target: UnknownBackend
