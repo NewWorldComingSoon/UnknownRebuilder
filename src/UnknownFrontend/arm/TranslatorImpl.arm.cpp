@@ -75,4 +75,20 @@ UnknownFrontendTranslatorImplARM::translateOneInstruction(const cs_insn *Insn, u
     return true;
 }
 
+// Translate one BasicBlock into UnknownIR
+uir::BasicBlock *
+UnknownFrontendTranslatorImplARM::translateOneBasicBlock()
+{
+    // TODO
+    return nullptr;
+}
+
+// Translate one Function into UnknownIR
+uir::Function *
+UnknownFrontendTranslatorImplARM::translateOneFunction()
+{
+    // TODO
+    return nullptr;
+}
+
 } // namespace ufrontend

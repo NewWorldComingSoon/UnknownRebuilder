@@ -41,6 +41,12 @@ public:
     virtual bool translateOneInstruction(const uint8_t *Bytes, size_t Size, uint64_t Address, uir::BasicBlock *BB) = 0;
     virtual bool translateOneInstruction(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB) = 0;
 
+    // Translate one BasicBlock into UnknownIR
+    virtual uir::BasicBlock *translateOneBasicBlock() = 0;
+
+    // Translate one Function into UnknownIR
+    virtual uir::Function *translateOneFunction() = 0;
+
 public:
     // Get/Set
     // Get the context of this translator

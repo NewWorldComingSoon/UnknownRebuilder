@@ -39,6 +39,12 @@ public:
     virtual bool
     translateOneInstruction(const uint8_t *Bytes, size_t Size, uint64_t Address, uir::BasicBlock *BB) override;
     virtual bool translateOneInstruction(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB) override;
+
+    // Translate one BasicBlock into UnknownIR
+    virtual uir::BasicBlock *translateOneBasicBlock() override;
+
+    // Translate one Function into UnknownIR
+    virtual uir::Function *translateOneFunction() override;
 };
 
 } // namespace ufrontend

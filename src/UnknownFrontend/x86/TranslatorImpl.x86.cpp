@@ -125,4 +125,20 @@ UnknownFrontendTranslatorImplX86::translateOneInstruction(const cs_insn *Insn, u
     return true;
 }
 
+// Translate one BasicBlock into UnknownIR
+uir::BasicBlock *
+UnknownFrontendTranslatorImplX86::translateOneBasicBlock()
+{
+    // TODO
+    return nullptr;
+}
+
+// Translate one Function into UnknownIR
+uir::Function *
+UnknownFrontendTranslatorImplX86::translateOneFunction()
+{
+    // TODO
+    return nullptr;
+}
+
 } // namespace ufrontend
