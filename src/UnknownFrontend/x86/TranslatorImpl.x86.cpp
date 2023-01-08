@@ -77,6 +77,15 @@ UnknownFrontendTranslatorImplX86::initSymbolParser()
             std::abort();
         }
     }
+
+    mSymbolParser = unknown::CreateSymbolParserForPE(UsePDB);
+    assert(mSymbolParser);
+
+    if (!mSymbolParser->ParseFunctionSymbols(mSymbolFile))
+    {
+        std::cerr << "UnknownFrontend: Warning: ParseFunctionSymbols failed" << std::endl;
+        std::abort();
+    }
 }
 
 ////////////////////////////////////////////////////////////
@@ -90,6 +99,7 @@ UnknownFrontendTranslatorImplX86::initBinary()
     }
 
     mBinary = LIEF::PE::Parser::parse(mBinaryFile);
+    assert(mBinary);
 }
 
 ////////////////////////////////////////////////////////////
