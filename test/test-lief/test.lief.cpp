@@ -41,3 +41,26 @@ TEST(test_lief, test_lief_2)
     builder.write(UNKNOWN_REBUILDER_SRC_DIR R"(/sample/pe-x64/Project12.rebuild2.exe)");
     std::cout << binary->name() << '\n';
 }
+
+TEST(test_lief, test_lief_3)
+{
+    std::unique_ptr<Binary> binary{Parser::parse(UNKNOWN_REBUILDER_SRC_DIR R"(/sample/pe-x64/Project12.exe)")};
+
+    auto printfContent = binary->get_content_from_virtual_address(0x140001010, 0x2);
+    for (auto &V : printfContent)
+    {
+        std::cout << std::format("{:X}", V) << std::endl;
+    }
+
+    // test patch
+    std::vector<uint8_t> patch = {0xcc, 0x90};
+    binary->patch_address(0x140001010, patch);
+
+    Builder builder{*binary};
+
+    builder.build_imports(false).patch_imports(false).build_tls(false).build_resources(false);
+
+    builder.build();
+    builder.write(UNKNOWN_REBUILDER_SRC_DIR R"(/sample/pe-x64/Project12.patch.exe)");
+    std::cout << binary->name() << '\n';
+}
