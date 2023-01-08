@@ -42,6 +42,12 @@ public:
     // Get the context of this translator
     uir::Context &getContext() const;
 
+    // Get the Binary File
+    const std::string &getBinaryFile() const;
+
+    // Get the Symbol File
+    const std::string &getSymbolFile() const;
+
     // Get the capstone handle
     csh getCapstoneHandle() const;
 

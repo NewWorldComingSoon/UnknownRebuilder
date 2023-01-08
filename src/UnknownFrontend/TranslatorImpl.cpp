@@ -27,6 +27,20 @@ UnknownFrontendTranslatorImpl::getContext() const
     return mContext;
 }
 
+// Get the Binary File
+const std::string &
+UnknownFrontendTranslatorImpl::getBinaryFile() const
+{
+    return mBinaryFile;
+}
+
+// Get the Symbol File
+const std::string &
+UnknownFrontendTranslatorImpl::getSymbolFile() const
+{
+    return mSymbolFile;
+}
+
 // Get the capstone handle
 csh
 UnknownFrontendTranslatorImpl::getCapstoneHandle() const

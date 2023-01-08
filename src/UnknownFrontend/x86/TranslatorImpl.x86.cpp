@@ -58,17 +58,17 @@ UnknownFrontendTranslatorImplX86::closeCapstoneHandle()
 void
 UnknownFrontendTranslatorImplX86::initSymbolParser()
 {
-    assert(!mSymbolFile.empty());
+    assert(!getSymbolFile().empty());
 
     bool UsePDB = false;
-    if (mSymbolFile.rfind(".pdb") != std::string::npos)
+    if (getSymbolFile().rfind(".pdb") != std::string::npos)
     {
         UsePDB = true;
     }
 
     if (!UsePDB)
     {
-        if (mSymbolFile.rfind(".map") == std::string::npos)
+        if (getSymbolFile().rfind(".map") == std::string::npos)
         {
             std::cerr << "UnknownFrontend: Error: Symbol file is not a .map/.pdb file" << std::endl;
             std::abort();
@@ -78,7 +78,7 @@ UnknownFrontendTranslatorImplX86::initSymbolParser()
     mSymbolParser = unknown::CreateSymbolParserForPE(UsePDB);
     assert(mSymbolParser);
 
-    if (!mSymbolParser->ParseFunctionSymbols(mSymbolFile))
+    if (!mSymbolParser->ParseFunctionSymbols(getSymbolFile()))
     {
         std::cerr << "UnknownFrontend: Error: ParseFunctionSymbols failed" << std::endl;
         std::abort();
@@ -90,9 +90,9 @@ UnknownFrontendTranslatorImplX86::initSymbolParser()
 void
 UnknownFrontendTranslatorImplX86::initBinary()
 {
-    assert(!mBinaryFile.empty());
+    assert(!getBinaryFile().empty());
 
-    mBinary = LIEF::PE::Parser::parse(mBinaryFile);
+    mBinary = LIEF::PE::Parser::parse(getBinaryFile());
     assert(mBinary);
 }
 
