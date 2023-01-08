@@ -70,7 +70,7 @@ UnknownFrontendTranslatorImplX86::initSymbolParser()
     {
         if (mSymbolFile.rfind(".map") == std::string::npos)
         {
-            std::cerr << "UnknownFrontend: Warning: Symbol file is not a .map/.pdb file" << std::endl;
+            std::cerr << "UnknownFrontend: Error: Symbol file is not a .map/.pdb file" << std::endl;
             std::abort();
         }
     }
@@ -80,7 +80,7 @@ UnknownFrontendTranslatorImplX86::initSymbolParser()
 
     if (!mSymbolParser->ParseFunctionSymbols(mSymbolFile))
     {
-        std::cerr << "UnknownFrontend: Warning: ParseFunctionSymbols failed" << std::endl;
+        std::cerr << "UnknownFrontend: Error: ParseFunctionSymbols failed" << std::endl;
         std::abort();
     }
 }
