@@ -108,7 +108,7 @@ UnknownFrontendTranslatorImplX86::translateBinary()
 
 // Translate one instruction into UnknownIR
 bool
-UnknownFrontendTranslatorImplX86::translateOneInst(
+UnknownFrontendTranslatorImplX86::translateOneInstruction(
     const uint8_t *Bytes,
     size_t Size,
     uint64_t Address,
@@ -119,7 +119,7 @@ UnknownFrontendTranslatorImplX86::translateOneInst(
 }
 
 bool
-UnknownFrontendTranslatorImplX86::translateOneInst(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB)
+UnknownFrontendTranslatorImplX86::translateOneInstruction(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB)
 {
     // TODO
     return true;
