@@ -94,7 +94,7 @@ UnknownFrontendTranslatorImplARM::translateOneFunction(
     assert(F);
 
     // TODO
-    return true;
+    return false;
 }
 
 } // namespace ufrontend

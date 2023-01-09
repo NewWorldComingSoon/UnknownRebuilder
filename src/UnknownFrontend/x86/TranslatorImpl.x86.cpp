@@ -236,7 +236,7 @@ UnknownFrontendTranslatorImplX86::translateOneFunction(
     assert(F);
 
     // TODO
-    return true;
+    return false;
 }
 
 bool
