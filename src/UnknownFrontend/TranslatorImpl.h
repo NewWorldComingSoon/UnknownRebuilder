@@ -109,7 +109,7 @@ public:
     virtual const Platform getPlatform() const override;
 
     // Set the platform
-    virtual void setPlatform(Platform Platform) override;
+    virtual void setPlatform(Platform Plat) override;
 };
 
 } // namespace ufrontend

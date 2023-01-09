@@ -81,7 +81,7 @@ public:
     virtual const Platform getPlatform() const = 0;
 
     // Set the platform
-    virtual void setPlatform(Platform Platform) = 0;
+    virtual void setPlatform(Platform Plat) = 0;
 
 public:
     // Static

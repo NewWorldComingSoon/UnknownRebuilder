@@ -114,9 +114,9 @@ UnknownFrontendTranslatorImpl::getPlatform() const
 
 // Set the platform
 void
-UnknownFrontendTranslatorImpl::setPlatform(Platform Platform)
+UnknownFrontendTranslatorImpl::setPlatform(Platform Plat)
 {
-    mPlatform = Platform;
+    mPlatform = Plat;
 }
 
 } // namespace ufrontend
