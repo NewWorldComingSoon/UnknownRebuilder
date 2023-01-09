@@ -51,8 +51,10 @@ public:
     // Translate one BasicBlock into UnknownIR
     virtual uir::BasicBlock *translateOneBasicBlock(const std::string &BlockName, uint64_t Address) override;
 
-    // Translate one Function into UnknownIR
-    virtual uir::Function *translateOneFunction(const std::string &FunctionName, uint64_t Address) override;
+    // Translate one function into UnknownIR
+    virtual bool
+    translateOneFunction(const std::string &FunctionName, uint64_t Address, size_t Size, uir::Function *F) override;
+    virtual bool translateOneFunction(const unknown::SymbolParser::FunctionSymbol &FunctionSymbol, uir::Function *F);
 };
 
 } // namespace ufrontend

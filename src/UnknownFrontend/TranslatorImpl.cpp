@@ -6,7 +6,13 @@ UnknownFrontendTranslatorImpl::UnknownFrontendTranslatorImpl(
     uir::Context &C,
     const std::string &BinaryFile,
     const std::string &SymbolFile) :
-    mContext(C), mBinaryFile(BinaryFile), mSymbolFile(SymbolFile), mCapstoneHandle(0), mCurPtrBegin(0), mCurPtrEnd(0)
+    mContext(C),
+    mBinaryFile(BinaryFile),
+    mSymbolFile(SymbolFile),
+    mCapstoneHandle(0),
+    mCurPtrBegin(0),
+    mCurPtrEnd(0),
+    mCurFunction(nullptr)
 {
     openCapstoneHandle();
     initSymbolParser();
@@ -81,6 +87,20 @@ void
 UnknownFrontendTranslatorImpl::setCurPtrEnd(uint64_t Ptr)
 {
     mCurPtrEnd = Ptr;
+}
+
+// Get the current function
+const uir::Function *
+UnknownFrontendTranslatorImpl::getCurFunction() const
+{
+    return mCurFunction;
+}
+
+// Set the current function
+void
+UnknownFrontendTranslatorImpl::setCurFunction(uir::Function *Function)
+{
+    mCurFunction = Function;
 }
 
 } // namespace ufrontend

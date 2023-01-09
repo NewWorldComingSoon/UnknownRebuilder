@@ -26,8 +26,9 @@ public:
     // Translate one BasicBlock into UnknownIR
     virtual uir::BasicBlock *translateOneBasicBlock(const std::string &BlockName, uint64_t Address) = 0;
 
-    // Translate one Function into UnknownIR
-    virtual uir::Function *translateOneFunction(const std::string &FunctionName, uint64_t Address) = 0;
+    // Translate one function into UnknownIR
+    virtual bool
+    translateOneFunction(const std::string &FunctionName, uint64_t Address, size_t Size, uir::Function *F) = 0;
 
 public:
     // Get/Set
@@ -51,6 +52,12 @@ public:
 
     // Set the end of current pointer
     virtual void setCurPtrEnd(uint64_t Ptr) = 0;
+
+    // Get the current function
+    virtual const uir::Function *getCurFunction() const = 0;
+
+    // Set the current function
+    virtual void setCurFunction(uir::Function *Function) = 0;
 
 public:
     // Static

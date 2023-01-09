@@ -137,6 +137,10 @@ public:
 
     // Print the module
     void print(unknown::XMLPrinter &Printer) const;
+
+public:
+    // Static
+    static std::unique_ptr<Module> get(Context &C, const unknown::StringRef &ModuleName);
 };
 
 } // namespace uir

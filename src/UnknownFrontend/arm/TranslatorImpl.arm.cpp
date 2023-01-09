@@ -83,12 +83,18 @@ UnknownFrontendTranslatorImplARM::translateOneBasicBlock(const std::string &Bloc
     return nullptr;
 }
 
-// Translate one Function into UnknownIR
-uir::Function *
-UnknownFrontendTranslatorImplARM::translateOneFunction(const std::string &FunctionName, uint64_t Address)
+// Translate one function into UnknownIR
+bool
+UnknownFrontendTranslatorImplARM::translateOneFunction(
+    const std::string &FunctionName,
+    uint64_t Address,
+    size_t Size,
+    uir::Function *F)
 {
+    assert(F);
+
     // TODO
-    return nullptr;
+    return true;
 }
 
 } // namespace ufrontend

@@ -347,4 +347,12 @@ Module::print(unknown::XMLPrinter &Printer) const
     Printer.CloseElement();
 }
 
+////////////////////////////////////////////////////////////
+// Static
+std::unique_ptr<Module>
+Module::get(Context &C, const unknown::StringRef &ModuleName)
+{
+    return std::make_unique<Module>(C, ModuleName);
+}
+
 } // namespace uir

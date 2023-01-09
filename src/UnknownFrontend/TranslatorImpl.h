@@ -19,6 +19,9 @@ protected:
     uint64_t mCurPtrBegin;
     uint64_t mCurPtrEnd;
 
+protected:
+    uir::Function *mCurFunction;
+
 public:
     UnknownFrontendTranslatorImpl(uir::Context &C, const std::string &BinaryFile, const std::string &SymbolFile);
     virtual ~UnknownFrontendTranslatorImpl();
@@ -55,10 +58,11 @@ public:
         return nullptr;
     }
 
-    // Translate one Function into UnknownIR
-    virtual uir::Function *translateOneFunction(const std::string &FunctionName, uint64_t Address) override
+    // Translate one function into UnknownIR
+    virtual bool
+    translateOneFunction(const std::string &FunctionName, uint64_t Address, size_t Size, uir::Function *F) override
     {
-        return nullptr;
+        return false;
     }
 
 public:
@@ -89,6 +93,12 @@ public:
 
     // Set the end of current pointer
     virtual void setCurPtrEnd(uint64_t Ptr) override;
+
+    // Get the current function
+    virtual const uir::Function *getCurFunction() const override;
+
+    // Set the current function
+    virtual void setCurFunction(uir::Function *Function) override;
 };
 
 } // namespace ufrontend

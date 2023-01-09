@@ -174,8 +174,28 @@ UnknownFrontendTranslatorImplX86::getBasePointerRegisterName() const
 std::unique_ptr<uir::Module>
 UnknownFrontendTranslatorImplX86::translateBinary(const std::string &ModuleName)
 {
-    // TODO
-    return {};
+    auto Module = uir::Module::get(mContext, ModuleName);
+    if (Module)
+    {
+        for (auto &FunctionSymbol : mSymbolParser->getFunctionSymbols())
+        {
+            auto F = uir::Function::get(mContext, FunctionSymbol.name);
+            assert(F);
+
+            // Set the current function
+            setCurFunction(F);
+
+            // Translate one function into UnknownIR
+            bool TransSucc = translateOneFunction(FunctionSymbol, F);
+            if (TransSucc)
+            {
+                // Insert a function into the module
+                Module->insertFunction(F);
+            }
+        }
+    }
+
+    return Module;
 }
 
 // Translate one instruction into UnknownIR
@@ -205,12 +225,36 @@ UnknownFrontendTranslatorImplX86::translateOneBasicBlock(const std::string &Bloc
     return nullptr;
 }
 
-// Translate one Function into UnknownIR
-uir::Function *
-UnknownFrontendTranslatorImplX86::translateOneFunction(const std::string &FunctionName, uint64_t Address)
+// Translate one function into UnknownIR
+bool
+UnknownFrontendTranslatorImplX86::translateOneFunction(
+    const std::string &FunctionName,
+    uint64_t Address,
+    size_t Size,
+    uir::Function *F)
 {
+    assert(F);
+
     // TODO
-    return nullptr;
+    return true;
+}
+
+bool
+UnknownFrontendTranslatorImplX86::translateOneFunction(
+    const unknown::SymbolParser::FunctionSymbol &FunctionSymbol,
+    uir::Function *F)
+{
+    assert(F);
+
+    auto ImageBase = mBinary->imagebase();
+    auto FunctionAddress = FunctionSymbol.rva + ImageBase;
+    auto FunctionSize = FunctionSymbol.size;
+    auto &FunctionName = FunctionSymbol.name;
+
+    F->setFunctionBeginAddress(FunctionAddress);
+    F->setFunctionEndAddress(FunctionAddress + FunctionSize);
+
+    return translateOneFunction(FunctionName, FunctionAddress, FunctionSize, F);
 }
 
 } // namespace ufrontend
