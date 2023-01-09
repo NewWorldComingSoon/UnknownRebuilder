@@ -50,7 +50,7 @@ UnknownFrontendTranslatorImplARM::initBinary()
 // Translate
 // Translate the given binary into UnknownIR
 std::unique_ptr<uir::Module>
-UnknownFrontendTranslatorImplARM::translateBinary()
+UnknownFrontendTranslatorImplARM::translateBinary(const std::string &ModuleName)
 {
     // TODO
     return {};

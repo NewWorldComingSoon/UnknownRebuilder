@@ -24,7 +24,7 @@ protected:
 
 public:
     // Translate the given binary into UnknownIR
-    virtual std::unique_ptr<uir::Module> translateBinary() override;
+    virtual std::unique_ptr<uir::Module> translateBinary(const std::string &ModuleName) override;
 
     // Translate one instruction into UnknownIR
     virtual bool

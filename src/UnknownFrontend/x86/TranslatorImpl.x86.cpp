@@ -170,7 +170,7 @@ UnknownFrontendTranslatorImplX86::getBasePointerRegisterName() const
 // Translate
 // Translate the given binary into UnknownIR
 std::unique_ptr<uir::Module>
-UnknownFrontendTranslatorImplX86::translateBinary()
+UnknownFrontendTranslatorImplX86::translateBinary(const std::string &ModuleName)
 {
     // TODO
     return {};
