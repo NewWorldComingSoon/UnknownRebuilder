@@ -15,6 +15,10 @@ protected:
 protected:
     csh mCapstoneHandle;
 
+protected:
+    uint64_t mCurPtrBegin;
+    uint64_t mCurPtrEnd;
+
 public:
     UnknownFrontendTranslatorImpl(uir::Context &C, const std::string &BinaryFile, const std::string &SymbolFile);
     virtual ~UnknownFrontendTranslatorImpl();
@@ -63,6 +67,18 @@ public:
 
     // Set the capstone handle
     void setCapstoneHandle(csh CapstoneHandle);
+
+    // Get the begin of current pointer
+    const uint64_t getCurPtrBegin() const;
+
+    // Get the end of current pointer
+    const uint64_t getCurPtrEnd() const;
+
+    // Set the begin of current pointer
+    void setCurPtrBegin(uint64_t Ptr);
+
+    // Set the end of current pointer
+    void setCurPtrEnd(uint64_t Ptr);
 };
 
 } // namespace ufrontend
