@@ -251,6 +251,7 @@ UnknownFrontendTranslatorImplX86::translateOneFunction(
     auto FunctionSize = FunctionSymbol.size;
     auto &FunctionName = FunctionSymbol.name;
 
+    F->setFunctionName(FunctionName);
     F->setFunctionBeginAddress(FunctionAddress);
     F->setFunctionEndAddress(FunctionAddress + FunctionSize);
 
