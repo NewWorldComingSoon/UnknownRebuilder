@@ -33,8 +33,11 @@ protected:
 
 protected:
     // x86-specific pointer
-    uint32_t getStackPointerRegister();
-    uint32_t getBasePointerRegister();
+    const uint32_t getStackPointerRegister() const;
+    const unknown::StringRef getStackPointerRegisterName() const;
+
+    const uint32_t getBasePointerRegister() const;
+    const unknown::StringRef getBasePointerRegisterName() const;
 
 public:
     // Translate the given binary into UnknownIR

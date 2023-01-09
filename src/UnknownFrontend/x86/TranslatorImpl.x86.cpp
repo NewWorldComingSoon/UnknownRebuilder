@@ -98,8 +98,8 @@ UnknownFrontendTranslatorImplX86::initBinary()
 
 ////////////////////////////////////////////////////////////
 // x86-specific pointer
-uint32_t
-UnknownFrontendTranslatorImplX86::getStackPointerRegister()
+const uint32_t
+UnknownFrontendTranslatorImplX86::getStackPointerRegister() const
 {
     switch (getContext().getModeBits())
     {
@@ -115,8 +115,25 @@ UnknownFrontendTranslatorImplX86::getStackPointerRegister()
     }
 }
 
-uint32_t
-UnknownFrontendTranslatorImplX86::getBasePointerRegister()
+const unknown::StringRef
+UnknownFrontendTranslatorImplX86::getStackPointerRegisterName() const
+{
+    switch (getContext().getModeBits())
+    {
+    case 32:
+        return "ESP";
+    case 64:
+        return "RSP";
+    default: {
+        std::cerr << "UnknownFrontend: Error: getStackPointerRegisterName failed" << std::endl;
+        std::abort();
+        break;
+    }
+    }
+}
+
+const uint32_t
+UnknownFrontendTranslatorImplX86::getBasePointerRegister() const
 {
     switch (getContext().getModeBits())
     {
@@ -126,6 +143,23 @@ UnknownFrontendTranslatorImplX86::getBasePointerRegister()
         return X86_REG_RBP;
     default: {
         std::cerr << "UnknownFrontend: Error: getBasePointerRegister failed" << std::endl;
+        std::abort();
+        break;
+    }
+    }
+}
+
+const unknown::StringRef
+UnknownFrontendTranslatorImplX86::getBasePointerRegisterName() const
+{
+    switch (getContext().getModeBits())
+    {
+    case 32:
+        return "EBP";
+    case 64:
+        return "RBP";
+    default: {
+        std::cerr << "UnknownFrontend: Error: getBasePointerRegisterName failed" << std::endl;
         std::abort();
         break;
     }
