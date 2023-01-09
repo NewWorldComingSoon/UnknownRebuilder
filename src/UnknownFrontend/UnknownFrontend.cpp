@@ -10,9 +10,9 @@ namespace ufrontend {
 std::unique_ptr<UnknownFrontendTranslator>
 UnknownFrontendTranslator::createArch(
     uir::Context &C,
-    const Platform Platform,
     const std::string &BinaryFile,
-    const std::string &SymbolFile)
+    const std::string &SymbolFile,
+    const Platform Platform)
 {
     auto Arch = C.getArch();
 

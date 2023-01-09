@@ -17,8 +17,16 @@ public:
         WINDOWS_X86,
         WINDOWS_ARM,
 
+        LINUX_X86,
+        LINUX_ARM,
+
+        ANDROID_X86,
         ANDROID_ARM,
-        IOS_ARM,
+
+        OSX_X86,
+        OSX_ARM,
+
+        UNKNOWN
     };
 
 public:
@@ -77,8 +85,11 @@ public:
 
 public:
     // Static
-    static std::unique_ptr<UnknownFrontendTranslator>
-    createArch(uir::Context &C, const Platform Platform, const std::string &BinaryFile, const std::string &SymbolFile);
+    static std::unique_ptr<UnknownFrontendTranslator> createArch(
+        uir::Context &C,
+        const std::string &BinaryFile,
+        const std::string &SymbolFile,
+        const Platform Platform = Platform::WINDOWS_X86);
 };
 
 } // namespace ufrontend
