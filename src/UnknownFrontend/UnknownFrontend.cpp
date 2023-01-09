@@ -8,7 +8,7 @@ namespace ufrontend {
 ////////////////////////////////////////////////////////////
 // Static
 std::unique_ptr<UnknownFrontendTranslator>
-UnknownFrontendTranslator::createArch(
+UnknownFrontendTranslator::createTranslator(
     uir::Context &C,
     const std::string &BinaryFile,
     const std::string &SymbolFile,

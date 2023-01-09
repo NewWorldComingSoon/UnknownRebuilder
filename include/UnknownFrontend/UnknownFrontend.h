@@ -85,7 +85,7 @@ public:
 
 public:
     // Static
-    static std::unique_ptr<UnknownFrontendTranslator> createArch(
+    static std::unique_ptr<UnknownFrontendTranslator> createTranslator(
         uir::Context &C,
         const std::string &BinaryFile,
         const std::string &SymbolFile,
