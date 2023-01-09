@@ -8,6 +8,7 @@ namespace ufrontend {
 class UnknownFrontendTranslatorImpl : public UnknownFrontendTranslator
 {
 protected:
+    Platform mPlatform;
     uir::Context &mContext;
     std::string mBinaryFile;
     std::string mSymbolFile;
@@ -23,7 +24,11 @@ protected:
     uir::Function *mCurFunction;
 
 public:
-    UnknownFrontendTranslatorImpl(uir::Context &C, const std::string &BinaryFile, const std::string &SymbolFile);
+    UnknownFrontendTranslatorImpl(
+        uir::Context &C,
+        const Platform Platform,
+        const std::string &BinaryFile,
+        const std::string &SymbolFile);
     virtual ~UnknownFrontendTranslatorImpl();
 
 protected:
@@ -99,6 +104,12 @@ public:
 
     // Set the current function
     virtual void setCurFunction(uir::Function *Function) override;
+
+    // Get the platform
+    virtual const Platform getPlatform() const override;
+
+    // Set the platform
+    virtual void setPlatform(Platform Platform) override;
 };
 
 } // namespace ufrontend

@@ -15,7 +15,11 @@ private:
     std::unique_ptr<LIEF::PE::Binary> mBinary;
 
 public:
-    UnknownFrontendTranslatorImplX86(uir::Context &C, const std::string &BinaryFile, const std::string &SymbolFile);
+    UnknownFrontendTranslatorImplX86(
+        uir::Context &C,
+        const Platform Platform,
+        const std::string &BinaryFile,
+        const std::string &SymbolFile);
     virtual ~UnknownFrontendTranslatorImplX86();
 
 protected:

@@ -4,9 +4,10 @@ namespace ufrontend {
 
 UnknownFrontendTranslatorImplARM::UnknownFrontendTranslatorImplARM(
     uir::Context &C,
+    const Platform Platform,
     const std::string &BinaryFile,
     const std::string &SymbolFile) :
-    UnknownFrontendTranslatorImpl(C, BinaryFile, SymbolFile)
+    UnknownFrontendTranslatorImpl(C, Platform, BinaryFile, SymbolFile)
 {
     //
 }

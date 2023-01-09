@@ -12,6 +12,16 @@ namespace ufrontend {
 class UnknownFrontendTranslator
 {
 public:
+    enum class Platform : uint32_t
+    {
+        WINDOWS_X86,
+        WINDOWS_ARM,
+
+        ANDROID_ARM,
+        IOS_ARM,
+    };
+
+public:
     UnknownFrontendTranslator() = default;
     virtual ~UnknownFrontendTranslator() = default;
 
@@ -59,10 +69,16 @@ public:
     // Set the current function
     virtual void setCurFunction(uir::Function *Function) = 0;
 
+    // Get the platform
+    virtual const Platform getPlatform() const = 0;
+
+    // Set the platform
+    virtual void setPlatform(Platform Platform) = 0;
+
 public:
     // Static
     static std::unique_ptr<UnknownFrontendTranslator>
-    createArch(uir::Context &C, const std::string &BinaryFile, const std::string &SymbolFile);
+    createArch(uir::Context &C, const Platform Platform, const std::string &BinaryFile, const std::string &SymbolFile);
 };
 
 } // namespace ufrontend

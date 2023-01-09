@@ -8,17 +8,21 @@ namespace ufrontend {
 ////////////////////////////////////////////////////////////
 // Static
 std::unique_ptr<UnknownFrontendTranslator>
-UnknownFrontendTranslator::createArch(uir::Context &C, const std::string &BinaryFile, const std::string &SymbolFile)
+UnknownFrontendTranslator::createArch(
+    uir::Context &C,
+    const Platform Platform,
+    const std::string &BinaryFile,
+    const std::string &SymbolFile)
 {
     auto Arch = C.getArch();
 
     if (Arch == uir::Context::Arch::ArchX86)
     {
-        return std::make_unique<UnknownFrontendTranslatorImplX86>(C, BinaryFile, SymbolFile);
+        return std::make_unique<UnknownFrontendTranslatorImplX86>(C, Platform, BinaryFile, SymbolFile);
     }
     else if (Arch == uir::Context::Arch::ArchARM)
     {
-        return std::make_unique<UnknownFrontendTranslatorImplARM>(C, BinaryFile, SymbolFile);
+        return std::make_unique<UnknownFrontendTranslatorImplARM>(C, Platform, BinaryFile, SymbolFile);
     }
 
     return {};

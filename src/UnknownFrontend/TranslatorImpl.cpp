@@ -4,8 +4,10 @@ namespace ufrontend {
 
 UnknownFrontendTranslatorImpl::UnknownFrontendTranslatorImpl(
     uir::Context &C,
+    const Platform Platform,
     const std::string &BinaryFile,
     const std::string &SymbolFile) :
+    mPlatform(Platform),
     mContext(C),
     mBinaryFile(BinaryFile),
     mSymbolFile(SymbolFile),
@@ -101,6 +103,20 @@ void
 UnknownFrontendTranslatorImpl::setCurFunction(uir::Function *Function)
 {
     mCurFunction = Function;
+}
+
+// Get the platform
+const UnknownFrontendTranslator::Platform
+UnknownFrontendTranslatorImpl::getPlatform() const
+{
+    return mPlatform;
+}
+
+// Set the platform
+void
+UnknownFrontendTranslatorImpl::setPlatform(Platform Platform)
+{
+    mPlatform = Platform;
 }
 
 } // namespace ufrontend
