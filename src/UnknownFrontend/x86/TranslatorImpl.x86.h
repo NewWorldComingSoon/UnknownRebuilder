@@ -31,6 +31,11 @@ protected:
     // Binary
     virtual void initBinary() override;
 
+protected:
+    // x86-specific pointer
+    uint32_t getStackPointerRegister();
+    uint32_t getBasePointerRegister();
+
 public:
     // Translate the given binary into UnknownIR
     virtual std::unique_ptr<uir::Module> translateBinary() override;

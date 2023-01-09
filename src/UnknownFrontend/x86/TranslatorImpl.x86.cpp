@@ -97,6 +97,42 @@ UnknownFrontendTranslatorImplX86::initBinary()
 }
 
 ////////////////////////////////////////////////////////////
+// x86-specific pointer
+uint32_t
+UnknownFrontendTranslatorImplX86::getStackPointerRegister()
+{
+    switch (getContext().getModeBits())
+    {
+    case 32:
+        return X86_REG_ESP;
+    case 64:
+        return X86_REG_RSP;
+    default: {
+        std::cerr << "UnknownFrontend: Error: getStackPointerRegister failed" << std::endl;
+        std::abort();
+        break;
+    }
+    }
+}
+
+uint32_t
+UnknownFrontendTranslatorImplX86::getBasePointerRegister()
+{
+    switch (getContext().getModeBits())
+    {
+    case 32:
+        return X86_REG_EBP;
+    case 64:
+        return X86_REG_RBP;
+    default: {
+        std::cerr << "UnknownFrontend: Error: getBasePointerRegister failed" << std::endl;
+        std::abort();
+        break;
+    }
+    }
+}
+
+////////////////////////////////////////////////////////////
 // Translate
 // Translate the given binary into UnknownIR
 std::unique_ptr<uir::Module>
