@@ -34,6 +34,8 @@ UnknownFrontendTranslatorImplX86::openCapstoneHandle()
         return;
     }
 
+    cs_option(CapstoneHandle, CS_OPT_DETAIL, CS_OPT_ON);
+
     mCapstoneHandle = CapstoneHandle;
 }
 
