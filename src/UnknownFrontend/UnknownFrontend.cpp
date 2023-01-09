@@ -16,7 +16,7 @@ UnknownFrontendTranslator::createTranslator(
 {
     auto Arch = C.getArch();
 
-    if (Arch == uir::Context::Arch::ArchX86 && Platform == Platform::WINDOWS_X86)
+    if (Arch == uir::Context::Arch::ArchX86)
     {
         return std::make_unique<UnknownFrontendTranslatorImplX86>(C, Platform, BinaryFile, SymbolFile);
     }
