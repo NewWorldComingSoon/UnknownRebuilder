@@ -63,6 +63,12 @@ public:
 
 public:
     // Get/Set
+    // Get the capstone handle
+    csh getCapstoneHandle() const;
+
+    // Set the capstone handle
+    void setCapstoneHandle(csh CapstoneHandle);
+
     // Get the context of this translator
     virtual uir::Context &getContext() const override;
 
@@ -71,12 +77,6 @@ public:
 
     // Get the Symbol File
     virtual const std::string &getSymbolFile() const override;
-
-    // Get the capstone handle
-    csh getCapstoneHandle() const;
-
-    // Set the capstone handle
-    void setCapstoneHandle(csh CapstoneHandle);
 
     // Get the begin of current pointer
     virtual const uint64_t getCurPtrBegin() const override;
