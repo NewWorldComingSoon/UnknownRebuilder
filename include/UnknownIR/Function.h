@@ -31,7 +31,7 @@ private:
 public:
     explicit Function(
         Context &C,
-        const unknown::StringRef &FunctionName,
+        const unknown::StringRef &FunctionName = "",
         Module *Parent = nullptr,
         uint64_t FunctionAddressBegin = 0,
         uint64_t FunctionAddressEnd = 0);
@@ -244,7 +244,7 @@ public:
 public:
     static Function *
     get(Context &C,
-        const unknown::StringRef &FunctionName,
+        const unknown::StringRef &FunctionName = "",
         Module *Parent = nullptr,
         uint64_t FunctionAddressBegin = 0,
         uint64_t FunctionAddressEnd = 0);

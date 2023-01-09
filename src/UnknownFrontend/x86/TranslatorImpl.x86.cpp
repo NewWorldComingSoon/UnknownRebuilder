@@ -179,7 +179,7 @@ UnknownFrontendTranslatorImplX86::translateBinary(const std::string &ModuleName)
     {
         for (auto &FunctionSymbol : mSymbolParser->getFunctionSymbols())
         {
-            auto F = uir::Function::get(mContext, FunctionSymbol.name);
+            auto F = uir::Function::get(mContext);
             assert(F);
 
             // Set the current function
