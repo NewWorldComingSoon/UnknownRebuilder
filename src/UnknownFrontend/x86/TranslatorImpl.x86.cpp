@@ -287,7 +287,7 @@ UnknownFrontendTranslatorImplX86::translateOneBasicBlock(
                 break;
             }
 
-            // Translate Instruction
+            // Translate one instruction
             TransRes = translateOneInstruction(Insn, Address, TempBB.get());
             if (!TransRes)
             {
