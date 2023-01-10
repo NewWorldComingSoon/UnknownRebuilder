@@ -270,6 +270,8 @@ UnknownFrontendTranslatorImplX86::translateOneFunction(
 void
 UnknownFrontendTranslatorImplX86::UpdateFunctionAttributes(uir::Function *F)
 {
+    assert(F);
+
     UpdateFunctionAttributesForSEH(F);
     UpdateFunctionAttributesForCXXEH(F);
 }
@@ -279,6 +281,8 @@ UnknownFrontendTranslatorImplX86::UpdateFunctionAttributes(
     const unknown::SymbolParser::FunctionSymbol &FunctionSymbol,
     uir::Function *F)
 {
+    assert(F);
+
     if (mUsePDB)
     {
         F->setSEH(FunctionSymbol.hasSEH);
@@ -292,12 +296,16 @@ UnknownFrontendTranslatorImplX86::UpdateFunctionAttributes(
 void
 UnknownFrontendTranslatorImplX86::UpdateFunctionAttributesForSEH(uir::Function *F)
 {
+    assert(F);
+
     // TODO
 }
 
 void
 UnknownFrontendTranslatorImplX86::UpdateFunctionAttributesForCXXEH(uir::Function *F)
 {
+    assert(F);
+
     // TODO
 }
 

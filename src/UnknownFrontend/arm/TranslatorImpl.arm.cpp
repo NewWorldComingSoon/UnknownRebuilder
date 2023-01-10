@@ -104,6 +104,8 @@ UnknownFrontendTranslatorImplARM::translateOneFunction(
 void
 UnknownFrontendTranslatorImplARM::UpdateFunctionAttributes(uir::Function *F)
 {
+    assert(F);
+
     // TODO
 }
 
