@@ -52,6 +52,17 @@ TEST(test_lief, test_lief_3)
         std::cout << std::format("{:X}", V) << std::endl;
     }
 
+    auto sec = binary->get_section(0x140001010);
+    if (sec)
+    {
+        std::cout << std::format(
+                         "sec name:{}, virtual_addr={:X}, raw_size={:X}",
+                         sec->name(),
+                         sec->virtual_address(),
+                         sec->sizeof_raw_data())
+                  << std::endl;
+    }
+
     // test patch
     std::vector<uint8_t> patch = {0xcc, 0x90};
     binary->patch_address(0x140001010, patch);
