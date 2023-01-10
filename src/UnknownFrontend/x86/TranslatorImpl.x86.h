@@ -66,6 +66,11 @@ public:
     virtual bool translateOneFunction(uir::Function *F);
 
 protected:
+    // Get/Set
+    const bool hasUsePDB() const;
+    void setUsePDB(bool HasUsePDB);
+
+protected:
     // Register
     // Get carry register.
     virtual uint32_t getCarryRegister() override;

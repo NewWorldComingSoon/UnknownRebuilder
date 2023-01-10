@@ -69,7 +69,7 @@ UnknownFrontendTranslatorImplX86::initSymbolParser()
         UsePDB = true;
     }
 
-    mUsePDB = UsePDB;
+    setUsePDB(UsePDB);
 
     if (!UsePDB)
     {
@@ -424,6 +424,21 @@ UnknownFrontendTranslatorImplX86::translateOneFunction(uir::Function *F)
         F);
 }
 
+////////////////////////////////////////////////////////////
+// Get/Set
+const bool
+UnknownFrontendTranslatorImplX86::hasUsePDB() const
+{
+    return mUsePDB;
+}
+
+void
+UnknownFrontendTranslatorImplX86::setUsePDB(bool HasUsePDB)
+{
+    mUsePDB = HasUsePDB;
+}
+
+////////////////////////////////////////////////////////////
 // Register
 // Get carry register.
 uint32_t
@@ -459,7 +474,7 @@ UnknownFrontendTranslatorImplX86::UpdateFunctionAttributes(
     F->setFunctionBeginAddress(FunctionAddress);
     F->setFunctionEndAddress(FunctionAddress + FunctionSize);
 
-    if (mUsePDB)
+    if (hasUsePDB())
     {
         F->setSEH(FunctionSymbol.hasSEH);
         F->setAsyncEH(FunctionSymbol.hasAsyncEH);
