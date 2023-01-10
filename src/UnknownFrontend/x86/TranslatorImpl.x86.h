@@ -64,6 +64,11 @@ public:
     virtual bool translateOneFunction(const unknown::SymbolParser::FunctionSymbol &FunctionSymbol, uir::Function *F);
 
 protected:
+    // Register
+    // Get carry register.
+    virtual uint32_t getCarryRegister() override;
+
+protected:
     // Attributes
     // Update function attributes
     virtual void UpdateFunctionAttributes(uir::Function *F) override;

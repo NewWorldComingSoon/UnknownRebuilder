@@ -112,6 +112,11 @@ public:
     virtual void setPlatform(Platform Plat) override;
 
 protected:
+    // Register
+    // Get carry register.
+    virtual uint32_t getCarryRegister() = 0;
+
+protected:
     // Attributes
     // Update function attributes
     virtual void UpdateFunctionAttributes(uir::Function *F) = 0;

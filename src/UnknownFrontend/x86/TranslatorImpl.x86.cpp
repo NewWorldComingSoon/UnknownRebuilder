@@ -264,6 +264,14 @@ UnknownFrontendTranslatorImplX86::translateOneFunction(
     return translateOneFunction(FunctionName, FunctionAddress, FunctionSize, F);
 }
 
+// Register
+// Get carry register.
+uint32_t
+UnknownFrontendTranslatorImplX86::getCarryRegister()
+{
+    return X86_REG_CF;
+}
+
 ////////////////////////////////////////////////////////////
 // Attributes
 // Update function attributes
