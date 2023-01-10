@@ -178,20 +178,25 @@ std::unique_ptr<uir::Module>
 UnknownFrontendTranslatorImplX86::translateBinary(const std::string &ModuleName)
 {
     auto Module = uir::Module::get(getContext(), ModuleName);
-    if (Module)
-    {
-        for (auto &FunctionSymbol : mSymbolParser->getFunctionSymbols())
-        {
-            auto F = uir::Function::get(getContext());
-            assert(F);
+    assert(Module);
 
-            // Translate one function into UnknownIR
-            bool TransSucc = translateOneFunction(FunctionSymbol, F);
-            if (TransSucc)
-            {
-                // Insert a function into the module
-                Module->insertFunction(F);
-            }
+    for (auto &FunctionSymbol : mSymbolParser->getFunctionSymbols())
+    {
+        auto F = new uir::Function(getContext());
+        assert(F);
+
+        // Translate one function into UnknownIR
+        bool TransSucc = translateOneFunction(FunctionSymbol, F);
+        if (TransSucc)
+        {
+            // Insert a function into the module
+            Module->insertFunction(F);
+        }
+        else
+        {
+            std::cerr << std::format("UnknownFrontend: Error: translateOneFunction: {} failed", F->getFunctionName())
+                      << std::endl;
+            delete F;
         }
     }
 
@@ -254,6 +259,40 @@ UnknownFrontendTranslatorImplX86::translateOneFunction(
     }
     assert(getCurPtrEnd());
     assert(getCurPtrEnd() > getCurPtrBegin());
+
+    auto TempFunction = std::make_unique<uir::Function>(getContext());
+    assert(TempFunction);
+
+    while (getCurPtrBegin() < getCurPtrEnd())
+    {
+        // Translate BasicBlock
+        auto BB = translateOneBasicBlock("", getCurPtrBegin());
+        if (BB == nullptr)
+        {
+            break;
+        }
+
+        // Insert a BasicBlock into the function
+        TempFunction->insertBasicBlock(BB);
+
+        // Update ptr
+        setCurPtrBegin(BB->getBasicBlockAddressEnd());
+    }
+
+    if (TempFunction->empty())
+    {
+        return false;
+    }
+
+    // Fill the function
+    for (auto It = TempFunction->begin(); It != TempFunction->end(); ++It)
+    {
+        auto BB = *It;
+        assert(BB);
+
+        // Insert a BasicBlock into the function
+        F->insertBasicBlock(BB);
+    }
 
     return true;
 }
