@@ -211,6 +211,7 @@ UnknownFrontendTranslatorImplX86::translateOneInstruction(
     uint64_t Address,
     uir::BasicBlock *BB)
 {
+    assert(Bytes);
     assert(BB);
 
     cs_insn *Insn = cs_malloc(getCapstoneHandle());
@@ -238,7 +239,31 @@ UnknownFrontendTranslatorImplX86::translateOneInstruction(
 bool
 UnknownFrontendTranslatorImplX86::translateOneInstruction(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB)
 {
+    assert(Insn);
     assert(BB);
+
+    if (getCurPtrBegin() == 0)
+    {
+        // Set the begin of current pointer
+        setCurPtrBegin(Address);
+        assert(getCurPtrBegin());
+    }
+
+    if (getCurPtrEnd() == 0)
+    {
+        // Set the end of current pointer
+        setCurPtrEnd(Address + Insn->size);
+        if (getCurPtrEnd() <= getCurPtrBegin())
+        {
+            auto CurSection = mBinary->get_section(getCurPtrBegin());
+            if (CurSection)
+            {
+                setCurPtrEnd(mBinary->imagebase() + CurSection->virtual_address() + CurSection->sizeof_raw_data());
+            }
+        }
+        assert(getCurPtrEnd());
+        assert(getCurPtrEnd() > getCurPtrBegin());
+    }
 
     // TODO
     return true;
@@ -251,6 +276,8 @@ UnknownFrontendTranslatorImplX86::translateOneBasicBlock(
     uint64_t Address,
     uint64_t MaxAddress)
 {
+    assert(Address);
+
     if (getCurPtrBegin() == 0)
     {
         // Set the begin of current pointer
@@ -340,6 +367,7 @@ UnknownFrontendTranslatorImplX86::translateOneFunction(
     size_t Size,
     uir::Function *F)
 {
+    assert(Address);
     assert(F);
 
     // Set the current function
