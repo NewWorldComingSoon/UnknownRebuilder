@@ -177,12 +177,12 @@ UnknownFrontendTranslatorImplX86::getBasePointerRegisterName() const
 std::unique_ptr<uir::Module>
 UnknownFrontendTranslatorImplX86::translateBinary(const std::string &ModuleName)
 {
-    auto Module = uir::Module::get(mContext, ModuleName);
+    auto Module = uir::Module::get(getContext(), ModuleName);
     if (Module)
     {
         for (auto &FunctionSymbol : mSymbolParser->getFunctionSymbols())
         {
-            auto F = uir::Function::get(mContext);
+            auto F = uir::Function::get(getContext());
             assert(F);
 
             // Translate one function into UnknownIR
