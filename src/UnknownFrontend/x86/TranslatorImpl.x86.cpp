@@ -256,6 +256,10 @@ UnknownFrontendTranslatorImplX86::translateOneFunction(
     F->setFunctionBeginAddress(FunctionAddress);
     F->setFunctionEndAddress(FunctionAddress + FunctionSize);
 
+    F->setSEH(FunctionSymbol.hasSEH);
+    F->setAsyncEH(FunctionSymbol.hasAsyncEH);
+    F->setNaked(FunctionSymbol.hasNaked);
+
     return translateOneFunction(FunctionName, FunctionAddress, FunctionSize, F);
 }
 

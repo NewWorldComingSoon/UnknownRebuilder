@@ -24,7 +24,10 @@ Function::Function(
     mFunctionName(FunctionName),
     mParent(Parent),
     mFunctionAddressBegin(FunctionAddressBegin),
-    mFunctionAddressEnd(FunctionAddressEnd)
+    mFunctionAddressEnd(FunctionAddressEnd),
+    mHasSEH(false),
+    mHasAsyncEH(false),
+    mHasNaked(false)
 {
     // Clear ordered block name index.
     C.mImpl->mOrderedBlockNameIndex = 0;
@@ -128,6 +131,48 @@ void
 Function::setFunctionAttributes(const Function::FunctionAttributesListType &FunctionAttributes)
 {
     mFunctionAttributesList = FunctionAttributes;
+}
+
+// function has SEH?
+const bool
+Function::hasSEH() const
+{
+    return mHasSEH;
+}
+
+// function has SEH?
+void
+Function::setSEH(bool HasSEH)
+{
+    mHasSEH = HasSEH;
+}
+
+// function compiled with /EHa?
+const bool
+Function::hasAsyncEH() const
+{
+    return mHasAsyncEH;
+}
+
+// function compiled with /EHa?
+void
+Function::setAsyncEH(bool HasAsyncEH)
+{
+    mHasAsyncEH = HasAsyncEH;
+}
+
+// function is __declspec(naked)?
+const bool
+Function::hasNaked() const
+{
+    return mHasNaked;
+}
+
+// function is __declspec(naked)?
+void
+Function::setNaked(bool HasNaked)
+{
+    mHasNaked = HasNaked;
 }
 
 ////////////////////////////////////////////////////////////

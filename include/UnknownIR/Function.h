@@ -27,6 +27,9 @@ private:
     ArgumentListType mArgumentsList;
     FunctionContextListType mFunctionContextList;
     FunctionAttributesListType mFunctionAttributesList;
+    bool mHasSEH;
+    bool mHasAsyncEH;
+    bool mHasNaked;
 
 public:
     explicit Function(
@@ -178,6 +181,24 @@ public:
 
     // Set the attributes of this function
     void setFunctionAttributes(const FunctionAttributesListType &FunctionAttributes);
+
+    // function has SEH?
+    const bool hasSEH() const;
+
+    // function has SEH?
+    void setSEH(bool HasSEH);
+
+    // function compiled with /EHa?
+    const bool hasAsyncEH() const;
+
+    // function compiled with /EHa?
+    void setAsyncEH(bool HasAsyncEH);
+
+    // function is __declspec(naked)?
+    const bool hasNaked() const;
+
+    // function is __declspec(naked)?
+    void setNaked(bool HasNaked);
 
 public:
     // Function Attribute
