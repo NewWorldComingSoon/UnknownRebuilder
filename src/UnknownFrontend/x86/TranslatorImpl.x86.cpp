@@ -259,7 +259,7 @@ UnknownFrontendTranslatorImplX86::translateOneBasicBlock(
     auto TempBB = std::make_unique<uir::BasicBlock>(getContext(), BlockName, Address, MaxAddress);
     assert(TempBB);
 
-    // Translate Instruction
+    // Translate
     while (getCurPtrBegin() < getCurPtrEnd())
     {
         cs_insn *Insn = cs_malloc(getCapstoneHandle());
@@ -278,6 +278,8 @@ UnknownFrontendTranslatorImplX86::translateOneBasicBlock(
 
         bool DisasmRes =
             cs_disasm_iter(getCapstoneHandle(), const_cast<const uint8_t **>(&Bytes), &Size, &Address, Insn);
+        bool TransRes = true;
+
         do
         {
             if (!DisasmRes)
@@ -285,7 +287,8 @@ UnknownFrontendTranslatorImplX86::translateOneBasicBlock(
                 break;
             }
 
-            bool TransRes = translateOneInstruction(Insn, Address, TempBB.get());
+            // Translate Instruction
+            TransRes = translateOneInstruction(Insn, Address, TempBB.get());
             if (!TransRes)
             {
                 std::cerr << std::format("UnknownFrontend: Error: translateOneInstruction: 0x{:X} failed", Address)
@@ -293,10 +296,18 @@ UnknownFrontendTranslatorImplX86::translateOneBasicBlock(
                 break;
             }
 
+            // Update ptr
+            setCurPtrBegin(Address + Insn->size);
+
         } while (false);
 
         delete[] Bytes;
         cs_free(Insn, 1);
+
+        if (!DisasmRes || !TransRes)
+        {
+            break;
+        }
     }
 
     return TempBB.release();
