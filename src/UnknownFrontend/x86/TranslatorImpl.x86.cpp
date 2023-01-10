@@ -226,8 +226,9 @@ UnknownFrontendTranslatorImplX86::translateOneInstruction(const cs_insn *Insn, u
 uir::BasicBlock *
 UnknownFrontendTranslatorImplX86::translateOneBasicBlock(const std::string &BlockName, uint64_t Address)
 {
-    // TODO
-    return nullptr;
+    auto TempBB = std::make_unique<uir::BasicBlock>(getContext(), BlockName, Address);
+
+    return TempBB.release();
 }
 
 // Translate one function into UnknownIR
