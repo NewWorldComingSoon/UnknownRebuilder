@@ -294,8 +294,7 @@ UnknownFrontendTranslatorImplX86::UpdateFunctionAttributes(
 {
     assert(F);
 
-    auto ImageBase = mBinary->imagebase();
-    auto FunctionAddress = FunctionSymbol.rva + ImageBase;
+    auto FunctionAddress = FunctionSymbol.rva + mBinary->imagebase();
     auto FunctionSize = FunctionSymbol.size;
     auto &FunctionName = FunctionSymbol.name;
 
