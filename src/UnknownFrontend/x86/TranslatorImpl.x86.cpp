@@ -426,12 +426,14 @@ UnknownFrontendTranslatorImplX86::translateOneFunction(uir::Function *F)
 
 ////////////////////////////////////////////////////////////
 // Get/Set
+// We use pdb?
 const bool
 UnknownFrontendTranslatorImplX86::hasUsePDB() const
 {
     return mUsePDB;
 }
 
+// We use pdb?
 void
 UnknownFrontendTranslatorImplX86::setUsePDB(bool HasUsePDB)
 {

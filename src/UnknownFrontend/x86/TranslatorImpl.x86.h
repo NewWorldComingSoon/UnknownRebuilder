@@ -67,7 +67,10 @@ public:
 
 protected:
     // Get/Set
+    // We use pdb?
     const bool hasUsePDB() const;
+
+    // We use pdb?
     void setUsePDB(bool HasUsePDB);
 
 protected:
