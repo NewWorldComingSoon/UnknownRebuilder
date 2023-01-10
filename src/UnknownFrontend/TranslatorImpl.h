@@ -110,6 +110,11 @@ public:
 
     // Set the platform
     virtual void setPlatform(Platform Plat) override;
+
+protected:
+    // Attributes
+    // Update function attributes
+    virtual void UpdateFunctionAttributes(uir::Function *F) = 0;
 };
 
 } // namespace ufrontend

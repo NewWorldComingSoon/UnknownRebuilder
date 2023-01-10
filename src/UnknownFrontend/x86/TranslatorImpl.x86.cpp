@@ -7,7 +7,7 @@ UnknownFrontendTranslatorImplX86::UnknownFrontendTranslatorImplX86(
     const Platform Platform,
     const std::string &BinaryFile,
     const std::string &SymbolFile) :
-    UnknownFrontendTranslatorImpl(C, Platform, BinaryFile, SymbolFile)
+    UnknownFrontendTranslatorImpl(C, Platform, BinaryFile, SymbolFile), mUsePDB(false)
 {
     //
 }
@@ -68,6 +68,8 @@ UnknownFrontendTranslatorImplX86::initSymbolParser()
     {
         UsePDB = true;
     }
+
+    mUsePDB = UsePDB;
 
     if (!UsePDB)
     {
@@ -256,11 +258,47 @@ UnknownFrontendTranslatorImplX86::translateOneFunction(
     F->setFunctionBeginAddress(FunctionAddress);
     F->setFunctionEndAddress(FunctionAddress + FunctionSize);
 
-    F->setSEH(FunctionSymbol.hasSEH);
-    F->setAsyncEH(FunctionSymbol.hasAsyncEH);
-    F->setNaked(FunctionSymbol.hasNaked);
+    // Update function attributes
+    UpdateFunctionAttributes(FunctionSymbol, F);
 
     return translateOneFunction(FunctionName, FunctionAddress, FunctionSize, F);
+}
+
+////////////////////////////////////////////////////////////
+// Attributes
+// Update function attributes
+void
+UnknownFrontendTranslatorImplX86::UpdateFunctionAttributes(uir::Function *F)
+{
+    UpdateFunctionAttributesForSEH(F);
+    UpdateFunctionAttributesForCXXEH(F);
+}
+
+void
+UnknownFrontendTranslatorImplX86::UpdateFunctionAttributes(
+    const unknown::SymbolParser::FunctionSymbol &FunctionSymbol,
+    uir::Function *F)
+{
+    if (mUsePDB)
+    {
+        F->setSEH(FunctionSymbol.hasSEH);
+        F->setAsyncEH(FunctionSymbol.hasAsyncEH);
+        F->setNaked(FunctionSymbol.hasNaked);
+    }
+
+    UpdateFunctionAttributes(F);
+}
+
+void
+UnknownFrontendTranslatorImplX86::UpdateFunctionAttributesForSEH(uir::Function *F)
+{
+    // TODO
+}
+
+void
+UnknownFrontendTranslatorImplX86::UpdateFunctionAttributesForCXXEH(uir::Function *F)
+{
+    // TODO
 }
 
 } // namespace ufrontend

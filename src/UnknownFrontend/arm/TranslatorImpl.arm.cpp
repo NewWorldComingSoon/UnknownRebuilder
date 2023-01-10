@@ -98,4 +98,13 @@ UnknownFrontendTranslatorImplARM::translateOneFunction(
     return false;
 }
 
+////////////////////////////////////////////////////////////
+// Attributes
+// Update function attributes
+void
+UnknownFrontendTranslatorImplARM::UpdateFunctionAttributes(uir::Function *F)
+{
+    // TODO
+}
+
 } // namespace ufrontend

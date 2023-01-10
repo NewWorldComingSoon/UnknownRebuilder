@@ -41,6 +41,11 @@ public:
     // Translate one function into UnknownIR
     virtual bool
     translateOneFunction(const std::string &FunctionName, uint64_t Address, size_t Size, uir::Function *F) override;
+
+protected:
+    // Attributes
+    // Update function attributes
+    virtual void UpdateFunctionAttributes(uir::Function *F) override;
 };
 
 } // namespace ufrontend

@@ -12,6 +12,7 @@ class UnknownFrontendTranslatorImplX86 : public UnknownFrontendTranslatorImpl
 {
 private:
     std::unique_ptr<unknown::SymbolParser> mSymbolParser;
+    bool mUsePDB;
     std::unique_ptr<LIEF::PE::Binary> mBinary;
 
 public:
@@ -59,6 +60,15 @@ public:
     virtual bool
     translateOneFunction(const std::string &FunctionName, uint64_t Address, size_t Size, uir::Function *F) override;
     virtual bool translateOneFunction(const unknown::SymbolParser::FunctionSymbol &FunctionSymbol, uir::Function *F);
+
+protected:
+    // Attributes
+    // Update function attributes
+    virtual void UpdateFunctionAttributes(uir::Function *F) override;
+    virtual void
+    UpdateFunctionAttributes(const unknown::SymbolParser::FunctionSymbol &FunctionSymbol, uir::Function *F);
+    virtual void UpdateFunctionAttributesForSEH(uir::Function *F);
+    virtual void UpdateFunctionAttributesForCXXEH(uir::Function *F);
 };
 
 } // namespace ufrontend
