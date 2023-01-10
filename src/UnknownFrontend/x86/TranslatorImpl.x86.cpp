@@ -249,7 +249,7 @@ UnknownFrontendTranslatorImplX86::translateOneFunction(
         auto CurSection = mBinary->get_section(getCurPtrBegin());
         if (CurSection)
         {
-            setCurPtrEnd(mBinary->imagebase() + CurSection->virtual_address());
+            setCurPtrEnd(mBinary->imagebase() + CurSection->virtual_address() + CurSection->sizeof_raw_data());
         }
     }
     assert(getCurPtrEnd());
