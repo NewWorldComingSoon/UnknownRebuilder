@@ -12,8 +12,10 @@ class UnknownFrontendTranslatorImplX86 : public UnknownFrontendTranslatorImpl
 {
 private:
     std::unique_ptr<unknown::SymbolParser> mSymbolParser;
-    bool mUsePDB;
     std::unique_ptr<LIEF::PE::Binary> mBinary;
+
+private:
+    bool mUsePDB;
 
 public:
     UnknownFrontendTranslatorImplX86(
