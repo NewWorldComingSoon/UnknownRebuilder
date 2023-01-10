@@ -215,6 +215,8 @@ UnknownFrontendTranslatorImplX86::translateOneInstruction(
     assert(BB);
 
     cs_insn *Insn = nullptr;
+
+    // Disasm
     size_t DisasmCount = cs_disasm(getCapstoneHandle(), const_cast<const uint8_t *>(Bytes), Size, Address, 1, &Insn);
     bool DisasmRes = DisasmCount == 1;
 
@@ -320,6 +322,7 @@ UnknownFrontendTranslatorImplX86::translateOneBasicBlock(
         assert(!Contents.empty());
         std::copy(Contents.begin(), Contents.end(), Bytes);
 
+        // Disasm
         size_t DisasmCount =
             cs_disasm(getCapstoneHandle(), const_cast<const uint8_t *>(Bytes), Size, Address, 1, &Insn);
         bool DisasmRes = DisasmCount == 1;
