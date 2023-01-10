@@ -244,7 +244,7 @@ UnknownFrontendTranslatorImplX86::translateOneFunction(
 
     // Set the end of current pointer
     setCurPtrEnd(Size ? Address + Size : F->getFunctionEndAddress());
-    if (getCurPtrEnd() == 0 || getCurPtrEnd() <= getCurPtrBegin())
+    if (getCurPtrEnd() <= getCurPtrBegin())
     {
         auto CurSection = mBinary->get_section(getCurPtrBegin());
         if (CurSection)
