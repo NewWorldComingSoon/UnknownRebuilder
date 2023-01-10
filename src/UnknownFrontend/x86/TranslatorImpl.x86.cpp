@@ -240,9 +240,19 @@ UnknownFrontendTranslatorImplX86::translateOneFunction(
 
     // Set the begin of current pointer
     setCurPtrBegin(Address ? Address : F->getFunctionBeginAddress());
+    assert(getCurPtrBegin());
 
     // Set the end of current pointer
     setCurPtrEnd(Size ? Address + Size : F->getFunctionEndAddress());
+    if (getCurPtrEnd() == 0)
+    {
+        auto CurSection = mBinary->get_section(getCurPtrBegin());
+        if (CurSection)
+        {
+            setCurPtrEnd(mBinary->imagebase() + CurSection->virtual_address());
+        }
+    }
+    assert(getCurPtrEnd());
 
     return true;
 }
