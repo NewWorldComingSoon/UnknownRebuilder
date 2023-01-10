@@ -269,7 +269,7 @@ UnknownFrontendTranslatorImplX86::translateOneBasicBlock(
         uint64_t MaxAddress = getCurPtrEnd();
         size_t Size = MaxAddress - Address;
 
-        uint8_t *Bytes = new uint8_t[Size]{0};
+        uint8_t *Bytes = new uint8_t[Size]{};
         assert(Bytes);
 
         auto Contents = mBinary->get_content_from_virtual_address(Address, Size);
