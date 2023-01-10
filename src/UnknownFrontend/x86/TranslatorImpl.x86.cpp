@@ -185,9 +185,6 @@ UnknownFrontendTranslatorImplX86::translateBinary(const std::string &ModuleName)
             auto F = uir::Function::get(mContext);
             assert(F);
 
-            // Set the current function
-            setCurFunction(F);
-
             // Translate one function into UnknownIR
             bool TransSucc = translateOneFunction(FunctionSymbol, F);
             if (TransSucc)
@@ -238,6 +235,9 @@ UnknownFrontendTranslatorImplX86::translateOneFunction(
 {
     assert(F);
 
+    // Set the current function
+    setCurFunction(F);
+
     // TODO
     return false;
 }
@@ -249,19 +249,22 @@ UnknownFrontendTranslatorImplX86::translateOneFunction(
 {
     assert(F);
 
-    auto ImageBase = mBinary->imagebase();
-    auto FunctionAddress = FunctionSymbol.rva + ImageBase;
-    auto FunctionSize = FunctionSymbol.size;
-    auto &FunctionName = FunctionSymbol.name;
-
-    F->setFunctionName(FunctionName);
-    F->setFunctionBeginAddress(FunctionAddress);
-    F->setFunctionEndAddress(FunctionAddress + FunctionSize);
-
     // Update function attributes
     UpdateFunctionAttributes(FunctionSymbol, F);
 
-    return translateOneFunction(FunctionName, FunctionAddress, FunctionSize, F);
+    return translateOneFunction(F);
+}
+
+bool
+UnknownFrontendTranslatorImplX86::translateOneFunction(uir::Function *F)
+{
+    assert(F);
+
+    return translateOneFunction(
+        F->getFunctionName(),
+        F->getFunctionBeginAddress(),
+        F->getFunctionEndAddress() - F->getFunctionBeginAddress(),
+        F);
 }
 
 // Register
@@ -291,6 +294,15 @@ UnknownFrontendTranslatorImplX86::UpdateFunctionAttributes(
 {
     assert(F);
 
+    auto ImageBase = mBinary->imagebase();
+    auto FunctionAddress = FunctionSymbol.rva + ImageBase;
+    auto FunctionSize = FunctionSymbol.size;
+    auto &FunctionName = FunctionSymbol.name;
+
+    F->setFunctionName(FunctionName);
+    F->setFunctionBeginAddress(FunctionAddress);
+    F->setFunctionEndAddress(FunctionAddress + FunctionSize);
+
     if (mUsePDB)
     {
         F->setSEH(FunctionSymbol.hasSEH);
@@ -313,6 +325,15 @@ void
 UnknownFrontendTranslatorImplX86::UpdateFunctionAttributesForCXXEH(uir::Function *F)
 {
     assert(F);
+
+    // TODO
+}
+
+// Update BasicBlock attributes
+void
+UnknownFrontendTranslatorImplX86::UpdateBasicBlockAttributes(uir::BasicBlock *BB)
+{
+    assert(BB);
 
     // TODO
 }

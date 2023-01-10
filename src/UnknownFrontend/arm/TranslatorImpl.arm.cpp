@@ -109,4 +109,13 @@ UnknownFrontendTranslatorImplARM::UpdateFunctionAttributes(uir::Function *F)
     // TODO
 }
 
+// Update BasicBlock attributes
+void
+UnknownFrontendTranslatorImplARM::UpdateBasicBlockAttributes(uir::BasicBlock *BB)
+{
+    assert(BB);
+
+    // TODO
+}
+
 } // namespace ufrontend

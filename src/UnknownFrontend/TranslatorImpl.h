@@ -120,6 +120,9 @@ protected:
     // Attributes
     // Update function attributes
     virtual void UpdateFunctionAttributes(uir::Function *F) = 0;
+
+    // Update BasicBlock attributes
+    virtual void UpdateBasicBlockAttributes(uir::BasicBlock *BB) = 0;
 };
 
 } // namespace ufrontend

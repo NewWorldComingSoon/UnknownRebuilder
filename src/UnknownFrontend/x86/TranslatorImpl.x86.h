@@ -62,6 +62,7 @@ public:
     virtual bool
     translateOneFunction(const std::string &FunctionName, uint64_t Address, size_t Size, uir::Function *F) override;
     virtual bool translateOneFunction(const unknown::SymbolParser::FunctionSymbol &FunctionSymbol, uir::Function *F);
+    virtual bool translateOneFunction(uir::Function *F);
 
 protected:
     // Register
@@ -76,6 +77,9 @@ protected:
     UpdateFunctionAttributes(const unknown::SymbolParser::FunctionSymbol &FunctionSymbol, uir::Function *F);
     virtual void UpdateFunctionAttributesForSEH(uir::Function *F);
     virtual void UpdateFunctionAttributesForCXXEH(uir::Function *F);
+
+    // Update BasicBlock attributes
+    virtual void UpdateBasicBlockAttributes(uir::BasicBlock *BB) override;
 };
 
 } // namespace ufrontend
