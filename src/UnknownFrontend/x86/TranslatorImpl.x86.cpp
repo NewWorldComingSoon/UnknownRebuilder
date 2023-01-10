@@ -227,6 +227,7 @@ uir::BasicBlock *
 UnknownFrontendTranslatorImplX86::translateOneBasicBlock(const std::string &BlockName, uint64_t Address)
 {
     auto TempBB = std::make_unique<uir::BasicBlock>(getContext(), BlockName, Address);
+    assert(TempBB);
 
     return TempBB.release();
 }
