@@ -224,10 +224,68 @@ UnknownFrontendTranslatorImplX86::translateOneInstruction(const cs_insn *Insn, u
 
 // Translate one BasicBlock into UnknownIR
 uir::BasicBlock *
-UnknownFrontendTranslatorImplX86::translateOneBasicBlock(const std::string &BlockName, uint64_t Address)
+UnknownFrontendTranslatorImplX86::translateOneBasicBlock(
+    const std::string &BlockName,
+    uint64_t Address,
+    uint64_t MaxAddress)
 {
-    auto TempBB = std::make_unique<uir::BasicBlock>(getContext(), BlockName, Address);
+    if (getCurPtrBegin() == 0)
+    {
+        // Set the begin of current pointer
+        setCurPtrBegin(Address);
+        assert(getCurPtrBegin());
+    }
+
+    if (getCurPtrEnd() == 0)
+    {
+        // Set the end of current pointer
+        setCurPtrEnd(MaxAddress);
+        if (getCurPtrEnd() <= getCurPtrBegin())
+        {
+            auto CurSection = mBinary->get_section(getCurPtrBegin());
+            if (CurSection)
+            {
+                setCurPtrEnd(mBinary->imagebase() + CurSection->virtual_address() + CurSection->sizeof_raw_data());
+            }
+        }
+        assert(getCurPtrEnd());
+        assert(getCurPtrEnd() > getCurPtrBegin());
+    }
+
+    auto TempBB = std::make_unique<uir::BasicBlock>(getContext(), BlockName, Address, MaxAddress);
     assert(TempBB);
+
+    // Translate Instruction
+    while (getCurPtrBegin() < getCurPtrEnd())
+    {
+        cs_insn *Insn = cs_malloc(getCapstoneHandle());
+        assert(Insn);
+
+        uint64_t Address = getCurPtrBegin();
+        uint64_t MaxAddress = getCurPtrEnd();
+        size_t Size = MaxAddress - Address;
+
+        uint8_t *Bytes = new uint8_t[Size]{0};
+        assert(Bytes);
+
+        auto Contents = mBinary->get_content_from_virtual_address(Address, Size);
+        assert(!Contents.empty());
+        std::copy(Contents.begin(), Contents.end(), Bytes);
+
+        bool DisasmRes =
+            cs_disasm_iter(getCapstoneHandle(), const_cast<const uint8_t **>(&Bytes), &Size, &Address, Insn);
+        do
+        {
+            if (!DisasmRes)
+            {
+                break;
+            }
+
+        } while (false);
+
+        delete[] Bytes;
+        cs_free(Insn, 1);
+    }
 
     return TempBB.release();
 }
@@ -268,7 +326,7 @@ UnknownFrontendTranslatorImplX86::translateOneFunction(
     while (getCurPtrBegin() < getCurPtrEnd())
     {
         // Translate BasicBlock
-        auto BB = translateOneBasicBlock("", getCurPtrBegin());
+        auto BB = translateOneBasicBlock("", getCurPtrBegin(), getCurPtrEnd());
         if (BB == nullptr)
         {
             break;

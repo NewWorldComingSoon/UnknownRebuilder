@@ -42,7 +42,8 @@ public:
     virtual bool translateOneInstruction(const uint8_t *Bytes, size_t Size, uint64_t Address, uir::BasicBlock *BB) = 0;
 
     // Translate one BasicBlock into UnknownIR
-    virtual uir::BasicBlock *translateOneBasicBlock(const std::string &BlockName, uint64_t Address) = 0;
+    virtual uir::BasicBlock *
+    translateOneBasicBlock(const std::string &BlockName, uint64_t Address, uint64_t MaxAddress) = 0;
 
     // Translate one function into UnknownIR
     virtual bool
