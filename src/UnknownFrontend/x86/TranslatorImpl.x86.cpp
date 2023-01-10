@@ -213,8 +213,26 @@ UnknownFrontendTranslatorImplX86::translateOneInstruction(
 {
     assert(BB);
 
-    // TODO
-    return true;
+    cs_insn *Insn = cs_malloc(getCapstoneHandle());
+    assert(Insn);
+
+    bool DisasmRes = cs_disasm_iter(getCapstoneHandle(), const_cast<const uint8_t **>(&Bytes), &Size, &Address, Insn);
+    bool TransRes = false;
+
+    do
+    {
+        if (!DisasmRes)
+        {
+            std::cerr << std::format("UnknownFrontend: Error: disasm: 0x{:X} failed", Address) << std::endl;
+            break;
+        }
+
+        TransRes = translateOneInstruction(Insn, Address, BB);
+
+    } while (false);
+
+    cs_free(Insn, 1);
+    return TransRes;
 }
 
 bool
@@ -284,6 +302,7 @@ UnknownFrontendTranslatorImplX86::translateOneBasicBlock(
         {
             if (!DisasmRes)
             {
+                std::cerr << std::format("UnknownFrontend: Error: disasm: 0x{:X} failed", Address) << std::endl;
                 break;
             }
 
