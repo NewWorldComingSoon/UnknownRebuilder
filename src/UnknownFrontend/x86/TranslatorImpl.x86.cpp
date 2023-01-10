@@ -211,6 +211,8 @@ UnknownFrontendTranslatorImplX86::translateOneInstruction(
     uint64_t Address,
     uir::BasicBlock *BB)
 {
+    assert(BB);
+
     // TODO
     return true;
 }
@@ -218,6 +220,8 @@ UnknownFrontendTranslatorImplX86::translateOneInstruction(
 bool
 UnknownFrontendTranslatorImplX86::translateOneInstruction(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB)
 {
+    assert(BB);
+
     // TODO
     return true;
 }
@@ -278,6 +282,14 @@ UnknownFrontendTranslatorImplX86::translateOneBasicBlock(
         {
             if (!DisasmRes)
             {
+                break;
+            }
+
+            bool TransSucc = translateOneInstruction(Insn, Address, TempBB.get());
+            if (!TransSucc)
+            {
+                std::cerr << std::format("UnknownFrontend: Error: translateOneInstruction: 0x{:X} failed", Address)
+                          << std::endl;
                 break;
             }
 
