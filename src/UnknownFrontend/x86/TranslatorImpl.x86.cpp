@@ -238,8 +238,13 @@ UnknownFrontendTranslatorImplX86::translateOneFunction(
     // Set the current function
     setCurFunction(F);
 
-    // TODO
-    return false;
+    // Set the begin of current pointer
+    setCurPtrBegin(Address ? Address : F->getFunctionBeginAddress());
+
+    // Set the end of current pointer
+    setCurPtrEnd(Size ? Address + Size : F->getFunctionEndAddress());
+
+    return true;
 }
 
 bool

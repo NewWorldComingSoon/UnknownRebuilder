@@ -81,6 +81,7 @@ UnknownFrontendTranslatorImpl::getCurPtrEnd() const
 void
 UnknownFrontendTranslatorImpl::setCurPtrBegin(uint64_t Ptr)
 {
+    assert(Ptr);
     mCurPtrBegin = Ptr;
 }
 
