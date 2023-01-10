@@ -367,14 +367,14 @@ UnknownFrontendTranslatorImplX86::translateOneFunction(
 
     while (getCurPtrBegin() < getCurPtrEnd())
     {
-        // Translate BasicBlock
+        // Translate a basic block
         auto BB = translateOneBasicBlock("", getCurPtrBegin(), getCurPtrEnd());
         if (BB == nullptr)
         {
             break;
         }
 
-        // Insert a BasicBlock into the function
+        // Insert a basic block into the function
         TempFunction->insertBasicBlock(BB);
 
         // Update ptr
