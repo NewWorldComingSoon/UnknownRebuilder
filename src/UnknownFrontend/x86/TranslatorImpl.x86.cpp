@@ -186,8 +186,8 @@ UnknownFrontendTranslatorImplX86::translateBinary(const std::string &ModuleName)
         assert(F);
 
         // Translate one function into UnknownIR
-        bool TransSucc = translateOneFunction(FunctionSymbol, F);
-        if (TransSucc)
+        bool TransRes = translateOneFunction(FunctionSymbol, F);
+        if (TransRes)
         {
             // Insert a function into the module
             Module->insertFunction(F);
@@ -285,8 +285,8 @@ UnknownFrontendTranslatorImplX86::translateOneBasicBlock(
                 break;
             }
 
-            bool TransSucc = translateOneInstruction(Insn, Address, TempBB.get());
-            if (!TransSucc)
+            bool TransRes = translateOneInstruction(Insn, Address, TempBB.get());
+            if (!TransRes)
             {
                 std::cerr << std::format("UnknownFrontend: Error: translateOneInstruction: 0x{:X} failed", Address)
                           << std::endl;
