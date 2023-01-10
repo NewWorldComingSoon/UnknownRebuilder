@@ -221,7 +221,6 @@ UnknownFrontendTranslatorImplX86::translateOneInstruction(
     bool DisasmRes = DisasmCount == 1;
 
     bool TransRes = false;
-
     do
     {
         if (!DisasmRes)
@@ -328,7 +327,6 @@ UnknownFrontendTranslatorImplX86::translateOneBasicBlock(
         bool DisasmRes = DisasmCount == 1;
 
         bool TransRes = true;
-
         do
         {
             if (!DisasmRes)
