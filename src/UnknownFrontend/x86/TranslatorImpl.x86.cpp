@@ -214,10 +214,10 @@ UnknownFrontendTranslatorImplX86::translateOneInstruction(
     assert(Bytes);
     assert(BB);
 
-    cs_insn *Insn = cs_malloc(getCapstoneHandle());
-    assert(Insn);
+    cs_insn *Insn = nullptr;
+    size_t DisasmCount = cs_disasm(getCapstoneHandle(), const_cast<const uint8_t *>(Bytes), Size, Address, 1, &Insn);
+    bool DisasmRes = DisasmCount == 1;
 
-    bool DisasmRes = cs_disasm_iter(getCapstoneHandle(), const_cast<const uint8_t **>(&Bytes), &Size, &Address, Insn);
     bool TransRes = false;
 
     do
@@ -307,8 +307,7 @@ UnknownFrontendTranslatorImplX86::translateOneBasicBlock(
     // Translate
     while (getCurPtrBegin() < getCurPtrEnd())
     {
-        cs_insn *Insn = cs_malloc(getCapstoneHandle());
-        assert(Insn);
+        cs_insn *Insn = nullptr;
 
         uint64_t Address = getCurPtrBegin();
         uint64_t MaxAddress = getCurPtrEnd();
@@ -321,8 +320,10 @@ UnknownFrontendTranslatorImplX86::translateOneBasicBlock(
         assert(!Contents.empty());
         std::copy(Contents.begin(), Contents.end(), Bytes);
 
-        bool DisasmRes =
-            cs_disasm_iter(getCapstoneHandle(), const_cast<const uint8_t **>(&Bytes), &Size, &Address, Insn);
+        size_t DisasmCount =
+            cs_disasm(getCapstoneHandle(), const_cast<const uint8_t *>(Bytes), Size, Address, 1, &Insn);
+        bool DisasmRes = DisasmCount == 1;
+
         bool TransRes = true;
 
         do
