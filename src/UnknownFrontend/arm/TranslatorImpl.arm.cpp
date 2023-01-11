@@ -102,6 +102,16 @@ UnknownFrontendTranslatorImplARM::translateOneFunction(
 }
 
 ////////////////////////////////////////////////////////////
+// Register
+// Get carry register.
+uint32_t
+UnknownFrontendTranslatorImplARM::getCarryRegister()
+{
+    // TODO
+    return 0;
+}
+
+////////////////////////////////////////////////////////////
 // Attributes
 // Update function attributes
 void
