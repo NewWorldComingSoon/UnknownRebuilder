@@ -516,7 +516,7 @@ UnknownFrontendTranslatorImplX86::getRegisterName(uint32_t RegID)
 {
     if (mReg2Name.empty())
     {
-        std::map<uint32_t, std::string> R2N = {
+        std::unordered_map<uint32_t, std::string> R2N = {
             // x86_reg_rflags
             //
             {X86_REG_CF, "cf"},

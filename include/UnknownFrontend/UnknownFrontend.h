@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include <map>
+#include <unordered_map>
 #include <vector>
 
 #include <UnknownIR/UnknownIR.h>
