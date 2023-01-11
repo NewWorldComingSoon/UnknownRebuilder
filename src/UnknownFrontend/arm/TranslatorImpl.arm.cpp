@@ -72,7 +72,11 @@ UnknownFrontendTranslatorImplARM::translateOneInstruction(
 }
 
 bool
-UnknownFrontendTranslatorImplARM::translateOneInstruction(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB)
+UnknownFrontendTranslatorImplARM::translateOneInstruction(
+    const cs_insn *Insn,
+    uint64_t Address,
+    uir::BasicBlock *BB,
+    bool &IsBlockTerminatorInsn)
 {
     // TODO
     return true;

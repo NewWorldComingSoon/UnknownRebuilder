@@ -55,7 +55,11 @@ public:
     {
         return false;
     }
-    virtual bool translateOneInstruction(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB) = 0;
+    virtual bool translateOneInstruction(
+        const cs_insn *Insn,
+        uint64_t Address,
+        uir::BasicBlock *BB,
+        bool &IsBlockTerminatorInsn) = 0;
 
     // Translate one BasicBlock into UnknownIR
     virtual uir::BasicBlock *

@@ -33,7 +33,9 @@ public:
     // Translate one instruction into UnknownIR
     virtual bool
     translateOneInstruction(const uint8_t *Bytes, size_t Size, uint64_t Address, uir::BasicBlock *BB) override;
-    virtual bool translateOneInstruction(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB) override;
+    virtual bool
+    translateOneInstruction(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB, bool &IsBlockTerminatorInsn)
+        override;
 
     // Translate one BasicBlock into UnknownIR
     virtual uir::BasicBlock *

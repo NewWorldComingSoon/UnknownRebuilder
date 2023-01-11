@@ -237,11 +237,16 @@ UnknownFrontendTranslatorImplX86::translateOneInstruction(
         return false;
     }
 
-    return translateOneInstruction(Insn, Address, BB);
+    bool IsBlockTerminatorInsn = false;
+    return translateOneInstruction(Insn, Address, BB, IsBlockTerminatorInsn);
 }
 
 bool
-UnknownFrontendTranslatorImplX86::translateOneInstruction(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB)
+UnknownFrontendTranslatorImplX86::translateOneInstruction(
+    const cs_insn *Insn,
+    uint64_t Address,
+    uir::BasicBlock *BB,
+    bool &IsBlockTerminatorInsn)
 {
     assert(Insn);
     assert(BB);
@@ -350,11 +355,17 @@ UnknownFrontendTranslatorImplX86::translateOneBasicBlock(
         }
 
         // Translate one instruction
-        bool TransRes = translateOneInstruction(Insn, Address, TempBB.get());
+        bool IsBlockTerminatorInsn = false;
+        bool TransRes = translateOneInstruction(Insn, Address, TempBB.get(), IsBlockTerminatorInsn);
         if (!TransRes)
         {
             std::cerr << std::format("UnknownFrontend: Error: translateOneInstruction: 0x{:X} failed", Address)
                       << std::endl;
+            break;
+        }
+
+        if (IsBlockTerminatorInsn)
+        {
             break;
         }
 
