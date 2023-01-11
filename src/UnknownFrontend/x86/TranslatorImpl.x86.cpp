@@ -591,8 +591,7 @@ UnknownFrontendTranslatorImplX86::getRegisterName(uint32_t RegID)
         }
         else
         {
-            std::cerr << std::format("UnknownFrontend: Error: Missing name for register id:{}", std::to_string(RegID))
-                      << std::endl;
+            std::cerr << std::format("UnknownFrontend: Error: Missing name for register id:{}", RegID) << std::endl;
             std::abort();
         }
     }
