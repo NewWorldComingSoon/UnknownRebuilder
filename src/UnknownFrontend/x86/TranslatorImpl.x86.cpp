@@ -1,5 +1,7 @@
 #include "TranslatorImpl.x86.h"
 
+#include <unknown/ADT/ScopeExit.h>
+
 namespace ufrontend {
 
 UnknownFrontendTranslatorImplX86::UnknownFrontendTranslatorImplX86(
@@ -220,23 +222,22 @@ UnknownFrontendTranslatorImplX86::translateOneInstruction(
 
     // Disasm
     size_t DisasmCount = cs_disasm(getCapstoneHandle(), const_cast<const uint8_t *>(Bytes), Size, Address, 1, &Insn);
-    bool DisasmRes = DisasmCount == 1;
-
-    bool TransRes = false;
-    do
-    {
-        if (!DisasmRes)
+    auto DeferredInsn = unknown::make_scope_exit([&Insn]() {
+        if (Insn)
         {
-            std::cerr << std::format("UnknownFrontend: Error: disasm: 0x{:X} failed", Address) << std::endl;
-            break;
+            cs_free(Insn, 1);
+            Insn = nullptr;
         }
+    });
 
-        TransRes = translateOneInstruction(Insn, Address, BB);
+    bool DisasmRes = DisasmCount == 1;
+    if (!DisasmRes)
+    {
+        std::cerr << std::format("UnknownFrontend: Error: disasm: 0x{:X} failed", Address) << std::endl;
+        return false;
+    }
 
-    } while (false);
-
-    cs_free(Insn, 1);
-    return TransRes;
+    return translateOneInstruction(Insn, Address, BB);
 }
 
 bool

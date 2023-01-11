@@ -63,5 +63,3 @@ make_scope_exit(Callable &&F)
 }
 
 } // namespace unknown
-
-#endif
