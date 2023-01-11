@@ -407,7 +407,10 @@ UnknownFrontendTranslatorImplX86::translateOneFunction(
         }
 
         // Insert a basic block into the function
-        TempFunction->insertBasicBlock(BB);
+        if (!BB->empty())
+        {
+            TempFunction->insertBasicBlock(BB);
+        }
 
         // Update ptr
         setCurPtrBegin(BB->getBasicBlockAddressEnd());
