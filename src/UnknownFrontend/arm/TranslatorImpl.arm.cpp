@@ -109,6 +109,14 @@ UnknownFrontendTranslatorImplARM::translateOneFunction(
 
 ////////////////////////////////////////////////////////////
 // Register
+// Get the register name by register id
+std::string
+UnknownFrontendTranslatorImplARM::getRegisterName(uint32_t RegID)
+{
+    // TODO
+    return "";
+}
+
 // Get carry register.
 uint32_t
 UnknownFrontendTranslatorImplARM::getCarryRegister()

@@ -510,6 +510,98 @@ UnknownFrontendTranslatorImplX86::setUsePDB(bool HasUsePDB)
 
 ////////////////////////////////////////////////////////////
 // Register
+// Get the register name by register id
+std::string
+UnknownFrontendTranslatorImplX86::getRegisterName(uint32_t RegID)
+{
+    if (mReg2name.empty())
+    {
+        std::map<uint32_t, std::string> R2N = {
+            // x86_reg_rflags
+            //
+            {X86_REG_CF, "cf"},
+            {X86_REG_PF, "pf"},
+            {X86_REG_AF, "af"},
+            {X86_REG_ZF, "zf"},
+            {X86_REG_SF, "sf"},
+            {X86_REG_TF, "tf"},
+            {X86_REG_IF, "if"},
+            {X86_REG_DF, "df"},
+            {X86_REG_OF, "of"},
+            {X86_REG_IOPL, "iopl"},
+            {X86_REG_NT, "nt"},
+            {X86_REG_RF, "rf"},
+            {X86_REG_VM, "vm"},
+            {X86_REG_AC, "ac"},
+            {X86_REG_VIF, "vif"},
+            {X86_REG_VIP, "vip"},
+            {X86_REG_ID, "id"},
+
+            // x87_reg_status
+            //
+            {X87_REG_IE, "fpu_stat_IE"},
+            {X87_REG_DE, "fpu_stat_DE"},
+            {X87_REG_ZE, "fpu_stat_ZE"},
+            {X87_REG_OE, "fpu_stat_OE"},
+            {X87_REG_UE, "fpu_stat_UE"},
+            {X87_REG_PE, "fpu_stat_PE"},
+            {X87_REG_SF, "fpu_stat_SF"},
+            {X87_REG_ES, "fpu_stat_ES"},
+            {X87_REG_C0, "fpu_stat_C0"},
+            {X87_REG_C1, "fpu_stat_C1"},
+            {X87_REG_C2, "fpu_stat_C2"},
+            {X87_REG_C3, "fpu_stat_C3"},
+            {X87_REG_TOP, "fpu_stat_TOP"},
+            {X87_REG_B, "fpu_stat_B"},
+
+            // x87_reg_control
+            //
+            {X87_REG_IM, "fpu_control_IM"},
+            {X87_REG_DM, "fpu_control_DM"},
+            {X87_REG_ZM, "fpu_control_ZM"},
+            {X87_REG_OM, "fpu_control_OM"},
+            {X87_REG_UM, "fpu_control_UM"},
+            {X87_REG_PM, "fpu_control_PM"},
+            {X87_REG_PC, "fpu_control_PC"},
+            {X87_REG_RC, "fpu_control_RC"},
+            {X87_REG_X, "fpu_control_X"},
+
+            // FPU data registers
+            // They are named as ST(X) in Capstone, which is not good for us.
+            //
+            {X86_REG_ST0, "st0"},
+            {X86_REG_ST1, "st1"},
+            {X86_REG_ST2, "st2"},
+            {X86_REG_ST3, "st3"},
+            {X86_REG_ST4, "st4"},
+            {X86_REG_ST5, "st5"},
+            {X86_REG_ST6, "st6"},
+            {X86_REG_ST7, "st7"},
+        };
+
+        mReg2name = std::move(R2N);
+    }
+
+    auto It = mReg2name.find(RegID);
+    if (It == mReg2name.end())
+    {
+        if (auto Name = cs_reg_name(getCapstoneHandle(), RegID))
+        {
+            return Name;
+        }
+        else
+        {
+            std::cerr << std::format("UnknownFrontend: Error: Missing name for register id:{}", std::to_string(RegID))
+                      << std::endl;
+            std::abort();
+        }
+    }
+    else
+    {
+        return It->second;
+    }
+}
+
 // Get carry register.
 uint32_t
 UnknownFrontendTranslatorImplX86::getCarryRegister()
