@@ -117,7 +117,7 @@ UnknownFrontendTranslatorImplARM::getRegisterName(uint32_t RegID)
     return "";
 }
 
-// Get carry register.
+// Get carry register
 uint32_t
 UnknownFrontendTranslatorImplARM::getCarryRegister()
 {

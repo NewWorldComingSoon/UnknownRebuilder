@@ -124,7 +124,7 @@ protected:
     // Get the register name by register id
     virtual std::string getRegisterName(uint32_t RegID) = 0;
 
-    // Get carry register.
+    // Get carry register
     virtual uint32_t getCarryRegister() = 0;
 
 protected:
