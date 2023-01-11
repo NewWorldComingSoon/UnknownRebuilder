@@ -115,15 +115,15 @@ public:
 protected:
     // Register
     // Get carry register.
-    virtual uint32_t getCarryRegister() = 0;
+    virtual uint32_t getCarryRegister() { return 0; }
 
 protected:
     // Attributes
     // Update function attributes
-    virtual void UpdateFunctionAttributes(uir::Function *F) = 0;
+    virtual void UpdateFunctionAttributes(uir::Function *F) {}
 
     // Update BasicBlock attributes
-    virtual void UpdateBasicBlockAttributes(uir::BasicBlock *BB) = 0;
+    virtual void UpdateBasicBlockAttributes(uir::BasicBlock *BB) {}
 };
 
 } // namespace ufrontend
