@@ -514,7 +514,7 @@ UnknownFrontendTranslatorImplX86::setUsePDB(bool HasUsePDB)
 std::string
 UnknownFrontendTranslatorImplX86::getRegisterName(uint32_t RegID)
 {
-    if (mReg2name.empty())
+    if (mReg2Name.empty())
     {
         std::map<uint32_t, std::string> R2N = {
             // x86_reg_rflags
@@ -579,11 +579,11 @@ UnknownFrontendTranslatorImplX86::getRegisterName(uint32_t RegID)
             {X86_REG_ST7, "st7"},
         };
 
-        mReg2name = std::move(R2N);
+        mReg2Name = std::move(R2N);
     }
 
-    auto It = mReg2name.find(RegID);
-    if (It == mReg2name.end())
+    auto It = mReg2Name.find(RegID);
+    if (It == mReg2Name.end())
     {
         if (auto Name = cs_reg_name(getCapstoneHandle(), RegID))
         {

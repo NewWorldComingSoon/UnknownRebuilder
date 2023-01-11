@@ -24,7 +24,7 @@ protected:
     uir::Function *mCurFunction;
 
 protected:
-    std::map<uint32_t, std::string> mReg2name;
+    std::map<uint32_t, std::string> mReg2Name;
 
 public:
     UnknownFrontendTranslatorImpl(
