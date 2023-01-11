@@ -243,7 +243,7 @@ UnknownFrontendTranslatorImplX86::translateOneInstruction(const cs_insn *Insn, u
     assert(Insn);
     assert(BB);
 
-    if (getCurPtrBegin() == 0)
+    if (getCurPtrBegin() != Address)
     {
         // Set the begin of current pointer
         setCurPtrBegin(Address);
@@ -279,7 +279,7 @@ UnknownFrontendTranslatorImplX86::translateOneBasicBlock(
 {
     assert(Address);
 
-    if (getCurPtrBegin() == 0)
+    if (getCurPtrBegin() != Address)
     {
         // Set the begin of current pointer
         setCurPtrBegin(Address);
