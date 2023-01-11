@@ -250,6 +250,7 @@ UnknownFrontendTranslatorImplX86::translateOneInstruction(
 {
     assert(Insn);
     assert(BB);
+    IsBlockTerminatorInsn = false;
 
     if (getCurPtrBegin() != Address)
     {
