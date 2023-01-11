@@ -33,16 +33,16 @@ public:
 
 protected:
     // Capstone
-    virtual void openCapstoneHandle() {}
-    virtual void closeCapstoneHandle() {}
+    virtual void openCapstoneHandle() = 0;
+    virtual void closeCapstoneHandle() = 0;
 
 protected:
     // Symbol Parser
-    virtual void initSymbolParser() {}
+    virtual void initSymbolParser() = 0;
 
 protected:
     // Binary
-    virtual void initBinary() {}
+    virtual void initBinary() = 0;
 
 public:
     // Translate

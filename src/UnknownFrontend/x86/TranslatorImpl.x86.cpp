@@ -9,12 +9,14 @@ UnknownFrontendTranslatorImplX86::UnknownFrontendTranslatorImplX86(
     const std::string &SymbolFile) :
     UnknownFrontendTranslatorImpl(C, Platform, BinaryFile, SymbolFile), mUsePDB(false)
 {
-    //
+    openCapstoneHandle();
+    initSymbolParser();
+    initBinary();
 }
 
 UnknownFrontendTranslatorImplX86::~UnknownFrontendTranslatorImplX86()
 {
-    //
+    closeCapstoneHandle();
 }
 
 ////////////////////////////////////////////////////////////

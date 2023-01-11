@@ -9,12 +9,14 @@ UnknownFrontendTranslatorImplARM::UnknownFrontendTranslatorImplARM(
     const std::string &SymbolFile) :
     UnknownFrontendTranslatorImpl(C, Platform, BinaryFile, SymbolFile)
 {
-    //
+    openCapstoneHandle();
+    initSymbolParser();
+    initBinary();
 }
 
 UnknownFrontendTranslatorImplARM::~UnknownFrontendTranslatorImplARM()
 {
-    //
+    closeCapstoneHandle();
 }
 
 ////////////////////////////////////////////////////////////
