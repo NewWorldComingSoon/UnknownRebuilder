@@ -319,6 +319,13 @@ UnknownFrontendTranslatorImplX86::translateOneBasicBlock(
 
         uint8_t *Bytes = new uint8_t[Size]{};
         assert(Bytes);
+        auto DeferredBytes = unknown::make_scope_exit([&Bytes]() {
+            if (Bytes)
+            {
+                delete[] Bytes;
+                Bytes = nullptr;
+            }
+        });
 
         auto Contents = mBinary->get_content_from_virtual_address(Address, Size);
         assert(!Contents.empty());
@@ -327,38 +334,32 @@ UnknownFrontendTranslatorImplX86::translateOneBasicBlock(
         // Disasm
         size_t DisasmCount =
             cs_disasm(getCapstoneHandle(), const_cast<const uint8_t *>(Bytes), Size, Address, 1, &Insn);
+        auto DeferredInsn = unknown::make_scope_exit([&Insn]() {
+            if (Insn)
+            {
+                cs_free(Insn, 1);
+                Insn = nullptr;
+            }
+        });
+
         bool DisasmRes = DisasmCount == 1;
-
-        bool TransRes = true;
-        do
+        if (!DisasmRes)
         {
-            if (!DisasmRes)
-            {
-                std::cerr << std::format("UnknownFrontend: Error: disasm: 0x{:X} failed", Address) << std::endl;
-                break;
-            }
-
-            // Translate one instruction
-            TransRes = translateOneInstruction(Insn, Address, TempBB.get());
-            if (!TransRes)
-            {
-                std::cerr << std::format("UnknownFrontend: Error: translateOneInstruction: 0x{:X} failed", Address)
-                          << std::endl;
-                break;
-            }
-
-            // Update ptr
-            setCurPtrBegin(Address + Insn->size);
-
-        } while (false);
-
-        delete[] Bytes;
-        cs_free(Insn, 1);
-
-        if (!DisasmRes || !TransRes)
-        {
+            std::cerr << std::format("UnknownFrontend: Error: disasm: 0x{:X} failed", Address) << std::endl;
             break;
         }
+
+        // Translate one instruction
+        bool TransRes = translateOneInstruction(Insn, Address, TempBB.get());
+        if (!TransRes)
+        {
+            std::cerr << std::format("UnknownFrontend: Error: translateOneInstruction: 0x{:X} failed", Address)
+                      << std::endl;
+            break;
+        }
+
+        // Update ptr
+        setCurPtrBegin(Address + Insn->size);
     }
 
     return TempBB.release();
