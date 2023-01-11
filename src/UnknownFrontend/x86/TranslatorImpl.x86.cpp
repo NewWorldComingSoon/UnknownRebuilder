@@ -276,8 +276,26 @@ UnknownFrontendTranslatorImplX86::translateOneInstruction(
         assert(getCurPtrEnd() > getCurPtrBegin());
     }
 
-    // TODO
-    return true;
+    bool TransRes = false;
+    do
+    {
+        // Ret
+        if (TransRes = translateRetInstruction(Insn, Address, BB))
+        {
+            IsBlockTerminatorInsn = true;
+            break;
+        }
+
+        // Jcc
+        if (TransRes = translateJccInstruction(Insn, Address, BB))
+        {
+            IsBlockTerminatorInsn = true;
+            break;
+        }
+
+    } while (false);
+
+    return TransRes;
 }
 
 // Translate one BasicBlock into UnknownIR

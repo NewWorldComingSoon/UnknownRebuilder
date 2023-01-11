@@ -91,6 +91,14 @@ protected:
 
     // Update BasicBlock attributes
     virtual void UpdateBasicBlockAttributes(uir::BasicBlock *BB) override;
+
+protected:
+    // x86 instruction translation methods
+    // Ret
+    bool translateRetInstruction(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB);
+
+    // Jcc
+    bool translateJccInstruction(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB);
 };
 
 } // namespace ufrontend
