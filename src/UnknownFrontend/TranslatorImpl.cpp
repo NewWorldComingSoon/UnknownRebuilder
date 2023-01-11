@@ -16,12 +16,14 @@ UnknownFrontendTranslatorImpl::UnknownFrontendTranslatorImpl(
     mCurPtrEnd(0),
     mCurFunction(nullptr)
 {
-    //
+    openCapstoneHandle();
+    initSymbolParser();
+    initBinary();
 }
 
 UnknownFrontendTranslatorImpl::~UnknownFrontendTranslatorImpl()
 {
-    //
+    closeCapstoneHandle();
 }
 
 ////////////////////////////////////////////////////////////
