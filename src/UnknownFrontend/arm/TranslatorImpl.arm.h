@@ -50,6 +50,9 @@ protected:
     // Get the register name by register id
     virtual std::string getRegisterName(uint32_t RegID) override;
 
+    // Get the register id by register name
+    virtual uint32_t getRegisterID(const std::string &RegName) override;
+
     // Get carry register
     virtual uint32_t getCarryRegister() override;
 

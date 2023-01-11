@@ -25,6 +25,7 @@ protected:
 
 protected:
     std::unordered_map<uint32_t, std::string> mReg2Name;
+    std::unordered_map<std::string, uint32_t> mName2Reg;
 
 public:
     UnknownFrontendTranslatorImpl(
@@ -123,6 +124,9 @@ protected:
     // Register
     // Get the register name by register id
     virtual std::string getRegisterName(uint32_t RegID) = 0;
+
+    // Get the register id by register name
+    virtual uint32_t getRegisterID(const std::string &RegName) = 0;
 
     // Get carry register
     virtual uint32_t getCarryRegister() = 0;
