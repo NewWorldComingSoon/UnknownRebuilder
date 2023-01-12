@@ -129,8 +129,7 @@ UnknownFrontendTranslatorImplARM::getRegisterID(const std::string &RegName)
 uint32_t
 UnknownFrontendTranslatorImplARM::getCarryRegister()
 {
-    // TODO
-    return 0;
+    return mTarget->getCarryRegister();
 }
 
 ////////////////////////////////////////////////////////////
