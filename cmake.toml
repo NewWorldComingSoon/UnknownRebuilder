@@ -22,7 +22,12 @@ condition = "test_mode"
 
 [target.UnknownUtils]
 type = "library"
-include-directories = ["src/UnknownUtils", "include", "include/UnknownUtils"]
+include-directories = [
+    "3rdparty/capstone-retdec/include",
+    "src/UnknownUtils",
+    "include",
+    "include/UnknownUtils",
+]
 headers = ["include/UnknownUtils/**.h"]
 sources = [
     "src/UnknownUtils/**.cpp",
@@ -31,7 +36,7 @@ sources = [
     "src/UnknownUtils/**.inc",
 ]
 compile-features = ["cxx_std_20"]
-
+link-libraries = ["capstone-static"]
 
 [target.UnknownIR]
 type = "library"

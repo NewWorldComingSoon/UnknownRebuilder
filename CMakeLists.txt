@@ -554,9 +554,14 @@ target_compile_features(UnknownUtils PUBLIC
 )
 
 target_include_directories(UnknownUtils PUBLIC
+	"3rdparty/capstone-retdec/include"
 	"src/UnknownUtils"
 	include
 	"include/UnknownUtils"
+)
+
+target_link_libraries(UnknownUtils PUBLIC
+	capstone-static
 )
 
 # Target: UnknownIR

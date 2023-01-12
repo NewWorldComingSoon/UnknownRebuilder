@@ -11,7 +11,13 @@ namespace unknown {
 std::unique_ptr<Target>
 CreateTargetForX86()
 {
-    return {};
+    return std::make_unique<TargetX86>();
+}
+
+std::unique_ptr<Target>
+CreateTargetForARM()
+{
+    return std::make_unique<TargetARM>();
 }
 
 } // namespace unknown

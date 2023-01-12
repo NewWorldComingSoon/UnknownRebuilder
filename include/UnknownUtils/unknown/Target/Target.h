@@ -32,4 +32,7 @@ public:
 std::unique_ptr<Target>
 CreateTargetForX86();
 
+std::unique_ptr<Target>
+CreateTargetForARM();
+
 } // namespace unknown

@@ -9,6 +9,8 @@ UnknownFrontendTranslatorImplARM::UnknownFrontendTranslatorImplARM(
     const std::string &SymbolFile) :
     UnknownFrontendTranslatorImpl(C, Platform, BinaryFile, SymbolFile)
 {
+    mTarget = unknown::CreateTargetForARM();
+
     openCapstoneHandle();
     initSymbolParser();
     initBinary();
@@ -113,16 +115,14 @@ UnknownFrontendTranslatorImplARM::translateOneFunction(
 std::string
 UnknownFrontendTranslatorImplARM::getRegisterName(uint32_t RegID)
 {
-    // TODO
-    return "";
+    return mTarget->getRegisterName(RegID);
 }
 
 // Get the register id by register name
 uint32_t
 UnknownFrontendTranslatorImplARM::getRegisterID(const std::string &RegName)
 {
-    // TODO
-    return 0;
+    return mTarget->getRegisterID(RegName);
 }
 
 // Get carry register

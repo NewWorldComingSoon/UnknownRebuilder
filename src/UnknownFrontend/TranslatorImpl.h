@@ -1,6 +1,8 @@
 #pragma once
 #include <capstone/capstone.h>
 
+#include <UnknownUtils/unknown/Target/Target.h>
+
 #include <UnknownFrontend/UnknownFrontend.h>
 
 namespace ufrontend {
@@ -24,8 +26,7 @@ protected:
     uir::Function *mCurFunction;
 
 protected:
-    std::unordered_map<uint32_t, std::string> mReg2Name;
-    std::unordered_map<std::string, uint32_t> mName2Reg;
+    std::unique_ptr<unknown::Target> mTarget;
 
 public:
     UnknownFrontendTranslatorImpl(
