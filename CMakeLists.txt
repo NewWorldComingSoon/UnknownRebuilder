@@ -96,6 +96,9 @@ set(UnknownUtils_SOURCES
 	"src/UnknownUtils/Symbol/UnknownUtils.PDB_SourceFileStream.cpp"
 	"src/UnknownUtils/Symbol/UnknownUtils.PDB_TPIStream.cpp"
 	"src/UnknownUtils/Symbol/UnknownUtils.PDB_Types.cpp"
+	"src/UnknownUtils/Target/UnknownUtils.Target.cpp"
+	"src/UnknownUtils/Target/arm/UnknownUtils.Target.arm.cpp"
+	"src/UnknownUtils/Target/x86/UnknownUtils.Target.x86.cpp"
 	"src/UnknownUtils/UnknownUtils.AArch64TargetParser.cpp"
 	"src/UnknownUtils/UnknownUtils.APFloat.cpp"
 	"src/UnknownUtils/UnknownUtils.APInt.cpp"
@@ -224,6 +227,8 @@ set(UnknownUtils_SOURCES
 	"src/UnknownUtils/Symbol/PDB_TPITypes.h"
 	"src/UnknownUtils/Symbol/PDB_Types.h"
 	"src/UnknownUtils/Symbol/PDB_Util.h"
+	"src/UnknownUtils/Target/arm/Target.arm.h"
+	"src/UnknownUtils/Target/x86/Target.x86.h"
 	"src/UnknownUtils/Unix/Unix.h"
 	"src/UnknownUtils/Windows/WindowsSupport.h"
 	"src/UnknownUtils/Unix/COM.inc"
@@ -534,6 +539,7 @@ set(UnknownUtils_SOURCES
 	"include/UnknownUtils/unknown/Support/type_traits.h"
 	"include/UnknownUtils/unknown/Support/xxhash.h"
 	"include/UnknownUtils/unknown/Symbol/SymbolParser.h"
+	"include/UnknownUtils/unknown/Target/Target.h"
 	"include/UnknownUtils/unknown/tinyxml2/tinyxml2.h"
 	cmake.toml
 )
