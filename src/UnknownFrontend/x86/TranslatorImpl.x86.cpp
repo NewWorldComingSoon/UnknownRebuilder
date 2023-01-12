@@ -118,12 +118,9 @@ UnknownFrontendTranslatorImplX86::getStackPointerRegister() const
         return X86_REG_ESP;
     case 64:
         return X86_REG_RSP;
-    default: {
-        std::cerr << "UnknownFrontend: Error: getStackPointerRegister failed" << std::endl;
-        std::abort();
-        break;
     }
-    }
+
+    return 0;
 }
 
 const unknown::StringRef
@@ -135,12 +132,9 @@ UnknownFrontendTranslatorImplX86::getStackPointerRegisterName() const
         return "ESP";
     case 64:
         return "RSP";
-    default: {
-        std::cerr << "UnknownFrontend: Error: getStackPointerRegisterName failed" << std::endl;
-        std::abort();
-        break;
     }
-    }
+
+    return "";
 }
 
 const uint32_t
@@ -152,12 +146,9 @@ UnknownFrontendTranslatorImplX86::getBasePointerRegister() const
         return X86_REG_EBP;
     case 64:
         return X86_REG_RBP;
-    default: {
-        std::cerr << "UnknownFrontend: Error: getBasePointerRegister failed" << std::endl;
-        std::abort();
-        break;
     }
-    }
+
+    return 0;
 }
 
 const unknown::StringRef
@@ -169,12 +160,9 @@ UnknownFrontendTranslatorImplX86::getBasePointerRegisterName() const
         return "EBP";
     case 64:
         return "RBP";
-    default: {
-        std::cerr << "UnknownFrontend: Error: getBasePointerRegisterName failed" << std::endl;
-        std::abort();
-        break;
     }
-    }
+
+    return "";
 }
 
 ////////////////////////////////////////////////////////////
