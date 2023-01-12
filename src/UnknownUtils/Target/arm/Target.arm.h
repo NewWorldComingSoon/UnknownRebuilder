@@ -7,7 +7,7 @@ namespace unknown {
 class TargetARM : public Target
 {
 public:
-    TargetARM();
+    explicit TargetARM(uint32_t ModeBits);
     virtual ~TargetARM();
 
 public:
@@ -16,6 +16,9 @@ public:
 
     // Get the register id by register name
     virtual uint32_t getRegisterID(const std::string &RegName) override;
+
+    // Get carry register
+    virtual uint32_t getCarryRegister() override;
 };
 
 } // namespace unknown

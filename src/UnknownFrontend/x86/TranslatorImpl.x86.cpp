@@ -11,7 +11,7 @@ UnknownFrontendTranslatorImplX86::UnknownFrontendTranslatorImplX86(
     const std::string &SymbolFile) :
     UnknownFrontendTranslatorImpl(C, Platform, BinaryFile, SymbolFile), mUsePDB(false)
 {
-    mTarget = unknown::CreateTargetForX86();
+    mTarget = unknown::CreateTargetForX86(C.getModeBits());
 
     openCapstoneHandle();
     initSymbolParser();
@@ -530,7 +530,7 @@ UnknownFrontendTranslatorImplX86::getRegisterID(const std::string &RegName)
 uint32_t
 UnknownFrontendTranslatorImplX86::getCarryRegister()
 {
-    return X86_REG_CF;
+    return mTarget->getCarryRegister();
 }
 
 ////////////////////////////////////////////////////////////

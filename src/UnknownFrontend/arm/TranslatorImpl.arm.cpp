@@ -9,7 +9,7 @@ UnknownFrontendTranslatorImplARM::UnknownFrontendTranslatorImplARM(
     const std::string &SymbolFile) :
     UnknownFrontendTranslatorImpl(C, Platform, BinaryFile, SymbolFile)
 {
-    mTarget = unknown::CreateTargetForARM();
+    mTarget = unknown::CreateTargetForARM(C.getModeBits());
 
     openCapstoneHandle();
     initSymbolParser();

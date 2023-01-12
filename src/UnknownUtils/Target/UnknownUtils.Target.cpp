@@ -9,15 +9,15 @@ namespace unknown {
 ////////////////////////////////////////////////////////////////////////////////////////
 //// Function
 std::unique_ptr<Target>
-CreateTargetForX86()
+CreateTargetForX86(uint32_t ModeBits)
 {
-    return std::make_unique<TargetX86>();
+    return std::make_unique<TargetX86>(ModeBits);
 }
 
 std::unique_ptr<Target>
-CreateTargetForARM()
+CreateTargetForARM(uint32_t ModeBits)
 {
-    return std::make_unique<TargetARM>();
+    return std::make_unique<TargetARM>(ModeBits);
 }
 
 } // namespace unknown

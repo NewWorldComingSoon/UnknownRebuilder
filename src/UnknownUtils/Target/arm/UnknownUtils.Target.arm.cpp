@@ -2,7 +2,7 @@
 
 namespace unknown {
 
-TargetARM::TargetARM()
+TargetARM::TargetARM(uint32_t ModeBits) : Target(ModeBits)
 {
     //
 }
@@ -23,6 +23,14 @@ TargetARM::getRegisterName(uint32_t RegID)
 // Get the register id by register name
 uint32_t
 TargetARM::getRegisterID(const std::string &RegName)
+{
+    // TODO
+    return 0;
+}
+
+// Get carry register
+uint32_t
+TargetARM::getCarryRegister()
 {
     // TODO
     return 0;

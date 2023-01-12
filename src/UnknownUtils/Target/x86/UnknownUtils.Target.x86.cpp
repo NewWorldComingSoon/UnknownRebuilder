@@ -4,7 +4,7 @@
 
 namespace unknown {
 
-TargetX86::TargetX86()
+TargetX86::TargetX86(uint32_t ModeBits) : Target(ModeBits)
 {
     //
 }
@@ -354,6 +354,13 @@ TargetX86::getRegisterID(const std::string &RegName)
     {
         return It->second;
     }
+}
+
+// Get carry register
+uint32_t
+TargetX86::getCarryRegister()
+{
+    return X86_REG_CF;
 }
 
 } // namespace unknown

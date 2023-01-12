@@ -6,7 +6,7 @@ namespace unknown {
 class TargetX86 : public Target
 {
 public:
-    TargetX86();
+    explicit TargetX86(uint32_t ModeBits);
     virtual ~TargetX86();
 
 public:
@@ -15,6 +15,9 @@ public:
 
     // Get the register id by register name
     virtual uint32_t getRegisterID(const std::string &RegName) override;
+
+    // Get carry register
+    virtual uint32_t getCarryRegister() override;
 };
 
 } // namespace unknown
