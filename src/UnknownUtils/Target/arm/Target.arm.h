@@ -19,6 +19,12 @@ public:
 
     // Get carry register
     virtual uint32_t getCarryRegister() override;
+
+    // x86-specific pointer
+    virtual const uint32_t getStackPointerRegister() const override { return 0; };
+    virtual const unknown::StringRef getStackPointerRegisterName() const override { return ""; };
+    virtual const uint32_t getBasePointerRegister() const override { return 0; };
+    virtual const unknown::StringRef getBasePointerRegisterName() const override { return ""; };
 };
 
 } // namespace unknown

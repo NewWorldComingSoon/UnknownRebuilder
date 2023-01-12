@@ -14,10 +14,10 @@ class Target
 protected:
     std::unordered_map<uint32_t, std::string> mReg2Name;
     std::unordered_map<std::string, uint32_t> mName2Reg;
-    uint32_t mModeBit;
+    uint32_t mModeBits;
 
 public:
-    explicit Target(uint32_t ModeBits) : mModeBit(ModeBits) {}
+    explicit Target(uint32_t ModeBits) : mModeBits(ModeBits) {}
     virtual ~Target() = default;
 
 public:
@@ -29,6 +29,12 @@ public:
 
     // Get carry register
     virtual uint32_t getCarryRegister() = 0;
+
+    // x86-specific pointer
+    virtual const uint32_t getStackPointerRegister() const = 0;
+    virtual const unknown::StringRef getStackPointerRegisterName() const = 0;
+    virtual const uint32_t getBasePointerRegister() const = 0;
+    virtual const unknown::StringRef getBasePointerRegisterName() const = 0;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////

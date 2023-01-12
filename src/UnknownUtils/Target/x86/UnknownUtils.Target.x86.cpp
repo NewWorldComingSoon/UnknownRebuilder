@@ -363,4 +363,61 @@ TargetX86::getCarryRegister()
     return X86_REG_CF;
 }
 
+// x86-specific pointer
+const uint32_t
+TargetX86::getStackPointerRegister() const
+{
+    switch (mModeBits)
+    {
+    case 32:
+        return X86_REG_ESP;
+    case 64:
+        return X86_REG_RSP;
+    }
+
+    return 0;
+}
+
+const unknown::StringRef
+TargetX86::getStackPointerRegisterName() const
+{
+    switch (mModeBits)
+    {
+    case 32:
+        return "ESP";
+    case 64:
+        return "RSP";
+    }
+
+    return "";
+}
+
+const uint32_t
+TargetX86::getBasePointerRegister() const
+{
+    switch (mModeBits)
+    {
+    case 32:
+        return X86_REG_EBP;
+    case 64:
+        return X86_REG_RBP;
+    }
+
+    return 0;
+}
+
+const unknown::StringRef
+TargetX86::getBasePointerRegisterName() const
+{
+    switch (mModeBits)
+    {
+    case 32:
+        return "EBP";
+    case 64:
+        return "RBP";
+    }
+
+    return "";
+}
+
 } // namespace unknown

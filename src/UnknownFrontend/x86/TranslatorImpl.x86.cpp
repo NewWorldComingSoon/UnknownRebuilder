@@ -112,57 +112,25 @@ UnknownFrontendTranslatorImplX86::initBinary()
 const uint32_t
 UnknownFrontendTranslatorImplX86::getStackPointerRegister() const
 {
-    switch (getContext().getModeBits())
-    {
-    case 32:
-        return X86_REG_ESP;
-    case 64:
-        return X86_REG_RSP;
-    }
-
-    return 0;
+    return mTarget->getStackPointerRegister();
 }
 
 const unknown::StringRef
 UnknownFrontendTranslatorImplX86::getStackPointerRegisterName() const
 {
-    switch (getContext().getModeBits())
-    {
-    case 32:
-        return "ESP";
-    case 64:
-        return "RSP";
-    }
-
-    return "";
+    return mTarget->getStackPointerRegisterName();
 }
 
 const uint32_t
 UnknownFrontendTranslatorImplX86::getBasePointerRegister() const
 {
-    switch (getContext().getModeBits())
-    {
-    case 32:
-        return X86_REG_EBP;
-    case 64:
-        return X86_REG_RBP;
-    }
-
-    return 0;
+    return mTarget->getBasePointerRegister();
 }
 
 const unknown::StringRef
 UnknownFrontendTranslatorImplX86::getBasePointerRegisterName() const
 {
-    switch (getContext().getModeBits())
-    {
-    case 32:
-        return "EBP";
-    case 64:
-        return "RBP";
-    }
-
-    return "";
+    return mTarget->getBasePointerRegisterName();
 }
 
 ////////////////////////////////////////////////////////////
