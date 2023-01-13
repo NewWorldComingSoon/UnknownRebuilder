@@ -6,17 +6,12 @@ namespace ufrontend {
 
 // Ret
 bool
-UnknownFrontendTranslatorImplX86::translateRetInstruction(
-    const cs_insn *Insn,
-    uint64_t Address,
-    uir::BasicBlock *BB,
-    bool &IsBlockTerminatorInsn)
+UnknownFrontendTranslatorImplX86::translateRetInstruction(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB)
 {
     if (Insn->id != X86_INS_RET)
     {
         return false;
     }
-    IsBlockTerminatorInsn = true;
 
     return true;
 }

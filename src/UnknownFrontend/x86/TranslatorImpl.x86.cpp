@@ -141,25 +141,25 @@ void
 UnknownFrontendTranslatorImplX86::initTranslateInstruction()
 {
     mX86InstructionTranslatorMap = {// Ret
-                                    {X86_INS_RET, &UnknownFrontendTranslatorImplX86::translateRetInstruction},
+                                    {X86_INS_RET, {&UnknownFrontendTranslatorImplX86::translateRetInstruction, true}},
 
                                     // Jcc
-                                    {X86_INS_JAE, &UnknownFrontendTranslatorImplX86::translateJccInstruction},
-                                    {X86_INS_JA, &UnknownFrontendTranslatorImplX86::translateJccInstruction},
-                                    {X86_INS_JBE, &UnknownFrontendTranslatorImplX86::translateJccInstruction},
-                                    {X86_INS_JB, &UnknownFrontendTranslatorImplX86::translateJccInstruction},
-                                    {X86_INS_JE, &UnknownFrontendTranslatorImplX86::translateJccInstruction},
-                                    {X86_INS_JGE, &UnknownFrontendTranslatorImplX86::translateJccInstruction},
-                                    {X86_INS_JG, &UnknownFrontendTranslatorImplX86::translateJccInstruction},
-                                    {X86_INS_JLE, &UnknownFrontendTranslatorImplX86::translateJccInstruction},
-                                    {X86_INS_JL, &UnknownFrontendTranslatorImplX86::translateJccInstruction},
-                                    {X86_INS_JNE, &UnknownFrontendTranslatorImplX86::translateJccInstruction},
-                                    {X86_INS_JNO, &UnknownFrontendTranslatorImplX86::translateJccInstruction},
-                                    {X86_INS_JNP, &UnknownFrontendTranslatorImplX86::translateJccInstruction},
-                                    {X86_INS_JNS, &UnknownFrontendTranslatorImplX86::translateJccInstruction},
-                                    {X86_INS_JO, &UnknownFrontendTranslatorImplX86::translateJccInstruction},
-                                    {X86_INS_JP, &UnknownFrontendTranslatorImplX86::translateJccInstruction},
-                                    {X86_INS_JS, &UnknownFrontendTranslatorImplX86::translateJccInstruction}
+                                    {X86_INS_JAE, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
+                                    {X86_INS_JA, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
+                                    {X86_INS_JBE, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
+                                    {X86_INS_JB, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
+                                    {X86_INS_JE, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
+                                    {X86_INS_JGE, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
+                                    {X86_INS_JG, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
+                                    {X86_INS_JLE, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
+                                    {X86_INS_JL, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
+                                    {X86_INS_JNE, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
+                                    {X86_INS_JNO, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
+                                    {X86_INS_JNP, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
+                                    {X86_INS_JNS, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
+                                    {X86_INS_JO, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
+                                    {X86_INS_JP, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
+                                    {X86_INS_JS, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}}
 
     };
 }
@@ -272,8 +272,9 @@ UnknownFrontendTranslatorImplX86::translateOneInstruction(
             break;
         }
 
-        auto TransFunc = ItTrans->second;
-        TransRes = (this->*TransFunc)(Insn, Address, BB, IsBlockTerminatorInsn);
+        auto &TransInfo = ItTrans->second;
+        IsBlockTerminatorInsn = TransInfo.IsBlockTerminatorInsn;
+        TransRes = (this->*TransInfo.TranslateInstruction)(Insn, Address, BB);
 
     } while (false);
 

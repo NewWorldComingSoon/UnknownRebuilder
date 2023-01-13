@@ -111,14 +111,17 @@ protected:
 protected:
     // x86 instruction translation methods
     // Ret
-    bool
-    translateRetInstruction(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB, bool &IsBlockTerminatorInsn);
+    bool translateRetInstruction(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB);
 
     // Jcc
-    bool
-    translateJccInstruction(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB, bool &IsBlockTerminatorInsn);
+    bool translateJccInstruction(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB);
 
-    std::unordered_map<uint32_t, decltype(&translateRetInstruction)> mX86InstructionTranslatorMap;
+    struct InstructionInfo
+    {
+        decltype(&translateRetInstruction) TranslateInstruction;
+        bool IsBlockTerminatorInsn;
+    };
+    std::unordered_map<uint32_t, InstructionInfo> mX86InstructionTranslatorMap;
 };
 
 } // namespace ufrontend
