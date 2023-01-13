@@ -482,6 +482,13 @@ UnknownFrontendTranslatorImplX86::getRegisterID(const std::string &RegName)
     return mTarget->getRegisterID(RegName);
 }
 
+// Get the register type bits by register id
+uint32_t
+UnknownFrontendTranslatorImplX86::getRegisterTypeBits(uint32_t RegID)
+{
+    return mTarget->getRegisterTypeBits(RegID);
+}
+
 // Get carry register
 uint32_t
 UnknownFrontendTranslatorImplX86::getCarryRegister()
