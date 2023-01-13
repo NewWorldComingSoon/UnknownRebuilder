@@ -125,6 +125,13 @@ UnknownFrontendTranslatorImplARM::getRegisterID(const std::string &RegName)
     return mTarget->getRegisterID(RegName);
 }
 
+// Get the register parent id by register id
+uint32_t
+UnknownFrontendTranslatorImplARM::getRegisterParentID(uint32_t RegID)
+{
+    return mTarget->getRegisterParentID(RegID);
+}
+
 // Get the register type bits by register id
 uint32_t
 UnknownFrontendTranslatorImplARM::getRegisterTypeBits(uint32_t RegID)

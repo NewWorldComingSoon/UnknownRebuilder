@@ -129,6 +129,9 @@ protected:
     // Get the register id by register name
     virtual uint32_t getRegisterID(const std::string &RegName) = 0;
 
+    // Get the register parent id by register id
+    virtual uint32_t getRegisterParentID(uint32_t RegID) = 0;
+
     // Get the register type bits by register id
     virtual uint32_t getRegisterTypeBits(uint32_t RegID) = 0;
 
