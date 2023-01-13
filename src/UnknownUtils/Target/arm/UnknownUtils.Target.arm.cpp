@@ -28,6 +28,14 @@ TargetARM::getRegisterID(const std::string &RegName)
     return 0;
 }
 
+// Get the register parent id by register id
+uint32_t
+TargetARM::getRegisterParentID(uint32_t RegID)
+{
+    // TODO
+    return 0;
+}
+
 // Get the register type bits by register id
 uint32_t
 TargetARM::getRegisterTypeBits(uint32_t RegID)

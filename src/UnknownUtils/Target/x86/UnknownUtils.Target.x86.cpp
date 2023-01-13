@@ -356,6 +356,80 @@ TargetX86::getRegisterID(const std::string &RegName)
     }
 }
 
+// Get the register parent id by register id
+uint32_t
+TargetX86::getRegisterParentID(uint32_t RegID)
+{
+    if (mReg2ParentReg.empty())
+    {
+        std::vector<std::vector<x86_reg>> RSS64 = {
+            {X86_REG_AH, X86_REG_AL, X86_REG_AX, X86_REG_EAX, X86_REG_RAX},
+            {X86_REG_CH, X86_REG_CL, X86_REG_CX, X86_REG_ECX, X86_REG_RCX},
+            {X86_REG_DH, X86_REG_DL, X86_REG_DX, X86_REG_EDX, X86_REG_RDX},
+            {X86_REG_BH, X86_REG_BL, X86_REG_BX, X86_REG_EBX, X86_REG_RBX},
+            {X86_REG_SPL, X86_REG_SP, X86_REG_ESP, X86_REG_RSP},
+            {X86_REG_BPL, X86_REG_BP, X86_REG_EBP, X86_REG_RBP},
+            {X86_REG_SIL, X86_REG_SI, X86_REG_ESI, X86_REG_RSI},
+            {X86_REG_DIL, X86_REG_DI, X86_REG_EDI, X86_REG_RDI},
+            {X86_REG_IP, X86_REG_EIP, X86_REG_RIP},
+            {X86_REG_EIZ, X86_REG_RIZ},
+            {X86_REG_R8B, X86_REG_R8W, X86_REG_R8D, X86_REG_R8},
+            {X86_REG_R9B, X86_REG_R9W, X86_REG_R9D, X86_REG_R9},
+            {X86_REG_R10B, X86_REG_R10W, X86_REG_R10D, X86_REG_R10},
+            {X86_REG_R11B, X86_REG_R11W, X86_REG_R11D, X86_REG_R11},
+            {X86_REG_R12B, X86_REG_R12W, X86_REG_R12D, X86_REG_R12},
+            {X86_REG_R13B, X86_REG_R13W, X86_REG_R13D, X86_REG_R13},
+            {X86_REG_R14B, X86_REG_R14W, X86_REG_R14D, X86_REG_R14},
+            {X86_REG_R15B, X86_REG_R15W, X86_REG_R15D, X86_REG_R15}};
+
+        std::vector<std::vector<x86_reg>> RSS32 = {
+            {X86_REG_AH, X86_REG_AL, X86_REG_AX, X86_REG_EAX},
+            {X86_REG_CH, X86_REG_CL, X86_REG_CX, X86_REG_ECX},
+            {X86_REG_DH, X86_REG_DL, X86_REG_DX, X86_REG_EDX},
+            {X86_REG_BH, X86_REG_BL, X86_REG_BX, X86_REG_EBX},
+            {X86_REG_SPL, X86_REG_SP, X86_REG_ESP},
+            {X86_REG_BPL, X86_REG_BP, X86_REG_EBP},
+            {X86_REG_SIL, X86_REG_SI, X86_REG_ESI},
+            {X86_REG_DIL, X86_REG_DI, X86_REG_EDI},
+            {X86_REG_IP, X86_REG_EIP},
+            {X86_REG_EIZ},
+        };
+
+        auto InitReg2ParentReg = [this](std::vector<std::vector<x86_reg>> &RSS) {
+            for (std::vector<x86_reg> &RS : RSS)
+            {
+                for (x86_reg R : RS)
+                {
+                    mReg2ParentReg[R] = RS.back();
+                }
+            }
+        };
+
+        if (mModeBits == 64)
+        {
+            InitReg2ParentReg(RSS64);
+        }
+        else if (mModeBits == 32)
+        {
+            InitReg2ParentReg(RSS32);
+        }
+        else
+        {
+            // TODO
+        }
+    }
+
+    auto It = mReg2ParentReg.find(RegID);
+    if (It == mReg2ParentReg.end())
+    {
+        return X86_REG_INVALID;
+    }
+    else
+    {
+        return It->second;
+    }
+}
+
 // Get the register type bits by register id
 uint32_t
 TargetX86::getRegisterTypeBits(uint32_t RegID)
