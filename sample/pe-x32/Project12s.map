@@ -1,46 +1,36 @@
  Project12
 
- Timestamp is 63b0176f (Sat Dec 31 19:05:19 2022)
+ Timestamp is 63c160d3 (Fri Jan 13 21:46:59 2023)
 
- Preferred load address is 00400000
+ Preferred load address is 0000000000400000
 
  Start         Length     Name                   Class
- 0001:00000000 00000d04H .text$mn                CODE
- 0002:00000000 000000c4H .idata$5                DATA
- 0002:000000c4 00000008H .00cfg                  DATA
- 0002:000000cc 00000004H .CRT$XCA                DATA
- 0002:000000d0 00000004H .CRT$XCAA               DATA
- 0002:000000d4 00000004H .CRT$XCZ                DATA
- 0002:000000d8 00000004H .CRT$XIA                DATA
- 0002:000000dc 00000004H .CRT$XIAA               DATA
- 0002:000000e0 00000004H .CRT$XIAC               DATA
- 0002:000000e4 00000004H .CRT$XIZ                DATA
- 0002:000000e8 00000004H .CRT$XPA                DATA
- 0002:000000ec 00000004H .CRT$XPZ                DATA
- 0002:000000f0 00000004H .CRT$XTA                DATA
- 0002:000000f4 00000004H .CRT$XTZ                DATA
- 0002:000000f8 00000000H .gfids$y                DATA
- 0002:000000f8 00000148H .rdata                  DATA
- 0002:00000240 00000000H .rdata$CastGuardVftablesA DATA
- 0002:00000240 00000000H .rdata$CastGuardVftablesC DATA
- 0002:00000240 00000004H .rdata$sxdata           DATA
- 0002:00000244 0000005cH .rdata$voltmd           DATA
- 0002:000002a0 000002d8H .rdata$zzzdbg           DATA
- 0002:00000578 00000004H .rtc$IAA                DATA
- 0002:0000057c 00000004H .rtc$IZZ                DATA
- 0002:00000580 00000004H .rtc$TAA                DATA
- 0002:00000584 00000004H .rtc$TZZ                DATA
- 0002:00000588 0000003cH .xdata$x                DATA
- 0002:000005c4 00000000H .edata                  DATA
- 0002:000005c4 0000008cH .idata$2                DATA
- 0002:00000650 00000014H .idata$3                DATA
- 0002:00000664 000000c4H .idata$4                DATA
- 0002:00000728 00000426H .idata$6                DATA
- 0003:00000000 00000018H .data                   DATA
- 0003:00000018 00000370H .bss                    DATA
- 0004:00000000 00000060H .rsrc$01                DATA
- 0004:00000060 00000180H .rsrc$02                DATA
+ 0001:00000000 000000cfH .text                   CODE
+ 0001:000000cf 00000bddH .text$mn                CODE
+ 0002:00000000 000000c8H .rdata                  DATA
+ 0002:00000114 00000004H .CRT$XCA                DATA
+ 0002:00000118 00000004H .CRT$XCAA               DATA
+ 0002:0000011c 00000004H .CRT$XCZ                DATA
+ 0002:00000120 00000004H .CRT$XIA                DATA
+ 0002:00000124 00000004H .CRT$XIAA               DATA
+ 0002:00000128 00000004H .CRT$XIAC               DATA
+ 0002:0000012c 00000004H .CRT$XIZ                DATA
+ 0002:00000130 00000004H .CRT$XPA                DATA
+ 0002:00000134 00000004H .CRT$XPZ                DATA
+ 0002:00000138 00000004H .CRT$XTA                DATA
+ 0002:0000013c 00000004H .CRT$XTZ                DATA
+ 0002:0000078c 00000004H .rtc$IAA                DATA
+ 0002:00000790 00000004H .rtc$IZZ                DATA
+ 0002:00000794 00000004H .rtc$TAA                DATA
+ 0002:00000798 00000004H .rtc$TZZ                DATA
+ 0002:000007a0 0000003cH .xdata$x                DATA
+ 0003:00000000 00000020H .data                   DATA
+ 0003:00000020 0000037cH .bss                    DATA
+ 0004:00000000 00000008H .00cfg                  DATA
+ 0005:00000000 00000058H .rsrc$01                DATA
+ 0005:00000060 00000178H .rsrc$02                DATA
 
-  Address         Publics by Value              Rva+Base       Lib:Object
+  Address         Publics by Value              Rva+Base               Lib:Object
 
-  0001:00000040       ?add@@YAHHH@Z              00401040 f   Source.obj
+  0001:00000000       ?add@@YAHHH@Z              0000000000401000 f   Source.obj
+  0001:00000040       ?empty@@YAXXZ              0000000000401040 f   Source.obj
