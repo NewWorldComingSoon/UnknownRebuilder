@@ -16,6 +16,9 @@ public:
     // Get the register id by register name
     virtual uint32_t getRegisterID(const std::string &RegName) override;
 
+    // Get the register type bits by register id
+    virtual uint32_t getRegisterTypeBits(uint32_t RegID) override;
+
     // Get carry register
     virtual uint32_t getCarryRegister() override;
 
