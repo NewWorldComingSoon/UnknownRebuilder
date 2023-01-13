@@ -5,20 +5,9 @@
 
 X86 native code rebuilder using UnknownIR(UIR) and UnknownMC(UMC).
 
-```mermaid
-flowchart LR
 
-A1[X86] -->|Lift| B(UIR)
-A2[ARM] -->|Lift| B(UIR)
+![Image](https://user-images.githubusercontent.com/13917777/212396942-0de11002-3b75-44a2-881a-e0a5912e05a1.png)
 
-B -->C(UIR Pass)
-C -->D(UMC)
-D -->E(UMC Pass)
-
-E -->|Build| F1[X86]
-E -->|Build| F2[ARM]
-
-```
 
 ## What's UIR?
 Yet another Intermediate Representation(IR) called UnknownIR(UIR).
