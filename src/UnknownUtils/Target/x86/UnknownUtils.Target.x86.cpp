@@ -392,8 +392,7 @@ TargetX86::getRegisterParentID(uint32_t RegID)
             {X86_REG_SIL, X86_REG_SI, X86_REG_ESI},
             {X86_REG_DIL, X86_REG_DI, X86_REG_EDI},
             {X86_REG_IP, X86_REG_EIP},
-            {X86_REG_EIZ},
-        };
+            {X86_REG_EIZ}};
 
         auto InitReg2ParentReg = [this](std::vector<std::vector<x86_reg>> &RSS) {
             for (std::vector<x86_reg> &RS : RSS)
