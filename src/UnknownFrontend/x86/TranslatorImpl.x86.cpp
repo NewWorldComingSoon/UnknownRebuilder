@@ -274,7 +274,7 @@ UnknownFrontendTranslatorImplX86::translateOneInstruction(
 
         auto &TransInfo = ItTrans->second;
         IsBlockTerminatorInsn = TransInfo.IsBlockTerminatorInsn;
-        TransRes = (this->*TransInfo.TranslateInstruction)(Insn, Address, BB);
+        TransRes = (this->*TransInfo.TranslateFunction)(Insn, Address, BB);
 
     } while (false);
 
