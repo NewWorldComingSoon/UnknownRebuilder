@@ -51,6 +51,9 @@ protected:
 
 public:
     // Translate
+    // Init the instruction translator
+    virtual void initTranslateInstruction() {}
+
     // Translate the given binary into UnknownIR
     virtual std::unique_ptr<uir::Module> translateBinary(const std::string &ModuleName) override { return {}; }
 

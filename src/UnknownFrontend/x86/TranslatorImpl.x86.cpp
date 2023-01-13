@@ -16,6 +16,7 @@ UnknownFrontendTranslatorImplX86::UnknownFrontendTranslatorImplX86(
     openCapstoneHandle();
     initSymbolParser();
     initBinary();
+    initTranslateInstruction();
 }
 
 UnknownFrontendTranslatorImplX86::~UnknownFrontendTranslatorImplX86()
@@ -135,6 +136,34 @@ UnknownFrontendTranslatorImplX86::getBasePointerRegisterName() const
 
 ////////////////////////////////////////////////////////////
 // Translate
+// Init the instruction translator
+void
+UnknownFrontendTranslatorImplX86::initTranslateInstruction()
+{
+    mX86InstructionTranslatorMap = {// Ret
+                                    {X86_INS_RET, &UnknownFrontendTranslatorImplX86::translateRetInstruction},
+
+                                    // Jcc
+                                    {X86_INS_JAE, &UnknownFrontendTranslatorImplX86::translateJccInstruction},
+                                    {X86_INS_JA, &UnknownFrontendTranslatorImplX86::translateJccInstruction},
+                                    {X86_INS_JBE, &UnknownFrontendTranslatorImplX86::translateJccInstruction},
+                                    {X86_INS_JB, &UnknownFrontendTranslatorImplX86::translateJccInstruction},
+                                    {X86_INS_JE, &UnknownFrontendTranslatorImplX86::translateJccInstruction},
+                                    {X86_INS_JGE, &UnknownFrontendTranslatorImplX86::translateJccInstruction},
+                                    {X86_INS_JG, &UnknownFrontendTranslatorImplX86::translateJccInstruction},
+                                    {X86_INS_JLE, &UnknownFrontendTranslatorImplX86::translateJccInstruction},
+                                    {X86_INS_JL, &UnknownFrontendTranslatorImplX86::translateJccInstruction},
+                                    {X86_INS_JNE, &UnknownFrontendTranslatorImplX86::translateJccInstruction},
+                                    {X86_INS_JNO, &UnknownFrontendTranslatorImplX86::translateJccInstruction},
+                                    {X86_INS_JNP, &UnknownFrontendTranslatorImplX86::translateJccInstruction},
+                                    {X86_INS_JNS, &UnknownFrontendTranslatorImplX86::translateJccInstruction},
+                                    {X86_INS_JO, &UnknownFrontendTranslatorImplX86::translateJccInstruction},
+                                    {X86_INS_JP, &UnknownFrontendTranslatorImplX86::translateJccInstruction},
+                                    {X86_INS_JS, &UnknownFrontendTranslatorImplX86::translateJccInstruction}
+
+    };
+}
+
 // Translate the given binary into UnknownIR
 std::unique_ptr<uir::Module>
 UnknownFrontendTranslatorImplX86::translateBinary(const std::string &ModuleName)
@@ -237,19 +266,14 @@ UnknownFrontendTranslatorImplX86::translateOneInstruction(
     bool TransRes = false;
     do
     {
-        // Ret
-        if (TransRes = translateRetInstruction(Insn, Address, BB))
+        auto ItTrans = mX86InstructionTranslatorMap.find(Insn->id);
+        if (ItTrans == mX86InstructionTranslatorMap.end())
         {
-            IsBlockTerminatorInsn = true;
             break;
         }
 
-        // Jcc
-        if (TransRes = translateJccInstruction(Insn, Address, BB))
-        {
-            IsBlockTerminatorInsn = true;
-            break;
-        }
+        auto TransFunc = ItTrans->second;
+        TransRes = (this->*TransFunc)(Insn, Address, BB, IsBlockTerminatorInsn);
 
     } while (false);
 

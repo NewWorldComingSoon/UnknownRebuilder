@@ -14,6 +14,7 @@ UnknownFrontendTranslatorImplARM::UnknownFrontendTranslatorImplARM(
     openCapstoneHandle();
     initSymbolParser();
     initBinary();
+    initTranslateInstruction();
 }
 
 UnknownFrontendTranslatorImplARM::~UnknownFrontendTranslatorImplARM()
@@ -53,6 +54,12 @@ UnknownFrontendTranslatorImplARM::initBinary()
 
 ////////////////////////////////////////////////////////////
 // Translate
+// Init the instruction translator
+void
+UnknownFrontendTranslatorImplARM::initTranslateInstruction()
+{
+}
+
 // Translate the given binary into UnknownIR
 std::unique_ptr<uir::Module>
 UnknownFrontendTranslatorImplARM::translateBinary(const std::string &ModuleName)

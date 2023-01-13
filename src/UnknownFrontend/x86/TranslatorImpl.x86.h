@@ -47,6 +47,10 @@ protected:
     const unknown::StringRef getBasePointerRegisterName() const;
 
 public:
+    // Translate
+    // Init the instruction translator
+    virtual void initTranslateInstruction() override;
+
     // Translate the given binary into UnknownIR
     virtual std::unique_ptr<uir::Module> translateBinary(const std::string &ModuleName) override;
 
@@ -107,10 +111,14 @@ protected:
 protected:
     // x86 instruction translation methods
     // Ret
-    bool translateRetInstruction(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB);
+    bool
+    translateRetInstruction(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB, bool &IsBlockTerminatorInsn);
 
     // Jcc
-    bool translateJccInstruction(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB);
+    bool
+    translateJccInstruction(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB, bool &IsBlockTerminatorInsn);
+
+    std::unordered_map<uint32_t, decltype(&translateRetInstruction)> mX86InstructionTranslatorMap;
 };
 
 } // namespace ufrontend

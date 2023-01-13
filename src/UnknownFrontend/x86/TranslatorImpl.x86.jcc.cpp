@@ -6,7 +6,11 @@ namespace ufrontend {
 
 // Jcc
 bool
-UnknownFrontendTranslatorImplX86::translateJccInstruction(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB)
+UnknownFrontendTranslatorImplX86::translateJccInstruction(
+    const cs_insn *Insn,
+    uint64_t Address,
+    uir::BasicBlock *BB,
+    bool &IsBlockTerminatorInsn)
 {
     if (Insn->id != X86_INS_JAE && Insn->id != X86_INS_JA && Insn->id != X86_INS_JBE && Insn->id != X86_INS_JB &&
         Insn->id != X86_INS_JE && Insn->id != X86_INS_JGE && Insn->id != X86_INS_JG && Insn->id != X86_INS_JLE &&
@@ -15,6 +19,7 @@ UnknownFrontendTranslatorImplX86::translateJccInstruction(const cs_insn *Insn, u
     {
         return false;
     }
+    IsBlockTerminatorInsn = true;
 
     return true;
 }

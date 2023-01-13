@@ -19,6 +19,7 @@ UnknownFrontendTranslatorImpl::UnknownFrontendTranslatorImpl(
     openCapstoneHandle();
     initSymbolParser();
     initBinary();
+    initTranslateInstruction();
 }
 
 UnknownFrontendTranslatorImpl::~UnknownFrontendTranslatorImpl()
