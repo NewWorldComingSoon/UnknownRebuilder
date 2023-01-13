@@ -264,19 +264,14 @@ UnknownFrontendTranslatorImplX86::translateOneInstruction(
     }
 
     bool TransRes = false;
-    do
-    {
-        auto ItTrans = mX86InstructionTranslatorMap.find(Insn->id);
-        if (ItTrans == mX86InstructionTranslatorMap.end())
-        {
-            break;
-        }
 
+    auto ItTrans = mX86InstructionTranslatorMap.find(Insn->id);
+    if (ItTrans != mX86InstructionTranslatorMap.end())
+    {
         auto &TransInfo = ItTrans->second;
         IsBlockTerminatorInsn = TransInfo.IsBlockTerminatorInsn;
         TransRes = (this->*TransInfo.TranslateFunction)(Insn, Address, BB);
-
-    } while (false);
+    }
 
     return TransRes;
 }
