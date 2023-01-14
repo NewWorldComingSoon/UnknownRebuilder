@@ -536,14 +536,16 @@ UnknownFrontendTranslatorImplX86::UpdateFunctionAttributes(uir::Function *F)
     // Add function attributes from the config file
     for (auto &Item : mConfigReader->getFunctionItems())
     {
-        if (Item.Name.compare(F->getFunctionName()) == 0)
+        if (Item.Name.compare(F->getFunctionName()) != 0)
         {
-            for (auto &Attr : Item.Attributes)
+            continue;
+        }
+
+        for (auto &Attr : Item.Attributes)
+        {
+            if (!Attr.empty())
             {
-                if (!Attr.empty())
-                {
-                    F->addFnAttr(Attr);
-                }
+                F->addFnAttr(Attr);
             }
         }
     }
