@@ -177,19 +177,29 @@ UnknownFrontendTranslatorImplX86::translateBinary(const std::string &ModuleName)
     {
         auto F = new uir::Function(getContext());
         assert(F);
+        auto DeferredFunction = unknown::make_scope_exit([&F]() {
+            if (F)
+            {
+                delete F;
+                F = nullptr;
+            }
+        });
 
         // Translate one function into UnknownIR
         bool TransRes = translateOneFunction(FunctionSymbol, F);
         if (TransRes)
         {
-            // Insert a function into the module
-            Module->insertFunction(F);
+            if (!F->empty())
+            {
+                // Insert a function into the module
+                Module->insertFunction(F);
+                DeferredFunction.release();
+            }
         }
         else
         {
             std::cerr << std::format("UnknownFrontend: Error: translateOneFunction: {} failed", F->getFunctionName())
                       << std::endl;
-            delete F;
         }
     }
 
@@ -386,6 +396,15 @@ UnknownFrontendTranslatorImplX86::translateOneFunction(
 {
     assert(Address);
     assert(F);
+
+    if (!mEnableAnalyzeAllFunctions)
+    {
+        // We only analyze the function that has attributes
+        if (F->getFunctionAttributes().empty())
+        {
+            return true;
+        }
+    }
 
     // Set the current function
     setCurFunction(F);
