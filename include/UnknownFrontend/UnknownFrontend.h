@@ -90,6 +90,12 @@ public:
     // Set the platform
     virtual void setPlatform(Platform Plat) = 0;
 
+    // Get EnableOutputAllFunctions
+    virtual const bool getEnableOutputAllFunctions() const = 0;
+
+    // Set EnableOutputAllFunctions
+    virtual void setEnableOutputAllFunctions(bool Set) = 0;
+
 public:
     // Static
     static std::unique_ptr<UnknownFrontendTranslator> createTranslator(
@@ -97,6 +103,7 @@ public:
         const std::string &BinaryFile,
         const std::string &SymbolFile,
         const std::string &ConfigFile,
+        bool OutputAllFunctions = true,
         const Platform Platform = Platform::WINDOWS_X86);
 };
 

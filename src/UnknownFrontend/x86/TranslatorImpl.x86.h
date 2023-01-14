@@ -23,7 +23,8 @@ public:
         const Platform Platform,
         const std::string &BinaryFile,
         const std::string &SymbolFile,
-        const std::string &ConfigFile);
+        const std::string &ConfigFile,
+        bool OutputAllFunctions);
     virtual ~UnknownFrontendTranslatorImplX86();
 
 protected:

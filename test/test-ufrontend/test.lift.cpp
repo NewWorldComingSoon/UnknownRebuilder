@@ -16,7 +16,8 @@ TEST(test_lift, test_lift_1)
         CTX,
         UNKNOWN_REBUILDER_SRC_DIR R"(/sample/pe-x64/Project12.exe)",
         UNKNOWN_REBUILDER_SRC_DIR R"(/sample/pe-x64/Project12.pdb)",
-        UNKNOWN_REBUILDER_SRC_DIR R"(/sample/pe-x64/Project12.cfg.xml)");
+        UNKNOWN_REBUILDER_SRC_DIR R"(/sample/pe-x64/Project12.cfg.xml)",
+        false);
     assert(Translator);
 
     auto Module = Translator->translateBinary("Project12");
