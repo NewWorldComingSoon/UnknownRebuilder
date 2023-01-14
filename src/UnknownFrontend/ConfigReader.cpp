@@ -11,6 +11,7 @@ ConfigReader::~ConfigReader()
 {
     //
 }
+
 ////////////////////////////////////////////////////////////
 // Get/Set
 // Get the config file path
