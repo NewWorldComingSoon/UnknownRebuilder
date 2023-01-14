@@ -1,0 +1,8 @@
+
+<config name = "cfg1">
+    <f name = "func1" attribute1 = "v1" attribute2 = "v2" attribute3 = "v3" attribute4 = "v4"/>
+    <f name = "func2" attribute1 = "v1" attribute2 = "v2" attribute3 = "v3" attribute4 = "v4"/>
+    <f name = "func3" attribute1 = "v1" attribute2 = "v2" attribute3 = "v3" attribute4 = "v4"/>
+</config>
+
+

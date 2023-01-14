@@ -75,3 +75,45 @@ TEST(test_xml, test_xml_1)
         unknown::outs() << printer.CStr();
     }
 }
+
+TEST(test_xml, test_xml_2)
+{
+    XMLDocument doc;
+    auto ret = doc.LoadFile(UNKNOWN_REBUILDER_SRC_DIR R"(/sample/xml/testcfg.xml)");
+    if (ret == XML_SUCCESS)
+    {
+        std::cout << "XML_SUCCESS" << '\n';
+    }
+    else
+    {
+        std::cout << "XML_ERROR_FILE_NOT_FOUND" << '\n';
+        return;
+    }
+
+    auto config_root = doc.RootElement();
+    if (config_root == nullptr)
+    {
+        std::cout << "config is nullptr" << '\n';
+        return;
+    }
+
+    auto config_name = config_root->Attribute("name");
+    std::cout << "config_name = " << config_name << std::endl;
+
+    for (XMLElement *currenteleElement = config_root->FirstChildElement("f"); currenteleElement;
+         currenteleElement = currenteleElement->NextSiblingElement("f"))
+    {
+        auto f_name = currenteleElement->Attribute("name");
+        std::cout << "f_name = " << f_name << std::endl;
+
+        for (int i = 0; i < 100; ++i)
+        {
+            auto attri_i = std::string("attribute") + std::to_string(i);
+            auto attri = currenteleElement->Attribute(attri_i.c_str());
+            if (attri)
+            {
+                std::cout << "attri = " << attri << std::endl;
+            }
+        }
+    }
+}
