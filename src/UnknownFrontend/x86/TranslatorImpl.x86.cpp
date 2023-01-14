@@ -178,13 +178,13 @@ UnknownFrontendTranslatorImplX86::translateBinary(const std::string &ModuleName)
         auto F = std::make_unique<uir::Function>(getContext());
         assert(F);
 
-        // Translate one function into UnknownIR
+        // Translate the function into UnknownIR
         bool TransRes = translateOneFunction(FunctionSymbol, F.get());
         if (TransRes)
         {
             if (!F->empty())
             {
-                // Insert a function into the module
+                // Insert the function into the module
                 Module->insertFunction(F.release());
             }
         }
