@@ -275,14 +275,6 @@ private:
                     continue;
                 }
 
-                //// check whether we already know this symbol from one of the module streams
-                // const auto it = seenFunctionRVAs.find(rva);
-                // if (it != seenFunctionRVAs.end())
-                //{
-                //     // we know this symbol already, ignore it
-                //     continue;
-                // }
-
                 // this is a new function symbol, so store it.
                 // note that we don't know its size yet.
                 publicSymbols.push_back(FunctionSymbol{record->data.S_PUB32.name, rva, 0u});
