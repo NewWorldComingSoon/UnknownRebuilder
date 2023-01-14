@@ -24,7 +24,7 @@ public:
         const std::string &BinaryFile,
         const std::string &SymbolFile,
         const std::string &ConfigFile,
-        bool OutputAllFunctions);
+        bool AnalyzeAllFunctions);
     virtual ~UnknownFrontendTranslatorImplX86();
 
 protected:

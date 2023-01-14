@@ -12,7 +12,7 @@ public:
         const std::string &BinaryFile,
         const std::string &SymbolFile,
         const std::string &ConfigFile,
-        bool OutputAllFunctions);
+        bool AnalyzeAllFunctions);
     virtual ~UnknownFrontendTranslatorImplARM();
 
 protected:

@@ -17,7 +17,7 @@ protected:
     std::string mBinaryFile;
     std::string mSymbolFile;
     std::string mConfigFile;
-    bool mEnableOutputAllFunctions;
+    bool mEnableAnalyzeAllFunctions;
 
 protected:
     csh mCapstoneHandle;
@@ -40,7 +40,7 @@ public:
         const std::string &BinaryFile,
         const std::string &SymbolFile,
         const std::string &ConfigFile,
-        bool OutputAllFunctions);
+        bool AnalyzeAllFunctions);
     virtual ~UnknownFrontendTranslatorImpl();
 
 protected:
@@ -138,11 +138,11 @@ public:
     // Set the platform
     virtual void setPlatform(Platform Plat) override;
 
-    // Get EnableOutputAllFunctions
-    virtual const bool getEnableOutputAllFunctions() const override;
+    // Get EnableAnalyzeAllFunctions
+    virtual const bool getEnableAnalyzeAllFunctions() const override;
 
-    // Set EnableOutputAllFunctions
-    virtual void setEnableOutputAllFunctions(bool Set) override;
+    // Set EnableAnalyzeAllFunctions
+    virtual void setEnableAnalyzeAllFunctions(bool Set) override;
 
 protected:
     // Register

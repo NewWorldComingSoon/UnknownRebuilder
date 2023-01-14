@@ -90,11 +90,11 @@ public:
     // Set the platform
     virtual void setPlatform(Platform Plat) = 0;
 
-    // Get EnableOutputAllFunctions
-    virtual const bool getEnableOutputAllFunctions() const = 0;
+    // Get EnableAnalyzeAllFunctions
+    virtual const bool getEnableAnalyzeAllFunctions() const = 0;
 
-    // Set EnableOutputAllFunctions
-    virtual void setEnableOutputAllFunctions(bool Set) = 0;
+    // Set EnableAnalyzeAllFunctions
+    virtual void setEnableAnalyzeAllFunctions(bool Set) = 0;
 
 public:
     // Static
@@ -103,7 +103,7 @@ public:
         const std::string &BinaryFile,
         const std::string &SymbolFile,
         const std::string &ConfigFile,
-        bool OutputAllFunctions = true,
+        bool AnalyzeAllFunctions = true,
         const Platform Platform = Platform::WINDOWS_X86);
 };
 

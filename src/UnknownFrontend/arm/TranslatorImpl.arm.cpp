@@ -8,8 +8,8 @@ UnknownFrontendTranslatorImplARM::UnknownFrontendTranslatorImplARM(
     const std::string &BinaryFile,
     const std::string &SymbolFile,
     const std::string &ConfigFile,
-    bool OutputAllFunctions) :
-    UnknownFrontendTranslatorImpl(C, Platform, BinaryFile, SymbolFile, ConfigFile, OutputAllFunctions)
+    bool AnalyzeAllFunctions) :
+    UnknownFrontendTranslatorImpl(C, Platform, BinaryFile, SymbolFile, ConfigFile, AnalyzeAllFunctions)
 {
     mTarget = unknown::CreateTargetForARM(C.getModeBits());
 

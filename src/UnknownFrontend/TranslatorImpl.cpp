@@ -8,13 +8,13 @@ UnknownFrontendTranslatorImpl::UnknownFrontendTranslatorImpl(
     const std::string &BinaryFile,
     const std::string &SymbolFile,
     const std::string &ConfigFile,
-    bool OutputAllFunctions) :
+    bool AnalyzeAllFunctions) :
     mPlatform(Platform),
     mContext(C),
     mBinaryFile(BinaryFile),
     mSymbolFile(SymbolFile),
     mConfigFile(ConfigFile),
-    mEnableOutputAllFunctions(OutputAllFunctions),
+    mEnableAnalyzeAllFunctions(AnalyzeAllFunctions),
     mCapstoneHandle(0),
     mCurPtrBegin(0),
     mCurPtrEnd(0),
@@ -152,18 +152,18 @@ UnknownFrontendTranslatorImpl::setPlatform(Platform Plat)
     mPlatform = Plat;
 }
 
-// Get EnableOutputAllFunctions
+// Get EnableAnalyzeAllFunctions
 const bool
-UnknownFrontendTranslatorImpl::getEnableOutputAllFunctions() const
+UnknownFrontendTranslatorImpl::getEnableAnalyzeAllFunctions() const
 {
-    return mEnableOutputAllFunctions;
+    return mEnableAnalyzeAllFunctions;
 }
 
-// Set EnableOutputAllFunctions
+// Set EnableAnalyzeAllFunctions
 void
-UnknownFrontendTranslatorImpl::setEnableOutputAllFunctions(bool Set)
+UnknownFrontendTranslatorImpl::setEnableAnalyzeAllFunctions(bool Set)
 {
-    mEnableOutputAllFunctions = Set;
+    mEnableAnalyzeAllFunctions = Set;
 }
 
 } // namespace ufrontend

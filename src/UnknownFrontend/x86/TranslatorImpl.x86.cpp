@@ -10,8 +10,8 @@ UnknownFrontendTranslatorImplX86::UnknownFrontendTranslatorImplX86(
     const std::string &BinaryFile,
     const std::string &SymbolFile,
     const std::string &ConfigFile,
-    bool OutputAllFunctions) :
-    UnknownFrontendTranslatorImpl(C, Platform, BinaryFile, SymbolFile, ConfigFile, OutputAllFunctions), mUsePDB(false)
+    bool AnalyzeAllFunctions) :
+    UnknownFrontendTranslatorImpl(C, Platform, BinaryFile, SymbolFile, ConfigFile, AnalyzeAllFunctions), mUsePDB(false)
 {
     mTarget = unknown::CreateTargetForX86(C.getModeBits());
 
