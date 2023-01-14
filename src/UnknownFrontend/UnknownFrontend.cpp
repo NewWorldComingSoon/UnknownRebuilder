@@ -12,17 +12,18 @@ UnknownFrontendTranslator::createTranslator(
     uir::Context &C,
     const std::string &BinaryFile,
     const std::string &SymbolFile,
+    const std::string &ConfigFile,
     const Platform Platform)
 {
     auto Arch = C.getArch();
 
     if (Arch == uir::Context::Arch::ArchX86)
     {
-        return std::make_unique<UnknownFrontendTranslatorImplX86>(C, Platform, BinaryFile, SymbolFile);
+        return std::make_unique<UnknownFrontendTranslatorImplX86>(C, Platform, BinaryFile, SymbolFile, ConfigFile);
     }
     else if (Arch == uir::Context::Arch::ArchARM)
     {
-        return std::make_unique<UnknownFrontendTranslatorImplARM>(C, Platform, BinaryFile, SymbolFile);
+        return std::make_unique<UnknownFrontendTranslatorImplARM>(C, Platform, BinaryFile, SymbolFile, ConfigFile);
     }
 
     // TODO

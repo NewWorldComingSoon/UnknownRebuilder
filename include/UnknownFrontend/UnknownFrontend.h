@@ -63,6 +63,9 @@ public:
     // Get the Symbol File
     virtual const std::string &getSymbolFile() const = 0;
 
+    // Get the Config File
+    virtual const std::string &getConfigFile() const = 0;
+
     // Get the begin of current pointer
     virtual const uint64_t getCurPtrBegin() const = 0;
 
@@ -93,6 +96,7 @@ public:
         uir::Context &C,
         const std::string &BinaryFile,
         const std::string &SymbolFile,
+        const std::string &ConfigFile,
         const Platform Platform = Platform::WINDOWS_X86);
 };
 

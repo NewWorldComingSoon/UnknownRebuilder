@@ -106,7 +106,7 @@ TEST(test_xml, test_xml_2)
         auto f_name = currenteleElement->Attribute("name");
         std::cout << "f_name = " << f_name << std::endl;
 
-        for (int i = 1; i != 0; ++i)
+        for (int i = 1; 1; ++i)
         {
             auto attri_i = std::string("attribute") + std::to_string(i);
             auto attri = currenteleElement->Attribute(attri_i.c_str());

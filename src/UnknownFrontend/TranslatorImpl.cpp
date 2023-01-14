@@ -6,16 +6,19 @@ UnknownFrontendTranslatorImpl::UnknownFrontendTranslatorImpl(
     uir::Context &C,
     const Platform Platform,
     const std::string &BinaryFile,
-    const std::string &SymbolFile) :
+    const std::string &SymbolFile,
+    const std::string &ConfigFile) :
     mPlatform(Platform),
     mContext(C),
     mBinaryFile(BinaryFile),
     mSymbolFile(SymbolFile),
+    mConfigFile(ConfigFile),
     mCapstoneHandle(0),
     mCurPtrBegin(0),
     mCurPtrEnd(0),
     mCurFunction(nullptr)
 {
+    initConfig();
     openCapstoneHandle();
     initSymbolParser();
     initBinary();
@@ -25,6 +28,25 @@ UnknownFrontendTranslatorImpl::UnknownFrontendTranslatorImpl(
 UnknownFrontendTranslatorImpl::~UnknownFrontendTranslatorImpl()
 {
     closeCapstoneHandle();
+}
+
+// Config
+void
+UnknownFrontendTranslatorImpl::initConfig()
+{
+    if (mConfigFile.empty())
+    {
+        return;
+    }
+
+    mConfigReader = ConfigReader::get(mConfigFile);
+    assert(mConfigReader);
+
+    if (!mConfigReader->ParseConfig())
+    {
+        std::cerr << "UnknownFrontend: Error: ParseConfig failed" << std::endl;
+        std::abort();
+    }
 }
 
 ////////////////////////////////////////////////////////////
@@ -48,6 +70,13 @@ const std::string &
 UnknownFrontendTranslatorImpl::getSymbolFile() const
 {
     return mSymbolFile;
+}
+
+// Get the Config File
+const std::string &
+UnknownFrontendTranslatorImpl::getConfigFile() const
+{
+    return mConfigFile;
 }
 
 // Get the capstone handle

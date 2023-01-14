@@ -15,7 +15,8 @@ TEST(test_lift, test_lift_1)
     auto Translator = ufrontend::UnknownFrontendTranslator::createTranslator(
         CTX,
         UNKNOWN_REBUILDER_SRC_DIR R"(/sample/pe-x64/Project12.exe)",
-        UNKNOWN_REBUILDER_SRC_DIR R"(/sample/pe-x64/Project12.pdb)");
+        UNKNOWN_REBUILDER_SRC_DIR R"(/sample/pe-x64/Project12.pdb)",
+        UNKNOWN_REBUILDER_SRC_DIR R"(/sample/pe-x64/Project12.cfg.xml)");
     assert(Translator);
 
     auto Module = Translator->translateBinary("Project12");

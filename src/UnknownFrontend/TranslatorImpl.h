@@ -5,6 +5,8 @@
 
 #include <UnknownFrontend/UnknownFrontend.h>
 
+#include "ConfigReader.h"
+
 namespace ufrontend {
 
 class UnknownFrontendTranslatorImpl : public UnknownFrontendTranslator
@@ -14,6 +16,7 @@ protected:
     uir::Context &mContext;
     std::string mBinaryFile;
     std::string mSymbolFile;
+    std::string mConfigFile;
 
 protected:
     csh mCapstoneHandle;
@@ -27,13 +30,15 @@ protected:
 
 protected:
     std::unique_ptr<unknown::Target> mTarget;
+    std::unique_ptr<ufrontend::ConfigReader> mConfigReader;
 
 public:
     UnknownFrontendTranslatorImpl(
         uir::Context &C,
         const Platform Platform,
         const std::string &BinaryFile,
-        const std::string &SymbolFile);
+        const std::string &SymbolFile,
+        const std::string &ConfigFile);
     virtual ~UnknownFrontendTranslatorImpl();
 
 protected:
@@ -48,6 +53,10 @@ protected:
 protected:
     // Binary
     virtual void initBinary() {}
+
+protected:
+    // Config
+    virtual void initConfig();
 
 public:
     // Translate
@@ -99,6 +108,9 @@ public:
 
     // Get the Symbol File
     virtual const std::string &getSymbolFile() const override;
+
+    // Get the Config File
+    virtual const std::string &getConfigFile() const override;
 
     // Get the begin of current pointer
     virtual const uint64_t getCurPtrBegin() const override;

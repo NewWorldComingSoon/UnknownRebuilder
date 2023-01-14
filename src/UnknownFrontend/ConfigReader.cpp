@@ -61,7 +61,7 @@ ConfigReader::ParseFunctionInfo(unknown::XMLElement *Root)
         {
             FunctionItem Item{};
             Item.Name = Name;
-            for (int i = 1; i != 0; ++i)
+            for (int i = 1; 1; ++i)
             {
                 auto AttrIdx = std::string("attribute") + std::to_string(i);
                 auto Attr = CurrenteleElement->Attribute(AttrIdx.c_str());

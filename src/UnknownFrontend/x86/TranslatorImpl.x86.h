@@ -22,7 +22,8 @@ public:
         uir::Context &C,
         const Platform Platform,
         const std::string &BinaryFile,
-        const std::string &SymbolFile);
+        const std::string &SymbolFile,
+        const std::string &ConfigFile);
     virtual ~UnknownFrontendTranslatorImplX86();
 
 protected:

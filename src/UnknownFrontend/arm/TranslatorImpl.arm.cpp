@@ -6,8 +6,9 @@ UnknownFrontendTranslatorImplARM::UnknownFrontendTranslatorImplARM(
     uir::Context &C,
     const Platform Platform,
     const std::string &BinaryFile,
-    const std::string &SymbolFile) :
-    UnknownFrontendTranslatorImpl(C, Platform, BinaryFile, SymbolFile)
+    const std::string &SymbolFile,
+    const std::string &ConfigFile) :
+    UnknownFrontendTranslatorImpl(C, Platform, BinaryFile, SymbolFile, ConfigFile)
 {
     mTarget = unknown::CreateTargetForARM(C.getModeBits());
 
