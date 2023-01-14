@@ -238,7 +238,7 @@ private:
                         return;
                     }
 
-                    functionSymbols.push_back(FunctionSymbol{name, rva, size});
+                    functionSymbols.push_back(FunctionSymbol{name, name, rva, size});
                     seenFunctionRVAs.emplace(rva);
                 });
             }
@@ -277,7 +277,7 @@ private:
 
                 // this is a new function symbol, so store it.
                 // note that we don't know its size yet.
-                publicSymbols.push_back(FunctionSymbol{record->data.S_PUB32.name, rva, 0u});
+                publicSymbols.push_back(FunctionSymbol{record->data.S_PUB32.name, record->data.S_PUB32.name, rva, 0u});
             }
         }
 

@@ -14,6 +14,7 @@ public:
     struct CommonSymbol
     {
         std::string name = "";
+        std::string internal_name = "";
         uint32_t rva = 0;
     };
 
