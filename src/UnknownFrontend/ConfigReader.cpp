@@ -96,6 +96,20 @@ ConfigReader::setConfigFilePath(const std::string &ConfigFilePath)
     mConfigFilePath = ConfigFilePath;
 }
 
+// Get the config name
+const std::string
+ConfigReader::getConfigName() const
+{
+    return mConfigName;
+}
+
+// Set the config name
+void
+ConfigReader::setConfigName(const std::string &ConfigName)
+{
+    mConfigName = ConfigName;
+}
+
 // Get the function items
 const std::vector<ConfigReader::FunctionItem> &
 ConfigReader::getFunctionItems() const

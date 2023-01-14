@@ -44,6 +44,12 @@ public:
     // Set the config file path
     void setConfigFilePath(const std::string &ConfigFilePath);
 
+    // Get the config name
+    const std::string getConfigName() const;
+
+    // Set the config name
+    void setConfigName(const std::string &ConfigName);
+
     // Get the function items
     const std::vector<FunctionItem> &getFunctionItems() const;
 
