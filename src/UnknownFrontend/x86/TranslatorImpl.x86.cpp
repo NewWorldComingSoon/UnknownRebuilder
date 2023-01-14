@@ -383,6 +383,12 @@ UnknownFrontendTranslatorImplX86::translateOneBasicBlock(
         setCurPtrBegin(Address + Insn->size);
     }
 
+    if (TempBB->empty())
+    {
+        TempBB.reset(nullptr);
+        return nullptr;
+    }
+
     return TempBB.release();
 }
 
