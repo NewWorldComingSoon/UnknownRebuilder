@@ -251,42 +251,43 @@ private:
         // module-specific information.
 
         // read public symbols
-        // const PDB::PublicSymbolStream publicSymbolStream = dbiStream.CreatePublicSymbolStream(rawPdbFile);
-        //{
-        //    const PDB::ArrayView<PDB::HashRecord> hashRecords = publicSymbolStream.GetRecords();
-        //    const size_t count = hashRecords.GetLength();
+        std::vector<FunctionSymbol> publicSymbols;
+        const PDB::PublicSymbolStream publicSymbolStream = dbiStream.CreatePublicSymbolStream(rawPdbFile);
+        {
+            const PDB::ArrayView<PDB::HashRecord> hashRecords = publicSymbolStream.GetRecords();
+            const size_t count = hashRecords.GetLength();
 
-        //    for (const PDB::HashRecord &hashRecord : hashRecords)
-        //    {
-        //        const PDB::CodeView::DBI::Record *record = publicSymbolStream.GetRecord(symbolRecordStream,
-        //        hashRecord); if ((PDB_AS_UNDERLYING(record->data.S_PUB32.flags) &
-        //             PDB_AS_UNDERLYING(PDB::CodeView::DBI::PublicSymbolFlags::Function)) == 0u)
-        //        {
-        //            // ignore everything that is not a function
-        //            continue;
-        //        }
+            for (const PDB::HashRecord &hashRecord : hashRecords)
+            {
+                const PDB::CodeView::DBI::Record *record = publicSymbolStream.GetRecord(symbolRecordStream, hashRecord);
+                if ((PDB_AS_UNDERLYING(record->data.S_PUB32.flags) &
+                     PDB_AS_UNDERLYING(PDB::CodeView::DBI::PublicSymbolFlags::Function)) == 0u)
+                {
+                    // ignore everything that is not a function
+                    continue;
+                }
 
-        //        const uint32_t rva = imageSectionStream.ConvertSectionOffsetToRVA(
-        //            record->data.S_PUB32.section, record->data.S_PUB32.offset);
-        //        if (rva == 0u)
-        //        {
-        //            // certain symbols (e.g. control-flow guard symbols) don't have a valid RVA, ignore those
-        //            continue;
-        //        }
+                const uint32_t rva = imageSectionStream.ConvertSectionOffsetToRVA(
+                    record->data.S_PUB32.section, record->data.S_PUB32.offset);
+                if (rva == 0u)
+                {
+                    // certain symbols (e.g. control-flow guard symbols) don't have a valid RVA, ignore those
+                    continue;
+                }
 
-        //        // check whether we already know this symbol from one of the module streams
-        //        const auto it = seenFunctionRVAs.find(rva);
-        //        if (it != seenFunctionRVAs.end())
-        //        {
-        //            // we know this symbol already, ignore it
-        //            continue;
-        //        }
+                //// check whether we already know this symbol from one of the module streams
+                // const auto it = seenFunctionRVAs.find(rva);
+                // if (it != seenFunctionRVAs.end())
+                //{
+                //     // we know this symbol already, ignore it
+                //     continue;
+                // }
 
-        //        // this is a new function symbol, so store it.
-        //        // note that we don't know its size yet.
-        //        functionSymbols.push_back(FunctionSymbol{record->data.S_PUB32.name, rva, 0u});
-        //    }
-        //}
+                // this is a new function symbol, so store it.
+                // note that we don't know its size yet.
+                publicSymbols.push_back(FunctionSymbol{record->data.S_PUB32.name, rva, 0u});
+            }
+        }
 
         // we still need to find the size of the public function symbols.
         // this can be deduced by sorting the symbols by their RVA, and then computing the distance between the current
@@ -361,6 +362,17 @@ private:
 
         if (!functionSymbols.empty())
         {
+            for (auto &functionItem : functionSymbols)
+            {
+                for (auto &publicItem : publicSymbols)
+                {
+                    if (functionItem.rva == publicItem.rva)
+                    {
+                        functionItem.name = publicItem.name;
+                    }
+                }
+            }
+
             std::swap(mFunctionSymbols, functionSymbols);
         }
     }
