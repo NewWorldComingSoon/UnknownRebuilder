@@ -175,25 +175,17 @@ UnknownFrontendTranslatorImplX86::translateBinary(const std::string &ModuleName)
 
     for (auto &FunctionSymbol : mSymbolParser->getFunctionSymbols())
     {
-        auto F = new uir::Function(getContext());
+        auto F = std::make_unique<uir::Function>(getContext());
         assert(F);
-        auto DeferredFunction = unknown::make_scope_exit([&F]() {
-            if (F)
-            {
-                delete F;
-                F = nullptr;
-            }
-        });
 
         // Translate one function into UnknownIR
-        bool TransRes = translateOneFunction(FunctionSymbol, F);
+        bool TransRes = translateOneFunction(FunctionSymbol, F.get());
         if (TransRes)
         {
             if (!F->empty())
             {
                 // Insert a function into the module
-                Module->insertFunction(F);
-                DeferredFunction.release();
+                Module->insertFunction(F.release());
             }
         }
         else
