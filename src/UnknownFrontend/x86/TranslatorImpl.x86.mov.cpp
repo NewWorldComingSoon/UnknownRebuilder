@@ -6,7 +6,7 @@ namespace ufrontend {
 
 // Mov
 bool
-UnknownFrontendTranslatorImplX86::translateMovInstruction(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB)
+UnknownFrontendTranslatorImplX86::translateMovInstruction(const cs_insn *Insn, uir::BasicBlock *BB)
 {
     if (Insn->id != X86_INS_MOV)
     {

@@ -114,13 +114,13 @@ protected:
 protected:
     // x86 instruction translation methods
     // Ret
-    bool translateRetInstruction(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB);
+    bool translateRetInstruction(const cs_insn *Insn, uir::BasicBlock *BB);
 
     // Mov
-    bool translateMovInstruction(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB);
+    bool translateMovInstruction(const cs_insn *Insn, uir::BasicBlock *BB);
 
     // Jcc
-    bool translateJccInstruction(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB);
+    bool translateJccInstruction(const cs_insn *Insn, uir::BasicBlock *BB);
 
     struct InstructionInfo
     {
