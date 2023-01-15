@@ -384,6 +384,9 @@ UnknownFrontendTranslatorImplX86::translateOneBasicBlock(
         return nullptr;
     }
 
+    // Update the end address of the basic block
+    NewBB->setBasicBlockAddressEnd(getCurPtrBegin());
+
     return NewBB.release();
 }
 
