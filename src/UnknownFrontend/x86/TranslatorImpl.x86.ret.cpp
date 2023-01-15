@@ -35,6 +35,7 @@ UnknownFrontendTranslatorImplX86::translateRetInstruction(const cs_insn *Insn, u
     }
     else
     {
+        assert("X86_INS_RET has only 0 or 1 operands" && false);
         return false;
     }
 
