@@ -655,6 +655,7 @@ set(UnknownFrontend_SOURCES
 	"src/UnknownFrontend/x86/TranslatorImpl.x86.cpp"
 	"src/UnknownFrontend/x86/TranslatorImpl.x86.jcc.cpp"
 	"src/UnknownFrontend/x86/TranslatorImpl.x86.ret.cpp"
+	"src/UnknownFrontend/x86/TranslatorImpl.x86.store.cpp"
 	"src/UnknownFrontend/ConfigReader.h"
 	"src/UnknownFrontend/TranslatorImpl.h"
 	"src/UnknownFrontend/arm/TranslatorImpl.arm.h"
