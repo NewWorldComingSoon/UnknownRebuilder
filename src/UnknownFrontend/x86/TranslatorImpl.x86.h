@@ -115,8 +115,8 @@ protected:
     // Ret
     bool translateRetInstruction(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB);
 
-    // Store
-    bool translateStoreInstruction(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB);
+    // Mov
+    bool translateMovInstruction(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB);
 
     // Jcc
     bool translateJccInstruction(const cs_insn *Insn, uint64_t Address, uir::BasicBlock *BB);
