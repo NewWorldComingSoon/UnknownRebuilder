@@ -1,4 +1,4 @@
-#include "TranslatorImpl.x86.h"
+#include <x86/TranslatorImpl.x86.h>
 
 #include <unknown/ADT/ScopeExit.h>
 
