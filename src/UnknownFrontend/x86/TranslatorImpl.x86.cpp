@@ -312,8 +312,8 @@ UnknownFrontendTranslatorImplX86::translateOneBasicBlock(
         assert(getCurPtrEnd() > getCurPtrBegin());
     }
 
-    auto TempBB = std::make_unique<uir::BasicBlock>(getContext(), BlockName, Address, MaxAddress);
-    assert(TempBB);
+    auto NewBB = std::make_unique<uir::BasicBlock>(getContext(), BlockName, Address, MaxAddress);
+    assert(NewBB);
 
     // Translate
     while (getCurPtrBegin() < getCurPtrEnd())
@@ -358,7 +358,7 @@ UnknownFrontendTranslatorImplX86::translateOneBasicBlock(
 
         // Translate one instruction
         bool IsTerminatorInsn = false;
-        bool TransRes = translateOneInstruction(Insn, Address, TempBB.get(), IsTerminatorInsn);
+        bool TransRes = translateOneInstruction(Insn, Address, NewBB.get(), IsTerminatorInsn);
         if (!TransRes)
         {
             std::cerr << std::format("UnknownFrontend: Error: translateOneInstruction: 0x{:X} failed", Address)
@@ -375,13 +375,13 @@ UnknownFrontendTranslatorImplX86::translateOneBasicBlock(
         setCurPtrBegin(Address + Insn->size);
     }
 
-    if (TempBB->empty())
+    if (NewBB->empty())
     {
-        TempBB.reset(nullptr);
+        NewBB.reset(nullptr);
         return nullptr;
     }
 
-    return TempBB.release();
+    return NewBB.release();
 }
 
 // Translate one function into UnknownIR
