@@ -193,6 +193,12 @@ Type::getInt128Ty(Context &C)
     return &C.mImpl->mInt128Ty;
 }
 
+IntegerType *
+Type::getIntNTy(Context &C, uint32_t N)
+{
+    return IntegerType::get(C, N);
+}
+
 PointerType *
 Type::getInt1PtrTy(Context &C)
 {
@@ -220,13 +226,13 @@ Type::getInt32PtrTy(Context &C)
 PointerType *
 Type::getInt64PtrTy(Context &C)
 {
-    if (C.getMode() == Context::Mode::Mode32)
-    {
-        uir_unreachable("Mode32 has not Int64PtrTy");
-        return nullptr;
-    }
-
     return getInt64Ty(C)->getPointerTo();
+}
+
+PointerType *
+Type::getIntNPtrTy(Context &C, uint32_t N)
+{
+    return getIntNTy(C, N)->getPointerTo();
 }
 
 ////////////////////////////////////////////////////////////
@@ -350,13 +356,6 @@ PointerType::get(Context &C, Type *ElementType)
     if (It != C.mImpl->mPointerTypes.end())
     {
         return It->second;
-    }
-
-    if (ElementType->getTypeBits() == 1 || ElementType->getTypeBits() == 128)
-    {
-        // Not support i1* and i128* currently
-        uir_unreachable("ElementType->getTypeBits() == 1 || ElementType->getTypeBits() == 128");
-        return nullptr;
     }
 
     // i8*/i16*/i32*/i64*

@@ -93,11 +93,13 @@ public:
     static IntegerType *getInt32Ty(Context &C);
     static IntegerType *getInt64Ty(Context &C);
     static IntegerType *getInt128Ty(Context &C);
+    static IntegerType *getIntNTy(Context &C, uint32_t N);
     static PointerType *getInt1PtrTy(Context &C);
     static PointerType *getInt8PtrTy(Context &C);
     static PointerType *getInt16PtrTy(Context &C);
     static PointerType *getInt32PtrTy(Context &C);
     static PointerType *getInt64PtrTy(Context &C);
+    static PointerType *getIntNPtrTy(Context &C, uint32_t N);
 
 public:
     // Pointer
