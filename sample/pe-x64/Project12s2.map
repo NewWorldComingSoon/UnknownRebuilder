@@ -36,4 +36,5 @@
 
   Address         Publics by Value              Rva+Base               Lib:Object
 
+ 0001:00000000       ?add@@YAHHH@Z              0000000140001000 f   Source.obj
  0001:00000050       ?empty@@YAXXZ              0000000140001050 f   Source.obj
