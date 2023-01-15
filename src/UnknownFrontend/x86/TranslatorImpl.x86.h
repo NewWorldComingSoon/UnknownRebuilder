@@ -104,8 +104,9 @@ protected:
     virtual void UpdateFunctionAttributes(uir::Function *F) override;
     virtual void
     UpdateFunctionAttributes(const unknown::SymbolParser::FunctionSymbol &FunctionSymbol, uir::Function *F);
-    virtual void UpdateFunctionAttributesForSEH(uir::Function *F);
-    virtual void UpdateFunctionAttributesForCXXEH(uir::Function *F);
+
+    // Update function context
+    virtual void UpdateFunctionContext(uir::Function *F) override;
 
     // Update BasicBlock attributes
     virtual void UpdateBasicBlockAttributes(uir::BasicBlock *BB) override;

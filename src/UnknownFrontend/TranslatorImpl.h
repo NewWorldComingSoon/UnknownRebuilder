@@ -166,6 +166,9 @@ protected:
     // Update function attributes
     virtual void UpdateFunctionAttributes(uir::Function *F) = 0;
 
+    // Update function context
+    virtual void UpdateFunctionContext(uir::Function *F) = 0;
+
     // Update BasicBlock attributes
     virtual void UpdateBasicBlockAttributes(uir::BasicBlock *BB) = 0;
 };

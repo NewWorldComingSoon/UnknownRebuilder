@@ -467,6 +467,9 @@ UnknownFrontendTranslatorImplX86::translateOneFunction(
         F->insertBasicBlock(BB);
     }
 
+    // Update function context
+    UpdateFunctionContext(F);
+
     return true;
 }
 
@@ -572,9 +575,6 @@ UnknownFrontendTranslatorImplX86::UpdateFunctionAttributes(uir::Function *F)
             }
         }
     }
-
-    UpdateFunctionAttributesForSEH(F);
-    UpdateFunctionAttributesForCXXEH(F);
 }
 
 void
@@ -602,16 +602,9 @@ UnknownFrontendTranslatorImplX86::UpdateFunctionAttributes(
     UpdateFunctionAttributes(F);
 }
 
+// Update function context
 void
-UnknownFrontendTranslatorImplX86::UpdateFunctionAttributesForSEH(uir::Function *F)
-{
-    assert(F);
-
-    // TODO
-}
-
-void
-UnknownFrontendTranslatorImplX86::UpdateFunctionAttributesForCXXEH(uir::Function *F)
+UnknownFrontendTranslatorImplX86::UpdateFunctionContext(uir::Function *F)
 {
     assert(F);
 

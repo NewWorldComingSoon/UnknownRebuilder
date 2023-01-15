@@ -166,6 +166,15 @@ UnknownFrontendTranslatorImplARM::UpdateFunctionAttributes(uir::Function *F)
     // TODO
 }
 
+// Update function context
+void
+UnknownFrontendTranslatorImplARM::UpdateFunctionContext(uir::Function *F)
+{
+    assert(F);
+
+    // TODO
+}
+
 // Update BasicBlock attributes
 void
 UnknownFrontendTranslatorImplARM::UpdateBasicBlockAttributes(uir::BasicBlock *BB)

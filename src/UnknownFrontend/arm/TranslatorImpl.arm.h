@@ -73,6 +73,9 @@ protected:
     // Update function attributes
     virtual void UpdateFunctionAttributes(uir::Function *F) override;
 
+    // Update function context
+    virtual void UpdateFunctionContext(uir::Function *F) override;
+
     // Update BasicBlock attributes
     virtual void UpdateBasicBlockAttributes(uir::BasicBlock *BB) override;
 };
