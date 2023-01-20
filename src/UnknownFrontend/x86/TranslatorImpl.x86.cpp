@@ -369,13 +369,13 @@ UnknownFrontendTranslatorImplX86::translateOneBasicBlock(
             break;
         }
 
+        // Update ptr
+        setCurPtrBegin(Address + Insn->size);
+
         if (IsTerminatorInsn)
         {
             break;
         }
-
-        // Update ptr
-        setCurPtrBegin(Address + Insn->size);
     }
 
     if (NewBB->empty())
@@ -430,9 +430,6 @@ UnknownFrontendTranslatorImplX86::translateOneFunction(
     assert(getCurPtrEnd());
     assert(getCurPtrEnd() > getCurPtrBegin());
 
-    auto TempFunction = std::make_unique<uir::Function>(getContext());
-    assert(TempFunction);
-
     while (getCurPtrBegin() < getCurPtrEnd())
     {
         // Translate a basic block
@@ -445,26 +442,16 @@ UnknownFrontendTranslatorImplX86::translateOneFunction(
         // Insert a basic block into the function
         if (!BB->empty())
         {
-            TempFunction->insertBasicBlock(BB);
+            F->insertBasicBlock(BB);
         }
 
         // Update ptr
         setCurPtrBegin(BB->getBasicBlockAddressEnd());
     }
 
-    if (TempFunction->empty())
+    if (F->empty())
     {
         return false;
-    }
-
-    // Fill the function
-    for (auto It = TempFunction->begin(); It != TempFunction->end(); ++It)
-    {
-        auto BB = *It;
-        assert(BB);
-
-        // Insert a BasicBlock into the function
-        F->insertBasicBlock(BB);
     }
 
     // Update function context

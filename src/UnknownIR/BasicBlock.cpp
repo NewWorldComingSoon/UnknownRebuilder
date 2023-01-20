@@ -15,7 +15,6 @@ namespace uir {
 BasicBlock::BasicBlock(Context &C) : BasicBlock(C, BasicBlock::generateOrderedBasicBlockName(C), 0, 0)
 {
     //
-    //
 }
 
 BasicBlock::BasicBlock(
@@ -30,8 +29,10 @@ BasicBlock::BasicBlock(
     mBasicBlockAddressEnd(BasicBlockAddressEnd),
     mParent(Parent)
 {
-    //
-    //
+    if (mBasicBlockName.empty())
+    {
+        mBasicBlockName = BasicBlock::generateOrderedBasicBlockName(C);
+    }
 }
 
 BasicBlock::~BasicBlock()
