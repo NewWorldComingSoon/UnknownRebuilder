@@ -22,4 +22,5 @@ TEST(test_lift, test_lift_1)
 
     auto Module = Translator->translateBinary("Project12");
     assert(Module);
+    Module->print(unknown::outs());
 }
