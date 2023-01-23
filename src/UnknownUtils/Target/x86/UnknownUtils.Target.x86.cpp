@@ -848,9 +848,9 @@ TargetX86::getStackPointerRegisterName() const
     switch (mModeBits)
     {
     case 32:
-        return "ESP";
+        return "esp";
     case 64:
-        return "RSP";
+        return "rsp";
     }
 
     return "";
@@ -876,9 +876,9 @@ TargetX86::getBasePointerRegisterName() const
     switch (mModeBits)
     {
     case 32:
-        return "EBP";
+        return "ebp";
     case 64:
-        return "RBP";
+        return "rbp";
     }
 
     return "";
