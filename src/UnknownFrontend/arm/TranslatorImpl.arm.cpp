@@ -148,6 +148,20 @@ UnknownFrontendTranslatorImplARM::getRegisterTypeBits(uint32_t RegID)
     return mTarget->getRegisterTypeBits(RegID);
 }
 
+// Is the register type low 8 bits?
+bool
+UnknownFrontendTranslatorImplARM::IsRegisterTypeLow8Bits(uint32_t RegID)
+{
+    return mTarget->IsRegisterTypeLow8Bits(RegID);
+}
+
+// Is the register type high 8 bits?
+bool
+UnknownFrontendTranslatorImplARM::IsRegisterTypeHigh8Bits(uint32_t RegID)
+{
+    return mTarget->IsRegisterTypeHigh8Bits(RegID);
+}
+
 // Get carry register
 uint32_t
 UnknownFrontendTranslatorImplARM::getCarryRegister()

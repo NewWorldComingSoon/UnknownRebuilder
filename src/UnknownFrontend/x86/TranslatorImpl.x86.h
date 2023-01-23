@@ -95,6 +95,12 @@ protected:
     // Get the register type bits by register id
     virtual uint32_t getRegisterTypeBits(uint32_t RegID) override;
 
+    // Is the register type low 8 bits?
+    virtual bool IsRegisterTypeLow8Bits(uint32_t RegID) override;
+
+    // Is the register type high 8 bits?
+    virtual bool IsRegisterTypeHigh8Bits(uint32_t RegID) override;
+
     // Get carry register
     virtual uint32_t getCarryRegister() override;
 
