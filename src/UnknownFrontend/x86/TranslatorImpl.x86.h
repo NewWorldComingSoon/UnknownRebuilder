@@ -84,31 +84,31 @@ protected:
 protected:
     // Register
     // Get the register name by register id
-    virtual std::string getRegisterName(uint32_t RegID) override;
+    virtual std::string getRegisterName(uint32_t RegID) const override;
 
     // Get the virtual register name by register id
-    virtual std::string getVirtualRegisterName(uint32_t RegID) override;
+    virtual std::string getVirtualRegisterName(uint32_t RegID) const override;
 
     // Get the register id by register name
-    virtual uint32_t getRegisterID(const std::string &RegName) override;
+    virtual uint32_t getRegisterID(const std::string &RegName) const override;
 
     // Get the register parent id by register id
-    virtual uint32_t getRegisterParentID(uint32_t RegID) override;
+    virtual uint32_t getRegisterParentID(uint32_t RegID) const override;
 
     // Get the register type bits by register id
-    virtual uint32_t getRegisterTypeBits(uint32_t RegID) override;
+    virtual uint32_t getRegisterTypeBits(uint32_t RegID) const override;
 
     // Get the virtual register id by register id
-    virtual uint32_t getVirtualRegisterID(uint32_t RegID) override;
+    virtual uint32_t getVirtualRegisterID(uint32_t RegID) const override;
 
     // Is the register type low 8 bits?
-    virtual bool IsRegisterTypeLow8Bits(uint32_t RegID) override;
+    virtual bool IsRegisterTypeLow8Bits(uint32_t RegID) const override;
 
     // Is the register type high 8 bits?
-    virtual bool IsRegisterTypeHigh8Bits(uint32_t RegID) override;
+    virtual bool IsRegisterTypeHigh8Bits(uint32_t RegID) const override;
 
     // Get carry register
-    virtual uint32_t getCarryRegister() override;
+    virtual uint32_t getCarryRegister() const override;
 
 protected:
     // Attributes

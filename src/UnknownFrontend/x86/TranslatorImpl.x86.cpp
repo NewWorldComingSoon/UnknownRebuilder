@@ -505,14 +505,14 @@ UnknownFrontendTranslatorImplX86::setUsePDB(bool HasUsePDB)
 // Register
 // Get the register name by register id
 std::string
-UnknownFrontendTranslatorImplX86::getRegisterName(uint32_t RegID)
+UnknownFrontendTranslatorImplX86::getRegisterName(uint32_t RegID) const
 {
     return mTarget->getRegisterName(RegID);
 }
 
 // Get the virtual register name by register id
 std::string
-UnknownFrontendTranslatorImplX86::getVirtualRegisterName(uint32_t RegID)
+UnknownFrontendTranslatorImplX86::getVirtualRegisterName(uint32_t RegID) const
 {
     // We simply use register name as virtual register name
     return getRegisterName(RegID);
@@ -520,28 +520,28 @@ UnknownFrontendTranslatorImplX86::getVirtualRegisterName(uint32_t RegID)
 
 // Get the register id by register name
 uint32_t
-UnknownFrontendTranslatorImplX86::getRegisterID(const std::string &RegName)
+UnknownFrontendTranslatorImplX86::getRegisterID(const std::string &RegName) const
 {
     return mTarget->getRegisterID(RegName);
 }
 
 // Get the register parent id by register id
 uint32_t
-UnknownFrontendTranslatorImplX86::getRegisterParentID(uint32_t RegID)
+UnknownFrontendTranslatorImplX86::getRegisterParentID(uint32_t RegID) const
 {
     return mTarget->getRegisterParentID(RegID);
 }
 
 // Get the register type bits by register id
 uint32_t
-UnknownFrontendTranslatorImplX86::getRegisterTypeBits(uint32_t RegID)
+UnknownFrontendTranslatorImplX86::getRegisterTypeBits(uint32_t RegID) const
 {
     return mTarget->getRegisterTypeBits(RegID);
 }
 
 // Get the virtual register id by register id
 uint32_t
-UnknownFrontendTranslatorImplX86::getVirtualRegisterID(uint32_t RegID)
+UnknownFrontendTranslatorImplX86::getVirtualRegisterID(uint32_t RegID) const
 {
     // We simply use the parent register id as the virtual register id
     return getRegisterParentID(RegID);
@@ -549,21 +549,21 @@ UnknownFrontendTranslatorImplX86::getVirtualRegisterID(uint32_t RegID)
 
 // Is the register type low 8 bits?
 bool
-UnknownFrontendTranslatorImplX86::IsRegisterTypeLow8Bits(uint32_t RegID)
+UnknownFrontendTranslatorImplX86::IsRegisterTypeLow8Bits(uint32_t RegID) const
 {
     return mTarget->IsRegisterTypeLow8Bits(RegID);
 }
 
 // Is the register type high 8 bits?
 bool
-UnknownFrontendTranslatorImplX86::IsRegisterTypeHigh8Bits(uint32_t RegID)
+UnknownFrontendTranslatorImplX86::IsRegisterTypeHigh8Bits(uint32_t RegID) const
 {
     return mTarget->IsRegisterTypeHigh8Bits(RegID);
 }
 
 // Get carry register
 uint32_t
-UnknownFrontendTranslatorImplX86::getCarryRegister()
+UnknownFrontendTranslatorImplX86::getCarryRegister() const
 {
     return mTarget->getCarryRegister();
 }
