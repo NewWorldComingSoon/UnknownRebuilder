@@ -1,4 +1,5 @@
 #include "TranslatorImpl.x86.h"
+#include "Error.h"
 
 #include <unknown/ADT/ScopeExit.h>
 
@@ -84,7 +85,7 @@ UnknownFrontendTranslatorImplX86::initSymbolParser()
     {
         if (getSymbolFile().rfind(".map") == std::string::npos)
         {
-            std::cerr << "UnknownFrontend: Error: Symbol file is not a .map/.pdb file" << std::endl;
+            std::cerr << UFRONTEND_ERROR_PREFIX "Symbol file is not a .map/.pdb file" << std::endl;
             std::abort();
         }
     }
@@ -94,7 +95,7 @@ UnknownFrontendTranslatorImplX86::initSymbolParser()
 
     if (!mSymbolParser->ParseFunctionSymbols(getSymbolFile()))
     {
-        std::cerr << "UnknownFrontend: Error: ParseFunctionSymbols failed" << std::endl;
+        std::cerr << UFRONTEND_ERROR_PREFIX "ParseFunctionSymbols failed" << std::endl;
         std::abort();
     }
 }
@@ -193,7 +194,7 @@ UnknownFrontendTranslatorImplX86::translateBinary(const std::string &ModuleName)
         }
         else
         {
-            std::cerr << std::format("UnknownFrontend: Error: translateOneFunction: {} failed", F->getFunctionName())
+            std::cerr << std::format(UFRONTEND_ERROR_PREFIX "translateOneFunction: {} failed", F->getFunctionName())
                       << std::endl;
         }
     }
@@ -227,7 +228,7 @@ UnknownFrontendTranslatorImplX86::translateOneInstruction(
     bool DisasmRes = DisasmCount == 1;
     if (!DisasmRes)
     {
-        std::cerr << std::format("UnknownFrontend: Error: disasm: 0x{:X} failed", Address) << std::endl;
+        std::cerr << std::format(UFRONTEND_ERROR_PREFIX "disasm: 0x{:X} failed", Address) << std::endl;
         return false;
     }
 
@@ -355,7 +356,7 @@ UnknownFrontendTranslatorImplX86::translateOneBasicBlock(
         bool DisasmRes = DisasmCount == 1;
         if (!DisasmRes)
         {
-            std::cerr << std::format("UnknownFrontend: Error: disasm: 0x{:X} failed", Address) << std::endl;
+            std::cerr << std::format(UFRONTEND_ERROR_PREFIX "disasm: 0x{:X} failed", Address) << std::endl;
             break;
         }
 
@@ -364,7 +365,7 @@ UnknownFrontendTranslatorImplX86::translateOneBasicBlock(
         bool TransRes = translateOneInstruction(Insn, Address, NewBB.get(), IsTerminatorInsn);
         if (!TransRes)
         {
-            std::cerr << std::format("UnknownFrontend: Error: translateOneInstruction: 0x{:X} failed", Address)
+            std::cerr << std::format(UFRONTEND_ERROR_PREFIX "translateOneInstruction: 0x{:X} failed", Address)
                       << std::endl;
             break;
         }

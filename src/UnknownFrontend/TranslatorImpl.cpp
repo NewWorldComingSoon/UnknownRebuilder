@@ -1,4 +1,5 @@
 #include "TranslatorImpl.h"
+#include "Error.h"
 
 namespace ufrontend {
 
@@ -46,7 +47,7 @@ UnknownFrontendTranslatorImpl::initConfig()
 
     if (!mConfigReader->ParseConfig())
     {
-        std::cerr << "UnknownFrontend: Error: ParseConfig failed" << std::endl;
+        std::cerr << UFRONTEND_ERROR_PREFIX "ParseConfig failed" << std::endl;
         std::abort();
     }
 }
