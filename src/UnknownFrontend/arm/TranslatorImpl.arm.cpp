@@ -148,6 +148,14 @@ UnknownFrontendTranslatorImplARM::getRegisterTypeBits(uint32_t RegID)
     return mTarget->getRegisterTypeBits(RegID);
 }
 
+// Get the virtual register id by register id
+uint32_t
+UnknownFrontendTranslatorImplARM::getVirtualRegisterID(uint32_t RegID)
+{
+    // We simply use the parent register id as the virtual register id
+    return getRegisterParentID(RegID);
+}
+
 // Is the register type low 8 bits?
 bool
 UnknownFrontendTranslatorImplARM::IsRegisterTypeLow8Bits(uint32_t RegID)

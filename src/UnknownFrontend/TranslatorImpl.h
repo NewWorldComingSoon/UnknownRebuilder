@@ -158,6 +158,9 @@ protected:
     // Get the register type bits by register id
     virtual uint32_t getRegisterTypeBits(uint32_t RegID) = 0;
 
+    // Get the virtual register id by register id
+    virtual uint32_t getVirtualRegisterID(uint32_t RegID) = 0;
+
     // Is the register type low 8 bits?
     virtual bool IsRegisterTypeLow8Bits(uint32_t RegID) = 0;
 
