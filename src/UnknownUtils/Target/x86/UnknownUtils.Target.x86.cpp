@@ -782,7 +782,7 @@ TargetX86::IsRegisterTypeLow8Bits(uint32_t RegID)
     }
 
     auto It = mTypeLow8Bits.find(RegID);
-    if (It == mTypeLow8Bits.end())
+    if (It != mTypeLow8Bits.end())
     {
         return It->second;
     }
@@ -810,7 +810,7 @@ TargetX86::IsRegisterTypeHigh8Bits(uint32_t RegID)
     }
 
     auto It = mTypeHigh8Bits.find(RegID);
-    if (It == mTypeHigh8Bits.end())
+    if (It != mTypeHigh8Bits.end())
     {
         return It->second;
     }
