@@ -149,6 +149,9 @@ protected:
     // Get the register name by register id
     virtual std::string getRegisterName(uint32_t RegID) = 0;
 
+    // Get the virtual register name by register id
+    virtual std::string getVirtualRegisterName(uint32_t RegID) = 0;
+
     // Get the register id by register name
     virtual uint32_t getRegisterID(const std::string &RegName) = 0;
 

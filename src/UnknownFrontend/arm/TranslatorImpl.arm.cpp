@@ -127,6 +127,14 @@ UnknownFrontendTranslatorImplARM::getRegisterName(uint32_t RegID)
     return mTarget->getRegisterName(RegID);
 }
 
+// Get the virtual register name by register id
+std::string
+UnknownFrontendTranslatorImplARM::getVirtualRegisterName(uint32_t RegID)
+{
+    // We simply use register name as virtual register name
+    return getRegisterName(RegID);
+}
+
 // Get the register id by register name
 uint32_t
 UnknownFrontendTranslatorImplARM::getRegisterID(const std::string &RegName)
