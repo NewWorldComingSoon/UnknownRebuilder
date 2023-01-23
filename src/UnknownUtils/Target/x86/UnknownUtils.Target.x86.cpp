@@ -338,7 +338,11 @@ TargetX86::getRegisterID(const std::string &RegName)
 {
     if (mName2Reg.empty())
     {
-        getRegisterName(X86_REG_EAX);
+        if (mReg2Name.empty())
+        {
+            getRegisterName(X86_REG_EAX);
+        }
+
         for (auto &Item : mReg2Name)
         {
             mName2Reg.insert({Item.second, Item.first});
@@ -794,7 +798,11 @@ TargetX86::IsRegisterTypeHigh8Bits(uint32_t RegID)
 {
     if (mTypeHigh8Bits.empty())
     {
-        IsRegisterTypeLow8Bits(X86_REG_AH);
+        if (mTypeLow8Bits.empty())
+        {
+            IsRegisterTypeLow8Bits(X86_REG_AH);
+        }
+
         for (auto &Item : mTypeLow8Bits)
         {
             mTypeHigh8Bits.insert({Item.first, !Item.second});
