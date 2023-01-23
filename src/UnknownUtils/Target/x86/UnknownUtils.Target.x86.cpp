@@ -762,6 +762,56 @@ TargetX86::getRegisterTypeBits(uint32_t RegID)
     }
 }
 
+// Is the register type low 8 bits?
+bool
+TargetX86::IsRegisterTypeLow8Bits(uint32_t RegID)
+{
+    if (mTypeLow8Bits.empty())
+    {
+        std::unordered_map<uint32_t, bool> TL8B = {
+            {X86_REG_AH, false},  {X86_REG_AL, true},   {X86_REG_CH, false},  {X86_REG_CL, true},
+            {X86_REG_DH, false},  {X86_REG_DL, true},   {X86_REG_BH, false},  {X86_REG_BL, true},
+            {X86_REG_SPL, true},  {X86_REG_BPL, true},  {X86_REG_DIL, true},  {X86_REG_SIL, true},
+            {X86_REG_R8B, true},  {X86_REG_R9B, true},  {X86_REG_R10B, true}, {X86_REG_R11B, true},
+            {X86_REG_R12B, true}, {X86_REG_R13B, true}, {X86_REG_R14B, true}, {X86_REG_R15B, true}};
+        mTypeLow8Bits = std::move(TL8B);
+    }
+
+    auto It = mTypeLow8Bits.find(RegID);
+    if (It == mTypeLow8Bits.end())
+    {
+        return It->second;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+// Is the register type high 8 bits?
+bool
+TargetX86::IsRegisterTypeHigh8Bits(uint32_t RegID)
+{
+    if (mTypeHigh8Bits.empty())
+    {
+        IsRegisterTypeLow8Bits(X86_REG_AH);
+        for (auto &Item : mTypeLow8Bits)
+        {
+            mTypeHigh8Bits.insert({Item.first, !Item.second});
+        }
+    }
+
+    auto It = mTypeHigh8Bits.find(RegID);
+    if (It == mTypeHigh8Bits.end())
+    {
+        return It->second;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 // Get carry register
 uint32_t
 TargetX86::getCarryRegister()

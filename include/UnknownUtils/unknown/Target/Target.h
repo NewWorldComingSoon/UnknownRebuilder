@@ -15,6 +15,8 @@ protected:
     std::unordered_map<uint32_t, std::string> mReg2Name;
     std::unordered_map<std::string, uint32_t> mName2Reg;
     std::unordered_map<uint32_t, uint32_t> mReg2TypeBits;
+    std::unordered_map<uint32_t, bool> mTypeLow8Bits;
+    std::unordered_map<uint32_t, bool> mTypeHigh8Bits;
     std::unordered_map<uint32_t, uint32_t> mReg2ParentReg;
 
     uint32_t mModeBits;
@@ -35,6 +37,12 @@ public:
 
     // Get the register type bits by register id
     virtual uint32_t getRegisterTypeBits(uint32_t RegID) = 0;
+
+    // Is the register type low 8 bits?
+    virtual bool IsRegisterTypeLow8Bits(uint32_t RegID) = 0;
+
+    // Is the register type high 8 bits?
+    virtual bool IsRegisterTypeHigh8Bits(uint32_t RegID) = 0;
 
     // Get carry register
     virtual uint32_t getCarryRegister() = 0;

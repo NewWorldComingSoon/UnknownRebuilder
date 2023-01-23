@@ -44,6 +44,22 @@ TargetARM::getRegisterTypeBits(uint32_t RegID)
     return 0;
 }
 
+// Is the register type low 8 bits?
+bool
+TargetARM::IsRegisterTypeLow8Bits(uint32_t RegID)
+{
+    // TODO
+    return false;
+}
+
+// Is the register type high 8 bits?
+bool
+TargetARM::IsRegisterTypeHigh8Bits(uint32_t RegID)
+{
+    // TODO
+    return false;
+}
+
 // Get carry register
 uint32_t
 TargetARM::getCarryRegister()
