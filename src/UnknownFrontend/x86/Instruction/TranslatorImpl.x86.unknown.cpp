@@ -11,7 +11,7 @@ UnknownFrontendTranslatorImplX86::translateUnknownX86Instruction(const cs_insn *
     std::string InstStr = "invalid";
     if (Insn->id != X86_INS_INVALID)
     {
-        if (Insn->op_str[0] == 0)
+        if (Insn->op_str[0] == '\0')
         {
             InstStr = std::string(Insn->mnemonic);
         }
