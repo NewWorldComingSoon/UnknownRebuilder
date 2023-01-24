@@ -58,6 +58,9 @@ public:
 
 public:
     // Create
+    // Unknown
+    UnknownInstruction *createUnknown(unknown::StringRef UnknownStr = "", uint64_t InstAddress = 0);
+
     // Return
     ReturnInstruction *createRetVoid(uint64_t InstAddress = 0);
     ReturnImmInstruction *createRetImm(ConstantInt *ImmConstantInt, uint64_t InstAddress = 0);

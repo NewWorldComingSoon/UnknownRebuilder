@@ -124,6 +124,13 @@ IRBuilder::IRBuilder(BasicBlock *BB, BasicBlock::iterator IT) : IRBuilder(BB->ge
 
 ////////////////////////////////////////////////////////////
 // Create
+// Unknown
+UnknownInstruction *
+IRBuilder::createUnknown(unknown::StringRef UnknownStr, uint64_t InstAddress)
+{
+    return insert(UnknownInstruction::get(UnknownStr), InstAddress);
+}
+
 // Return
 ReturnInstruction *
 IRBuilder::createRetVoid(uint64_t InstAddress)
