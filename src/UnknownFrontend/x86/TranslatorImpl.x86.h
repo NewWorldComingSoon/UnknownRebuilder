@@ -143,7 +143,7 @@ protected:
 
     struct InstructionInfo
     {
-        decltype(&translateRetInstruction) TranslateFunction;
+        decltype(&translateUnknownX86Instruction) TranslateFunction;
         bool IsBlockTerminatorInsn;
     };
     std::unordered_map<uint32_t, InstructionInfo> mX86InstructionTranslatorMap;
