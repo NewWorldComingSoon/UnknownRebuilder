@@ -65,4 +65,12 @@ UnknownInstruction::getUnknownStr() const
     return mUnknownStr;
 }
 
+////////////////////////////////////////////////////////////
+// Static
+UnknownInstruction *
+UnknownInstruction::get(unknown::StringRef UnknownStr)
+{
+    return new UnknownInstruction(UnknownStr);
+}
+
 } // namespace uir
