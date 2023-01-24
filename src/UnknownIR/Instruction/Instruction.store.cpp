@@ -22,7 +22,6 @@ StoreInstruction::StoreInstruction(Value *Val, Value *Ptr, bool IsVolatile) :
 StoreInstruction::~StoreInstruction()
 {
     //
-    //
 }
 
 ////////////////////////////////////////////////////////////
