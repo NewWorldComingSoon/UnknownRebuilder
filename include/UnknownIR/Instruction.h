@@ -5,6 +5,7 @@
 
 #include <UnknownIR/Instruction/Instruction.store.h>
 #include <UnknownIR/Instruction/Instruction.load.h>
+#include <UnknownIR/Instruction/Instruction.lea.h>
 
 #include <UnknownIR/Instruction/Instruction.add.h>
 #include <UnknownIR/Instruction/Instruction.sub.h>
