@@ -11,7 +11,7 @@ UnknownFrontendTranslatorImplX86::translateUnknownX86Instruction(const cs_insn *
     std::string InstStr = "invalid";
     if (Insn->id != X86_INS_INVALID)
     {
-        InstStr = std::string(Insn->mnemonic) + Insn->op_str;
+        InstStr = std::string(Insn->mnemonic) + " " + Insn->op_str;
     }
 
     uir::IRBuilder IBR(BB);
