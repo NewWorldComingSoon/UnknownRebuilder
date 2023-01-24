@@ -656,6 +656,8 @@ set(UnknownFrontend_SOURCES
 	"src/UnknownFrontend/arm/TranslatorImpl.arm.cpp"
 	"src/UnknownFrontend/x86/Instruction/TranslatorImpl.x86.jcc.cpp"
 	"src/UnknownFrontend/x86/Instruction/TranslatorImpl.x86.mov.cpp"
+	"src/UnknownFrontend/x86/Instruction/TranslatorImpl.x86.pop.cpp"
+	"src/UnknownFrontend/x86/Instruction/TranslatorImpl.x86.push.cpp"
 	"src/UnknownFrontend/x86/Instruction/TranslatorImpl.x86.ret.cpp"
 	"src/UnknownFrontend/x86/Instruction/TranslatorImpl.x86.unknown.cpp"
 	"src/UnknownFrontend/x86/TranslatorImpl.x86.cpp"

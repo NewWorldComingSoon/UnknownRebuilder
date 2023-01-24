@@ -143,29 +143,34 @@ UnknownFrontendTranslatorImplX86::getBasePointerRegisterName() const
 void
 UnknownFrontendTranslatorImplX86::initTranslateInstruction()
 {
-    mX86InstructionTranslatorMap = {// Ret
-                                    {X86_INS_RET, {&UnknownFrontendTranslatorImplX86::translateRetInstruction, true}},
+    mX86InstructionTranslatorMap = {
+        // Ret
+        {X86_INS_RET, {&UnknownFrontendTranslatorImplX86::translateRetInstruction, true}},
 
-                                    // Mov
-                                    {X86_INS_MOV, {&UnknownFrontendTranslatorImplX86::translateMovInstruction, false}},
+        // Mov
+        {X86_INS_MOV, {&UnknownFrontendTranslatorImplX86::translateMovInstruction, false}},
 
-                                    // Jcc
-                                    {X86_INS_JAE, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
-                                    {X86_INS_JA, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
-                                    {X86_INS_JBE, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
-                                    {X86_INS_JB, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
-                                    {X86_INS_JE, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
-                                    {X86_INS_JGE, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
-                                    {X86_INS_JG, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
-                                    {X86_INS_JLE, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
-                                    {X86_INS_JL, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
-                                    {X86_INS_JNE, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
-                                    {X86_INS_JNO, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
-                                    {X86_INS_JNP, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
-                                    {X86_INS_JNS, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
-                                    {X86_INS_JO, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
-                                    {X86_INS_JP, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
-                                    {X86_INS_JS, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}}
+        // Push/Pop
+        {X86_INS_PUSH, {&UnknownFrontendTranslatorImplX86::translatePushInstruction, false}},
+        {X86_INS_POP, {&UnknownFrontendTranslatorImplX86::translatePopInstruction, false}},
+
+        // Jcc
+        {X86_INS_JAE, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
+        {X86_INS_JA, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
+        {X86_INS_JBE, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
+        {X86_INS_JB, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
+        {X86_INS_JE, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
+        {X86_INS_JGE, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
+        {X86_INS_JG, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
+        {X86_INS_JLE, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
+        {X86_INS_JL, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
+        {X86_INS_JNE, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
+        {X86_INS_JNO, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
+        {X86_INS_JNP, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
+        {X86_INS_JNS, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
+        {X86_INS_JO, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
+        {X86_INS_JP, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}},
+        {X86_INS_JS, {&UnknownFrontendTranslatorImplX86::translateJccInstruction, true}}
 
     };
 }

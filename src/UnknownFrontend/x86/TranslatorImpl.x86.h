@@ -134,6 +134,12 @@ protected:
     // Mov
     bool translateMovInstruction(const cs_insn *Insn, uir::BasicBlock *BB);
 
+    // Push
+    bool translatePushInstruction(const cs_insn *Insn, uir::BasicBlock *BB);
+
+    // Pop
+    bool translatePopInstruction(const cs_insn *Insn, uir::BasicBlock *BB);
+
     // Jcc
     bool translateJccInstruction(const cs_insn *Insn, uir::BasicBlock *BB);
 
