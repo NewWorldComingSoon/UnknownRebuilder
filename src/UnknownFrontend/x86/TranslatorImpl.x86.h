@@ -123,7 +123,7 @@ protected:
     // Update BasicBlock attributes
     virtual void UpdateBasicBlockAttributes(uir::BasicBlock *BB) override;
 
-protected:
+private:
     // x86 instruction translation methods
     // Unknown X86
     bool translateUnknownX86Instruction(const cs_insn *Insn, uir::BasicBlock *BB);
