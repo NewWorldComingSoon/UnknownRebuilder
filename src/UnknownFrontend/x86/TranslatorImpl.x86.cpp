@@ -280,6 +280,10 @@ UnknownFrontendTranslatorImplX86::translateOneInstruction(
         IsBlockTerminatorInsn = TransInfo.IsBlockTerminatorInsn;
         TransRes = (this->*TransInfo.TranslateFunction)(Insn, BB);
     }
+    else
+    {
+        TransRes = translateUnknownX86Instruction(Insn, BB);
+    }
 
     return TransRes;
 }

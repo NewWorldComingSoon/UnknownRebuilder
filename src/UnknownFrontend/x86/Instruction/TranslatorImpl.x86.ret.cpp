@@ -13,13 +13,15 @@ UnknownFrontendTranslatorImplX86::translateRetInstruction(const cs_insn *Insn, u
         return false;
     }
 
+    bool TransRes = false;
+
     auto &X86Info = Insn->detail->x86;
     if (X86Info.op_count == 0)
     {
         // ret
         uir::IRBuilder IBR(BB);
 
-        IBR.createRetVoid(Insn->address);
+        TransRes = IBR.createRetVoid(Insn->address) != nullptr;
     }
     else if (X86Info.op_count == 1)
     {
@@ -29,17 +31,17 @@ UnknownFrontendTranslatorImplX86::translateRetInstruction(const cs_insn *Insn, u
         const uint32_t TypeSize = 16;
         auto Imm = static_cast<uint64_t>(X86Info.operands[0].imm.imm);
 
-        IBR.createRetImm(
-            uir::ConstantInt::get(uir::Type::getIntNTy(getContext(), TypeSize), unknown::APInt(TypeSize, Imm)),
-            Insn->address);
+        TransRes =
+            IBR.createRetImm(
+                uir::ConstantInt::get(uir::Type::getIntNTy(getContext(), TypeSize), unknown::APInt(TypeSize, Imm)),
+                Insn->address) != nullptr;
     }
     else
     {
         assert("X86_INS_RET has only 0 or 1 operands" && false);
-        return false;
     }
 
-    return true;
+    return TransRes;
 }
 
 } // namespace ufrontend

@@ -125,6 +125,9 @@ protected:
 
 protected:
     // x86 instruction translation methods
+    // Unknown X86
+    bool translateUnknownX86Instruction(const cs_insn *Insn, uir::BasicBlock *BB);
+
     // Ret
     bool translateRetInstruction(const cs_insn *Insn, uir::BasicBlock *BB);
 
