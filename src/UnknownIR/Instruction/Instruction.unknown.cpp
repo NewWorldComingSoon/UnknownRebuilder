@@ -51,9 +51,7 @@ UnknownInstruction::printInst(unknown::raw_ostream &OS) const
 {
     OS << getOpcodeName();
     OS << UIR_OPCODE_SEPARATOR;
-    OS << R"(")";
     OS << getUnknownStr();
-    OS << R"(")";
 }
 
 ////////////////////////////////////////////////////////////
