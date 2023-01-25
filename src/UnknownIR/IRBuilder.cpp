@@ -164,4 +164,11 @@ IRBuilder::createStore(Value *Val, Value *Ptr, bool IsVolatile, uint64_t InstAdd
     return insert(StoreInstruction::get(getContext(), Val, Ptr, IsVolatile), InstAddress);
 }
 
+// GetBitPtr
+GetBitPtrInstruction *
+IRBuilder::createGetBitPtr(PointerType *ResType, Value *Ptr, Value *BitIndex, uint64_t InstAddress)
+{
+    return insert(GetBitPtrInstruction::get(ResType, Ptr, BitIndex), InstAddress);
+}
+
 } // namespace uir

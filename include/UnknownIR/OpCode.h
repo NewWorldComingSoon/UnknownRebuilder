@@ -11,7 +11,7 @@ enum class OpCodeID : uint8_t
     // Data/Memory instructions
     Load,
     Store,
-    Lea,
+    GetBitPtr,
 
     // Binary operators instructions
     Add,
@@ -54,8 +54,8 @@ const OpCodeComponent LoadComponent       = {    OpCodeID::Load,        "uir.loa
 // store op1, op2
 const OpCodeComponent StoreComponent      = {    OpCodeID::Store,       "uir.store",        2,      false,     false};
 
-// res = lea op1, offset
-const OpCodeComponent LeaComponent        = {    OpCodeID::Lea,         "uir.lea",          2,      true,      false};
+// res_ptr = gbp op1_ptr, op2_bit_index
+const OpCodeComponent GBPComponent        = {    OpCodeID::GetBitPtr,   "uir.gbp",          2,      true,      false};
 
 
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

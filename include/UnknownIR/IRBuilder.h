@@ -71,6 +71,9 @@ public:
 
     // Store
     StoreInstruction *createStore(Value *Val, Value *Ptr, bool IsVolatile = false, uint64_t InstAddress = 0);
+
+    // GetBitPtr
+    GetBitPtrInstruction *createGetBitPtr(PointerType *ResType, Value *Ptr, Value *BitIndex, uint64_t InstAddress = 0);
 };
 
 } // namespace uir
