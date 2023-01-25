@@ -537,12 +537,24 @@ CreateSymbolParserForPE(bool UsePDB)
 {
     if (UsePDB)
     {
-        return std::make_unique<SymbolParserByPDB>();
+        return CreateSymbolParserForPEByPDB();
     }
     else
     {
-        return std::make_unique<SymbolParserByMap>();
+        return CreateSymbolParserForPEByMAP();
     }
+}
+
+std::unique_ptr<SymbolParser>
+CreateSymbolParserForPEByPDB()
+{
+    return std::make_unique<SymbolParserByPDB>();
+}
+
+std::unique_ptr<SymbolParser>
+CreateSymbolParserForPEByMAP()
+{
+    return std::make_unique<SymbolParserByMap>();
 }
 
 } // namespace unknown

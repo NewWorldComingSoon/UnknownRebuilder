@@ -128,40 +128,40 @@ IRBuilder::IRBuilder(BasicBlock *BB, BasicBlock::iterator IT) : IRBuilder(BB->ge
 UnknownInstruction *
 IRBuilder::createUnknown(unknown::StringRef UnknownStr, uint64_t InstAddress)
 {
-    return insert(UnknownInstruction::get(UnknownStr), InstAddress);
+    return insert(UnknownInstruction::get(getContext(), UnknownStr), InstAddress);
 }
 
 // Return
 ReturnInstruction *
 IRBuilder::createRetVoid(uint64_t InstAddress)
 {
-    return insert(ReturnInstruction::get(), InstAddress);
+    return insert(ReturnInstruction::get(getContext()), InstAddress);
 }
 
 ReturnImmInstruction *
 IRBuilder::createRetImm(ConstantInt *ImmConstantInt, uint64_t InstAddress)
 {
-    return insert(ReturnImmInstruction::get(ImmConstantInt), InstAddress);
+    return insert(ReturnImmInstruction::get(getContext(), ImmConstantInt), InstAddress);
 }
 
 // Jmp
 JmpAddrInstruction *
 IRBuilder::createJmpAddr(ConstantInt *JmpDest, uint64_t InstAddress)
 {
-    return insert(JmpAddrInstruction::get(JmpDest), InstAddress);
+    return insert(JmpAddrInstruction::get(getContext(), JmpDest), InstAddress);
 }
 
 JmpBBInstruction *
 IRBuilder::createJmpBB(BasicBlock *DestBB, uint64_t InstAddress)
 {
-    return insert(JmpBBInstruction::get(DestBB), InstAddress);
+    return insert(JmpBBInstruction::get(getContext(), DestBB), InstAddress);
 }
 
 // Store
 StoreInstruction *
 IRBuilder::createStore(Value *Val, Value *Ptr, bool IsVolatile, uint64_t InstAddress)
 {
-    return insert(StoreInstruction::get(Val, Ptr, IsVolatile), InstAddress);
+    return insert(StoreInstruction::get(getContext(), Val, Ptr, IsVolatile), InstAddress);
 }
 
 } // namespace uir

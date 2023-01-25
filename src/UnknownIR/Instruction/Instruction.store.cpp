@@ -7,8 +7,8 @@
 namespace uir {
 ////////////////////////////////////////////////////////////
 // Ctor/Dtor
-StoreInstruction::StoreInstruction(Value *Val, Value *Ptr, bool IsVolatile) :
-    Instruction(OpCodeID::Store), mIsVolatile(IsVolatile)
+StoreInstruction::StoreInstruction(Context &C, Value *Val, Value *Ptr, bool IsVolatile) :
+    Instruction(C, OpCodeID::Store), mIsVolatile(IsVolatile)
 {
     assert(Ptr->getType()->isPointerTy() && "Ptr is not a pointer type!");
 
@@ -126,9 +126,9 @@ StoreInstruction::setVolatile(bool IsVolatile)
 ////////////////////////////////////////////////////////////
 // Static
 StoreInstruction *
-StoreInstruction::get(Value *Val, Value *Ptr, bool IsVolatile)
+StoreInstruction::get(Context &C, Value *Val, Value *Ptr, bool IsVolatile)
 {
-    return new StoreInstruction(Val, Ptr, IsVolatile);
+    return new StoreInstruction(C, Val, Ptr, IsVolatile);
 }
 
 } // namespace uir

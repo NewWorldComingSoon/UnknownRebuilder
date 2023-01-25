@@ -10,8 +10,10 @@
 namespace uir {
 
 class BasicBlock;
+class LocalVariable;
+class Context;
 
-class Instruction : public User
+class Instruction : public LocalVariable
 {
 protected:
     OpCodeID mOpCodeID;
@@ -22,8 +24,9 @@ protected:
     bool mEnablePrintOp;
 
 public:
-    Instruction();
-    explicit Instruction(OpCodeID OpCodeId);
+    explicit Instruction(Context &C);
+    explicit Instruction(Context &C, OpCodeID OpCodeId);
+    explicit Instruction(OpCodeID OpCodeId, Type *Ty);
     virtual ~Instruction();
 
 public:
@@ -147,10 +150,6 @@ public:
 
     // Is this instruction Enable 'print detailed op'?
     bool hasPrintOp() const;
-
-public:
-    // Static
-    static Instruction *get(OpCodeID OpCodeId);
 };
 
 class TerminatorInstruction : public Instruction
@@ -162,7 +161,7 @@ protected:
     SuccessorsListType mSuccessorsList;
 
 protected:
-    TerminatorInstruction(OpCodeID OpCodeId);
+    TerminatorInstruction(Context &C, OpCodeID OpCodeId);
     virtual ~TerminatorInstruction();
 
 public:

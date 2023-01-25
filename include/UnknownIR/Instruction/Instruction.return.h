@@ -7,7 +7,7 @@ namespace uir {
 class ReturnInstruction : public TerminatorInstruction
 {
 public:
-    ReturnInstruction();
+    ReturnInstruction(Context &C);
     virtual ~ReturnInstruction();
 
 public:
@@ -29,13 +29,13 @@ public:
 
 public:
     // Static
-    static ReturnInstruction *get();
+    static ReturnInstruction *get(Context &C);
 };
 
 class ReturnImmInstruction : public TerminatorInstruction
 {
 public:
-    explicit ReturnImmInstruction(ConstantInt *ImmConstantInt);
+    explicit ReturnImmInstruction(Context &C, ConstantInt *ImmConstantInt);
     virtual ~ReturnImmInstruction();
 
 public:
@@ -65,7 +65,7 @@ public:
 
 public:
     // Static
-    static ReturnImmInstruction *get(ConstantInt *ImmConstantInt);
+    static ReturnImmInstruction *get(Context &C, ConstantInt *ImmConstantInt);
 };
 
 } // namespace uir

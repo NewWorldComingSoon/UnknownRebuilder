@@ -4,8 +4,8 @@
 
 namespace uir {
 
-UnknownInstruction::UnknownInstruction(unknown::StringRef UnknownStr) :
-    Instruction(OpCodeID::Unknown), mUnknownStr(UnknownStr)
+UnknownInstruction::UnknownInstruction(Context &C, unknown::StringRef UnknownStr) :
+    Instruction(C, OpCodeID::Unknown), mUnknownStr(UnknownStr)
 {
     //
 }
@@ -66,9 +66,9 @@ UnknownInstruction::getUnknownStr() const
 ////////////////////////////////////////////////////////////
 // Static
 UnknownInstruction *
-UnknownInstruction::get(unknown::StringRef UnknownStr)
+UnknownInstruction::get(Context &C, unknown::StringRef UnknownStr)
 {
-    return new UnknownInstruction(UnknownStr);
+    return new UnknownInstruction(C, UnknownStr);
 }
 
 } // namespace uir

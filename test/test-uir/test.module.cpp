@@ -30,15 +30,15 @@ TEST(test_uir, test_uir_module_1)
         BasicBlock *BB1 = BasicBlock::get(CTX, "bb1", 0x401000, 0x401005);
         BasicBlock *BB2 = BasicBlock::get(CTX, "bb2", 0x401007, 0x401010);
 
-        auto RetInst = ReturnInstruction::get();
+        auto RetInst = ReturnInstruction::get(CTX);
         RetInst->setInstructionAddress(0x401000);
         BB1->insertInst(RetInst);
 
-        auto JmpBBInst = JmpBBInstruction::get(BB2);
+        auto JmpBBInst = JmpBBInstruction::get(CTX, BB2);
         JmpBBInst->setInstructionAddress(0x401005);
         JmpBBInst->insertAfter(RetInst);
 
-        auto RetInst2 = ReturnInstruction::get();
+        auto RetInst2 = ReturnInstruction::get(CTX);
         RetInst2->setInstructionAddress(0x401007);
         BB2->insertInst(RetInst2);
 

@@ -10,8 +10,12 @@ namespace uir {
 ////////////////////////////////////////////////////////////
 //     JccAddrInstruction
 //
-JccAddrInstruction::JccAddrInstruction(ConstantInt *JccDest, ConstantInt *JccNormal, FlagsVariable *FlagsVar) :
-    TerminatorInstruction(OpCodeID::JccAddr)
+JccAddrInstruction::JccAddrInstruction(
+    Context &C,
+    ConstantInt *JccDest,
+    ConstantInt *JccNormal,
+    FlagsVariable *FlagsVar) :
+    TerminatorInstruction(C, OpCodeID::JccAddr)
 {
     // Insert value   -> op1
     insertOperandAndUpdateUsers(JccDest);
@@ -102,16 +106,20 @@ JccAddrInstruction::setJccNormalConstantInt(ConstantInt *JccNormalConstantInt)
 ////////////////////////////////////////////////////////////
 // Static
 JccAddrInstruction *
-JccAddrInstruction::get(ConstantInt *JccDest, ConstantInt *JccNormal, FlagsVariable *FlagsVar)
+JccAddrInstruction::get(Context &C, ConstantInt *JccDest, ConstantInt *JccNormal, FlagsVariable *FlagsVar)
 {
-    return new JccAddrInstruction(JccDest, JccNormal, FlagsVar);
+    return new JccAddrInstruction(C, JccDest, JccNormal, FlagsVar);
 }
 
 ////////////////////////////////////////////////////////////
 //     JccBBInstruction
 //
-JccBBInstruction::JccBBInstruction(BasicBlock *JccDestBB, BasicBlock *JccNormalBB, FlagsVariable *FlagsVar) :
-    TerminatorInstruction(OpCodeID::JccBB)
+JccBBInstruction::JccBBInstruction(
+    Context &C,
+    BasicBlock *JccDestBB,
+    BasicBlock *JccNormalBB,
+    FlagsVariable *FlagsVar) :
+    TerminatorInstruction(C, OpCodeID::JccBB)
 {
     // Insert successor1
     insertSuccessor(JccDestBB);
@@ -235,9 +243,9 @@ JccBBInstruction::setNormalBlockAndUpdatePredecessor(BasicBlock *NormalBB)
 ////////////////////////////////////////////////////////////
 // Static
 JccBBInstruction *
-JccBBInstruction::get(BasicBlock *JccDestBB, BasicBlock *JccNormalBB, FlagsVariable *FlagsVar)
+JccBBInstruction::get(Context &C, BasicBlock *JccDestBB, BasicBlock *JccNormalBB, FlagsVariable *FlagsVar)
 {
-    return new JccBBInstruction(JccDestBB, JccNormalBB, FlagsVar);
+    return new JccBBInstruction(C, JccDestBB, JccNormalBB, FlagsVar);
 }
 
 } // namespace uir

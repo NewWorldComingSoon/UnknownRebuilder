@@ -10,9 +10,12 @@ namespace uir {
 ////////////////////////////////////////////////////////////
 //     LocalVariable
 //
-LocalVariable::LocalVariable(Type *Ty) : LocalVariable(Ty, generateOrderedLocalVarName(Ty->getContext()), 0)
+LocalVariable::LocalVariable(Type *Ty) :
+    LocalVariable(
+        Ty,
+        Ty == Type::getVoidTy(Ty->getContext()) ? "LocalVoid" : generateOrderedLocalVarName(Ty->getContext()),
+        0)
 {
-    //
     //
 }
 
@@ -20,12 +23,10 @@ LocalVariable::LocalVariable(Type *Ty, const unknown::StringRef &LocalVariableNa
     Constant(Ty, LocalVariableName), mLocalVariableAddress(LocalVariableAddress)
 {
     //
-    //
 }
 
 LocalVariable::~LocalVariable()
 {
-    //
     //
 }
 

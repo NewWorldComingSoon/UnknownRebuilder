@@ -9,7 +9,7 @@ class BasicBlock;
 class JmpAddrInstruction : public TerminatorInstruction
 {
 public:
-    explicit JmpAddrInstruction(ConstantInt *JmpDest);
+    explicit JmpAddrInstruction(Context &C, ConstantInt *JmpDest);
     virtual ~JmpAddrInstruction();
 
 public:
@@ -39,13 +39,13 @@ public:
 
 public:
     // Static
-    static JmpAddrInstruction *get(ConstantInt *JmpDest);
+    static JmpAddrInstruction *get(Context &C, ConstantInt *JmpDest);
 };
 
 class JmpBBInstruction : public TerminatorInstruction
 {
 public:
-    explicit JmpBBInstruction(BasicBlock *DestBB);
+    explicit JmpBBInstruction(Context &C, BasicBlock *DestBB);
     virtual ~JmpBBInstruction();
 
 public:
@@ -81,7 +81,7 @@ public:
 
 public:
     // Static
-    static JmpBBInstruction *get(BasicBlock *DestBB);
+    static JmpBBInstruction *get(Context &C, BasicBlock *DestBB);
 };
 
 } // namespace uir

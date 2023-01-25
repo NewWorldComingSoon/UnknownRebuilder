@@ -10,7 +10,7 @@ class FlagsVariable;
 class JccAddrInstruction : public TerminatorInstruction
 {
 public:
-    explicit JccAddrInstruction(ConstantInt *JccDest, ConstantInt *JccNormal, FlagsVariable *FlagsVar);
+    explicit JccAddrInstruction(Context &C, ConstantInt *JccDest, ConstantInt *JccNormal, FlagsVariable *FlagsVar);
     virtual ~JccAddrInstruction();
 
 public:
@@ -46,13 +46,13 @@ public:
 
 public:
     // Static
-    static JccAddrInstruction *get(ConstantInt *JccDest, ConstantInt *JccNormal, FlagsVariable *FlagsVar);
+    static JccAddrInstruction *get(Context &C, ConstantInt *JccDest, ConstantInt *JccNormal, FlagsVariable *FlagsVar);
 };
 
 class JccBBInstruction : public TerminatorInstruction
 {
 public:
-    explicit JccBBInstruction(BasicBlock *JccDestBB, BasicBlock *JccNormalBB, FlagsVariable *FlagsVar);
+    explicit JccBBInstruction(Context &C, BasicBlock *JccDestBB, BasicBlock *JccNormalBB, FlagsVariable *FlagsVar);
     virtual ~JccBBInstruction();
 
 public:
@@ -97,7 +97,7 @@ public:
 
 public:
     // Static
-    static JccBBInstruction *get(BasicBlock *JccDestBB, BasicBlock *JccNormalBB, FlagsVariable *FlagsVar);
+    static JccBBInstruction *get(Context &C, BasicBlock *JccDestBB, BasicBlock *JccNormalBB, FlagsVariable *FlagsVar);
 };
 
 } // namespace uir

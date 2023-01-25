@@ -9,7 +9,7 @@ namespace uir {
 ////////////////////////////////////////////////////////////
 //     JmpAddrInstruction
 //
-JmpAddrInstruction::JmpAddrInstruction(ConstantInt *JmpDest) : TerminatorInstruction(OpCodeID::JmpAddr)
+JmpAddrInstruction::JmpAddrInstruction(Context &C, ConstantInt *JmpDest) : TerminatorInstruction(C, OpCodeID::JmpAddr)
 {
     // Insert value   -> op1
     insertOperandAndUpdateUsers(JmpDest);
@@ -78,15 +78,15 @@ JmpAddrInstruction::setJmpDestConstantInt(ConstantInt *JmpDestConstantInt)
 ////////////////////////////////////////////////////////////
 // Static
 JmpAddrInstruction *
-JmpAddrInstruction::get(ConstantInt *JmpDest)
+JmpAddrInstruction::get(Context &C, ConstantInt *JmpDest)
 {
-    return new JmpAddrInstruction(JmpDest);
+    return new JmpAddrInstruction(C, JmpDest);
 }
 
 ////////////////////////////////////////////////////////////
 //     JmpBBInstruction
 //
-JmpBBInstruction::JmpBBInstruction(BasicBlock *DestBB) : TerminatorInstruction(OpCodeID::JmpBB)
+JmpBBInstruction::JmpBBInstruction(Context &C, BasicBlock *DestBB) : TerminatorInstruction(C, OpCodeID::JmpBB)
 {
     insertSuccessor(DestBB);
 }
@@ -175,9 +175,9 @@ JmpBBInstruction::setDestinationBlockAndUpdatePredecessor(BasicBlock *DestBB)
 ////////////////////////////////////////////////////////////
 // Static
 JmpBBInstruction *
-JmpBBInstruction::get(BasicBlock *DestBB)
+JmpBBInstruction::get(Context &C, BasicBlock *DestBB)
 {
-    return new JmpBBInstruction(DestBB);
+    return new JmpBBInstruction(C, DestBB);
 }
 
 } // namespace uir

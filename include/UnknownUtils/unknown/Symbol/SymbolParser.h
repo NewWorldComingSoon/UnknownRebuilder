@@ -73,4 +73,10 @@ public:
 std::unique_ptr<SymbolParser>
 CreateSymbolParserForPE(bool UsePDB = true);
 
+std::unique_ptr<SymbolParser>
+CreateSymbolParserForPEByPDB();
+
+std::unique_ptr<SymbolParser>
+CreateSymbolParserForPEByMAP();
+
 } // namespace unknown

@@ -1,6 +1,7 @@
 #include <Instruction.h>
 #include <BasicBlock.h>
 #include <GlobalVariable.h>
+#include <LocalVariable.h>
 #include <Function.h>
 #include <Argument.h>
 #include <FunctionContext.h>
@@ -14,13 +15,18 @@ namespace uir {
 ////////////////////////////////////////////////////////////
 //     Instruction
 //
-Instruction::Instruction() : Instruction(OpCodeID::Unknown)
+Instruction::Instruction(Context &C) : Instruction(C, OpCodeID::Unknown)
 {
-    //
     //
 }
 
-Instruction::Instruction(OpCodeID OpCodeId) :
+Instruction::Instruction(Context &C, OpCodeID OpCodeId) : Instruction(OpCodeId, Type::getVoidTy(C))
+{
+    //
+}
+
+Instruction::Instruction(OpCodeID OpCodeId, Type *Ty) :
+    LocalVariable(Ty),
     mOpCodeID(OpCodeId),
     mInstructionAddress(0),
     mParent(nullptr),
@@ -543,17 +549,9 @@ Instruction::hasPrintOp() const
 }
 
 ////////////////////////////////////////////////////////////
-// Static
-Instruction *
-Instruction::get(OpCodeID OpCodeId)
-{
-    return new Instruction(OpCodeId);
-}
-
-////////////////////////////////////////////////////////////
 //     TerminatorInstruction
 //
-TerminatorInstruction::TerminatorInstruction(OpCodeID OpCodeId) : Instruction(OpCodeID::Unknown)
+TerminatorInstruction::TerminatorInstruction(Context &C, OpCodeID OpCodeId) : Instruction(C, OpCodeId)
 {
     //
 }

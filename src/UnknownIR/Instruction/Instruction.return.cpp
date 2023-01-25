@@ -8,7 +8,7 @@ namespace uir {
 ////////////////////////////////////////////////////////////
 //     ReturnInstruction
 //
-ReturnInstruction::ReturnInstruction() : TerminatorInstruction(OpCodeID::Ret)
+ReturnInstruction::ReturnInstruction(Context &C) : TerminatorInstruction(C, OpCodeID::Ret)
 {
     //
 }
@@ -58,15 +58,16 @@ ReturnInstruction::printInst(unknown::raw_ostream &OS) const
 ////////////////////////////////////////////////////////////
 // Static
 ReturnInstruction *
-ReturnInstruction::get()
+ReturnInstruction::get(Context &C)
 {
-    return new ReturnInstruction();
+    return new ReturnInstruction(C);
 }
 
 ////////////////////////////////////////////////////////////
 //     ReturnImmInstruction
 //
-ReturnImmInstruction::ReturnImmInstruction(ConstantInt *ImmConstantInt) : TerminatorInstruction(OpCodeID::RetIMM)
+ReturnImmInstruction::ReturnImmInstruction(Context &C, ConstantInt *ImmConstantInt) :
+    TerminatorInstruction(C, OpCodeID::RetIMM)
 {
     // Insert ImmConstantInt   -> op1
     insertOperandAndUpdateUsers(ImmConstantInt);
@@ -135,9 +136,9 @@ ReturnImmInstruction::setImmConstantInt(ConstantInt *ImmConstantInt)
 ////////////////////////////////////////////////////////////
 // Static
 ReturnImmInstruction *
-ReturnImmInstruction::get(ConstantInt *ImmConstantInt)
+ReturnImmInstruction::get(Context &C, ConstantInt *ImmConstantInt)
 {
-    return new ReturnImmInstruction(ImmConstantInt);
+    return new ReturnImmInstruction(C, ImmConstantInt);
 }
 
 } // namespace uir

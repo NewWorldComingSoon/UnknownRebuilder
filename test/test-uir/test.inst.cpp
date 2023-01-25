@@ -13,7 +13,7 @@ TEST(test_uir, test_uir_inst_RetIMM_1)
 
     std::cout << std::format("RetIMMOpCodeName = {}", RetIMMComponent.mOpCodeName.data()) << std::endl;
 
-    auto ReturnImmInst = ReturnImmInstruction::get(ConstantInt::get(CTX, unknown::APInt(32, 1)));
+    auto ReturnImmInst = ReturnImmInstruction::get(CTX, ConstantInt::get(CTX, unknown::APInt(32, 1)));
     ReturnImmInst->setInstructionAddress(0x401000);
     ReturnImmInst->print(unknown::outs());
     unknown::outs() << *ReturnImmInst;
@@ -50,7 +50,7 @@ TEST(test_uir, test_uir_inst_Store_1)
     auto Val = LocalVariable::get(Type::getInt32Ty(CTX), "local_1", 0x501000);
     auto Ptr = LocalVariable::get(Type::getInt32PtrTy(CTX), "local_ptr_1", 0x601000);
 
-    auto StoreInst = StoreInstruction::get(Val, Ptr);
+    auto StoreInst = StoreInstruction::get(CTX, Val, Ptr);
     StoreInst->setInstructionAddress(0x401000);
     StoreInst->print(unknown::outs());
     unknown::outs() << *StoreInst;
@@ -70,7 +70,7 @@ TEST(test_uir, test_uir_inst_Ret_1)
 
     std::cout << std::format("RetComponent = {}", RetComponent.mOpCodeName.data()) << std::endl;
 
-    auto RetInst = ReturnInstruction::get();
+    auto RetInst = ReturnInstruction::get(CTX);
     RetInst->setInstructionAddress(0x401000);
     RetInst->print(unknown::outs());
     unknown::outs() << *RetInst;
@@ -84,7 +84,7 @@ TEST(test_uir, test_uir_inst_JmpAddr_1)
 
     std::cout << std::format("JmpAddrComponent = {}", JmpAddrComponent.mOpCodeName.data()) << std::endl;
 
-    auto JmpAddrInst = JmpAddrInstruction::get(ConstantInt::get(CTX, unknown::APInt(64, 0x406000)));
+    auto JmpAddrInst = JmpAddrInstruction::get(CTX, ConstantInt::get(CTX, unknown::APInt(64, 0x406000)));
     JmpAddrInst->setInstructionAddress(0x401000);
     JmpAddrInst->print(unknown::outs());
     unknown::outs() << *JmpAddrInst;
@@ -99,7 +99,7 @@ TEST(test_uir, test_uir_inst_JmpBB_1)
     std::cout << std::format("JmpBBComponent = {}", JmpBBComponent.mOpCodeName.data()) << std::endl;
 
     auto BB = BasicBlock::get(CTX, "bb1", 0x406000, 0x406005);
-    auto JmpBBInst = JmpBBInstruction::get(BB);
+    auto JmpBBInst = JmpBBInstruction::get(CTX, BB);
     JmpBBInst->setInstructionAddress(0x401000);
     JmpBBInst->print(unknown::outs());
     unknown::outs() << *JmpBBInst;
@@ -120,7 +120,7 @@ TEST(test_uir, test_uir_inst_JccAddr_1)
     FlagsVar->setCarryFlag(true);
     FlagsVar->setZeroFlag(true);
 
-    auto JccAddrInst = JccAddrInstruction::get(Addr1, Addr2, FlagsVar);
+    auto JccAddrInst = JccAddrInstruction::get(CTX, Addr1, Addr2, FlagsVar);
     JccAddrInst->setInstructionAddress(0x401000);
     JccAddrInst->print(unknown::outs());
     unknown::outs() << *JccAddrInst;
@@ -141,7 +141,7 @@ TEST(test_uir, test_uir_inst_JccBB_1)
     FlagsVar->setCarryFlag(true);
     FlagsVar->setZeroFlag(true);
 
-    auto JccBBInst = JccBBInstruction::get(BB1, BB2, FlagsVar);
+    auto JccBBInst = JccBBInstruction::get(CTX, BB1, BB2, FlagsVar);
     JccBBInst->setInstructionAddress(0x401000);
     JccBBInst->print(unknown::outs());
     unknown::outs() << *JccBBInst;

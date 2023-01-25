@@ -9,7 +9,7 @@ private:
     bool mIsVolatile;
 
 public:
-    explicit StoreInstruction(Value *Val, Value *Ptr, bool IsVolatile = false);
+    explicit StoreInstruction(Context &C, Value *Val, Value *Ptr, bool IsVolatile = false);
     virtual ~StoreInstruction();
 
 public:
@@ -57,7 +57,7 @@ public:
 
 public:
     // Static
-    static StoreInstruction *get(Value *Val, Value *Ptr, bool IsVolatile = false);
+    static StoreInstruction *get(Context &C, Value *Val, Value *Ptr, bool IsVolatile = false);
 };
 
 } // namespace uir

@@ -9,7 +9,7 @@ private:
     std::string mUnknownStr;
 
 public:
-    explicit UnknownInstruction(unknown::StringRef UnknownStr = "");
+    explicit UnknownInstruction(Context &C, unknown::StringRef UnknownStr = "");
     virtual ~UnknownInstruction();
 
 public:
@@ -36,7 +36,7 @@ public:
 
 public:
     // Static
-    static UnknownInstruction *get(unknown::StringRef UnknownStr = "");
+    static UnknownInstruction *get(Context &C, unknown::StringRef UnknownStr = "");
 };
 
 } // namespace uir
