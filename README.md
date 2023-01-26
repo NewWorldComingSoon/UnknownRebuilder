@@ -37,6 +37,15 @@ Only tested on Windows, other systems have not been tested.
 cmake -Bbuild -DCAPSTONE_BUILD_TESTS=OFF -DCAPSTONE_BUILD_SHARED=OFF -DCAPSTONE_BUILD_STATIC_RUNTIME=ON -DLLVM_TARGETS_TO_BUILD=X86 -DLIEF_PYTHON_API=OFF -DLIEF_ELF=OFF -DLIEF_MACHO=OFF -DLIEF_OAT=OFF -DLIEF_MACHO=OFF -DLIEF_OAT=OFF -DLIEF_DEX=OFF -DLIEF_VDEX=OFF -DLIEF_ART=OFF -DLIEF_EXAMPLES=OFF -DLIEF_C_API=OFF -DLIEF_ENABLE_JSON=OFF -DBUILD_SHARE_LIBS=OFF
 ```
 
+### Contributing
+Any contributions you make are **greatly appreciated**.
+
+- Fork the Project
+- Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+- Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+- Push to the Branch (`git push origin feature/AmazingFeature`)
+- Open a Pull Request
+
 ## Note
 This is currently an unfinished project.
 I expect to spend 1 year to complete this project :)
