@@ -4,17 +4,17 @@
 [![GitHub license](https://img.shields.io/github/license/NewWorldComingSoon/UnknownRebuilder
 )](https://github.com/NewWorldComingSoon/UnknownRebuilder/blob/main/LICENSE)
 
-X86 native code rebuilder using UnknownIR(UIR) and UnknownMC(UMC). We can also say bin2bin(binary to binary).
+X86 native code rebuilder using **UnknownIR(UIR)** and **UnknownMC(UMC)**. We can also say **bin2bin(binary to binary)**.
 
 
 ![Image](https://user-images.githubusercontent.com/13917777/212396942-0de11002-3b75-44a2-881a-e0a5912e05a1.png)
 
 
 ### What's UIR?
-Yet another Intermediate Representation(IR) called UnknownIR(UIR).
+Yet another Intermediate Representation(IR) called **UnknownIR(UIR)**.
 
 ### What's UMC?
-Yet another Machine Code(MC) called UnknownMC(UMC).
+Yet another Machine Code(MC) called **UnknownMC(UMC)**.
 
 ### Motivation
 Just for learning and fun. Maybe it can help others too.
