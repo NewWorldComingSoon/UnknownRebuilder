@@ -10,16 +10,16 @@ X86 native code rebuilder using UnknownIR(UIR) and UnknownMC(UMC). We can also s
 ![Image](https://user-images.githubusercontent.com/13917777/212396942-0de11002-3b75-44a2-881a-e0a5912e05a1.png)
 
 
-## What's UIR?
+### What's UIR?
 Yet another Intermediate Representation(IR) called UnknownIR(UIR).
 
-## What's UMC?
+### What's UMC?
 Yet another Machine Code(MC) called UnknownMC(UMC).
 
-## Motivation
+### Motivation
 Just for learning and fun. Maybe it can help others too.
 
-## Credit
+### Credit
 - [cmkr](https://github.com/build-cpp/cmkr)
 - [LLVM](https://github.com/llvm/llvm-project)
 - [RetDec](https://github.com/avast/retdec)
@@ -31,13 +31,13 @@ Just for learning and fun. Maybe it can help others too.
 - [LIEF](https://github.com/NewWorldComingSoon/LIEF)
 - [TinyXML2](https://github.com/leethomason/tinyxml2)
 
-## Build
+### Build
 Only tested on Windows, other systems have not been tested.
 ```
 cmake -Bbuild -DCAPSTONE_BUILD_TESTS=OFF -DCAPSTONE_BUILD_SHARED=OFF -DCAPSTONE_BUILD_STATIC_RUNTIME=ON -DLLVM_TARGETS_TO_BUILD=X86 -DLIEF_PYTHON_API=OFF -DLIEF_ELF=OFF -DLIEF_MACHO=OFF -DLIEF_OAT=OFF -DLIEF_MACHO=OFF -DLIEF_OAT=OFF -DLIEF_DEX=OFF -DLIEF_VDEX=OFF -DLIEF_ART=OFF -DLIEF_EXAMPLES=OFF -DLIEF_C_API=OFF -DLIEF_ENABLE_JSON=OFF -DBUILD_SHARE_LIBS=OFF
 ```
 
-## Contributing
+### Contributing
 Any contributions you make are **greatly appreciated**.
 
 - Fork the Project
@@ -46,6 +46,6 @@ Any contributions you make are **greatly appreciated**.
 - Push to the Branch (`git push origin feature/AmazingFeature`)
 - Open a Pull Request
 
-## Note
+### Note
 This is currently an unfinished project.
 I expect to spend 1 year to complete this project :)
