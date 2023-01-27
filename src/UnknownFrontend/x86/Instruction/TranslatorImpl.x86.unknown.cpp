@@ -21,8 +21,8 @@ UnknownFrontendTranslatorImplX86::translateUnknownX86Instruction(const cs_insn *
         }
     }
 
-    uir::IRBuilder IBR(BB);
-    return IBR.createUnknown(InstStr, Insn->address) != nullptr;
+    uir::IRBuilder IRB(BB);
+    return IRB.createUnknown(InstStr, Insn->address) != nullptr;
 }
 
 } // namespace ufrontend
