@@ -21,17 +21,17 @@ UnknownFrontendTranslatorImpl::UnknownFrontendTranslatorImpl(
     mCurPtrEnd(0),
     mCurFunction(nullptr)
 {
-    if (C.getArch() == uir::Context::Arch::ArchX86)
+    switch (C.getArch())
     {
+    case uir::Context::Arch::ArchX86:
         mTarget = unknown::CreateTargetForX86(C.getModeBits());
-    }
-    else if (C.getArch() == uir::Context::Arch::ArchARM)
-    {
+        break;
+    case uir::Context::Arch::ArchARM:
         mTarget = unknown::CreateTargetForARM(C.getModeBits());
-    }
-    else
-    {
+        break;
+    default:
         // TODO
+        break;
     }
 }
 

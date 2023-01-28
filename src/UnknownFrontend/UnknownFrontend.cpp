@@ -16,19 +16,17 @@ UnknownFrontendTranslator::createTranslator(
     bool AnalyzeAllFunctions,
     const Platform Platform)
 {
-    if (C.getArch() == uir::Context::Arch::ArchX86)
+    switch (C.getArch())
     {
+    case uir::Context::Arch::ArchX86:
         return std::make_unique<UnknownFrontendTranslatorImplX86>(
             C, Platform, BinaryFile, SymbolFile, ConfigFile, AnalyzeAllFunctions);
-    }
-    else if (C.getArch() == uir::Context::Arch::ArchARM)
-    {
+    case uir::Context::Arch::ArchARM:
         return std::make_unique<UnknownFrontendTranslatorImplARM>(
             C, Platform, BinaryFile, SymbolFile, ConfigFile, AnalyzeAllFunctions);
-    }
-    else
-    {
+    default:
         // TODO
+        break;
     }
 
     return {};
