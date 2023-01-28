@@ -549,6 +549,14 @@ UnknownFrontendTranslatorImplX86::getRegisterTypeBits(uint32_t RegID) const
     return mTarget->getRegisterTypeBits(RegID);
 }
 
+// Get the register type  by register id
+uir::Type *
+UnknownFrontendTranslatorImplX86::getRegisterType(uint32_t RegID) const
+{
+    auto Bits = getRegisterTypeBits(RegID);
+    return uir::Type::getIntNTy(getContext(), Bits);
+}
+
 // Get the virtual register id by register id
 uint32_t
 UnknownFrontendTranslatorImplX86::getVirtualRegisterID(uint32_t RegID) const
