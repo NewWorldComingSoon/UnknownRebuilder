@@ -189,3 +189,28 @@ TEST(test_uir, test_uir_inst_GBP_1)
         std::cout << std::format("Op = {}", Op->getName()) << std::endl;
     }
 }
+
+TEST(test_uir, test_uir_inst_Load_1)
+{
+    Context CTX;
+    CTX.setArch(Context::Arch::ArchX86);
+    CTX.setMode(Context::Mode::Mode64);
+
+    std::cout << std::format("LoadComponent = {}", LoadComponent.mOpCodeName.data()) << std::endl;
+
+    auto Ptr = LocalVariable::get(Type::getInt32PtrTy(CTX), "ptr1", 0x601000);
+
+    auto LoadInst = LoadInstruction::get(Ptr);
+    LoadInst->setInstructionAddress(0x401000);
+
+    LoadInst->enablePrintOp();
+
+    LoadInst->print(unknown::outs());
+    unknown::outs() << *LoadInst;
+
+    for (auto OpIt = LoadInst->op_begin(); OpIt != LoadInst->op_end(); ++OpIt)
+    {
+        auto Op = *OpIt;
+        std::cout << std::format("Op = {}", Op->getName()) << std::endl;
+    }
+}
