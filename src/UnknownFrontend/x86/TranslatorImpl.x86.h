@@ -143,8 +143,8 @@ private:
 
     struct InstructionInfo
     {
-        decltype(&translateUnknownX86Instruction) TranslateFunction;
-        bool IsBlockTerminatorInsn;
+        decltype(&translateUnknownX86Instruction) TranslateFunction = nullptr;
+        bool IsBlockTerminatorInsn = false;
     };
     std::unordered_map<uint32_t, InstructionInfo> mX86InstructionTranslatorMap;
 };
