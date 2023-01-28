@@ -156,8 +156,8 @@ UnknownFrontendTranslatorImplARM::getRegisterTypeBits(uint32_t RegID) const
     return mTarget->getRegisterTypeBits(RegID);
 }
 
-// Get the register type  by register id
-uir::Type *
+// Get the register type by register id
+const uir::Type *
 UnknownFrontendTranslatorImplARM::getRegisterType(uint32_t RegID) const
 {
     auto Bits = getRegisterTypeBits(RegID);

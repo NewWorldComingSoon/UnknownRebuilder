@@ -162,7 +162,7 @@ protected:
     virtual uint32_t getRegisterTypeBits(uint32_t RegID) const = 0;
 
     // Get the register type  by register id
-    virtual uir::Type *getRegisterType(uint32_t RegID) const = 0;
+    virtual const uir::Type *getRegisterType(uint32_t RegID) const = 0;
 
     // Get the virtual register id by register id
     virtual uint32_t getVirtualRegisterID(uint32_t RegID) const = 0;
