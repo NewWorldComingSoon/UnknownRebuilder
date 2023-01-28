@@ -97,7 +97,7 @@ protected:
 
     // Get the register type bits by register id
     virtual uint32_t getRegisterTypeBits(uint32_t RegID) const override;
-	
+
     // Get the register type by register id
     virtual const uir::Type *getRegisterType(uint32_t RegID) const override;
 
@@ -112,6 +112,9 @@ protected:
 
     // Get carry register
     virtual uint32_t getCarryRegister() const override;
+
+    // Load register
+    virtual uir::Value *loadRegister(const cs_insn *Insn, uir::BasicBlock *BB) override;
 
 protected:
     // Attributes

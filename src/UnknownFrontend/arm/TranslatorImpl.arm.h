@@ -83,6 +83,9 @@ protected:
     // Get carry register
     virtual uint32_t getCarryRegister() const override;
 
+    // Load register
+    virtual uir::Value *loadRegister(const cs_insn *Insn, uir::BasicBlock *BB) override;
+
 protected:
     // Attributes
     // Update function attributes

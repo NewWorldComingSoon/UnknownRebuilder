@@ -3,6 +3,7 @@
 
 #include <UnknownIR/Instruction/Instruction.unknown.h>
 
+#include <UnknownIR/Instruction/Instruction.load.h>
 #include <UnknownIR/Instruction/Instruction.store.h>
 #include <UnknownIR/Instruction/Instruction.load.h>
 #include <UnknownIR/Instruction/Instruction.gbp.h>

@@ -193,6 +193,14 @@ UnknownFrontendTranslatorImplARM::getCarryRegister() const
     return mTarget->getCarryRegister();
 }
 
+// Load register
+uir::Value *
+UnknownFrontendTranslatorImplARM::loadRegister(const cs_insn *Insn, uir::BasicBlock *BB)
+{
+    // TODO
+    return nullptr;
+}
+
 ////////////////////////////////////////////////////////////
 // Attributes
 // Update function attributes
