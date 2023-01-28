@@ -11,7 +11,7 @@ UnknownFrontendTranslatorImplARM::UnknownFrontendTranslatorImplARM(
     bool AnalyzeAllFunctions) :
     UnknownFrontendTranslatorImpl(C, Platform, BinaryFile, SymbolFile, ConfigFile, AnalyzeAllFunctions)
 {
-    mTarget = unknown::CreateTargetForARM(C.getModeBits());
+    //
 }
 
 UnknownFrontendTranslatorImplARM::~UnknownFrontendTranslatorImplARM()

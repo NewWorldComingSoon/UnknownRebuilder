@@ -14,7 +14,7 @@ UnknownFrontendTranslatorImplX86::UnknownFrontendTranslatorImplX86(
     bool AnalyzeAllFunctions) :
     UnknownFrontendTranslatorImpl(C, Platform, BinaryFile, SymbolFile, ConfigFile, AnalyzeAllFunctions), mUsePDB(false)
 {
-    mTarget = unknown::CreateTargetForX86(C.getModeBits());
+    //
 }
 
 UnknownFrontendTranslatorImplX86::~UnknownFrontendTranslatorImplX86()
