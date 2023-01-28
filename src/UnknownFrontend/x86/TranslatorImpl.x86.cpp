@@ -15,11 +15,6 @@ UnknownFrontendTranslatorImplX86::UnknownFrontendTranslatorImplX86(
     UnknownFrontendTranslatorImpl(C, Platform, BinaryFile, SymbolFile, ConfigFile, AnalyzeAllFunctions), mUsePDB(false)
 {
     mTarget = unknown::CreateTargetForX86(C.getModeBits());
-
-    openCapstoneHandle();
-    initSymbolParser();
-    initBinary();
-    initTranslateInstruction();
 }
 
 UnknownFrontendTranslatorImplX86::~UnknownFrontendTranslatorImplX86()

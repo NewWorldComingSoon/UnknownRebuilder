@@ -21,11 +21,6 @@ UnknownFrontendTranslatorImpl::UnknownFrontendTranslatorImpl(
     mCurPtrEnd(0),
     mCurFunction(nullptr)
 {
-    initConfig();
-    openCapstoneHandle();
-    initSymbolParser();
-    initBinary();
-    initTranslateInstruction();
 }
 
 UnknownFrontendTranslatorImpl::~UnknownFrontendTranslatorImpl()
@@ -33,7 +28,22 @@ UnknownFrontendTranslatorImpl::~UnknownFrontendTranslatorImpl()
     closeCapstoneHandle();
 }
 
+////////////////////////////////////////////////////////////
+// Init
+// Init the translator
+void
+UnknownFrontendTranslatorImpl::initTranslator()
+{
+    initConfig();
+    openCapstoneHandle();
+    initSymbolParser();
+    initBinary();
+    initTranslateInstruction();
+}
+
+////////////////////////////////////////////////////////////
 // Config
+// Init the config
 void
 UnknownFrontendTranslatorImpl::initConfig()
 {

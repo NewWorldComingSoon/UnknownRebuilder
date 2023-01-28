@@ -12,11 +12,6 @@ UnknownFrontendTranslatorImplARM::UnknownFrontendTranslatorImplARM(
     UnknownFrontendTranslatorImpl(C, Platform, BinaryFile, SymbolFile, ConfigFile, AnalyzeAllFunctions)
 {
     mTarget = unknown::CreateTargetForARM(C.getModeBits());
-
-    openCapstoneHandle();
-    initSymbolParser();
-    initBinary();
-    initTranslateInstruction();
 }
 
 UnknownFrontendTranslatorImplARM::~UnknownFrontendTranslatorImplARM()

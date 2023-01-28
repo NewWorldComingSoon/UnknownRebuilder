@@ -48,11 +48,13 @@ protected:
     const uint32_t getBasePointerRegister() const;
     const unknown::StringRef getBasePointerRegisterName() const;
 
-public:
+protected:
     // Translate
     // Init the instruction translator
     virtual void initTranslateInstruction() override;
 
+public:
+    // Translate
     // Translate the given binary into UnknownIR
     virtual std::unique_ptr<uir::Module> translateBinary(const std::string &ModuleName) override;
 

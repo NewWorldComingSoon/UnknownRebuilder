@@ -37,6 +37,11 @@ public:
     virtual ~UnknownFrontendTranslator() = default;
 
 public:
+    // Init
+    // Init the translator
+    virtual void initTranslator() = 0;
+
+public:
     // Translate
     // Translate the given binary into UnknownIR
     virtual std::unique_ptr<uir::Module> translateBinary(const std::string &ModuleName) = 0;

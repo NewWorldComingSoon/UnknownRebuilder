@@ -43,6 +43,11 @@ public:
         bool AnalyzeAllFunctions);
     virtual ~UnknownFrontendTranslatorImpl();
 
+public:
+    // Init
+    // Init the translator
+    virtual void initTranslator() override;
+
 protected:
     // Capstone
     virtual void openCapstoneHandle() {}
@@ -60,11 +65,13 @@ protected:
     // Config
     virtual void initConfig();
 
-public:
+protected:
     // Translate
     // Init the instruction translator
     virtual void initTranslateInstruction() {}
 
+public:
+    // Translate
     // Translate the given binary into UnknownIR
     virtual std::unique_ptr<uir::Module> translateBinary(const std::string &ModuleName) override { return {}; }
 

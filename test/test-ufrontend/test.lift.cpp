@@ -19,6 +19,7 @@ TEST(test_lift, test_lift_1)
         UNKNOWN_REBUILDER_SRC_DIR R"(/sample/pe-x64/Project12.cfg.xml)",
         false);
     assert(Translator);
+    Translator->initTranslator();
 
     auto Module = Translator->translateBinary("Project12");
     assert(Module);
@@ -40,6 +41,7 @@ TEST(test_lift, test_lift_2)
         UNKNOWN_REBUILDER_SRC_DIR R"(/sample/pe-x64/Project12.cfg2.xml)",
         false);
     assert(Translator);
+    Translator->initTranslator();
 
     auto Module = Translator->translateBinary("Project12-2");
     assert(Module);
