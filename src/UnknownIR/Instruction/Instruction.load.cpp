@@ -85,4 +85,12 @@ LoadInstruction::setPointerOperand(Value *Ptr)
     setOperandAndUpdateUsers(0, Ptr);
 }
 
+////////////////////////////////////////////////////////////
+// Static
+LoadInstruction *
+LoadInstruction::get(Value *Ptr)
+{
+    return new LoadInstruction(Ptr);
+}
+
 } // namespace uir
