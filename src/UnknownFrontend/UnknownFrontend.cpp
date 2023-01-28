@@ -26,8 +26,10 @@ UnknownFrontendTranslator::createTranslator(
         return std::make_unique<UnknownFrontendTranslatorImplARM>(
             C, Platform, BinaryFile, SymbolFile, ConfigFile, AnalyzeAllFunctions);
     }
-
-    // TODO
+    else
+    {
+        // TODO
+    }
 
     return {};
 }
