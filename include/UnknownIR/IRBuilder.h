@@ -69,8 +69,11 @@ public:
     JmpAddrInstruction *createJmpAddr(ConstantInt *JmpDest, uint64_t InstAddress = 0);
     JmpBBInstruction *createJmpBB(BasicBlock *DestBB, uint64_t InstAddress = 0);
 
+    // Load
+    LoadInstruction *createLoad(Value *Ptr, uint64_t InstAddress = 0);
+
     // Store
-    StoreInstruction *createStore(Value *Val, Value *Ptr, bool IsVolatile = false, uint64_t InstAddress = 0);
+    StoreInstruction *createStore(Value *Val, Value *Ptr, uint64_t InstAddress = 0);
 
     // GetBitPtr
     GetBitPtrInstruction *createGetBitPtr(PointerType *ResType, Value *Ptr, Value *BitIndex, uint64_t InstAddress = 0);

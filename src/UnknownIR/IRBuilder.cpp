@@ -157,11 +157,18 @@ IRBuilder::createJmpBB(BasicBlock *DestBB, uint64_t InstAddress)
     return insert(JmpBBInstruction::get(getContext(), DestBB), InstAddress);
 }
 
+// Load
+LoadInstruction *
+IRBuilder::createLoad(Value *Ptr, uint64_t InstAddress)
+{
+    return insert(LoadInstruction::get(Ptr), InstAddress);
+}
+
 // Store
 StoreInstruction *
-IRBuilder::createStore(Value *Val, Value *Ptr, bool IsVolatile, uint64_t InstAddress)
+IRBuilder::createStore(Value *Val, Value *Ptr, uint64_t InstAddress)
 {
-    return insert(StoreInstruction::get(getContext(), Val, Ptr, IsVolatile), InstAddress);
+    return insert(StoreInstruction::get(getContext(), Val, Ptr, false), InstAddress);
 }
 
 // GetBitPtr
