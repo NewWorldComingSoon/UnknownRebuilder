@@ -7,7 +7,8 @@ namespace uir {
 LoadInstruction::LoadInstruction(Value *Ptr) :
     Instruction(
         OpCodeID::Load,
-        Ptr->getType()->isPointerTy() ? dynamic_cast<PointerType *>(Ptr->getType())->getElementType() : nullptr)
+        Ptr->getType()->isPointerTy() ? dynamic_cast<PointerType *>(Ptr->getType())->getElementType()
+                                      : Type::getVoidTy(getContext()))
 {
     assert(Ptr->getType()->isPointerTy() && "Ptr must be a pointer type!");
 
