@@ -59,24 +59,24 @@ public:
 public:
     // Create
     // Unknown
-    UnknownInstruction *createUnknown(unknown::StringRef UnknownStr = "", uint64_t InstAddress = 0);
+    UnknownInstruction *createUnknown(unknown::StringRef UnknownStr, uint64_t InstAddress);
 
     // Return
-    ReturnInstruction *createRetVoid(uint64_t InstAddress = 0);
-    ReturnImmInstruction *createRetImm(ConstantInt *ImmConstantInt, uint64_t InstAddress = 0);
+    ReturnInstruction *createRetVoid(uint64_t InstAddress);
+    ReturnImmInstruction *createRetImm(ConstantInt *ImmConstantInt, uint64_t InstAddress);
 
     // Jmp
-    JmpAddrInstruction *createJmpAddr(ConstantInt *JmpDest, uint64_t InstAddress = 0);
-    JmpBBInstruction *createJmpBB(BasicBlock *DestBB, uint64_t InstAddress = 0);
+    JmpAddrInstruction *createJmpAddr(ConstantInt *JmpDest, uint64_t InstAddress);
+    JmpBBInstruction *createJmpBB(BasicBlock *DestBB, uint64_t InstAddress);
 
     // Load
-    LoadInstruction *createLoad(Value *Ptr, uint64_t InstAddress = 0);
+    LoadInstruction *createLoad(Value *Ptr, uint64_t InstAddress);
 
     // Store
-    StoreInstruction *createStore(Value *Val, Value *Ptr, uint64_t InstAddress = 0);
+    StoreInstruction *createStore(Value *Val, Value *Ptr, uint64_t InstAddress);
 
     // GetBitPtr
-    GetBitPtrInstruction *createGetBitPtr(PointerType *ResType, Value *Ptr, Value *BitIndex, uint64_t InstAddress = 0);
+    GetBitPtrInstruction *createGetBitPtr(PointerType *ResType, Value *Ptr, Value *BitIndex, uint64_t InstAddress);
 };
 
 } // namespace uir
