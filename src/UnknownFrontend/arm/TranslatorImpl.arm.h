@@ -62,7 +62,7 @@ protected:
     virtual std::string getVirtualRegisterName(uint32_t RegID) const override;
 
     // Get the virtual register information by register id
-    virtual VirtualRegisterInfo &getVirtualRegisterInfo(uint32_t RegID) override;
+    virtual std::optional<VirtualRegisterInfo *> getVirtualRegisterInfo(uint32_t RegID) override;
 
     // Get the register id by register name
     virtual uint32_t getRegisterID(const std::string &RegName) const override;

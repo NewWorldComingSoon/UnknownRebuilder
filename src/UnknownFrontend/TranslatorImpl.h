@@ -171,7 +171,7 @@ protected:
     virtual std::string getVirtualRegisterName(uint32_t RegID) const = 0;
 
     // Get the virtual register information by register id
-    virtual VirtualRegisterInfo &getVirtualRegisterInfo(uint32_t RegID) = 0;
+    virtual std::optional<VirtualRegisterInfo *> getVirtualRegisterInfo(uint32_t RegID) = 0;
 
     // Get the register id by register name
     virtual uint32_t getRegisterID(const std::string &RegName) const = 0;
