@@ -533,10 +533,10 @@ UnknownFrontendTranslatorImplX86::getVirtualRegisterInfo(uint32_t RegID)
         return {};
     }
 
-    auto It = mVirtualRegisterInfoMap.find(VRegID);
-    if (It != mVirtualRegisterInfoMap.end())
+    auto ItFind = mVirtualRegisterInfoMap.find(VRegID);
+    if (ItFind != mVirtualRegisterInfoMap.end())
     {
-        return &mVirtualRegisterInfoMap[VRegID];
+        return &ItFind->second;
     }
 
     // TODO Insert
