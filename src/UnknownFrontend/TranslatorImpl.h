@@ -12,6 +12,17 @@ namespace ufrontend {
 class UnknownFrontendTranslatorImpl : public UnknownFrontendTranslator
 {
 protected:
+    struct VirtualRegisterInfo
+    {
+        uint32_t TypeSize = 0;
+        uint32_t RawRegID = 0;
+        uir::Value *RegPtr = nullptr;
+        uir::Value *SavedRegVal = nullptr;
+    };
+    // [VRegID, VRegInfo]
+    std::unordered_map<uint32_t, VirtualRegisterInfo> mVirtualRegisterInfoMap;
+
+protected:
     Platform mPlatform;
     uir::Context &mContext;
     std::string mBinaryFile;
@@ -158,6 +169,9 @@ protected:
 
     // Get the virtual register name by register id
     virtual std::string getVirtualRegisterName(uint32_t RegID) const = 0;
+
+    // Get the virtual register information by register id
+    virtual VirtualRegisterInfo &getVirtualRegisterInfo(uint32_t RegID) = 0;
 
     // Get the register id by register name
     virtual uint32_t getRegisterID(const std::string &RegName) const = 0;
