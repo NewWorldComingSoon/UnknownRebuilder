@@ -129,6 +129,7 @@ const std::vector<std::string>
 ConfigReader::getFunctionAttributes(const std::string &FunctionName) const
 {
     std::vector<std::string> Attributes;
+
     for (auto &Item : getFunctionItems())
     {
         if (Item.Name.compare(FunctionName) == 0)
