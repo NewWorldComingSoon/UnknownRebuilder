@@ -406,24 +406,20 @@ UnknownFrontendTranslatorImplX86::translateOneFunction(
     assert(Address);
     assert(F);
 
-    if (!mEnableAnalyzeAllFunctions)
+    // We only analyze the function that has attributes if not mEnableAnalyzeAllFunctions
+    if (!mEnableAnalyzeAllFunctions && F->getFunctionAttributes().empty())
     {
-        // We only analyze the function that has attributes
-        if (F->getFunctionAttributes().empty())
-        {
-            return true;
-        }
+        return true;
     }
 
     // Set the current function
     setCurFunction(F);
 
-    // Set the begin of current pointer
+    // Set the begin and end of current pointer
     setCurPtrBegin(Address ? Address : F->getFunctionBeginAddress());
-    assert(getCurPtrBegin());
-
-    // Set the end of current pointer
     setCurPtrEnd(Size ? Address + Size : F->getFunctionEndAddress());
+
+    // Update the end pointer if it's not valid
     if (getCurPtrEnd() <= getCurPtrBegin())
     {
         auto CurSection = mBinary->get_section(getCurPtrBegin());
@@ -432,6 +428,8 @@ UnknownFrontendTranslatorImplX86::translateOneFunction(
             setCurPtrEnd(mBinary->imagebase() + CurSection->virtual_address() + CurSection->sizeof_raw_data());
         }
     }
+
+    assert(getCurPtrBegin());
     assert(getCurPtrEnd());
     assert(getCurPtrEnd() > getCurPtrBegin());
 
