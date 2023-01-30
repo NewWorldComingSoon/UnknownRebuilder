@@ -638,9 +638,8 @@ UnknownFrontendTranslatorImplX86::UpdateFunctionAttributes(
 
     auto FunctionAddress = FunctionSymbol.rva + mBinary->imagebase();
     auto FunctionSize = FunctionSymbol.size;
-    auto &FunctionName = FunctionSymbol.name;
 
-    F->setFunctionName(FunctionName);
+    F->setFunctionName(FunctionSymbol.name);
     F->setFunctionBeginAddress(FunctionAddress);
     F->setFunctionEndAddress(FunctionAddress + FunctionSize);
 
