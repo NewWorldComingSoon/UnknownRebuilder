@@ -206,4 +206,37 @@ UnknownFrontendTranslatorImpl::setEnableAnalyzeAllFunctions(bool Set)
     mEnableAnalyzeAllFunctions = Set;
 }
 
+////////////////////////////////////////////////////////////
+// Register
+// Get the virtual register information by register id
+std::optional<UnknownFrontendTranslatorImpl::VirtualRegisterInfo *>
+UnknownFrontendTranslatorImpl::getVirtualRegisterInfo(uint32_t RegID)
+{
+    auto VRegID = getVirtualRegisterID(RegID);
+    if (VRegID == 0)
+    {
+        return {};
+    }
+
+    auto ItFind = mVirtualRegisterInfoMap.find(VRegID);
+    if (ItFind != mVirtualRegisterInfoMap.end())
+    {
+        // Already exists
+        return &ItFind->second;
+    }
+    else
+    {
+        // Insert [VRegID, VRegInfo]
+        VirtualRegisterInfo VRegInfo{};
+        VRegInfo.TypeBits = getRegisterTypeBits(RegID);
+        VRegInfo.IsHigh8Bits = VRegInfo.TypeBits == 8 ? IsRegisterTypeHigh8Bits(RegID) : false;
+        VRegInfo.RawRegID = RegID;
+        VRegInfo.RegPtr = nullptr;
+        VRegInfo.SavedRegVal = nullptr;
+        mVirtualRegisterInfoMap.insert({VRegID, VRegInfo});
+
+        return &mVirtualRegisterInfoMap[VRegID];
+    }
+}
+
 } // namespace ufrontend

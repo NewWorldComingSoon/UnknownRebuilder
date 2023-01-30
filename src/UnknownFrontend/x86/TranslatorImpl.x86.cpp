@@ -521,37 +521,6 @@ UnknownFrontendTranslatorImplX86::getVirtualRegisterName(uint32_t RegID) const
     return getRegisterName(RegID);
 }
 
-// Get the virtual register information by register id
-std::optional<UnknownFrontendTranslatorImplX86::VirtualRegisterInfo *>
-UnknownFrontendTranslatorImplX86::getVirtualRegisterInfo(uint32_t RegID)
-{
-    auto VRegID = getVirtualRegisterID(RegID);
-    if (VRegID == X86_REG_INVALID)
-    {
-        return {};
-    }
-
-    auto ItFind = mVirtualRegisterInfoMap.find(VRegID);
-    if (ItFind != mVirtualRegisterInfoMap.end())
-    {
-        // Already exists
-        return &ItFind->second;
-    }
-    else
-    {
-        // Insert [VRegID, VRegInfo]
-        VirtualRegisterInfo VRegInfo{};
-        VRegInfo.TypeBits = getRegisterTypeBits(RegID);
-        VRegInfo.IsHigh8Bits = VRegInfo.TypeBits == 8 ? IsRegisterTypeHigh8Bits(RegID) : false;
-        VRegInfo.RawRegID = RegID;
-        VRegInfo.RegPtr = nullptr;
-        VRegInfo.SavedRegVal = nullptr;
-        mVirtualRegisterInfoMap.insert({VRegID, VRegInfo});
-
-        return &mVirtualRegisterInfoMap[VRegID];
-    }
-}
-
 // Get the register id by register name
 uint32_t
 UnknownFrontendTranslatorImplX86::getRegisterID(const std::string &RegName) const
