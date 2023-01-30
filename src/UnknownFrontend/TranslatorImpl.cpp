@@ -213,6 +213,9 @@ std::optional<UnknownFrontendTranslatorImpl::VirtualRegisterInfo *>
 UnknownFrontendTranslatorImpl::getVirtualRegisterInfo(uint32_t RegID)
 {
     auto VRegID = getVirtualRegisterID(RegID);
+    // X86_REG_INVALID = 0
+    // ARM64_REG_INVALID = 0
+    // TODO: This should be expressed in a common macro
     if (VRegID == 0)
     {
         return {};
