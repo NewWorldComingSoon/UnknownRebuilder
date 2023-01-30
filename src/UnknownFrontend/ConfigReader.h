@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <optional>
 
 #include <UnknownUtils/unknown/tinyxml2/tinyxml2.h>
 
@@ -55,6 +56,9 @@ public:
 
     // Set the function items
     void setFunctionItems(const std::vector<FunctionItem> &Items);
+
+    // Get the function attributes
+    const std::vector<std::string> getFunctionAttributes(const std::string &FunctionName) const;
 
 public:
     // Static

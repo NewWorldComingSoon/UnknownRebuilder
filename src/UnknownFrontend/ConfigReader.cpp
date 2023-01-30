@@ -124,6 +124,23 @@ ConfigReader::setFunctionItems(const std::vector<ConfigReader::FunctionItem> &It
     mFunctionItems = Items;
 }
 
+// Get the function attributes
+const std::vector<std::string>
+ConfigReader::getFunctionAttributes(const std::string &FunctionName) const
+{
+    std::vector<std::string> Attributes;
+    for (auto &Item : getFunctionItems())
+    {
+        if (Item.Name.compare(FunctionName) == 0)
+        {
+            Attributes = Item.Attributes;
+            break;
+        }
+    }
+
+    return Attributes;
+}
+
 ////////////////////////////////////////////////////////////
 // Static
 std::unique_ptr<ConfigReader>
