@@ -14,7 +14,8 @@ class UnknownFrontendTranslatorImpl : public UnknownFrontendTranslator
 protected:
     struct VirtualRegisterInfo
     {
-        uint32_t TypeSize = 0;
+        uint32_t TypeBits = 0;
+        bool IsHigh8Bits = false;
         uint32_t RawRegID = 0;
         uir::Value *RegPtr = nullptr;
         uir::Value *SavedRegVal = nullptr;

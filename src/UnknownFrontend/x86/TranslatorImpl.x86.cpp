@@ -534,12 +534,22 @@ UnknownFrontendTranslatorImplX86::getVirtualRegisterInfo(uint32_t RegID)
     auto ItFind = mVirtualRegisterInfoMap.find(VRegID);
     if (ItFind != mVirtualRegisterInfoMap.end())
     {
+        // Already exists
         return &ItFind->second;
     }
+    else
+    {
+        // Insert [VRegID, VRegInfo]
+        VirtualRegisterInfo VRegInfo{};
+        VRegInfo.TypeBits = getRegisterTypeBits(RegID);
+        VRegInfo.IsHigh8Bits = VRegInfo.TypeBits == 8 ? IsRegisterTypeHigh8Bits(RegID) : false;
+        VRegInfo.RawRegID = RegID;
+        VRegInfo.RegPtr = nullptr;
+        VRegInfo.SavedRegVal = nullptr;
+        mVirtualRegisterInfoMap.insert({VRegID, VRegInfo});
 
-    // TODO Insert
-
-    return {};
+        return &mVirtualRegisterInfoMap[VRegID];
+    }
 }
 
 // Get the register id by register name
