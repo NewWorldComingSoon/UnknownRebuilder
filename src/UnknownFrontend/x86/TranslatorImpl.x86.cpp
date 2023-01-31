@@ -581,12 +581,11 @@ UnknownFrontendTranslatorImplX86::getCarryRegister() const
 
 // Load register
 std::optional<uir::Value *>
-UnknownFrontendTranslatorImplX86::loadRegister(const cs_insn *Insn, uir::BasicBlock *BB)
+UnknownFrontendTranslatorImplX86::loadRegister(uint32_t RegID, uint64_t Address, uir::BasicBlock *BB)
 {
-    assert(Insn);
     assert(BB);
 
-    auto VRegInfo = getVirtualRegisterInfo(Insn->id);
+    auto VRegInfo = getVirtualRegisterInfo(RegID);
     if (!VRegInfo)
     {
         return {};

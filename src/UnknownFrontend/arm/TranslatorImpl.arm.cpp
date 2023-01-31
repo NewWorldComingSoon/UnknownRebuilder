@@ -190,7 +190,7 @@ UnknownFrontendTranslatorImplARM::getCarryRegister() const
 
 // Load register
 std::optional<uir::Value *>
-UnknownFrontendTranslatorImplARM::loadRegister(const cs_insn *Insn, uir::BasicBlock *BB)
+UnknownFrontendTranslatorImplARM::loadRegister(uint32_t RegID, uint64_t Address, uir::BasicBlock *BB)
 {
     // TODO
     return {};

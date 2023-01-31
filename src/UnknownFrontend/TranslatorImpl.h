@@ -200,7 +200,11 @@ protected:
     virtual uint32_t getCarryRegister() const = 0;
 
     // Load register
-    virtual std::optional<uir::Value *> loadRegister(const cs_insn *Insn, uir::BasicBlock *BB) = 0;
+    virtual std::optional<uir::Value *> loadRegister(uint32_t RegID, uint64_t Address, uir::BasicBlock *BB) = 0;
+    virtual std::optional<uir::Value *> loadRegister(const cs_insn *Insn, uir::BasicBlock *BB)
+    {
+        return loadRegister(Insn->id, Insn->address, BB);
+    }
 
 protected:
     // Attributes
