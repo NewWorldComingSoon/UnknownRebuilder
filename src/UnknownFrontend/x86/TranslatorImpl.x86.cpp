@@ -624,6 +624,10 @@ UnknownFrontendTranslatorImplX86::loadRegister(uint32_t RegID, uint64_t Address,
         VRegInfo.value()->IsUpdated = false;
     }
 
+    if (VRegInfo.value()->SavedRegVal == nullptr)
+    {
+    }
+
     // TODO
     return VRegInfo.value()->SavedRegVal;
 }
@@ -637,7 +641,7 @@ UnknownFrontendTranslatorImplX86::storeRegister(
 {
     assert(BB);
 
-    if (VRegInfo.RegPtr && VRegInfo.SavedRegVal)
+    if (VRegInfo.RegPtr != nullptr && VRegInfo.SavedRegVal != nullptr)
     {
         uir::IRBuilder IRB(BB);
         IRB.createStore(VRegInfo.SavedRegVal, VRegInfo.RegPtr, Address);
