@@ -638,8 +638,8 @@ UnknownFrontendTranslatorImplX86::storeRegister(
 
     if (VRegInfo.RegPtr && VRegInfo.SavedRegVal)
     {
-        uir::IRBuilder IBR(BB);
-        IBR.createStore(VRegInfo.SavedRegVal, VRegInfo.RegPtr, Address);
+        uir::IRBuilder IRB(BB);
+        IRB.createStore(VRegInfo.SavedRegVal, VRegInfo.RegPtr, Address);
     }
 }
 
