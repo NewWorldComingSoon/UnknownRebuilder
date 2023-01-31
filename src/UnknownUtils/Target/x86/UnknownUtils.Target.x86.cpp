@@ -425,7 +425,7 @@ TargetX86::getRegisterParentID(uint32_t RegID)
     auto It = mReg2ParentReg.find(RegID);
     if (It == mReg2ParentReg.end())
     {
-        return X86_REG_INVALID;
+        return RegID;
     }
     else
     {
