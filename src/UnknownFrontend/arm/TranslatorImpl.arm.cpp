@@ -189,11 +189,11 @@ UnknownFrontendTranslatorImplARM::getCarryRegister() const
 }
 
 // Load register
-uir::Value *
+std::optional<uir::Value *>
 UnknownFrontendTranslatorImplARM::loadRegister(const cs_insn *Insn, uir::BasicBlock *BB)
 {
     // TODO
-    return nullptr;
+    return {};
 }
 
 ////////////////////////////////////////////////////////////

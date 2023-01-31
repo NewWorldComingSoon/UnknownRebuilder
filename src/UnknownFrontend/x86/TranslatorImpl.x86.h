@@ -116,7 +116,7 @@ protected:
     virtual uint32_t getCarryRegister() const override;
 
     // Load register
-    virtual uir::Value *loadRegister(const cs_insn *Insn, uir::BasicBlock *BB) override;
+    virtual std::optional<uir::Value *> loadRegister(const cs_insn *Insn, uir::BasicBlock *BB) override;
 
 protected:
     // Attributes
