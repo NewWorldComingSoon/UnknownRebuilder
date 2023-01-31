@@ -206,6 +206,17 @@ protected:
         return loadRegister(Insn->id, Insn->address, BB);
     }
 
+    // Store register
+    virtual void storeRegister(const VirtualRegisterInfo &RegID, uint64_t Address, uir::BasicBlock *BB) = 0;
+    virtual void storeRegister(uint32_t RegID, uint64_t Address, uir::BasicBlock *BB)
+    {
+        auto RegInfo = getVirtualRegisterInfo(RegID);
+        if (RegInfo)
+        {
+            storeRegister(*RegInfo.value(), Address, BB);
+        }
+    }
+
 protected:
     // Attributes
     // Update function attributes

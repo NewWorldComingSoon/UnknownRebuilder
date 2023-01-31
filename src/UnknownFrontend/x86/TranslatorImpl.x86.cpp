@@ -595,6 +595,13 @@ UnknownFrontendTranslatorImplX86::loadRegister(uint32_t RegID, uint64_t Address,
     return {};
 }
 
+// Store register
+void
+UnknownFrontendTranslatorImplX86::storeRegister(const VirtualRegisterInfo &RegID, uint64_t Address, uir::BasicBlock *BB)
+{
+    // TODO
+}
+
 ////////////////////////////////////////////////////////////
 // Attributes
 // Update function attributes
