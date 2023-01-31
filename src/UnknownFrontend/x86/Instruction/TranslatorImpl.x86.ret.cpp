@@ -28,7 +28,7 @@ UnknownFrontendTranslatorImplX86::translateRetInstruction(const cs_insn *Insn, u
         // ret imm
         uir::IRBuilder IRB(BB);
 
-        const uint32_t TypeSize = 16;
+        constexpr uint32_t TypeSize = 16;
         auto Imm = static_cast<uint64_t>(X86Info.operands[0].imm.imm);
 
         TransRes =
