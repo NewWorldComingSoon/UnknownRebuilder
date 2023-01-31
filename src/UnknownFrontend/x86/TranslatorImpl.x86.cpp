@@ -626,9 +626,10 @@ UnknownFrontendTranslatorImplX86::loadRegister(uint32_t RegID, uint64_t Address,
 
     if (VRegInfo.value()->SavedRegVal == nullptr)
     {
+        // TODO
+        VRegInfo.value()->IsUpdated = true;
     }
 
-    // TODO
     return VRegInfo.value()->SavedRegVal;
 }
 
