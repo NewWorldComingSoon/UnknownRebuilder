@@ -649,6 +649,14 @@ UnknownFrontendTranslatorImplX86::storeRegister(
     }
 }
 
+// Get register ptr
+std::optional<uir::Value *>
+UnknownFrontendTranslatorImplX86::getRegisterPtr(uint32_t RegID)
+{
+    // TODO
+    return {};
+}
+
 ////////////////////////////////////////////////////////////
 // Attributes
 // Update function attributes

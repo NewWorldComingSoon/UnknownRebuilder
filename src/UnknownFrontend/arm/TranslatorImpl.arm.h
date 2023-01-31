@@ -91,6 +91,9 @@ protected:
     // Store register
     virtual void storeRegister(const VirtualRegisterInfo &VRegInfo, uint64_t Address, uir::BasicBlock *BB) override;
 
+    // Get register ptr
+    virtual std::optional<uir::Value *> getRegisterPtr(uint32_t RegID) override;
+
 protected:
     // Attributes
     // Update function attributes

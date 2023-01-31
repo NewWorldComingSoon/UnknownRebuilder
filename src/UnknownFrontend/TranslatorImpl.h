@@ -217,6 +217,9 @@ protected:
         }
     }
 
+    // Get register ptr
+    virtual std::optional<uir::Value *> getRegisterPtr(uint32_t RegID) = 0;
+
 protected:
     // Attributes
     // Update function attributes
