@@ -591,15 +591,30 @@ UnknownFrontendTranslatorImplX86::loadRegister(uint32_t RegID, uint64_t Address,
         return {};
     }
 
+    if (VRegInfo.value()->IsUpdated)
+    {
+        storeRegister(*VRegInfo.value(), Address, BB);
+        VRegInfo.value()->IsUpdated = false;
+    }
+
     // TODO
     return {};
 }
 
 // Store register
 void
-UnknownFrontendTranslatorImplX86::storeRegister(const VirtualRegisterInfo &RegID, uint64_t Address, uir::BasicBlock *BB)
+UnknownFrontendTranslatorImplX86::storeRegister(
+    const VirtualRegisterInfo &VRegInfo,
+    uint64_t Address,
+    uir::BasicBlock *BB)
 {
-    // TODO
+    assert(BB);
+
+    if (VRegInfo.RegPtr && VRegInfo.SavedRegVal)
+    {
+        uir::IRBuilder IBR(BB);
+        IBR.createStore(VRegInfo.SavedRegVal, VRegInfo.RegPtr, Address);
+    }
 }
 
 ////////////////////////////////////////////////////////////

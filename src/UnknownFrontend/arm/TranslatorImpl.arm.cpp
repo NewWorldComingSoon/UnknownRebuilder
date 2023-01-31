@@ -198,7 +198,10 @@ UnknownFrontendTranslatorImplARM::loadRegister(uint32_t RegID, uint64_t Address,
 
 // Store register
 void
-UnknownFrontendTranslatorImplARM::storeRegister(const VirtualRegisterInfo &RegID, uint64_t Address, uir::BasicBlock *BB)
+UnknownFrontendTranslatorImplARM::storeRegister(
+    const VirtualRegisterInfo &VRegInfo,
+    uint64_t Address,
+    uir::BasicBlock *BB)
 {
     // TODO
 }

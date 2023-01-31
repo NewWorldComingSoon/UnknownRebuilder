@@ -89,7 +89,7 @@ protected:
     virtual std::optional<uir::Value *> loadRegister(uint32_t RegID, uint64_t Address, uir::BasicBlock *BB) override;
 
     // Store register
-    virtual void storeRegister(const VirtualRegisterInfo &RegID, uint64_t Address, uir::BasicBlock *BB) override;
+    virtual void storeRegister(const VirtualRegisterInfo &VRegInfo, uint64_t Address, uir::BasicBlock *BB) override;
 
 protected:
     // Attributes

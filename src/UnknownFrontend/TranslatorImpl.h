@@ -207,13 +207,13 @@ protected:
     }
 
     // Store register
-    virtual void storeRegister(const VirtualRegisterInfo &RegID, uint64_t Address, uir::BasicBlock *BB) = 0;
+    virtual void storeRegister(const VirtualRegisterInfo &VRegInfo, uint64_t Address, uir::BasicBlock *BB) = 0;
     virtual void storeRegister(uint32_t RegID, uint64_t Address, uir::BasicBlock *BB)
     {
-        auto RegInfo = getVirtualRegisterInfo(RegID);
-        if (RegInfo)
+        auto VRegInfo = getVirtualRegisterInfo(RegID);
+        if (VRegInfo)
         {
-            storeRegister(*RegInfo.value(), Address, BB);
+            storeRegister(*VRegInfo.value(), Address, BB);
         }
     }
 
