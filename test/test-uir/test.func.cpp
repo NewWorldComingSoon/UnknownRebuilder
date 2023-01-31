@@ -40,6 +40,15 @@ TEST(test_uir, test_uir_func_1)
         RetInst2->setInstructionAddress(0x401007);
         BB2->insertInst(RetInst2);
 
+        IRBuilder IRB(BB2);
+        auto RetImm21 = IRB.createRetImm(ConstantInt::get(Type::getInt16Ty(CTX), unknown::APInt(32, 4)), 0x401008);
+
+        IRBuilder IRB2(BB2);
+        IRB2.createRetImm(ConstantInt::get(Type::getInt16Ty(CTX), unknown::APInt(32, 6)), 0x401008);
+
+        IRB2.setInsertPoint(RetImm21);
+        IRB2.createRetImm(ConstantInt::get(Type::getInt16Ty(CTX), unknown::APInt(32, 5)), 0x401010);
+
         F.insertBasicBlock(BB1);
         F.insertBasicBlock(BB2);
 
