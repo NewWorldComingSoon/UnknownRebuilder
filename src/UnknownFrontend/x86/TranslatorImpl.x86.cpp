@@ -617,6 +617,7 @@ UnknownFrontendTranslatorImplX86::loadRegister(uint32_t RegID, uint64_t Address,
         return {};
     }
 
+    // Refresh our raw registers
     if (VRegInfo.value()->IsUpdated)
     {
         storeRegister(*VRegInfo.value(), Address, BB);
@@ -624,7 +625,7 @@ UnknownFrontendTranslatorImplX86::loadRegister(uint32_t RegID, uint64_t Address,
     }
 
     // TODO
-    return {};
+    return VRegInfo.value()->SavedRegVal;
 }
 
 // Store register
