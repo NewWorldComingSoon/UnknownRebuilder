@@ -16,6 +16,7 @@ protected:
     {
         uint32_t TypeBits = 0;
         bool IsHigh8Bits = false;
+        bool IsUpdated = false;
         uint32_t RawRegID = 0;
         uir::Value *RegPtr = nullptr;
         uir::Value *SavedRegVal = nullptr;

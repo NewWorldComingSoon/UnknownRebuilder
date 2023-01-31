@@ -233,6 +233,7 @@ UnknownFrontendTranslatorImpl::getVirtualRegisterInfo(uint32_t RegID)
         VirtualRegisterInfo VRegInfo{};
         VRegInfo.TypeBits = getRegisterTypeBits(RegID);
         VRegInfo.IsHigh8Bits = VRegInfo.TypeBits == 8 ? IsRegisterTypeHigh8Bits(RegID) : false;
+        VRegInfo.IsUpdated = false;
         VRegInfo.RawRegID = RegID;
         VRegInfo.RegPtr = nullptr;
         VRegInfo.SavedRegVal = nullptr;

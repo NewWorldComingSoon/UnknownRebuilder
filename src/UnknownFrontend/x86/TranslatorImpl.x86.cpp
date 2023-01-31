@@ -583,6 +583,15 @@ UnknownFrontendTranslatorImplX86::getCarryRegister() const
 uir::Value *
 UnknownFrontendTranslatorImplX86::loadRegister(const cs_insn *Insn, uir::BasicBlock *BB)
 {
+    assert(Insn);
+    assert(BB);
+
+    auto VRegInfo = getVirtualRegisterInfo(Insn->id);
+    if (!VRegInfo)
+    {
+        return nullptr;
+    }
+
     // TODO
     return nullptr;
 }
