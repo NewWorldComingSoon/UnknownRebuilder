@@ -36,7 +36,7 @@ UnknownFrontendTranslatorImplX86::openCapstoneHandle()
     csh CapstoneHandle;
     if (cs_open(cs_arch::CS_ARCH_X86, Mode, &CapstoneHandle) != CS_ERR_OK)
     {
-        std::cerr << cs_strerror(cs_errno(CapstoneHandle)) << std::endl;
+        std::cerr << UFRONTEND_ERROR_PREFIX + std::string(cs_strerror(cs_errno(CapstoneHandle))) << std::endl;
         return;
     }
 
@@ -53,7 +53,7 @@ UnknownFrontendTranslatorImplX86::closeCapstoneHandle()
     {
         if (cs_close(&CapstoneHandle) != CS_ERR_OK)
         {
-            std::cerr << cs_strerror(cs_errno(CapstoneHandle)) << std::endl;
+            std::cerr << UFRONTEND_ERROR_PREFIX + std::string(cs_strerror(cs_errno(CapstoneHandle))) << std::endl;
             return;
         }
 
