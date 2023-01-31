@@ -163,7 +163,9 @@ UnknownFrontendTranslatorImplARM::getRegisterType(uint32_t RegID) const
 uint32_t
 UnknownFrontendTranslatorImplARM::getVirtualRegisterID(uint32_t RegID) const
 {
-    // We simply use the parent register id as the virtual register id
+    // TODO 8 16 32 64
+
+    // Others We simply use the parent register id as the virtual register id
     return getRegisterParentID(RegID);
 }
 

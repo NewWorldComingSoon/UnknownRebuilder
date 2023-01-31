@@ -554,7 +554,33 @@ UnknownFrontendTranslatorImplX86::getRegisterType(uint32_t RegID) const
 uint32_t
 UnknownFrontendTranslatorImplX86::getVirtualRegisterID(uint32_t RegID) const
 {
-    // We simply use the parent register id as the virtual register id
+    auto TypeBits = getRegisterTypeBits(RegID);
+    if (TypeBits == 8)
+    {
+        if (IsRegisterTypeHigh8Bits(RegID))
+        {
+            // high 8 bits
+            return X86_REG_AH;
+        }
+        else
+        {
+            return X86_REG_AL;
+        }
+    }
+    else if (TypeBits == 16)
+    {
+        return X86_REG_AX;
+    }
+    else if (TypeBits == 32)
+    {
+        return X86_REG_EAX;
+    }
+    else if (TypeBits == 64)
+    {
+        return X86_REG_RAX;
+    }
+
+    // Others We simply use the parent register id as the virtual register id
     return getRegisterParentID(RegID);
 }
 
