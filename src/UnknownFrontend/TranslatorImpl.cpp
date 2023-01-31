@@ -43,13 +43,13 @@ UnknownFrontendTranslatorImpl::~UnknownFrontendTranslatorImpl()
     for (auto &Item : mVirtualRegisterInfoMap)
     {
         auto &VRegInfo = Item.second;
-        if (VRegInfo.RegPtr && !VRegInfo.RegPtr->user_empty())
+        if (VRegInfo.RegPtr != nullptr && !VRegInfo.RegPtr->user_empty())
         {
             delete VRegInfo.RegPtr;
             VRegInfo.RegPtr = nullptr;
         }
 
-        if (VRegInfo.SavedRegVal && !VRegInfo.SavedRegVal->user_empty())
+        if (VRegInfo.SavedRegVal != nullptr && !VRegInfo.SavedRegVal->user_empty())
         {
             delete VRegInfo.SavedRegVal;
             VRegInfo.SavedRegVal = nullptr;
