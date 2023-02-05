@@ -673,7 +673,7 @@ std::optional<uir::Value *>
 UnknownFrontendTranslatorImplX86::getParentRegisterPtr(uint32_t RegID)
 {
     auto ParentRegID = getRegisterParentID(RegID);
-    assert(ParentRegID == X86_REG_INVALID);
+    assert(ParentRegID != X86_REG_INVALID);
 
     auto VRegInfo = getVirtualRegisterInfo(ParentRegID);
     if (!VRegInfo)
