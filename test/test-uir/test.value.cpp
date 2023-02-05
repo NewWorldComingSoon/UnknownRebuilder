@@ -32,15 +32,15 @@ TEST(test_uir, test_uir_value_2)
     CTX.setArch(Context::Arch::ArchX86);
     CTX.setMode(Context::Mode::Mode64);
 
-    auto Ptr2 = new ConstantInt(Type::getInt32PtrTy(CTX), unknown::APInt(32, 123));
+    Value *Ptr2 = new ConstantInt(Type::getInt32PtrTy(CTX), unknown::APInt(32, 123));
     std::cout << std::format("Ptr2 ReadableName = {}, getValueBits = {}", Ptr2->getReadableName(), Ptr2->getValueBits())
               << std::endl;
 
-    auto Ptr3 = new GlobalVariable(Type::getInt32PtrTy(CTX), "global_ptr_1", 0x401000);
+    Value *Ptr3 = new GlobalVariable(Type::getInt32PtrTy(CTX), "global_ptr_1", 0x401000);
     std::cout << std::format("Ptr3 ReadableName = {}, getValueBits = {}", Ptr3->getReadableName(), Ptr3->getValueBits())
               << std::endl;
 
-    auto Ptr4 = new LocalVariable(Type::getInt32PtrTy(CTX), "local_ptr_1", 0x401000);
+    Value *Ptr4 = new LocalVariable(Type::getInt32PtrTy(CTX), "local_ptr_1", 0x401000);
     std::cout << std::format("Ptr4 ReadableName = {}, getValueBits = {}", Ptr4->getReadableName(), Ptr4->getValueBits())
               << std::endl;
 }
