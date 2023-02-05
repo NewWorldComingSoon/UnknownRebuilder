@@ -412,6 +412,9 @@ UnknownFrontendTranslatorImplX86::translateOneFunction(
         return true;
     }
 
+    // Clear mRegisterCounterMap
+    mRegisterCounterMap.clear();
+
     // Set the current function
     setCurFunction(F);
 
@@ -655,20 +658,59 @@ UnknownFrontendTranslatorImplX86::storeRegister(
 std::optional<uir::Value *>
 UnknownFrontendTranslatorImplX86::getRegisterPtr(uint32_t RegID)
 {
-    auto ParentRegID = getRegisterParentID(RegID);
-    if (ParentRegID == X86_REG_INVALID)
+    auto VRegInfoMapOp = getVirtualRegisterInfo(RegID);
+    if (!VRegInfoMapOp)
+    {
+        return {};
+    }
+    auto &VRegInfoMap = *VRegInfoMapOp.value();
+    auto VRegID = getVirtualRegisterID(RegID);
+    if (VRegID == X86_REG_INVALID)
     {
         return {};
     }
 
-    auto VParentRegInfo = getVirtualRegisterInfo(ParentRegID);
-    if (!VParentRegInfo)
+    if (VRegInfoMap[VRegID].RegPtr != nullptr)
+    {
+        // Already exists
+        return VRegInfoMap[VRegID].RegPtr;
+    }
+
+    auto ParentRegPtr = getParentRegisterPtr(RegID);
+    if (!ParentRegPtr)
     {
         return {};
     }
 
-    // TODO
-    return {};
+    if (VRegInfoMap[VRegID].RegPtr != nullptr)
+    {
+        // Already exists
+        return VRegInfoMap[VRegID].RegPtr;
+    }
+
+    // Create GetBitPtr Instruction
+    uint64_t Bit = 0;
+    if (VRegInfoMap[VRegID].IsHigh8Bits)
+    {
+        Bit = 8;
+    }
+    auto Ptr = ParentRegPtr.value();
+    auto PtrValueBits = Ptr->getValueBits();
+    auto TypeBits = VRegInfoMap[VRegID].TypeBits;
+    auto BitIndex =
+        uir::ConstantInt::get(uir::Type::getIntNTy(getContext(), PtrValueBits), unknown::APInt(PtrValueBits, Bit));
+    auto GBPInst = uir::GetBitPtrInstruction::get(uir::Type::getIntNPtrTy(getContext(), TypeBits), Ptr, BitIndex);
+
+    // Set address
+    GBPInst->setInstructionAddress(getCurPtrBegin());
+
+    // Set name
+    GBPInst->setName(getRegisterName(RegID).c_str());
+
+    // Save RegPtr
+    VRegInfoMap[VRegID].RegPtr = GBPInst;
+
+    return GBPInst;
 }
 
 // Get parent register ptr
@@ -699,13 +741,17 @@ UnknownFrontendTranslatorImplX86::getParentRegisterPtr(uint32_t RegID)
         return VRegInfoMap[VRegID].RegPtr;
     }
 
+    // Create ParentRegPtr
     auto ParentRegPtr = uir::LocalVariable::get(uir::Type::getIntNPtrTy(getContext(), VRegInfoMap[VRegID].TypeBits));
     if (!ParentRegPtr)
     {
         return {};
     }
 
+    // Set name
     ParentRegPtr->setName(getRegisterName(ParentRegID).c_str());
+
+    // Save RegPtr
     VRegInfoMap[VRegID].RegPtr = ParentRegPtr;
 
     return ParentRegPtr;

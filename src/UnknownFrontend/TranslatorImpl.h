@@ -25,6 +25,9 @@ protected:
     // [ParentID, [VRegID, VRegInfo]]
     std::unordered_map<uint32_t, std::unordered_map<uint32_t, VirtualRegisterInfo>> mVirtualRegisterInfoMap;
 
+    // [RegID, Counter]
+    std::unordered_map<uint32_t, uint32_t> mRegisterCounterMap;
+
 protected:
     Platform mPlatform;
     uir::Context &mContext;
@@ -169,6 +172,12 @@ protected:
     // Register
     // Get the register name by register id
     virtual std::string getRegisterName(uint32_t RegID) const = 0;
+
+    // Get the register name with index by register id
+    virtual std::string getRegisterNameWithIndex(uint32_t RegID, uint32_t Index);
+
+    // Get the register name with index by default by register id
+    virtual std::string getRegisterNameWithIndexByDefault(uint32_t RegID);
 
     // Get the virtual register name by register id
     virtual std::string getVirtualRegisterName(uint32_t RegID) const = 0;
