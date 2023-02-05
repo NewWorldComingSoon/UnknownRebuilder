@@ -611,26 +611,28 @@ UnknownFrontendTranslatorImplX86::loadRegister(uint32_t RegID, uint64_t Address,
 {
     assert(BB);
 
-    auto VRegInfo = getVirtualRegisterInfo(RegID);
-    if (!VRegInfo)
+    auto VRegInfoMap = getVirtualRegisterInfo(RegID);
+    if (!VRegInfoMap)
     {
         return {};
     }
 
-    // Refresh our raw registers
-    if (VRegInfo.value()->IsUpdated)
-    {
-        storeRegister(*VRegInfo.value(), Address, BB);
-        VRegInfo.value()->IsUpdated = false;
-    }
+    //// Refresh our raw registers
+    // if (VRegInfo.value()->IsUpdated)
+    //{
+    //     storeRegister(*VRegInfo.value(), Address, BB);
+    //     VRegInfo.value()->IsUpdated = false;
+    // }
 
-    if (VRegInfo.value()->SavedRegVal == nullptr)
-    {
-        // TODO
-        VRegInfo.value()->IsUpdated = true;
-    }
+    // if (VRegInfo.value()->SavedRegVal == nullptr)
+    //{
+    //     // TODO
+    //     VRegInfo.value()->IsUpdated = true;
+    // }
 
-    return VRegInfo.value()->SavedRegVal;
+    // return VRegInfo.value()->SavedRegVal;
+
+    return {};
 }
 
 // Store register
@@ -653,15 +655,16 @@ UnknownFrontendTranslatorImplX86::storeRegister(
 std::optional<uir::Value *>
 UnknownFrontendTranslatorImplX86::getRegisterPtr(uint32_t RegID)
 {
-    auto VRegInfo = getVirtualRegisterInfo(RegID);
-    if (!VRegInfo)
+    auto ParentRegID = getRegisterParentID(RegID);
+    if (ParentRegID == X86_REG_INVALID)
     {
         return {};
     }
 
-    if (VRegInfo.value()->RegPtr != nullptr)
+    auto VParentRegInfo = getVirtualRegisterInfo(ParentRegID);
+    if (!VParentRegInfo)
     {
-        return VRegInfo.value()->RegPtr;
+        return {};
     }
 
     // TODO
@@ -673,28 +676,39 @@ std::optional<uir::Value *>
 UnknownFrontendTranslatorImplX86::getParentRegisterPtr(uint32_t RegID)
 {
     auto ParentRegID = getRegisterParentID(RegID);
-    assert(ParentRegID != X86_REG_INVALID);
-
-    auto VRegInfo = getVirtualRegisterInfo(ParentRegID);
-    if (!VRegInfo)
+    if (ParentRegID == X86_REG_INVALID)
     {
         return {};
     }
 
-    if (VRegInfo.value()->RegPtr == nullptr)
+    auto VRegInfoMapOp = getVirtualRegisterInfo(ParentRegID);
+    if (!VRegInfoMapOp)
     {
-        // Alloc RegPtr
-        auto ParentRegPtr = uir::LocalVariable::get(uir::Type::getIntNPtrTy(getContext(), VRegInfo.value()->TypeBits));
-        assert(ParentRegPtr);
-
-        // Set name
-        ParentRegPtr->setName(getRegisterName(ParentRegID).c_str());
-
-        // Save RegPtr
-        VRegInfo.value()->RegPtr = ParentRegPtr;
+        return {};
     }
 
-    return VRegInfo.value()->RegPtr;
+    auto VRegID = getVirtualRegisterID(ParentRegID);
+    if (VRegID == X86_REG_INVALID)
+    {
+        return {};
+    }
+
+    auto &VRegInfoMap = *VRegInfoMapOp.value();
+    if (VRegInfoMap[VRegID].RegPtr)
+    {
+        return VRegInfoMap[VRegID].RegPtr;
+    }
+
+    auto ParentRegPtr = uir::LocalVariable::get(uir::Type::getIntNPtrTy(getContext(), VRegInfoMap[VRegID].TypeBits));
+    if (!ParentRegPtr)
+    {
+        return {};
+    }
+
+    ParentRegPtr->setName(getRegisterName(ParentRegID).c_str());
+    VRegInfoMap[VRegID].RegPtr = ParentRegPtr;
+
+    return ParentRegPtr;
 }
 
 ////////////////////////////////////////////////////////////

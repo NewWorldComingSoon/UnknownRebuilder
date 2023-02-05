@@ -42,17 +42,22 @@ UnknownFrontendTranslatorImpl::~UnknownFrontendTranslatorImpl()
     // Clear mVirtualRegisterInfoMap
     for (auto &Item : mVirtualRegisterInfoMap)
     {
-        auto &VRegInfo = Item.second;
-        if (VRegInfo.RegPtr != nullptr && VRegInfo.RegPtr->user_empty())
-        {
-            delete VRegInfo.RegPtr;
-            VRegInfo.RegPtr = nullptr;
-        }
+        auto &VParentRegInfo = Item.second;
 
-        if (VRegInfo.SavedRegVal != nullptr && VRegInfo.SavedRegVal->user_empty())
+        for (auto &VRegInfoItem : VParentRegInfo)
         {
-            delete VRegInfo.SavedRegVal;
-            VRegInfo.SavedRegVal = nullptr;
+            auto &VRegInfo = VRegInfoItem.second;
+            if (VRegInfo.RegPtr != nullptr && VRegInfo.RegPtr->user_empty())
+            {
+                delete VRegInfo.RegPtr;
+                VRegInfo.RegPtr = nullptr;
+            }
+
+            if (VRegInfo.SavedRegVal != nullptr && VRegInfo.SavedRegVal->user_empty())
+            {
+                delete VRegInfo.SavedRegVal;
+                VRegInfo.SavedRegVal = nullptr;
+            }
         }
     }
 }
@@ -208,39 +213,59 @@ UnknownFrontendTranslatorImpl::setEnableAnalyzeAllFunctions(bool Set)
 ////////////////////////////////////////////////////////////
 // Register
 // Get the virtual register information by register id
-std::optional<UnknownFrontendTranslatorImpl::VirtualRegisterInfo *>
+std::optional<std::unordered_map<uint32_t, UnknownFrontendTranslatorImpl::VirtualRegisterInfo> *>
 UnknownFrontendTranslatorImpl::getVirtualRegisterInfo(uint32_t RegID)
 {
+    auto ParentRegID = getRegisterParentID(RegID);
     auto VRegID = getVirtualRegisterID(RegID);
+
     // X86_REG_INVALID = 0
     // ARM64_REG_INVALID = 0
     // TODO: This should be expressed in a common macro
-    constexpr uint32_t V_REG_INVALID = X86_REG_INVALID;
-    if (VRegID == V_REG_INVALID)
+    constexpr uint32_t REG_INVALID = X86_REG_INVALID;
+    if (ParentRegID == REG_INVALID)
     {
         return {};
     }
 
-    auto ItFind = mVirtualRegisterInfoMap.find(VRegID);
-    if (ItFind != mVirtualRegisterInfoMap.end())
+    auto insertVRegInfo2Map =
+        [this](uint32_t RegID, uint32_t VRegID, std::unordered_map<uint32_t, VirtualRegisterInfo> &Map) {
+            // [VRegID, VRegInfo]
+            VirtualRegisterInfo VRegInfo{};
+            VRegInfo.TypeBits = getRegisterTypeBits(RegID);
+            VRegInfo.IsHigh8Bits = VRegInfo.TypeBits == 8 ? IsRegisterTypeHigh8Bits(RegID) : false;
+            VRegInfo.IsUpdated = false;
+            VRegInfo.RawRegID = RegID;
+            VRegInfo.VirtualRegID = VRegID;
+            VRegInfo.RegPtr = nullptr;
+            VRegInfo.SavedRegVal = nullptr;
+
+            // Insert to map
+            Map.insert({VRegInfo.VirtualRegID, VRegInfo});
+        };
+
+    auto ItFindParentRegID = mVirtualRegisterInfoMap.find(ParentRegID);
+    if (ItFindParentRegID != mVirtualRegisterInfoMap.end())
     {
         // Already exists
-        return &ItFind->second;
+        auto ItFindVRegID = ItFindParentRegID->second.find(VRegID);
+        if (ItFindVRegID == ItFindParentRegID->second.end())
+        {
+            // Not exists
+            // Insert [VRegID, VRegInfo]
+            insertVRegInfo2Map(RegID, VRegID, ItFindParentRegID->second);
+        }
     }
     else
     {
-        // Insert [VRegID, VRegInfo]
-        VirtualRegisterInfo VRegInfo{};
-        VRegInfo.TypeBits = getRegisterTypeBits(RegID);
-        VRegInfo.IsHigh8Bits = VRegInfo.TypeBits == 8 ? IsRegisterTypeHigh8Bits(RegID) : false;
-        VRegInfo.IsUpdated = false;
-        VRegInfo.RawRegID = RegID;
-        VRegInfo.RegPtr = nullptr;
-        VRegInfo.SavedRegVal = nullptr;
-        mVirtualRegisterInfoMap.insert({VRegID, VRegInfo});
-
-        return &mVirtualRegisterInfoMap[VRegID];
+        // Not exists
+        // [ParentID, [VRegID, VRegInfo]]
+        std::unordered_map<uint32_t, VirtualRegisterInfo> VMap;
+        insertVRegInfo2Map(RegID, VRegID, VMap);
+        mVirtualRegisterInfoMap.insert({ParentRegID, VMap});
     }
+
+    return &mVirtualRegisterInfoMap[ParentRegID];
 }
 
 } // namespace ufrontend

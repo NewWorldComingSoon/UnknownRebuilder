@@ -18,11 +18,12 @@ protected:
         bool IsHigh8Bits = false;
         bool IsUpdated = false;
         uint32_t RawRegID = 0;
+        uint32_t VirtualRegID = 0;
         uir::Value *RegPtr = nullptr;
         uir::Value *SavedRegVal = nullptr;
     };
-    // [VRegID, VRegInfo]
-    std::unordered_map<uint32_t, VirtualRegisterInfo> mVirtualRegisterInfoMap;
+    // [ParentID, [VRegID, VRegInfo]]
+    std::unordered_map<uint32_t, std::unordered_map<uint32_t, VirtualRegisterInfo>> mVirtualRegisterInfoMap;
 
 protected:
     Platform mPlatform;
@@ -173,7 +174,7 @@ protected:
     virtual std::string getVirtualRegisterName(uint32_t RegID) const = 0;
 
     // Get the virtual register information by register id
-    virtual std::optional<VirtualRegisterInfo *> getVirtualRegisterInfo(uint32_t RegID);
+    virtual std::optional<std::unordered_map<uint32_t, VirtualRegisterInfo> *> getVirtualRegisterInfo(uint32_t RegID);
 
     // Get the register id by register name
     virtual uint32_t getRegisterID(const std::string &RegName) const = 0;
@@ -208,14 +209,6 @@ protected:
 
     // Store register
     virtual void storeRegister(const VirtualRegisterInfo &VRegInfo, uint64_t Address, uir::BasicBlock *BB) = 0;
-    virtual void storeRegister(uint32_t RegID, uint64_t Address, uir::BasicBlock *BB)
-    {
-        auto VRegInfo = getVirtualRegisterInfo(RegID);
-        if (VRegInfo)
-        {
-            storeRegister(*VRegInfo.value(), Address, BB);
-        }
-    }
 
     // Get register ptr
     virtual std::optional<uir::Value *> getRegisterPtr(uint32_t RegID) = 0;
