@@ -216,6 +216,14 @@ UnknownFrontendTranslatorImplARM::getRegisterPtr(uint32_t RegID)
     return {};
 }
 
+// Get parent register ptr
+std::optional<uir::Value *>
+UnknownFrontendTranslatorImplARM::getParentRegisterPtr(uint32_t RegID)
+{
+    // TODO
+    return {};
+}
+
 ////////////////////////////////////////////////////////////
 // Attributes
 // Update function attributes

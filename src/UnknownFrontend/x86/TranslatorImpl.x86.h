@@ -124,6 +124,9 @@ protected:
     // Get register ptr
     virtual std::optional<uir::Value *> getRegisterPtr(uint32_t RegID) override;
 
+    // Get parent register ptr
+    virtual std::optional<uir::Value *> getParentRegisterPtr(uint32_t RegID) override;
+
 protected:
     // Attributes
     // Update function attributes
