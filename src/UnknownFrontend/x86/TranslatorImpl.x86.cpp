@@ -684,14 +684,14 @@ UnknownFrontendTranslatorImplX86::getParentRegisterPtr(uint32_t RegID)
     if (VRegInfo.value()->RegPtr == nullptr)
     {
         // Alloc RegPtr
-        auto ParentPtr = uir::LocalVariable::get(uir::Type::getIntNPtrTy(getContext(), VRegInfo.value()->TypeBits));
-        assert(ParentPtr);
+        auto ParentRegPtr = uir::LocalVariable::get(uir::Type::getIntNPtrTy(getContext(), VRegInfo.value()->TypeBits));
+        assert(ParentRegPtr);
 
         // Set name
-        ParentPtr->setName(getRegisterName(ParentRegID).c_str());
+        ParentRegPtr->setName(getRegisterName(ParentRegID).c_str());
 
         // Save RegPtr
-        VRegInfo.value()->RegPtr = ParentPtr;
+        VRegInfo.value()->RegPtr = ParentRegPtr;
     }
 
     return VRegInfo.value()->RegPtr;
