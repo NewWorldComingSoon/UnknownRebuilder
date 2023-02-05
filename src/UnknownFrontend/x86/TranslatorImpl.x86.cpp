@@ -672,8 +672,29 @@ UnknownFrontendTranslatorImplX86::getRegisterPtr(uint32_t RegID)
 std::optional<uir::Value *>
 UnknownFrontendTranslatorImplX86::getParentRegisterPtr(uint32_t RegID)
 {
-    // TODO
-    return {};
+    auto ParentRegID = getRegisterParentID(RegID);
+    assert(ParentRegID == X86_REG_INVALID);
+
+    auto VRegInfo = getVirtualRegisterInfo(ParentRegID);
+    if (!VRegInfo)
+    {
+        return {};
+    }
+
+    if (VRegInfo.value()->RegPtr == nullptr)
+    {
+        // Alloc RegPtr
+        auto ParentPtr = uir::LocalVariable::get(uir::Type::getIntNPtrTy(getContext(), VRegInfo.value()->TypeBits));
+        assert(ParentPtr);
+
+        // Set name
+        ParentPtr->setName(getRegisterName(ParentRegID).c_str());
+
+        // Save RegPtr
+        VRegInfo.value()->RegPtr = ParentPtr;
+    }
+
+    return VRegInfo.value()->RegPtr;
 }
 
 ////////////////////////////////////////////////////////////
