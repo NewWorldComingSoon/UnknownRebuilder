@@ -34,15 +34,12 @@ TEST(test_uir, test_uir_value_2)
 
     Value *Ptr2 = new ConstantInt(Type::getInt32PtrTy(CTX), unknown::APInt(32, 123));
     std::cout << std::format("Ptr2 ReadableName = {}", Ptr2->getReadableName()) << std::endl;
-    unknown::outs() << "Ptr2 ReadableName = " << *Ptr2;
 
     Value *Ptr3 = new GlobalVariable(Type::getInt32PtrTy(CTX), "global_ptr_1", 0x401000);
     std::cout << std::format("Ptr3 ReadableName = {}", Ptr3->getReadableName()) << std::endl;
-    unknown::outs() << "Ptr3 ReadableName = " << *Ptr3;
 
     Value *Ptr4 = new LocalVariable(Type::getInt32PtrTy(CTX), "local_ptr_1", 0x401000);
     std::cout << std::format("Ptr4 ReadableName = {}", Ptr4->getReadableName()) << std::endl;
-    unknown::outs() << "Ptr4 ReadableName = " << *Ptr4;
 }
 
 TEST(test_uir, test_uir_value_3)
