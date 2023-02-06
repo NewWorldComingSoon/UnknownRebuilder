@@ -690,17 +690,12 @@ UnknownFrontendTranslatorImplX86::getRegisterPtr(uint32_t RegID)
     }
 
     // Create GetBitPtr Instruction
-    uint64_t Bit = 0;
-    if (VRegInfoMap[VRegID].IsHigh8Bits)
-    {
-        Bit = 8;
-    }
+    uint64_t Bit = VRegInfoMap[VRegID].IsHigh8Bits ? 8 : 0;
     auto Ptr = ParentRegPtr.value();
-    auto PtrValueBits = Ptr->getValueBits();
-    auto TypeBits = VRegInfoMap[VRegID].TypeBits;
-    auto BitIndex =
-        uir::ConstantInt::get(uir::Type::getIntNTy(getContext(), PtrValueBits), unknown::APInt(PtrValueBits, Bit));
-    auto GBPInst = uir::GetBitPtrInstruction::get(uir::Type::getIntNPtrTy(getContext(), TypeBits), Ptr, BitIndex);
+    auto BitIndex = uir::ConstantInt::get(
+        uir::Type::getIntNTy(getContext(), Ptr->getValueBits()), unknown::APInt(Ptr->getValueBits(), Bit));
+    auto GBPInst = uir::GetBitPtrInstruction::get(
+        uir::Type::getIntNPtrTy(getContext(), VRegInfoMap[VRegID].TypeBits), Ptr, BitIndex);
 
     // Set address
     GBPInst->setInstructionAddress(getCurPtrBegin());
