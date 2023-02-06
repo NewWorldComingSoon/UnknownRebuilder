@@ -613,9 +613,17 @@ std::optional<uir::Value *>
 UnknownFrontendTranslatorImplX86::loadRegister(uint32_t RegID, uint64_t Address, uir::BasicBlock *BB)
 {
     assert(BB);
+    // Get the virtual register info
+    auto VRegInfoMapOp = getVirtualRegisterInfo(RegID);
+    if (!VRegInfoMapOp)
+    {
+        return {};
+    }
+    auto &VRegInfoMap = *VRegInfoMapOp.value();
 
-    auto VRegInfoMap = getVirtualRegisterInfo(RegID);
-    if (!VRegInfoMap)
+    // Get the virtual register id
+    auto VRegID = getVirtualRegisterID(RegID);
+    if (VRegID == X86_REG_INVALID)
     {
         return {};
     }
@@ -658,6 +666,7 @@ UnknownFrontendTranslatorImplX86::storeRegister(
 std::optional<uir::Value *>
 UnknownFrontendTranslatorImplX86::getRegisterPtr(uint32_t RegID)
 {
+    // Get the virtual register info
     auto VRegInfoMapOp = getVirtualRegisterInfo(RegID);
     if (!VRegInfoMapOp)
     {
@@ -665,6 +674,7 @@ UnknownFrontendTranslatorImplX86::getRegisterPtr(uint32_t RegID)
     }
     auto &VRegInfoMap = *VRegInfoMapOp.value();
 
+    // Get the virtual register id
     auto VRegID = getVirtualRegisterID(RegID);
     if (VRegID == X86_REG_INVALID)
     {
@@ -677,6 +687,7 @@ UnknownFrontendTranslatorImplX86::getRegisterPtr(uint32_t RegID)
         return VRegInfoMap[VRegID].RegPtr;
     }
 
+    // Get the parent register ptr
     auto ParentRegPtr = getParentRegisterPtr(RegID);
     if (!ParentRegPtr)
     {
@@ -713,18 +724,21 @@ UnknownFrontendTranslatorImplX86::getRegisterPtr(uint32_t RegID)
 std::optional<uir::Value *>
 UnknownFrontendTranslatorImplX86::getParentRegisterPtr(uint32_t RegID)
 {
+    // Get the parent register id
     auto ParentRegID = getRegisterParentID(RegID);
     if (ParentRegID == X86_REG_INVALID)
     {
         return {};
     }
 
+    // Get the virtual register info
     auto VRegInfoMapOp = getVirtualRegisterInfo(ParentRegID);
     if (!VRegInfoMapOp)
     {
         return {};
     }
 
+    // Get the virtual register id
     auto VRegID = getVirtualRegisterID(ParentRegID);
     if (VRegID == X86_REG_INVALID)
     {
