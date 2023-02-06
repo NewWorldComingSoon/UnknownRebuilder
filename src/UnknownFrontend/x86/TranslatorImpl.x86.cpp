@@ -628,12 +628,12 @@ UnknownFrontendTranslatorImplX86::loadRegister(uint32_t RegID, uint64_t Address,
         return {};
     }
 
-    //// Refresh our raw registers
-    // if (VRegInfo.value()->IsUpdated)
-    //{
-    //     storeRegister(*VRegInfo.value(), Address, BB);
-    //     VRegInfo.value()->IsUpdated = false;
-    // }
+    // Refresh our raw registers
+    if (VRegInfoMap[VRegID].IsUpdated)
+    {
+        storeRegister(VRegInfoMap[VRegID], Address, BB);
+        VRegInfoMap[VRegID].IsUpdated = false;
+    }
 
     // if (VRegInfo.value()->SavedRegVal == nullptr)
     //{
