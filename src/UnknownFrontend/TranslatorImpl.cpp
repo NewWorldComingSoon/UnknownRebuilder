@@ -216,8 +216,15 @@ UnknownFrontendTranslatorImpl::setEnableAnalyzeAllFunctions(bool Set)
 std::string
 UnknownFrontendTranslatorImpl::getRegisterNameWithIndex(uint32_t RegID, uint32_t Index)
 {
-    std::string RegNameWithIndex = "";
     auto RegName = getRegisterName(RegID);
+    return getRegisterNameWithIndex(RegName, Index);
+}
+
+// Get the register name with index by register name
+std::string
+UnknownFrontendTranslatorImpl::getRegisterNameWithIndex(unknown::StringRef RegName, uint32_t Index)
+{
+    std::string RegNameWithIndex = "";
     if (!RegName.empty())
     {
         RegNameWithIndex += RegName;
@@ -232,6 +239,14 @@ std::string
 UnknownFrontendTranslatorImpl::getRegisterNameWithIndexByDefault(uint32_t RegID)
 {
     return getRegisterNameWithIndex(RegID, mRegisterCounterMap[RegID]++);
+}
+
+// Get the register name with index by default by name
+std::string
+UnknownFrontendTranslatorImpl::getRegisterNameWithIndexByDefault(unknown::StringRef RegName)
+{
+    auto RegID = getRegisterID(RegName.str());
+    return getRegisterNameWithIndex(RegName, mRegisterCounterMap[RegID]++);
 }
 
 // Get the virtual register information by register id

@@ -176,8 +176,14 @@ protected:
     // Get the register name with index by register id
     virtual std::string getRegisterNameWithIndex(uint32_t RegID, uint32_t Index);
 
+    // Get the register name with index by register name
+    virtual std::string getRegisterNameWithIndex(unknown::StringRef RegName, uint32_t Index);
+
     // Get the register name with index by default by register id
     virtual std::string getRegisterNameWithIndexByDefault(uint32_t RegID);
+
+    // Get the register name with index by default by name
+    virtual std::string getRegisterNameWithIndexByDefault(unknown::StringRef RegName);
 
     // Get the virtual register name by register id
     virtual std::string getVirtualRegisterName(uint32_t RegID) const = 0;

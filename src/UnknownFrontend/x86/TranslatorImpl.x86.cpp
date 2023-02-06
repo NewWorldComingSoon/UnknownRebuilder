@@ -638,8 +638,22 @@ UnknownFrontendTranslatorImplX86::loadRegister(uint32_t RegID, uint64_t Address,
     // Allocate SavedRegVal
     if (VRegInfoMap[VRegID].SavedRegVal == nullptr)
     {
-        // TODO
-        VRegInfoMap[VRegID].IsUpdated = true;
+        auto RegisterPtr = getRegisterPtr(RegID);
+        if (RegisterPtr)
+        {
+            // Create Load instruction
+            uir::IRBuilder IRB(BB);
+            auto SavedRegVal = IRB.createLoad(RegisterPtr.value(), Address);
+
+            // Set new name
+            SavedRegVal->setName(getRegisterNameWithIndexByDefault(RegisterPtr.value()->getName()).c_str());
+
+            // Save SavedRegVal
+            VRegInfoMap[VRegID].SavedRegVal = SavedRegVal;
+
+            // Set IsUpdated = true
+            VRegInfoMap[VRegID].IsUpdated = true;
+        }
     }
 
     // Return SavedRegVal
