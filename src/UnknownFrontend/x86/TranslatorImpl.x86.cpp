@@ -664,6 +664,7 @@ UnknownFrontendTranslatorImplX86::getRegisterPtr(uint32_t RegID)
         return {};
     }
     auto &VRegInfoMap = *VRegInfoMapOp.value();
+
     auto VRegID = getVirtualRegisterID(RegID);
     if (VRegID == X86_REG_INVALID)
     {
