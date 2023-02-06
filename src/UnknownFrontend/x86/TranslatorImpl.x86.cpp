@@ -635,15 +635,15 @@ UnknownFrontendTranslatorImplX86::loadRegister(uint32_t RegID, uint64_t Address,
         VRegInfoMap[VRegID].IsUpdated = false;
     }
 
-    // if (VRegInfo.value()->SavedRegVal == nullptr)
-    //{
-    //     // TODO
-    //     VRegInfo.value()->IsUpdated = true;
-    // }
+    // Allocate SavedRegVal
+    if (VRegInfoMap[VRegID].SavedRegVal == nullptr)
+    {
+        // TODO
+        VRegInfoMap[VRegID].IsUpdated = true;
+    }
 
-    // return VRegInfo.value()->SavedRegVal;
-
-    return {};
+    // Return SavedRegVal
+    return VRegInfoMap[VRegID].SavedRegVal;
 }
 
 // Store register
