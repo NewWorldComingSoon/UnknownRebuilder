@@ -49,3 +49,5 @@ Any contributions you make are **greatly appreciated**.
 ### Note
 This is currently an unfinished project.
 I expect to spend 1 year to complete this project :)
+
+20230209 Under development as a commercial project.
